@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Usuario" as user
+actor "Administrador" as admin
+
+usecase "Registro de Usuario" as UC_REG
+usecase "Precondición:\nUsuario no autenticado" as UC_PRE
+usecase "Acción:\nValidación de Email y Contraseña" as UC_COND
+usecase "Postcondición:\nCuenta creada y correo enviado" as UC_POST
+
+' El usuario inicia el proceso de registro
+user --> UC_REG : Inicia Registro
+
+' Se incluyen las acciones derivadas en el proceso de registro
+UC_REG .> UC_PRE : <<include>>
+UC_REG .> UC_COND : <<include>>
+UC_REG .> UC_POST : <<include>>
+
+' Una vez completado, se notifica al administrador
+UC_REG --> admin : Notifica registro
+
+@enduml
