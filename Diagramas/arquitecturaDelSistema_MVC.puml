@@ -1,0 +1,78 @@
+@startuml
+' Definir actores y paquetes
+
+actor "Cliente" as User
+
+package "Frontend" {
+  [React SPA\n(Interfaz de usuario)] as React
+}
+
+package "Backend" {
+
+  ' API Layer (Controladores)
+  package "API Layer (Controladores)" {
+    [Auth Controller\n(Registro/Incio de sesión)] as AuthCtrl
+    [Catalog Controller\n(Gestión de productos)] as CatCtrl
+    [Cart Controller\n(Carrito de compras)] as CartCtrl
+    [Search Controller\n(Búsquedas)] as SearchCtrl
+  }
+  
+  ' Service Layer (Lógica de Negocio)
+  package "Service Layer (Lógica de Negocio)" {
+    [Auth Service\n(Validación y seguridad)] as AuthSvc
+    [Product Service\n(Catálogo & búsquedas)] as ProdSvc
+    [Cart Service\n(Órdenes y carrito)] as CartSvc
+  }
+  
+  ' Data Access Layer (Repositorios)
+  package "Data Access Layer" {
+    [User Repository] as UserRepo
+    [Product Repository] as ProdRepo
+    [Order Repository] as OrderRepo
+  }
+  
+  ' Integration Adapters (Adaptadores externos)
+  package "Integration Adapters" {
+    [Payment Gateway\n(Integración de pagos)] as Payment
+    [Email Adapter\n(Envío de correos)] as EmailAdapter
+    [Notification Adapter\n(Notificaciones push)] as NotifAdapter
+    [Cache Adapter\n(Almacenamiento en caché)] as CacheAdapter
+  }
+}
+
+database "MySQL Database" as DB
+
+' Relaciones entre componentes
+
+' Interacción entre el usuario y la interfaz frontend
+User --> React : Navega y realiza acciones
+
+' Comunicación Frontend --> API layer
+React --> AuthCtrl : Solicita registro/inicio de sesión
+React --> CatCtrl : Solicita catálogo de productos
+React --> CartCtrl : Gestiona el carrito
+React --> SearchCtrl : Ejecuta búsquedas
+
+' Controladores interactúan con la lógica de negocio (Service Layer)
+AuthCtrl --> AuthSvc : Invoca autenticación y registro
+CatCtrl --> ProdSvc : Invoca lógica del catálogo
+CartCtrl --> CartSvc : Invoca gestión del carrito
+SearchCtrl --> ProdSvc : Invoca búsquedas avanzadas
+
+' La capa de servicios interactúa con la persistencia
+AuthSvc --> UserRepo : Consulta/Actualiza usuarios
+ProdSvc --> ProdRepo : Acceso a productos
+CartSvc --> OrderRepo : Gestiona órdenes y carrito
+
+' Repositorios se comunican con la base de datos
+UserRepo --> DB
+ProdRepo --> DB
+OrderRepo --> DB
+
+' Integración con servicios externos (Adaptadores)
+CartSvc --> Payment : Solicita procesamiento de pago
+AuthSvc --> EmailAdapter : Envía correo de verificación
+AuthSvc --> NotifAdapter : Envía notificaciones de seguridad
+ProdSvc --> CacheAdapter : Optimiza búsquedas con caché
+
+@enduml

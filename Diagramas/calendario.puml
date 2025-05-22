@@ -1,0 +1,27 @@
+@startgantt
+Project starts 2025-05-21
+
+[Planeación (Wílmer, Juan, Carlos)] requires 5 days
+
+[Diseño (Wílmer, Juan)] requires 4 days
+[Diseño (Wílmer, Juan)] starts at [Planeación (Wílmer, Juan, Carlos)]'s end
+
+[Revisión de Diseño (Wílmer, Juan)] requires 4 days
+[Revisión de Diseño (Wílmer, Juan)] starts at [Diseño (Wílmer, Juan)]'s end
+
+[Codificación (Wílmer, Juan, Carlos)] requires 5 days
+[Codificación (Wílmer, Juan, Carlos)] starts at [Revisión de Diseño (Wílmer, Juan)]'s end
+
+[Revisión de Código (Juan, Wílmer, Carlos)] requires 3 days
+[Revisión de Código (Juan, Wílmer, Carlos)] starts at [Codificación (Wílmer, Juan, Carlos)]'s end
+
+[Compilación e Integración (Carlos, Juan)] requires 3 days
+[Compilación e Integración (Carlos, Juan)] starts at [Revisión de Código (Juan, Wílmer, Carlos)]'s end
+
+[Pruebas (Carlos, Juan)] requires 5 days
+[Pruebas (Carlos, Juan)] starts at [Compilación e Integración (Carlos, Juan)]'s end
+
+[Postmortem y Ajustes Finales (Wílmer, Juan, Carlos)] requires 6 days
+[Postmortem y Ajustes Finales (Wílmer, Juan, Carlos)] starts at [Pruebas (Carlos, Juan)]'s end
+
+@endgantt
