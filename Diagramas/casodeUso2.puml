@@ -1,0 +1,27 @@
+@startuml
+left to right direction
+
+actor "Usuario" as user
+actor "Sistema" as sys
+
+' Caso de uso principal: Inicio de Sesión
+usecase "Inicio de Sesión" as UC_LOGIN
+
+' Acciones o bloques que componen el proceso de inicio de sesión
+usecase "Precondición:\n- Cuenta registrada \n- Formulario activo" as UC_PRE_LOGIN
+usecase "Acción 1:\nIngreso de Credenciales" as UC_CREDENT
+usecase "Acción 2:\nValidación de Credenciales" as UC_VALIDAR
+usecase "Postcondición:\n- Sesión iniciada \n- Log de acceso registrado" as UC_POST_LOGIN
+
+' Flujo del caso de uso
+user --> UC_LOGIN : Solicita inicio de sesión
+UC_LOGIN .> UC_PRE_LOGIN : <<include>>
+UC_LOGIN .> UC_CREDENT : <<include>>
+UC_LOGIN .> UC_VALIDAR : <<include>>
+UC_LOGIN .> UC_POST_LOGIN : <<include>>
+
+' Interacción con el Sistema
+UC_VALIDAR --> sys : Valida credenciales
+UC_POST_LOGIN --> sys : Registra acceso en log
+
+@enduml
