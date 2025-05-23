@@ -1,0 +1,17 @@
+@startebnf
+title Protocolo de merge y pull en flujo de trabajo
+
+main = "main (GitHub)" ;
+dev_branch = branch, "->", checkout, "->", commit, "->", push, "->", update, "->", pr, "->", merge ;
+(* Se crea los branche de Carlos y Juan Esteban. *)
+git_checkout_y_merge_a_main = "main" | "Juan Esteban" ;
+git_checkout_y_merge_a_main = "main" | "Carlos" ;
+(* todos los cambios significativos deben consolidarse
+con un merge al main (Importante avisar a los demás integrantes). *)
+branches = "main" | "Juan Esteban" | "Carlos";
+(* Cuando Carlos haga merge desde su rama al main, debe
+ avisar para que Juan Estaban haga un pull desde el main. *)
+merge_a_main = "Carlos" | "main";
+pull = "main", "->","Juan Esteban";
+
+@endebnf
