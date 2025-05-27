@@ -1,0 +1,68 @@
+@startuml
+title Diagrama de Componentes – Plena Studio
+
+' Componente del Frontend
+component "React SPA\n(Frontend)" as Frontend
+
+' Agrupación de componentes del Backend
+package "Backend" {
+  ' Controladores
+  component "Auth Controller" as AuthCtrl
+  component "Catalog Controller" as CatCtrl
+  component "Cart Controller" as CartCtrl
+  component "Search Controller" as SearchCtrl
+  
+  ' Servicios
+  component "Auth Service" as AuthSvc
+  component "Product Service" as ProdSvc
+  component "Cart Service" as CartSvc
+  
+  ' Repositorios
+  component "User Repository" as UserRepo
+  component "Product Repository" as ProdRepo
+  component "Order Repository" as OrderRepo
+  
+  ' Adaptadores / Integraciones
+  package "Adapters" {
+    component "Payment Gateway" as PaymentGateway
+    component "Email Adapter" as EmailAdapter
+    component "Notification Adapter" as NotificationAdapter
+    component "Cache Adapter" as CacheAdapter
+  }
+}
+
+' Base de Datos
+database "MySQL Database" as DB
+
+' Relaciones entre componentes
+
+' El Frontend consume los Controladores
+Frontend --> AuthCtrl : Login / Register
+Frontend --> CatCtrl : List Products
+Frontend --> CartCtrl : Update Cart
+Frontend --> SearchCtrl : Search
+
+' Los Controladores se apoyan en los servicios
+AuthCtrl --> AuthSvc
+CatCtrl --> ProdSvc
+CartCtrl --> CartSvc
+SearchCtrl --> ProdSvc
+
+' Los Servicios interactúan con los Repositorios
+AuthSvc --> UserRepo
+ProdSvc --> ProdRepo
+CartSvc --> UserRepo
+CartSvc --> OrderRepo
+
+' Los Repositorios se conectan con la Base de Datos
+UserRepo --> DB
+ProdRepo --> DB
+OrderRepo --> DB
+
+' Los Servicios integran funciones adicionales mediante los Adaptadores
+AuthSvc --> EmailAdapter : Enviar correos
+AuthSvc --> NotificationAdapter : Notificaciones de seguridad
+CartSvc --> PaymentGateway : Procesar pagos
+CartSvc --> CacheAdapter : Manejar caché
+
+@enduml

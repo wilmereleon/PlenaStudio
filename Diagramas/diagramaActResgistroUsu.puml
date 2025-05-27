@@ -1,0 +1,24 @@
+@startuml
+start
+:Mostrar formulario de registro;
+:Ingresar datos del usuario;
+  note right
+    Datos incluyen:
+    - Nombre
+    - Apellido
+    - Email
+    - Password
+  end note
+:Enviar datos de registro;
+:Validar datos ingresados;
+if (Datos válidos?) then (Sí)
+  :Almacenar datos en la tabla USUARIO;
+  :Enviar correo de verificación\n(mediante EmailAdapter);
+  :Mostrar mensaje de registro exitoso;
+  stop
+else (No)
+  :Mostrar mensaje de error;
+  :Solicitar reingreso de datos;
+  --> [Regresar a "Ingresar datos del usuario"]
+endif
+@enduml
