@@ -1,0 +1,29 @@
+@startuml Checkout
+actor "Usuario" as U
+participant "Interfaz Web (React)" as FE
+participant "API Backend (Express)" as BE
+participant "Pasarela de Pago" as Payment
+participant "Base de Datos (MySQL)" as DB
+participant "Servicio de Email" as Email
+
+U -> FE: Añade productos al carrito
+FE -> BE: POST /cart (agregar producto)
+BE -> DB: INSERT/UPDATE producto en carrito
+DB --> BE: Confirmación de actualización
+
+U -> FE: Inicia el proceso de checkout
+FE -> BE: POST /checkout (datos de compra)
+BE -> Payment: Procesar pago
+Payment --> BE: Resultado del pago
+alt Pago Exitoso
+  BE -> DB: Crear orden y actualizar stock
+  DB --> BE: Confirmación de orden
+  BE -> Email: Enviar confirmación de compra
+  Email --> BE: Confirmación de envío de email
+  BE --> FE: Respuesta exitosa (orden confirmada)
+  FE --> U: Muestra confirmación de compra
+else Pago Fallido
+  BE --> FE: Mensaje de error en pago
+  FE --> U: Muestra error en transacción
+end
+@enduml

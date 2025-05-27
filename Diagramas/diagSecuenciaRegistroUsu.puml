@@ -1,0 +1,16 @@
+@startuml RegistroUsuario
+actor "Usuario" as U
+participant "Interfaz Web (React)" as FE
+participant "API Backend (Express)" as BE
+participant "Base de Datos (MySQL)" as DB
+participant "Servicio de Email" as Email
+
+U -> FE: Completa el formulario de registro
+FE -> BE: POST /register (datos del usuario)
+BE -> DB: INSERT nuevo usuario
+DB --> BE: Confirmación de inserción
+BE -> Email: Enviar correo de confirmación
+Email --> BE: Confirmación de envío
+BE --> FE: Respuesta exitosa
+FE --> U: Muestra mensaje de registro exitoso
+@enduml

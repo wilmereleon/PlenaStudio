@@ -1,0 +1,13 @@
+@startuml BusquedaProductos
+actor "Usuario" as U
+participant "Interfaz Web (React)" as FE
+participant "API Backend (Express)" as BE
+participant "Base de Datos (MySQL)" as DB
+
+U -> FE: Ingresa término de búsqueda y/o aplica filtros
+FE -> BE: GET /products?query=...&filter=...
+BE -> DB: SELECT productos WHERE (condiciones según query y filtros)
+DB --> BE: Devuelve lista de productos filtrados
+BE --> FE: Responde con datos de productos
+FE --> U: Muestra resultados de búsqueda
+@enduml

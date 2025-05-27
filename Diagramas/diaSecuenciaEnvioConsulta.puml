@@ -1,0 +1,13 @@
+@startuml FormularioContacto
+actor "Usuario" as U
+participant "Interfaz Web (React)" as FE
+participant "API Backend (Express)" as BE
+participant "Sistema de Notificaciones" as Notif
+
+U -> FE: Completa formulario de contacto (nombre, correo, mensaje)
+FE -> BE: POST /contact (datos)
+BE -> Notif: Enviar notificación al equipo de soporte
+Notif --> BE: Confirmación de envío de notificación
+BE --> FE: Respuesta exitosa
+FE --> U: Muestra mensaje de confirmación
+@enduml

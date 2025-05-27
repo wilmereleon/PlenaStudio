@@ -1,0 +1,13 @@
+@startuml GestionPedidos
+actor "Usuario" as U
+participant "Interfaz Web (React)" as FE
+participant "API Backend (Express)" as BE
+participant "Base de Datos (MySQL)" as DB
+
+U -> FE: Solicita historial de pedidos
+FE -> BE: GET /orders (usuario autenticado)
+BE -> DB: SELECT pedidos del usuario
+DB --> BE: Devuelve lista de pedidos
+BE --> FE: Responde con datos de pedidos
+FE --> U: Muestra historial de pedidos
+@enduml

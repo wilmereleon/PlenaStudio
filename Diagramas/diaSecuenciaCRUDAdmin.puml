@@ -1,0 +1,20 @@
+@startuml GestionProductosAdmin
+actor "Administrador" as Admin
+participant "Panel Admin (React)" as FE_admin
+participant "API Backend (Express)" as BE
+participant "Base de Datos (MySQL)" as DB
+
+Admin -> FE_admin: Accede a la sección de gestión de productos
+FE_admin -> BE: GET /admin/products
+BE -> DB: SELECT * FROM productos
+DB --> BE: Retorna lista de productos
+BE --> FE_admin: Envía lista de productos
+FE_admin --> Admin: Muestra listado de productos
+
+Admin -> FE_admin: Selecciona agregar/editar/eliminar producto
+FE_admin -> BE: POST/PUT/DELETE /admin/product (datos del producto)
+BE -> DB: INSERT/UPDATE/DELETE producto
+DB --> BE: Confirmación de operación
+BE --> FE_admin: Respuesta de éxito o error
+FE_admin --> Admin: Muestra mensaje de resultado
+@enduml
