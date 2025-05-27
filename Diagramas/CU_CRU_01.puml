@@ -1,0 +1,10 @@
+@startuml
+title CU_CRU_01 - Gestión de Contenido del Sitio Web (CRUD)
+
+actor "Administrador de Contenido" as AP
+actor "Sistema de Base de Datos" as AS
+
+AP --> "Gestión de Contenido"
+AS --> "Gestión de Contenido"
+
+@enduml

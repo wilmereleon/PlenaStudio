@@ -1,0 +1,10 @@
+@startuml
+title CU_PCH_01 - Proceso de Finalización de Compra (Checkout)
+
+actor "Usuario Autenticado" as AP
+actor "Sistema de Pagos" as AS
+
+AP --> (Proceso de Finalización de Compra)
+AS --> (Proceso de Finalización de Compra)
+
+@enduml

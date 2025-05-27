@@ -1,0 +1,10 @@
+@startuml
+title CU_ICP_01 - Visualización de Servicios, Información Corporativa y Promociones
+
+actor "Usuario" as AP
+actor "Administrador de Contenido" as AS
+
+AP --> (Visualización de Servicios, Información Corporativa y Promociones)
+AS --> (Visualización de Servicios, Información Corporativa y Promociones)
+
+@enduml

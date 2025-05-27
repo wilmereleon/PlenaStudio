@@ -1,0 +1,10 @@
+@startuml
+title CU_GCC_01 - Gestión de Carrito de Compras
+
+actor "Usuario Autenticado" as AP
+actor "Sistema de Inventario" as AS
+
+AP --> (Gestión de Carrito de Compras)
+AS --> (Gestión de Carrito de Compras)
+
+@enduml
