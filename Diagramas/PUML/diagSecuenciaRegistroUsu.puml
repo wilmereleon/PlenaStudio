@@ -1,16 +1,36 @@
 @startuml RegistroUsuario
+
 actor "Usuario" as U
 participant "Interfaz Web (React)" as FE
 participant "API Backend (Express)" as BE
 participant "Base de Datos (MySQL)" as DB
 participant "Servicio de Email" as Email
+participant "Administrador" as Admin
 
-U -> FE: Completa el formulario de registro
-FE -> BE: POST /register (datos del usuario)
-BE -> DB: INSERT nuevo usuario
+U -> FE: Accede a formulario de registro (botón «Regístrate»)
+FE -> U: Muestra formulario (campos obligatorios, botones «Registrar» y «Cancelar», enlace «¿Ya estás registrado? Inicia sesión»)
+U -> FE: Completa y envía formulario («Registrar»)
+FE -> FE: Validaciones cliente (formato, campos obligatorios, complejidad contraseña)
+FE -> U: Muestra errores si hay validaciones fallidas
+FE -> BE: POST /register (datos del usuario) [si validación cliente exitosa]
+BE -> BE: Validaciones servidor (formato, unicidad correo, complejidad contraseña)
+BE -> FE: Errores de validación (si aplica)
+BE -> DB: INSERT nuevo usuario (estado: inactivo)
 DB --> BE: Confirmación de inserción
-BE -> Email: Enviar correo de confirmación
+BE -> BE: Genera token único de activación
+BE -> Email: Enviar correo de confirmación (con enlace y token)
 Email --> BE: Confirmación de envío
-BE --> FE: Respuesta exitosa
-FE --> U: Muestra mensaje de registro exitoso
+BE -> Admin: Notifica nuevo registro
+Admin --> BE: Confirmación de notificación
+BE --> FE: Respuesta exitosa (registro pendiente de activación)
+FE --> U: Muestra mensaje de registro exitoso y aviso de activación por correo
+
+U -> Email: Recibe correo de activación
+U -> FE: Accede al enlace de activación
+FE -> BE: GET /activate?token=...
+BE -> DB: Verifica token y activa cuenta
+DB --> BE: Confirmación de activación
+BE --> FE: Respuesta de activación exitosa
+FE --> U: Muestra mensaje de cuenta activada
+
 @enduml

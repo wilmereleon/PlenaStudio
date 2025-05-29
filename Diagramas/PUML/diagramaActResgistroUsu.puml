@@ -1,24 +1,26 @@
 @startuml
 start
-:Mostrar formulario de registro;
-:Ingresar datos del usuario;
-  note right
-    Datos incluyen:
-    - Nombre
-    - Apellido
-    - Email
-    - Password
-  end note
-:Enviar datos de registro;
-:Validar datos ingresados;
-if (Datos válidos?) then (Sí)
-  :Almacenar datos en la tabla USUARIO;
-  :Enviar correo de verificación\n(mediante EmailAdapter);
-  :Mostrar mensaje de registro exitoso;
-  stop
+:Mostrar formulario de registro (campos obligatorios, botones «Registrar» y «Cancelar», enlace «¿Ya estás registrado? Inicia sesión»);
+:Usuario ingresa datos (Nombres, Apellidos, Edad, Tipo y Número de identificación, Email, Contraseña, Confirmación);
+:Validar datos en cliente (formato, campos obligatorios, complejidad contraseña);
+if (¿Validación cliente exitosa?) then (Sí)
+  :Enviar datos al backend;
+  :Validar datos en servidor (formato, unicidad email, complejidad contraseña);
+  if (¿Validación servidor exitosa?) then (Sí)
+    :Almacenar usuario en BD (estado: inactivo);
+    :Generar token único de activación;
+    :Enviar correo de confirmación (con enlace y token);
+    :Notificar al Administrador;
+    :Mostrar mensaje de registro exitoso y aviso de activación por correo;
+    stop
+  else (No)
+    :Mostrar mensaje de error de validación servidor;
+    :Solicitar corrección de datos;
+    --> [Regresar a "Usuario ingresa datos"]
+  endif
 else (No)
-  :Mostrar mensaje de error;
-  :Solicitar reingreso de datos;
-  --> [Regresar a "Ingresar datos del usuario"]
+  :Mostrar mensaje de error de validación cliente;
+  :Solicitar corrección de datos;
+  --> [Regresar a "Usuario ingresa datos"]
 endif
 @enduml
