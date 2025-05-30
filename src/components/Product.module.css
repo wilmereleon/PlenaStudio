@@ -1,0 +1,176 @@
+.nathanDumlaoKixfbedyp64UnspIcon {
+  width: 323px;
+  position: relative;
+  border-radius: var(--br-20);
+  max-height: 849.54px;
+  object-fit: cover;
+  min-width: 200px;
+  max-width: 800px;
+  min-height: 212.38px;
+}
+.areteArlequeenRf200 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  line-height: 32px;
+  font-weight: 700;
+  font-family: inherit;
+}
+.emptyInfo,
+.info {
+  align-self: stretch;
+}
+.emptyInfo {
+  height: 34px;
+  position: relative;
+  font-size: var(--font-size-20);
+  line-height: 20px;
+  display: inline-block;
+  font-family: var(--font-lato);
+  color: var(--color-darkslategray-300);
+}
+.info {
+  height: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5);
+}
+.cartIcon,
+.heartIcon {
+  height: 47px;
+  width: 51px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.heartIcon {
+  width: 50px;
+}
+.enlaceACarritoYMeGusta {
+  width: 51px;
+  height: 47px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-8);
+}
+.comprar1 {
+  position: relative;
+  line-height: 24px;
+}
+.aadirACarro,
+.comprar {
+  height: 24px;
+  border-radius: var(--br-8);
+  background-color: var(--color-lightgreen);
+  border: 1px solid var(--color-darkslategray-100);
+  box-sizing: border-box;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.comprar {
+  width: 85px;
+  padding: 9px var(--padding-16);
+}
+.aadirACarro {
+  width: 105px;
+  padding: 9px;
+  font-family: var(--font-gilroy-medium);
+}
+.chevronDownIcon {
+  width: 20px;
+  position: relative;
+  height: 14px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.cantidad,
+.compra {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.cantidad {
+  height: 24px;
+  width: 105px;
+  border-radius: var(--br-8);
+  background-color: var(--color-lightgreen);
+  border: 1px solid var(--color-darkslategray-100);
+  box-sizing: border-box;
+  overflow: hidden;
+  flex-shrink: 0;
+  justify-content: center;
+  padding: 9px var(--padding-8);
+  gap: var(--gap-4);
+}
+.compra {
+  width: 325px;
+  justify-content: space-between;
+  gap: 0;
+  font-size: var(--font-size-10);
+  color: var(--color-white);
+  font-family: var(--font-lato);
+}
+.content,
+.product1 {
+  flex: 1;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+}
+.content {
+  height: 212px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--padding-24) 0 45px;
+  gap: var(--gap-6);
+  min-width: 320px;
+  max-width: 640px;
+}
+.product1 {
+  height: 663px;
+  border-radius: var(--br-32);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-silver);
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: var(--padding-24);
+  gap: var(--gap-32);
+  min-width: 354px;
+  text-align: left;
+  font-size: var(--font-size-18);
+  color: var(--color-darkslategray-100);
+  font-family: var(--font-garamond);
+}
+@media screen and (max-width: 1125px) {
+  .nathanDumlaoKixfbedyp64UnspIcon {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .content {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .emptyInfo {
+    font-size: var(--font-size-16);
+    line-height: 16px;
+  }
+  .product1 {
+    gap: var(--gap-16);
+    padding-top: var(--padding-20);
+    padding-bottom: var(--padding-20);
+    box-sizing: border-box;
+  }
+}
