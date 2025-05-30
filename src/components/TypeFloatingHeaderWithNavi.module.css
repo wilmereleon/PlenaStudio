@@ -1,0 +1,113 @@
+.icon,
+.icon1 {
+  position: relative;
+  object-fit: cover;
+}
+.icon {
+  height: 73px;
+  width: 284px;
+}
+.icon1 {
+  width: 73px;
+  max-height: 100%;
+}
+.brandDeMarcaYLogo {
+  height: 89px;
+  border-radius: var(--br-16);
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 var(--padding-16) 0 var(--padding-10);
+  box-sizing: border-box;
+  gap: var(--gap-4);
+}
+.inicioTexto {
+  position: relative;
+  line-height: 160%;
+}
+.aretes,
+.bufandas,
+.inicio {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 var(--padding-16);
+}
+.aretes,
+.bufandas {
+  padding: 0 var(--padding-15);
+}
+.bufandas {
+  width: 146px;
+  padding: 0 var(--padding-16);
+  box-sizing: border-box;
+}
+.searchSharpIcon {
+  height: 30px;
+  width: 30px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.botonInicioSesion,
+.botonRegistrate,
+.contenedorDeTexto {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--padding-3);
+}
+.botonInicioSesion,
+.botonRegistrate {
+  border-radius: var(--br-8);
+  border: 1px solid var(--color-darkslategray-100);
+  padding: var(--padding-10) var(--padding-19);
+  text-align: center;
+}
+.botonInicioSesion {
+  height: 43px;
+  background-color: var(--color-mintcream);
+  box-sizing: border-box;
+}
+.botonRegistrate {
+  background-color: var(--color-lightgreen);
+  color: var(--color-mintcream);
+}
+.contornoDeEncabezado,
+.enlacesDeNavegacin,
+.typefloatingHeaderWithNavi {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.enlacesDeNavegacin {
+  align-self: stretch;
+  border-radius: var(--br-16);
+  gap: 13px;
+}
+.contornoDeEncabezado,
+.typefloatingHeaderWithNavi {
+  padding: var(--padding-20) 0;
+}
+.typefloatingHeaderWithNavi {
+  align-self: stretch;
+  justify-content: space-between;
+  padding: var(--padding-8) var(--padding-30) var(--padding-8) var(--padding-8);
+  gap: 0;
+  z-index: 6;
+  text-align: left;
+  font-size: var(--font-size-12);
+  color: var(--color-darkslategray-100);
+  font-family: var(--font-lato);
+}
+@media screen and (max-width: 1300px) {
+  .enlacesDeNavegacin {
+    display: none;
+  }
+}
