@@ -1,0 +1,108 @@
+@startuml
+package "components" {
+  class Product {
+    +className: string
+    +nathanDumlaoKixfBEdypUnsplash: string
+    +emptyInfoHeight: CSSProperties["height"]
+    +emptyInfoDisplay: CSSProperties["display"]
+    --
+    +Product(props: ProductType)
+    +render(): JSX.Element
+    ..
+    +Product.module.css : estilos
+  }
+
+  class Property1CardsPopularProdu {
+    +className: string
+    --
+    +Property1CardsPopularProdu(props: Property1CardsPopularProduType)
+    +render(): JSX.Element
+    ..
+    +Property1CardsPopularProdu.module.css : estilos
+  }
+
+  class Property1SoftwareHeroTripl {
+    +className: string
+    --
+    +Property1SoftwareHeroTripl(props: Property1SoftwareHeroTriplType)
+    +render(): JSX.Element
+    ..
+    +Property1SoftwareHeroTripl.module.css : estilos
+  }
+
+  class TypeFloatingHeaderWithNavi {
+    +className: string
+    --
+    +TypeFloatingHeaderWithNavi(props: TypeFloatingHeaderWithNaviType)
+    +render(): JSX.Element
+    ..
+    +TypeFloatingHeaderWithNavi.module.css : estilos
+  }
+
+  class TypeSideBySideImages {
+    +className: string
+    --
+    +TypeSideBySideImages(props: TypeSideBySideImagesType)
+    +render(): JSX.Element
+    ..
+    +TypeSideBySideImages.module.css : estilos
+  }
+
+  class TypeStackedSimpleFooter {
+    +className: string
+    --
+    +TypeStackedSimpleFooter(props: TypeStackedSimpleFooterType)
+    +render(): JSX.Element
+    ..
+    +TypeStackedSimpleFooter.module.css : estilos
+  }
+
+  class TypeSubscribePillInputCT {
+    +className: string
+    --
+    +TypeSubscribePillInputCT(props: TypeSubscribePillInputCTType)
+    +render(): JSX.Element
+    ..
+    +TypeSubscribePillInputCT.module.css : estilos
+  }
+}
+
+package "pages" {
+  class App {
+    +render(): JSX.Element
+  }
+
+  class global_css {
+    <<css>>
+  }
+
+  class index_ts {
+    +main(): void
+  }
+
+  class reportWebVitals {
+    +report(metric: any): void
+  }
+
+  class typings_d_ts {
+    <<TypeScript Definitions>>
+  }
+}
+
+' Relaciones de uso/composición
+App --> Product
+App --> Property1CardsPopularProdu
+App --> Property1SoftwareHeroTripl
+App --> TypeFloatingHeaderWithNavi
+App --> TypeSideBySideImages
+App --> TypeStackedSimpleFooter
+App --> TypeSubscribePillInputCT
+
+Property1CardsPopularProdu --> Product
+
+index_ts --> App
+index_ts --> reportWebVitals
+index_ts --> global_css
+App --> typings_d_ts
+
+@enduml
