@@ -31,3 +31,4 @@ pids
 
 # OS-specific
 Thumbs.db
+.vercel
