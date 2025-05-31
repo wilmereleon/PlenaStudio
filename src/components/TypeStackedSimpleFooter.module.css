@@ -1,0 +1,129 @@
+.brandname {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  line-height: 150%;
+  font-weight: 400;
+  font-family: inherit;
+}
+.logo {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.link {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 150%;
+  font-weight: 400;
+  font-family: inherit;
+}
+.content,
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.links {
+  flex-direction: row;
+  gap: 31.1px;
+}
+.content {
+  background-color: var(--color-whitesmoke);
+  flex-direction: column;
+  gap: var(--gap-32);
+}
+.divider {
+  align-self: stretch;
+  position: relative;
+  background-color: var(--color-darkslategray-200);
+  height: 1px;
+}
+.brandNameAll {
+  display: inline-block;
+  max-width: 100%;
+}
+.brandNameAll,
+.link4 {
+  position: relative;
+  line-height: 160%;
+}
+.footerLinks {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-24);
+  max-width: 100%;
+}
+.credits,
+.row,
+.typestackedSimpleFooter {
+  align-self: stretch;
+  display: flex;
+  max-width: 100%;
+}
+.row {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0;
+}
+.credits,
+.typestackedSimpleFooter {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-32);
+  font-size: var(--font-size-14);
+}
+.typestackedSimpleFooter {
+  background-color: var(--color-whitesmoke);
+  overflow: hidden;
+  padding: var(--padding-80) var(--padding-64);
+  box-sizing: border-box;
+  gap: var(--gap-64);
+  z-index: 0;
+  text-align: left;
+  font-size: var(--font-size-18);
+  color: var(--color-darkslategray-100);
+  font-family: var(--font-lato);
+}
+@media screen and (max-width: 1125px) {
+  .row {
+    flex-wrap: wrap;
+  }
+  .typestackedSimpleFooter {
+    gap: var(--gap-32);
+    padding-left: var(--padding-32);
+    padding-right: var(--padding-32);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 800px) {
+  .links {
+    flex-wrap: wrap;
+  }
+  .content,
+  .links {
+    gap: var(--gap-16);
+  }
+  .footerLinks {
+    flex-wrap: wrap;
+  }
+  .credits {
+    gap: var(--gap-16);
+  }
+}
+@media screen and (max-width: 450px) {
+  .typestackedSimpleFooter {
+    gap: var(--gap-16);
+    padding-top: 52px;
+    padding-bottom: 52px;
+    box-sizing: border-box;
+  }
+}

@@ -1,0 +1,57 @@
+@startuml PERT
+top to bottom direction
+title PERT: Diagrama de Objetos – Plena Studio
+
+map Usuario {
+  id => 1
+  nombre => "Juan"
+  apellido => "Perez"
+  email => "juan@example.com"
+  password => "hash123"
+  fechaRegistro => "2025-05-27"
+}
+
+map Producto {
+  id => 101
+  nombre => "Bolso de Cuero"
+  descripcion => "Bolso elegante de cuero"
+  precio => 99.99
+  stock => 50
+  imagenUrl => "http://example.com/bolso.jpg"
+  fechaCreacion => "2025-05-25"
+}
+
+map Carrito {
+  id => 1
+  fechaCreacion => "2025-05-27"
+}
+
+map CarritoItem {
+  id => 1
+  cantidad => 2
+  precioUnitario => 99.99
+}
+
+map Orden {
+  id => 1
+  fechaOrden => "2025-05-27"
+  estado => "Procesado"
+  total => 199.98
+}
+
+map OrdenItem {
+  id => 1
+  cantidad => 2
+  precioUnitario => 99.99
+}
+
+' Relaciones entre objetos
+Usuario --> Carrito : posee
+Carrito --> CarritoItem : contiene
+CarritoItem --> Producto : referencia
+
+Usuario --> Orden : realiza
+Orden --> OrdenItem : incluye
+OrdenItem --> Producto : se basa en
+
+@enduml

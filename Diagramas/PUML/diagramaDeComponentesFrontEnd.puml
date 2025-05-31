@@ -1,0 +1,49 @@
+@startuml
+package "Frontend" {
+  [App.tsx] as App
+  [Product.tsx] as Product
+  [Property1CardsPopularProdu.tsx] as Property1CardsPopularProdu
+  [Property1SoftwareHeroTripl.tsx] as Property1SoftwareHeroTripl
+  [TypeFloatingHeaderWithNavi.tsx] as TypeFloatingHeaderWithNavi
+  [TypeSideBySideImages.tsx] as TypeSideBySideImages
+  [TypeStackedSimpleFooter.tsx] as TypeStackedSimpleFooter
+  [TypeSubscribePillInputCT.tsx] as TypeSubscribePillInputCT
+  [global.css] as GlobalCSS
+  [index.ts] as IndexTS
+  [reportWebVitals.tsx] as ReportWebVitals
+  [typings.d.ts] as TypingsDTs
+
+  [Product.module.css] as ProductCSS
+  [Property1CardsPopularProdu.module.css] as CardsPopularProduCSS
+  [Property1SoftwareHeroTripl.module.css] as SoftwareHeroTriplCSS
+  [TypeFloatingHeaderWithNavi.module.css] as FloatingHeaderWithNaviCSS
+  [TypeSideBySideImages.module.css] as SideBySideImagesCSS
+  [TypeStackedSimpleFooter.module.css] as StackedSimpleFooterCSS
+  [TypeSubscribePillInputCT.module.css] as SubscribePillInputCTCSS
+}
+
+' Relaciones principales de componentes
+App --> Product
+App --> Property1CardsPopularProdu
+App --> Property1SoftwareHeroTripl
+App --> TypeFloatingHeaderWithNavi
+App --> TypeSideBySideImages
+App --> TypeStackedSimpleFooter
+App --> TypeSubscribePillInputCT
+
+Property1CardsPopularProdu --> Product
+
+Product ..> ProductCSS
+Property1CardsPopularProdu ..> CardsPopularProduCSS
+Property1SoftwareHeroTripl ..> SoftwareHeroTriplCSS
+TypeFloatingHeaderWithNavi ..> FloatingHeaderWithNaviCSS
+TypeSideBySideImages ..> SideBySideImagesCSS
+TypeStackedSimpleFooter ..> StackedSimpleFooterCSS
+TypeSubscribePillInputCT ..> SubscribePillInputCTCSS
+
+IndexTS --> App
+IndexTS --> ReportWebVitals
+IndexTS --> GlobalCSS
+App --> TypingsDTs
+
+@enduml

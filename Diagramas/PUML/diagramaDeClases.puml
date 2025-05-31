@@ -1,0 +1,149 @@
+@startuml
+' ======== Dominio ========
+package "Domain" {
+  class Usuario {
+    - id: Number
+    - nombre: String
+    - apellido: String
+    - email: String
+    - password: String
+    - fechaRegistro: Date
+  }
+  
+  class Producto {
+    - id: Number
+    - nombre: String
+    - descripcion: String
+    - precio: Decimal
+    - stock: Number
+    - imagenUrl: String
+    - fechaCreacion: Date
+  }
+  
+  class Carrito {
+    - id: Number
+    - fechaCreacion: Date
+  }
+  
+  class CarritoItem {
+    - id: Number
+    - cantidad: Integer
+    - precioUnitario: Decimal
+  }
+  
+  class Orden {
+    - id: Number
+    - fechaOrden: Date
+    - estado: String
+    - total: Decimal
+  }
+  
+  class OrdenItem {
+    - id: Number
+    - cantidad: Integer
+    - precioUnitario: Decimal
+  }
+  
+  ' Relaciones entre entidades del dominio:
+  Usuario "1" -- "*" Carrito : posee
+  Usuario "1" -- "*" Orden   : realiza
+  Carrito "1" -- "*" CarritoItem : contiene
+  CarritoItem "*" -- "1" Producto : referencia
+  Orden "1" -- "*" OrdenItem : incluye
+  OrdenItem "*" -- "1" Producto : se basa en
+}
+
+' ======== Controladores ========
+package "Controller" {
+  class AuthController {
+    + login()
+    + register()
+  }
+  class CatalogController {
+    + listProducts()
+    + searchProduct()
+  }
+  class CartController {
+    + addItem()
+    + removeItem()
+    + viewCart()
+  }
+  class SearchController {
+    + searchBasic()
+    + searchAdvanced()
+  }
+}
+
+' ======== Servicios ========
+package "Service" {
+  class AuthService {
+    + validateUser()
+    + encryptPassword()
+  }
+  class ProductService {
+    + getProducts()
+    + findProduct()
+  }
+  class CartService {
+    + calculateTotal()
+    + processCart()
+  }
+}
+
+' ======== Repositorios ========
+package "Repository" {
+  class UsuarioRepository {
+    + findById(id: Number)
+    + save(usuario: Usuario)
+  }
+  class ProductoRepository {
+    + findById(id: Number)
+    + save(producto: Producto)
+  }
+  class OrdenRepository {
+    + findById(id: Number)
+    + save(orden: Orden)
+  }
+  class CarritoRepository {
+    + findById(id: Number)
+    + save(carrito: Carrito)
+  }
+}
+
+' ======== Adaptadores / Integraciones ========
+package "Adapters" {
+  class PaymentGateway {
+    + processPayment(order: Orden)
+  }
+  class EmailAdapter {
+    + sendVerification(email: String)
+  }
+  class NotificationAdapter {
+    + sendNotification(message: String)
+  }
+  class CacheAdapter {
+    + cacheData(key: String, data: Object)
+    + retrieveData(key: String): Object
+  }
+}
+
+' ======== Relaciones de Uso / Dependencias ========
+' Los controladores utilizan los servicios correspondientes:
+AuthController --> AuthService : uses
+CatalogController --> ProductService : uses
+CartController --> CartService : uses
+SearchController --> ProductService : uses
+
+' Los servicios hacen uso de los repositorios:
+AuthService ..> UsuarioRepository : <<repository>>
+ProductService ..> ProductoRepository : <<repository>>
+CartService ..> CarritoRepository : <<repository>>
+CartService ..> OrdenRepository : <<repository>>
+
+' Los servicios y controladores integran adaptadores para funcionalidades adicionales:
+AuthService --> EmailAdapter : uses
+AuthService --> NotificationAdapter : uses
+CartService --> PaymentGateway : uses
+CartService --> CacheAdapter : uses
+
+@enduml

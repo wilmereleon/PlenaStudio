@@ -1,0 +1,71 @@
+@startuml
+' Definición del componente del API Backend con sus clases internas (Controladores y Servicios)
+component "API Backend\n(Node.js, Express)" as API {
+  ' Declaración de clases internas para el API
+  class UserController {
+    +login()
+    +register()
+    +getUserProfile()
+  }
+  class ProductController {
+    +listProducts()
+    +getProductDetail()
+  }
+  class OrderController {
+    +createOrder()
+    +getOrderHistory()
+  }
+  
+  class UserService {
+    +authenticate()
+    +createUser()
+  }
+  class ProductService {
+    +fetchProducts()
+    +updateStock()
+  }
+  class OrderService {
+    +processOrder()
+    +calculateTotals()
+  }
+  
+  ' Relaciones internas (las flechas muestran colaboración o dependencia)
+  UserController --> UserService : usa
+  ProductController --> ProductService : usa
+  OrderController --> OrderService : usa
+}
+
+' Componente para el Frontend
+component "Frontend\n(React)" as FE {
+  ' Declaración de clases internas para representar componentes o vistas
+  class HomePage {
+    +render()
+    +showBanners()
+  }
+  class ProductPage {
+    +render()
+    +displayProductDetails()
+  }
+  class CartPage {
+    +render()
+    +updateCart()
+  }
+  
+  ' Relaciones: Podrían interactuar internamente o derivar de un componente base (opcional)
+  HomePage --> ProductPage : navega a
+  ProductPage --> CartPage : añade producto
+}
+
+' Componente para la Base de Datos
+database "MySQL Database" as DB
+
+' Relación entre el API y la Base de Datos
+' Los servicios se comunican con la Base de Datos para operaciones CRUD.
+UserService --> DB : Consulta/Actualización
+ProductService --> DB : Consulta/Actualización
+OrderService --> DB : Consulta/Actualización
+
+' Relación entre el Frontend y el API
+FE --> API : HTTP / REST
+
+@enduml

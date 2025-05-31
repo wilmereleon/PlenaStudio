@@ -1,0 +1,35 @@
+@startuml
+!define RECTANGLE class
+
+node "Cliente\n(Navegador Web)" as Cliente {
+  [React SPA\n(JS, HTML, CSS)] as ReactSPA
+}
+
+node "Servidor Web\n(Nginx/Apache)" as WebSrv {
+  [Servidor de archivos estáticos]
+}
+
+node "Servidor de Aplicaciones\n(Node.js/Express)" as AppSrv {
+  [API Backend\n(Controladores, Servicios, Repositorios)]
+}
+
+database "MySQL Database\n(Base de datos de producción)" as DB
+
+cloud "Servicios Externos" as Cloud {
+  [Email Service\n(Proveedor SMTP/SendGrid)] as EmailSrv
+  [Payment Gateway\n(Pasarela de pagos)] as PaymentSrv
+  [Push Notification Service] as NotifSrv
+  [Cache Service\n(Redis/Memcached)] as CacheSrv
+}
+
+' Relaciones de despliegue
+Cliente --> WebSrv : Solicita SPA (HTTP/HTTPS)
+WebSrv --> ReactSPA : Sirve archivos estáticos
+Cliente --> AppSrv : Solicita API REST (HTTPS)
+AppSrv --> DB : Acceso a datos (MySQL)
+AppSrv --> EmailSrv : Envío de correos (SMTP/API)
+AppSrv --> PaymentSrv : Procesamiento de pagos (API)
+AppSrv --> NotifSrv : Notificaciones push (API)
+AppSrv --> CacheSrv : Almacenamiento en caché (API)
+
+@enduml

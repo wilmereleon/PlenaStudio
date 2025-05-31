@@ -1,0 +1,44 @@
+@startuml
+top to bottom direction
+title Diagrama de Casos de Uso - Proceso de Checkout (Vertical)
+
+actor "Usuario (Autenticado/\nInvitado)" as Usuario
+actor "Sistema de Pagos" as Pago
+actor "Sistema de Inventario" as Inventario
+actor "Servicio de Correo\nElectrónico" as Correo
+actor "Administrador" as Admin
+
+usecase "Visualización del\nCatálogo y Promociones" as UC06
+usecase "Gestión del Carrito\ny Proceso de Checkout" as UC07
+
+' Subcasos de UC07 presentados en forma vertical (secuencial)
+usecase "A1: Agregar productos al Carrito" as A1
+usecase "A2: Modificar/Eliminar ítems\ndel Carrito" as A2
+usecase "A3: Iniciar proceso de Checkout" as A3
+usecase "A4: Calcular totales\n(impuestos, envío, descuentos)" as A4
+usecase "A5: Validar método de pago" as A5
+usecase "A6: Generar orden confirmada" as A6
+usecase "A7: Actualizar inventario" as A7
+usecase "A8: Notificar transacción" as A8
+
+' Relaciones directas del usuario
+Usuario --> UC06 : Navega catálogo
+Usuario --> UC07 : Gestiona carrito y checkout
+
+' Secuencia vertical del flujo del caso de uso UC07:
+UC07 --> A1 : <<include>>
+A1 --> A2 : <<include>>
+A2 --> A3 : <<include>>
+A3 --> A4 : <<include>>
+A4 --> A5 : <<include>>
+A5 --> A6 : <<include>>
+A6 --> A7 : <<include>>
+A7 --> A8 : <<include>>
+
+' Relaciones de integración con sistemas externos para ciertas acciones
+A5 ..> Pago : Procesa pago
+A7 ..> Inventario : Actualiza stock
+A8 ..> Correo : Envía confirmación
+A8 ..> Admin : Notifica transacción
+
+@enduml

@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Garamond:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gilroy-Medium:wght@400&display=swap");
+
+body {
+  margin: 0;
+  line-height: normal;
+}
+:root {
+  /* Color */
+  --color-honeydew: #d1fae5;
+  --color-slategray: #4a6a7b;
+  --color-mistyrose: #f4d7d7;
+  --color-lavenderblush: #fce7f3;
+  --color-silver: #b9b9b9;
+  --color-whitesmoke: #f0f0f0;
+  --color-lightgreen: #8abf69;
+  --color-mintcream: #ecfdf5;
+  --color-darkslategray-300: #1b333c;
+  --color-darkslategray-200: #064e3b;
+  --color-darkslategray-100: #2c3e50;
+  --color-white: #fff;
+
+  /* Gap */
+  --gap-64: 64px;
+  --gap-5: 5px;
+  --gap-6: 6px;
+  --gap-32: 32px;
+  --gap-40: 40px;
+  --gap-8: 8px;
+  --gap-16: 16px;
+  --gap-12: 12px;
+  --gap-24: 24px;
+  --gap-48: 48px;
+  --gap-20: 20px;
+  --gap-4: 4px;
+
+  /* Padding */
+  --padding-80: 80px;
+  --padding-12: 12px;
+  --padding-72: 72px;
+  --padding-14: 14px;
+  --padding-4: 4px;
+  --padding-48: 48px;
+  --padding-40: 40px;
+  --padding-64: 64px;
+  --padding-24: 24px;
+  --padding-32: 32px;
+  --padding-3: 3px;
+  --padding-19: 19px;
+  --padding-15: 15px;
+  --padding-20: 20px;
+  --padding-10: 10px;
+  --padding-30: 30px;
+  --padding-16: 16px;
+  --padding-8: 8px;
+
+  /* BorderRadius */
+  --br-20: 20px;
+  --br-32: 32px;
+  --br-8: 8px;
+  --br-16: 16px;
+
+  /* Font */
+  --font-gilroy-medium: Gilroy-Medium;
+  --font-garamond: Garamond;
+  --font-lato: Lato;
+
+  /* FontSize */
+  --font-size-22: 22px;
+  --font-size-72: 72px;
+  --font-size-10: 10px;
+  --font-size-20: 20px;
+  --font-size-14: 14px;
+  --font-size-18: 18px;
+  --font-size-24: 24px;
+  --font-size-40: 40px;
+  --font-size-32: 32px;
+  --font-size-12: 12px;
+  --font-size-16: 16px;
+}

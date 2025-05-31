@@ -1,0 +1,108 @@
+.navLabel {
+  position: relative;
+  line-height: 160%;
+}
+.etiquetaDeTexto {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 var(--padding-16);
+}
+.enlace {
+  align-self: stretch;
+  border-radius: var(--br-16);
+}
+.enlace,
+.informadorDeEventos,
+.textoDeNavegacin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.informadorDeEventos {
+  align-self: stretch;
+  justify-content: space-between;
+  padding: var(--padding-8);
+  z-index: 7;
+  text-align: left;
+  font-size: var(--font-size-16);
+  color: var(--color-darkslategray-100);
+  font-family: var(--font-lato);
+}
+.figmaIpsumComponent {
+  margin: 0;
+  width: 100%;
+  position: relative;
+  font-size: inherit;
+  line-height: 120%;
+  font-weight: 400;
+  font-family: inherit;
+  display: inline-block;
+  max-width: 800px;
+}
+.textContainer {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.videoContainerIcon {
+  align-self: stretch;
+  border-radius: 48px;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: cover;
+}
+.content,
+.pginaWeb {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.content {
+  gap: 30px;
+  max-width: 1280px;
+  z-index: 5;
+  text-align: center;
+  font-size: var(--font-size-32);
+  color: var(--color-darkslategray-100);
+  font-family: var(--font-garamond);
+}
+.pginaWeb {
+  position: relative;
+  background-color: var(--color-white);
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 1300px) {
+  .content {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 1125px) {
+  .figmaIpsumComponent {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .figmaIpsumComponent {
+    font-size: 26px;
+    line-height: 31px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .figmaIpsumComponent {
+    font-size: 19px;
+    line-height: 23px;
+  }
+  .textContainer {
+    gap: var(--gap-20);
+  }
+}

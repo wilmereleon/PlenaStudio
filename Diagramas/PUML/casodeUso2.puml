@@ -1,0 +1,38 @@
+@startuml
+left to right direction
+
+actor "Usuario" as user
+actor "Sistema" as sys
+
+' Caso de uso principal: Inicio de Sesión
+usecase "CU_AUT_02: Inicio de Sesión" as UC_LOGIN
+
+' Precondiciones y presentación
+usecase "Verificar precondiciones\n(Cuenta registrada, formulario activo)" as UC_PRE_LOGIN
+usecase "Presentar formulario de inicio de sesión" as UC_FORM
+
+' Acciones principales
+usecase "Ingresar credenciales\n(email y contraseña)" as UC_CREDENT
+usecase "Validar credenciales\n(hash seguro, intentos, bloqueo)" as UC_VALIDAR
+usecase "A1: Credenciales incorrectas" as UC_A1
+usecase "A2: Cuenta bloqueada" as UC_A2
+usecase "Iniciar sesión y redirigir a panel" as UC_SUCCESS
+usecase "Registrar acceso en log" as UC_LOG
+
+' Flujo principal
+user --> UC_LOGIN : Selecciona «Iniciar Sesión»
+UC_LOGIN .> UC_PRE_LOGIN : <<include>>
+UC_LOGIN .> UC_FORM : <<include>>
+UC_LOGIN .> UC_CREDENT : <<include>>
+UC_LOGIN .> UC_VALIDAR : <<include>>
+UC_VALIDAR <|-- UC_A1 : <<extend>>
+UC_VALIDAR <|-- UC_A2 : <<extend>>
+UC_LOGIN .> UC_SUCCESS : <<include>>
+UC_LOGIN .> UC_LOG : <<include>>
+
+' Interacción con el Sistema
+UC_VALIDAR --> sys : Verifica credenciales y estado
+UC_SUCCESS --> sys : Crea sesión y redirige
+UC_LOG --> sys : Registra intento en log
+
+@enduml

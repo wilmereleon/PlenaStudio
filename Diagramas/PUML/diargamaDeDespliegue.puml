@@ -1,0 +1,51 @@
+@startuml DiagramaDespliegueComplementado
+title Diagrama de Despliegue Complementado - Sitio Web de Accesorios
+
+' Nodo de acceso del cliente
+node "Cliente" <<(C,LightBlue)>> as Client {
+    artifact "Navegador Web\n(Chrome, Firefox, etc.)" as Browser <<WebClient>>
+}
+
+' Nodo Internet para representar la red pública
+cloud "Internet" <<(I,Orange)>> as Internet {
+  file "Gateway" as Gateway <<SecurityLayer>>
+}
+
+' Nodo del servidor web (backend + frontend)
+node "Servidor Web" <<(S,LightGreen)>> as WebServer {
+    component "API REST\n(Node.js, Express)" as API <<Backend>>
+    package "Aplicación Frontend\n(React)" as Frontend <<Frontend>>
+    queue "Manejo de Solicitudes\n(Middleware)" as Middleware <<RequestQueue>>
+}
+
+' Nodo del servidor de base de datos
+database "Servidor de Base de Datos" <<(D,LightYellow)>> as DBServer {
+  storage "MySQL" as MySQL <<Database>>
+}
+
+' Nodo para servicios externos
+folder "Servicios Externos" <<(E,LightGray)>> as ExternalServices {
+    stack "Servicio de Email\n(API Email)" as EmailService <<Service>>
+    hexagon "Pasarela de Pago\n(API Payment)" as PaymentService <<Service>>
+}
+
+' Conexiones entre los componentes, agregando protocolos y estereotipos en las etiquetas
+
+' Conexión del cliente hacia Internet (solicitudes seguras)
+Client --> Internet : "HTTP/HTTPS\n<<SSL/TLS>>"
+
+' Conexión de Internet al servidor web
+Internet --> WebServer : "HTTP/HTTPS Requests"
+
+' El Servidor Web se comunica internamente con la base de datos
+WebServer --> DBServer : "SQL Queries\n<<JDBC/MySQL Connector>>"
+
+' Conexión del Servidor Web hacia Servicios Externos (Email y Pago)
+WebServer --> ExternalServices : "API Calls\n(REST/JSON)"
+ExternalServices --> WebServer : "API Responses\n(JSON)"
+
+' Respuesta final del servidor web al cliente a través de Internet
+WebServer --> Internet : "HTTP/HTTPS Responses"
+Internet --> Client : "HTTP/HTTPS"
+
+@enduml

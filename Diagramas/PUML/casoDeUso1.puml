@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+
+actor "Usuario" as user
+actor "Administrador" as admin
+
+usecase "CU_REG_01: Registro de Usuario" as UC_REG
+usecase "Validar precondiciones\n(No autenticado, acceso válido, formulario activo)" as UC_PRE
+usecase "Ingresar datos de registro" as UC_DATOS
+usecase "Validar datos\n(formato, unicidad email, complejidad contraseña)" as UC_VALID
+usecase "A1: Datos incompletos o inválidos" as UC_A1
+usecase "A2: Email duplicado" as UC_A2
+usecase "Crear cuenta en BD (estado: inactivo)" as UC_CREAR
+usecase "Enviar email de confirmación\n(token único, validez 24h)" as UC_EMAIL
+usecase "A3: Fallo en envío de email" as UC_A3
+usecase "Notificar al Administrador" as UC_ADMIN
+usecase "Activar cuenta vía enlace" as UC_ACTIVAR
+
+user --> UC_REG : Selecciona "Registrarse"
+UC_REG .> UC_PRE : <<include>>
+UC_REG .> UC_DATOS : <<include>>
+UC_REG .> UC_VALID : <<include>>
+UC_VALID <|-- UC_A1 : <<extend>>
+UC_VALID <|-- UC_A2 : <<extend>>
+UC_REG .> UC_CREAR : <<include>>
+UC_REG .> UC_EMAIL : <<include>>
+UC_EMAIL <|-- UC_A3 : <<extend>>
+UC_REG .> UC_ADMIN : <<include>>
+user --> UC_ACTIVAR : Accede a enlace de activación
+UC_ACTIVAR .> UC_REG : <<extend>>
+UC_REG --> admin : Notifica registro
+
+@enduml

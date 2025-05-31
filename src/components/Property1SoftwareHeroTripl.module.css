@@ -1,0 +1,253 @@
+.heading,
+.subheading {
+  margin: 0;
+  position: relative;
+}
+.heading {
+  align-self: stretch;
+  font-size: inherit;
+  letter-spacing: -0.01em;
+  line-height: 108%;
+  font-weight: 700;
+  font-family: inherit;
+  display: -webkit-inline-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.subheading {
+  width: 599px;
+  font-size: var(--font-size-22);
+  line-height: 140%;
+  font-weight: 400;
+  font-family: var(--font-lato);
+  color: var(--color-darkslategray-300);
+  display: inline-block;
+}
+.headingText {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--gap-20);
+}
+.cta {
+  position: relative;
+  line-height: 160%;
+}
+.textContainer {
+  padding: var(--padding-4);
+}
+.ctaButton,
+.textContainer,
+.textContainer1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.ctaButton {
+  height: 53px;
+  flex: 1;
+  border-radius: var(--br-8);
+  background-color: var(--color-lightgreen);
+  padding: var(--padding-16) var(--padding-24);
+  box-sizing: border-box;
+  min-width: 140px;
+}
+.textContainer1 {
+  padding: 0 var(--padding-4);
+}
+.secondaryButton {
+  height: 53px;
+  flex: 1;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: var(--br-8);
+  border: 1px solid var(--color-darkslategray-100);
+  box-sizing: border-box;
+  flex-direction: row;
+  padding: var(--padding-14) var(--padding-24);
+  min-width: 140px;
+  color: var(--color-darkslategray-300);
+}
+.buttonCombo,
+.copyComponent,
+.copyContainer,
+.secondaryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buttonCombo {
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: var(--gap-16);
+  max-width: 680px;
+  font-size: var(--font-size-14);
+  color: var(--color-mintcream);
+  font-family: var(--font-lato);
+}
+.copyComponent,
+.copyContainer {
+  flex-direction: column;
+}
+.copyComponent {
+  width: 100%;
+  gap: var(--gap-40);
+  min-width: 304px;
+  max-width: 940px;
+}
+.copyContainer {
+  width: 699px;
+  border-radius: var(--br-16);
+  padding: var(--padding-64) var(--padding-40) var(--padding-48);
+  box-sizing: border-box;
+  min-width: 320px;
+  text-align: center;
+  font-size: var(--font-size-72);
+  color: var(--color-darkslategray-100);
+  font-family: var(--font-garamond);
+}
+.logoBarChild {
+  width: 504px;
+  position: absolute;
+  margin: 0 !important;
+  top: calc(50% - 252.25px);
+  left: calc(50% - 252px);
+  border-radius: 50%;
+  background-color: var(--color-lavenderblush);
+  height: 504px;
+  z-index: 0;
+}
+.deviceIcon {
+  width: 288.7px;
+  position: relative;
+  max-height: 100%;
+  object-fit: contain;
+  z-index: 1;
+}
+.iphone14Starlight1,
+.screenContentImageLummi {
+  position: absolute;
+  height: 102.81%;
+  width: 104.45%;
+  top: -1.36%;
+  right: -2.2%;
+  bottom: -1.45%;
+  left: -2.25%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: cover;
+}
+.screenContentImageLummi {
+  height: 90.51%;
+  width: 81.14%;
+  top: 4.36%;
+  right: 9.14%;
+  bottom: 5.12%;
+  left: 9.72%;
+  z-index: 1;
+}
+.device {
+  width: 208.9px;
+  position: relative;
+  height: 405.9px;
+}
+.deviceContainer,
+.deviceIcon1 {
+  position: relative;
+  margin-left: -120px;
+}
+.deviceContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 50.6px;
+  z-index: 2;
+}
+.deviceIcon1 {
+  width: 288.7px;
+  max-height: 100%;
+  object-fit: contain;
+  z-index: 3;
+}
+.logoBar {
+  align-self: stretch;
+  flex-direction: row;
+  padding: var(--padding-32) 0 0;
+  position: relative;
+}
+.logoBar,
+.mediaLayouts,
+.property1softwareHeroTripl,
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mediaLayouts {
+  flex: 1;
+  flex-direction: column;
+  padding: var(--padding-48) var(--padding-40);
+  box-sizing: border-box;
+  min-width: 320px;
+  max-width: 640px;
+}
+.property1softwareHeroTripl,
+.wrapper {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+}
+.wrapper {
+  flex: 1;
+  gap: 0;
+}
+.property1softwareHeroTripl {
+  align-self: stretch;
+  background-color: var(--color-whitesmoke);
+  overflow: hidden;
+  z-index: 2;
+}
+@media screen and (max-width: 1125px) {
+  .copyComponent {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .heading {
+    font-size: 58px;
+    line-height: 62px;
+  }
+  .buttonCombo {
+    max-width: 100%;
+  }
+  .copyComponent {
+    gap: var(--gap-20);
+  }
+  .copyContainer {
+    gap: var(--gap-16);
+    padding-top: 42px;
+    padding-bottom: 31px;
+    box-sizing: border-box;
+  }
+  .mediaLayouts {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .heading {
+    font-size: 43px;
+    line-height: 47px;
+  }
+  .subheading {
+    font-size: var(--font-size-18);
+    line-height: 25px;
+  }
+}

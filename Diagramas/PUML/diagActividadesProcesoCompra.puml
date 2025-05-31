@@ -1,0 +1,26 @@
+@startuml
+start
+:Usuario navega por el catálogo;
+:Selecciona productos;
+:Agrega productos al carrito;
+:Visualiza contenido del carrito;
+if (¿Carrito vacío?) then (Sí)
+  :Mostrar mensaje "Carrito vacío";
+  stop
+else (No)
+  :Proceder al checkout;
+  :Calcular total del carrito;
+  :Validar stock de productos;
+  :Iniciar proceso de pago\n(utilizando PaymentGateway);
+  if (¿Pago exitoso?) then (Sí)
+     :Generar registro en la tabla ORDEN;
+     :Generar registros en la tabla ORDEN_ITEM;
+     :Enviar notificación de confirmación\n(mediante NotificationAdapter);
+     :Mostrar mensaje de compra exitosa;
+     stop
+  else (No)
+     :Mostrar mensaje de error en el pago;
+     stop
+  endif
+endif
+@enduml

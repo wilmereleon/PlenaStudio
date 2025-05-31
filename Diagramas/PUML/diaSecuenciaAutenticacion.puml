@@ -1,0 +1,44 @@
+@startuml AutenticacionUsuario
+actor "Usuario" as U
+participant "Interfaz Web (React)" as FE
+participant "API Backend (Express)" as BE
+participant "Base de Datos (MySQL)" as DB
+participant "Servicio de Soporte" as Soporte
+
+U -> FE: Accede a formulario de inicio de sesión
+FE -> U: Muestra formulario (campos email y contraseña, enlaces «¿Olvidé mi contraseña?» y «¿Ya estás registrado?»)
+U -> FE: Ingresa credenciales y envía formulario
+FE -> BE: POST /login (credenciales)
+BE -> DB: SELECT usuario por email
+DB --> BE: Datos del usuario (incluye estado y contador de intentos)
+BE -> BE: Verifica estado de cuenta (activa/bloqueada)
+alt Cuenta bloqueada
+  BE --> FE: Error (cuenta bloqueada)
+  FE --> U: Muestra mensaje «Cuenta bloqueada» y enlace a soporte
+  U -> FE: Solicita recuperación (clic en enlace)
+  FE -> Soporte: Envía solicitud de recuperación (correo y cédula)
+else Cuenta activa
+  BE -> BE: Validación de credenciales (hash seguro)
+  alt Credenciales correctas
+    BE -> DB: Reinicia contador de intentos
+    BE -> DB: Registra acceso en log
+    BE --> FE: Respuesta (token, datos usuario)
+    FE --> U: Acceso concedido y redirección a panel
+  else Credenciales incorrectas
+    BE -> DB: Incrementa contador de intentos
+    alt Intentos < 3
+      BE --> FE: Error de autenticación
+      FE --> U: Muestra mensaje «Credenciales incorrectas»
+    else Intentos >= 3 y < 5
+      BE --> FE: Error de autenticación (advertencia de bloqueo próximo)
+      FE --> U: Muestra mensaje «Credenciales incorrectas. Próximo intento fallido bloqueará la cuenta.»
+    else Intentos >= 5
+      BE -> DB: Cambia estado de cuenta a bloqueada
+      BE --> FE: Error (cuenta bloqueada)
+      FE --> U: Muestra mensaje «Cuenta bloqueada» y enlace a soporte
+      U -> FE: Solicita recuperación (clic en enlace)
+      FE -> Soporte: Envía solicitud de recuperación (correo y cédula)
+    end
+  end
+end
+@enduml
