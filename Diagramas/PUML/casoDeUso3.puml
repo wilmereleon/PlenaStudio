@@ -1,0 +1,60 @@
+@startuml
+title Diagrama de Casos de Uso: Envío de Formularios de Contacto/Consulta
+
+' Declaración de actores
+actor "Usuario\n(autenticado o no autenticado)" as Usuario
+actor "Sistema de Notificaciones" as Notif
+actor "Administrador de Soporte" as Soporte
+
+' Contenedor principal para el caso de uso
+rectangle "CU_ENC_01: Envío de Formularios de Contacto/Consulta" {
+  
+  usecase "Acceder a la página de contacto" as UC1
+  usecase "Completar formulario con datos\n(nombre, email, asunto, mensaje)" as UC2
+  usecase "Seleccionar tipo de consulta\n(información general, soporte técnico, ventas)" as UC3
+  usecase "Validar datos y CAPTCHA" as UC4
+  usecase "Registrar consulta en la base de datos\n(con timestamp y número de tiquete)" as UC5
+  usecase "Enviar confirmación automática al usuario" as UC6
+  usecase "Notificar al equipo de soporte" as UC7
+  
+  ' Flujos alternativos
+  usecase "A1: Datos Incompletos\n(Mostrar error y mantener datos)" as A1
+  usecase "A2: Email Inválido\n(Solicitar corrección)" as A2
+  usecase "A3: Error en Envío\n(Informar error y reintentar)" as A3
+  
+  ' Requisitos especiales como acciones
+  usecase "UC8: Categorización automática de\nconsulta según palabras clave" as UC8 <<especial>>
+  usecase "UC9: Almacenamiento seguro de datos\n(conforme a GDPR)" as UC9 <<especial>>
+  usecase "UC10: Supervisar tiempo de respuesta\n(<=24 horas laborales)" as UC10 <<especial>>
+}
+
+' Relaciones de actor Usuario con los casos de uso
+Usuario --> UC1
+Usuario --> UC2
+Usuario --> UC3
+
+' Flujo básico vinculado entre casos de uso
+UC2 --> UC4 : "envía datos"
+UC3 --> UC4 : "incluye selección"
+UC4 --> UC5 : "si datos válidos"
+UC5 --> UC6 : "consulta registrada"
+UC5 --> UC7 : "consulta registrada"
+UC6 --> Usuario : "muestra confirmación"
+UC7 --> Usuario : "proporciona número de tiquete"
+
+' Relaciones de actores secundarios
+Notif --> UC6 : "gestiona notificación"
+Notif --> UC7 : "distribuye alerta"
+Soporte --> UC7 : "recibe y atiende consulta"
+
+' Relaciones de flujos alternativos mediante extensión
+UC4 .> A1 : <<extend>>
+UC4 .> A2 : <<extend>>
+UC6 .> A3 : <<extend>>
+
+' Relaciones de requisitos especiales
+UC5 --> UC8 : <<include>>
+UC5 --> UC9 : <<include>>
+UC7 --> UC10 : <<include>>
+
+@enduml

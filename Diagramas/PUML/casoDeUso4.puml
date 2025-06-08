@@ -1,0 +1,53 @@
+@startuml
+title Diagrama de Casos de Uso 4: Visualización de Información y Búsqueda de Contenidos
+left to right direction
+
+' Declaración de actores
+actor "Usuario\n(autenticado o no autenticado)" as Usuario
+actor "Administrador de Contenido\n(Fiscaliza rendimiento)" as Admin
+
+' Contenedor principal para el caso de uso
+rectangle "CU_VIS_04: Visualización de Información y Búsqueda de Contenidos" {
+
+  usecase "Acceder a la página principal" as UC1
+  usecase "Visualizar catálogo de productos\n(aretes, pulseras, bufandas)" as UC2
+  usecase "Utilizar barra de búsqueda\ny filtros interactivos" as UC3
+  usecase "Mostrar resultados de búsqueda" as UC4
+  usecase "Visualizar detalles del producto" as UC5
+  
+  ' Flujos alternativos
+  usecase "A1: Búsqueda sin resultados\n(Mostrar mensaje 'No se encontraron\ncoincidencias')" as A1
+  usecase "A2: Falla en la carga de productos\n(Mensaje de error y reintentar)" as A2
+
+  ' Acciones concretas derivadas de los requisitos especiales
+  usecase "RC1: Monitorear tiempos de respuesta\n(Notificar si > 3 seg)" as RC1 <<especial>>
+  usecase "RC2: Verificar interfaz responsiva\n(Generar reporte de adaptabilidad)" as RC2 <<especial>>
+  usecase "RC3: Registrar uso de filtros\n(Gestionar estadísticas de selección)" as RC3 <<especial>>
+  usecase "RC4: Evaluar usabilidad y accesibilidad\n(Enviar alertas al administrador)" as RC4 <<especial>>
+}
+
+' Relaciones de actor con casos de uso principales
+Usuario --> UC1 : "entra al sitio"
+UC1 --> UC2 : "visualiza catálogo"
+Usuario --> UC3 : "realiza búsqueda/filtro"
+UC3 --> UC4 : "envía consulta"
+UC4 --> UC5 : "selecciona producto"
+
+' Relaciones de flujos alternativos
+UC4 .> A1 : <<extend>>
+UC2 .> A2 : <<extend>>
+UC4 .> A2 : <<extend>>
+
+' Inclusión de acciones concretas de los requisitos especiales en la búsqueda
+UC3 --> RC1 : <<include>>
+UC3 --> RC2 : <<include>>
+UC3 --> RC3 : <<include>>
+UC3 --> RC4 : <<include>>
+
+' Relaciones de supervisión para el Administrador
+Admin --> RC1 : "revisa reportes de tiempos"
+Admin --> RC2 : "verifica adaptabilidad"
+Admin --> RC3 : "analiza estadísticas de filtros"
+Admin --> RC4 : "evalúa usabilidad y accesibilidad"
+
+@enduml

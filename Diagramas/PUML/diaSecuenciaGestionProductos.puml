@@ -1,0 +1,46 @@
+@startuml
+title Secuencia – Gestión de Productos CRUD
+
+actor "Administrador de Contenido" as Admin
+participant "UI / Frontend" as UI
+participant "ProductController" as PC
+participant "ValidatorService" as VAL
+database "ProductDB" as DB
+
+== Crear (Create) ==
+Admin -> UI : Solicita crear nuevo producto
+UI -> PC : POST /products {datosProducto}
+PC -> VAL : validar(datosProducto)
+VAL --> PC : Validación OK
+PC -> DB : INSERT producto {datosProducto}
+DB --> PC : productId y confirmación
+PC --> UI : 201 Created, {productId, datosProducto}
+UI --> Admin : Muestra mensaje "Producto creado"
+
+== Leer (Read) ==
+Admin -> UI : Solicita ver producto (id)
+UI -> PC : GET /products/{id}
+PC -> DB : SELECT * FROM Products WHERE id = {id}
+DB --> PC : Datos del producto
+PC --> UI : 200 OK, {datosProducto}
+UI --> Admin : Muestra detalle del producto
+
+== Actualizar (Update) ==
+Admin -> UI : Solicita editar producto (id)
+UI -> PC : PUT /products/{id} {nuevosDatos}
+PC -> VAL : validar(nuevosDatos)
+VAL --> PC : Validación OK
+PC -> DB : UPDATE Products SET ... WHERE id = {id}
+DB --> PC : Confirmación de actualización
+PC --> UI : 200 OK, producto actualizado
+UI --> Admin : Muestra mensaje "Producto actualizado"
+
+== Eliminar (Delete) ==
+Admin -> UI : Solicita eliminar producto (id)
+UI -> PC : DELETE /products/{id}
+PC -> DB : DELETE FROM Products WHERE id = {id}
+DB --> PC : Confirmación de eliminación
+PC --> UI : 200 OK, producto eliminado
+UI --> Admin : Muestra mensaje "Producto eliminado"
+
+@enduml

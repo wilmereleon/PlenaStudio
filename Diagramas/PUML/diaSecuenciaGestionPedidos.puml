@@ -1,13 +1,95 @@
-@startuml GestionPedidos
-actor "Usuario" as U
-participant "Interfaz Web (React)" as FE
-participant "API Backend (Express)" as BE
-participant "Base de Datos (MySQL)" as DB
+@startuml
+title Secuencia Detallada – Gestión de Pedidos e Historial de Compras
 
-U -> FE: Solicita historial de pedidos
-FE -> BE: GET /orders (usuario autenticado)
-BE -> DB: SELECT pedidos del usuario
-DB --> BE: Devuelve lista de pedidos
-BE --> FE: Responde con datos de pedidos
-FE --> U: Muestra historial de pedidos
+actor Usuario
+participant "SPA / Frontend"          as UI
+participant "CheckoutService"         as CHECK
+participant "PaymentGateway"          as PAY
+participant "InventoryService"        as INV
+participant "OrderService"            as ORD
+participant "ShippingService"         as SHIP
+participant "NotificationService"     as NOTIF
+database   "OrderDB"                  as DB
+participant "AnalyticsService"        as AN
+
+== 1. Confirmar compra (Place Order) ==
+Usuario  -> UI     : «Confirmar pedido»
+UI       -> CHECK  : POST /checkout {cart,paymentInfo,shipping}
+CHECK    -> PAY    : authorize(amount,paymentInfo)
+
+alt Pago autorizado
+  PAY    --> CHECK : authOK
+
+  '–– Reserva de stock ––'
+  CHECK  -> INV    : reserveStock(cart)
+  alt Stock suficiente
+    INV  --> CHECK  : okStock
+
+    '–– Creación del pedido ––'
+    CHECK -> ORD    : createOrder(cart,shipping,user)
+    ORD   -> DB     : INSERT pedido + ítems
+    DB    --> ORD   : orderId
+    ORD   --> CHECK : orderId
+
+    '–– Generar envío ––'
+    CHECK -> SHIP   : createShipment(orderId, address)
+    SHIP  --> ORD   : trackingNumber
+    ORD   -> DB     : UPDATE pedido ← tracking, status = "Processing"
+
+    '–– Notificar cliente ––'
+    CHECK -> NOTIF  : sendOrderConfirmation(email, orderId)
+    NOTIF -> Usuario: Email de confirmación
+
+    '–– Métricas ––'
+    CHECK -> AN     : logEvent("purchase", orderId, amount)
+
+    CHECK --> UI    : 200 OK + orderId + status
+    UI    --> Usuario: Pantalla de confirmación
+  else Stock insuficiente
+    INV  --> CHECK : errorStock
+    CHECK --> UI   : 409 SinStock
+    UI   --> Usuario: Mensaje “No hay stock suficiente”
+  end
+else Pago rechazado
+  PAY   --> CHECK : authFail
+  CHECK --> UI    : 402 PagoFallido
+  UI    --> Usuario: Mensaje “Pago rechazado”
+end
+
+== 2. Consulta de historial ==
+Usuario  -> UI   : Abre “Mis pedidos”
+UI       -> ORD  : GET /orders?userId
+ORD      -> DB   : SELECT * FROM pedidos WHERE user=…
+DB       --> ORD : listaPedidos
+ORD      --> UI  : listaPedidos
+UI       --> Usuario: Tabla de pedidos
+
+== 3. Detalle y seguimiento ==
+Usuario  -> UI   : Clic pedido #123
+UI       -> ORD  : GET /orders/123
+ORD      -> DB   : SELECT pedido + ítems + tracking
+DB       --> ORD : detallePedido
+ORD      --> UI  : detallePedido
+UI       --> Usuario: Detalle + enlace a tracking
+
+== 4. Cancelar pedido (opcional) ==
+alt Usuario pulsa “Cancelar”
+  Usuario -> UI   : Clic “Cancelar”
+  UI      -> ORD  : POST /orders/123/cancel
+  ORD     -> DB   : SELECT status
+  alt Pedido no enviado aún
+    ORD  -> SHIP  : cancelShipment(trackingNumber)
+    SHIP --> ORD  : cancelOK
+    ORD  -> INV   : releaseStock(orderId)
+    INV  --> ORD  : OK
+    ORD  -> DB    : UPDATE pedido status = "Cancelled"
+    ORD  -> NOTIF : sendCancellation(email, orderId)
+    NOTIF-> Usuario: Email de cancelación
+    ORD  --> UI   : 200 Pedido cancelado
+    UI   --> Usuario: Mensaje “Pedido cancelado”
+  else Pedido ya despachado
+    ORD  --> UI   : 409 NoCancelable
+    UI   --> Usuario: Mensaje “El pedido ya fue enviado”
+  end
+end
 @enduml

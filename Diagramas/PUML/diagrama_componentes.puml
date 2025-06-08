@@ -1,26 +1,56 @@
 @startuml
-title Diagrama de Componentes - Arquitectura Lógica del Sistema
+title Diagrama de Componentes - Plena Studio (Frontend & Backend)
 
-package "Front-end" {
-  [Interfaz de Usuario] --> [Catálogo y Filtros]
-  [Interfaz de Usuario] --> [Carrito de Compras]
-  [Interfaz de Usuario] --> [Checkout]
-  [Interfaz de Usuario] --> [Información Institucional]
-  [Interfaz de Usuario] --> [Autenticación]
+package "Frontend" {
+  [UI Principal] as UI
+  [Catálogo de Productos] as Catalogo
+  [Carrito de Compras] as Carrito
+  [Checkout] as Checkout
+  [Autenticación de Usuario] as AuthFront
+  [Búsqueda y Filtros] as BusquedaFiltros
+  [Página Institucional] as Institucional
+
+  UI --> Catalogo
+  UI --> Carrito
+  UI --> Checkout
+  UI --> AuthFront
+  UI --> BusquedaFiltros
+  UI --> Institucional
 }
 
-package "Back-end" {
-  [Autenticación] --> [Base de Datos de Usuarios]
-  [Gestión de Contenido] --> [Base de Datos de Contenido]
-  [Catálogo y Promociones] --> [Base de Datos de Productos]
-  [Carrito de Compras] --> [Catálogo y Promociones]
-  [Checkout] --> [Carrito de Compras]
-  [Checkout] --> [Sistema de Pagos]
-  [Checkout] --> [Base de Datos de Pedidos]
-  [Autenticación] --> [Gestión de Sesión]
+package "Backend" {
+  [API de Autenticación] as AuthAPI
+  [API de Productos] as ProductosAPI
+  [API de Carrito] as CarritoAPI
+  [API de Checkout] as CheckoutAPI
+  [API de Búsqueda] as BusquedaAPI
+  [API de Contenido Institucional] as InstitucionalAPI
+  [Gestión de Sesión] as Sesion
+  [Gestión de Inventario] as Inventario
+  [Sistema de Pagos] as Pagos
+  [Servicio de Correo] as Correo
+  [Base de Datos] as DB
+
+  AuthAPI --> Sesion
+  AuthAPI --> DB
+  ProductosAPI --> Inventario
+  ProductosAPI --> DB
+  CarritoAPI --> ProductosAPI
+  CarritoAPI --> DB
+  CheckoutAPI --> CarritoAPI
+  CheckoutAPI --> Pagos
+  CheckoutAPI --> Correo
+  CheckoutAPI --> DB
+  BusquedaAPI --> ProductosAPI
+  InstitucionalAPI --> DB
 }
 
-[Interfaz de Usuario] --> [Gestión de Contenido]
-[Gestión de Contenido] --> [Catálogo y Promociones]
+' Relaciones Frontend <-> Backend
+AuthFront --> AuthAPI
+Catalogo --> ProductosAPI
+Carrito --> CarritoAPI
+Checkout --> CheckoutAPI
+BusquedaFiltros --> BusquedaAPI
+Institucional --> InstitucionalAPI
 
 @enduml

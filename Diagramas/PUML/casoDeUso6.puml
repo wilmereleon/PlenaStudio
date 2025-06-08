@@ -1,0 +1,54 @@
+@startuml
+title Diagrama de Casos de Uso 6: Gestión de Contenido (CRUD)
+top to bottom direction
+
+' Declaración de actores
+actor "Administrador de Contenido" as Admin
+actor "Sistema de Gestión de Base de Datos" as DB
+
+' Contenedor principal para el caso de uso
+rectangle "CU_CRU_01: Gestión de Contenido del Sitio Web (CRUD)" {
+
+  usecase "Iniciar sesión y\nacceder al panel\nadministrativo" as UC1
+  usecase "Seleccionar módulo de contenido\na gestionar (ej. catálogo)" as UC2
+  usecase "Visualizar listado actual de contenido\n(opciones: agregar, editar, eliminar)" as UC3
+  
+  usecase "Crear nuevo contenido\n(a. Clic en 'Agregar nuevo'\nb. Completar campos\nc. Guardar y validar)" as UC4
+  usecase "Editar contenido existente\n(Seleccionar y modificar campos)" as UC5
+  usecase "Eliminar contenido\n(Confirmar eliminación o mover a papelera)" as UC6
+
+  ' Requisitos Especiales convertidos en acciones concretas
+  usecase "RC1: Validar integridad\n(campos obligatorios, formatos, límite de caracteres)" as RC1 <<especial>>
+  usecase "RC2: Proteger por roles\n(autenticación restringida a administradores)" as RC2 <<especial>>
+  usecase "RC3: Mostrar ventanas de operaciones seguras\n(consultas parametrizadas/ORM e integración con CDN)" as RC3 <<especial>>
+  usecase "RC4: Visualizar registros de logs y auditoría\n(historial de cambios, fecha, hora, usuario)" as RC4 <<especial>>
+}
+
+' Relaciones de actor con casos de uso principales
+Admin --> UC1 : "inicia sesión"
+Admin --> UC2 : "selecciona módulo"
+UC2 --> UC3 : "visualiza listado de contenido"
+Admin --> UC4 : "crea nuevo contenido"
+Admin --> UC5 : "modifica contenido"
+Admin --> UC6 : "elimina contenido"
+
+' Relaciones con el sistema de gestión de base de datos
+UC4 --> DB : "persiste datos nuevos"
+UC5 --> DB : "actualiza registros"
+UC6 --> DB : "marca/elimina/mueve a papelera"
+UC3 --> DB : "consulta datos actuales"
+
+' Inclusiones de requisitos especiales
+UC1 --> RC2 : <<include>>
+UC2 --> RC2 : <<include>>
+UC4 --> RC1 : <<include>>
+UC4 --> RC3 : <<include>>
+UC5 --> RC1 : <<include>>
+UC5 --> RC3 : <<include>>
+UC6 --> RC3 : <<include>>
+UC3 --> RC4 : <<include>>
+UC4 --> RC4 : <<include>>
+UC5 --> RC4 : <<include>>
+UC6 --> RC4 : <<include>>
+
+@enduml

@@ -1,29 +1,104 @@
-@startuml Checkout
-actor "Usuario" as U
-participant "Interfaz Web (React)" as FE
-participant "API Backend (Express)" as BE
-participant "Pasarela de Pago" as Payment
-participant "Base de Datos (MySQL)" as DB
-participant "Servicio de Email" as Email
+@startuml
+title Secuencia Detallada – Gestión del Carrito de Compras
 
-U -> FE: Añade productos al carrito
-FE -> BE: POST /cart (agregar producto)
-BE -> DB: INSERT/UPDATE producto en carrito
-DB --> BE: Confirmación de actualización
+actor Usuario
+participant "SPA / Frontend"            as UI
+participant "CartController\n(API REST)" as API
+participant "CartService"               as CART
+participant "InventoryService"          as INV
+participant "PricingService"            as PRICE
+participant "PromoService"              as PROMO
+database   "SessionStore / Redis"       as SESS
+participant "AnalyticsService"          as AN
+actor      "Módulo Checkout"            as CHECK
 
-U -> FE: Inicia el proceso de checkout
-FE -> BE: POST /checkout (datos de compra)
-BE -> Payment: Procesar pago
-Payment --> BE: Resultado del pago
-alt Pago Exitoso
-  BE -> DB: Crear orden y actualizar stock
-  DB --> BE: Confirmación de orden
-  BE -> Email: Enviar confirmación de compra
-  Email --> BE: Confirmación de envío de email
-  BE --> FE: Respuesta exitosa (orden confirmada)
-  FE --> U: Muestra confirmación de compra
-else Pago Fallido
-  BE --> FE: Mensaje de error en pago
-  FE --> U: Muestra error en transacción
+== 1. Agregar producto al carrito ==
+Usuario  -> UI     : Clic «Agregar al carrito»
+UI       -> API    : POST /cart/items {idProd, qty}
+API      -> INV    : checkStock(idProd, qty)
+alt Stock suficiente
+  INV   --> API    : OK
+  API   -> PRICE   : getPrice(idProd, qty)
+  PRICE --> API    : precioUnit
+  API   -> CART    : addItem(sessionId, idProd, qty, precioUnit)
+  CART  -> SESS    : save(cart)
+  SESS  --> CART   : OK
+  CART  --> API    : CartSummary
+  API   -> AN      : logEvent("addItem", idProd, qty)
+  API   --> UI     : 200 + CartSummary
+  UI    --> Usuario: Mini-cart actualizado
+else Stock insuficiente
+  INV   --> API    : ERROR stock
+  API   --> UI     : 409 StockError
+  UI    --> Usuario: Mensaje “Sin stock”
 end
+
+== 2. Modificar cantidad de un ítem ==
+Usuario  -> UI     : Cambia cantidad
+UI       -> API    : PUT /cart/items/{idProd} {qty}
+API      -> INV    : checkStock(idProd, qty)
+alt OK
+  INV  --> API     : OK
+  API  -> PRICE    : getPrice(idProd, qty)
+  PRICE --> API    : precioUnit
+  API  -> CART     : updateQty(sessionId, idProd, qty, precioUnit)
+  CART -> SESS     : save(cart)
+  CART --> API     : CartSummary
+  API  --> UI      : 200 + CartSummary
+else ERROR stock
+  INV  --> API     : ERROR stock
+  API  --> UI      : 409 StockError
+end
+
+== 3. Eliminar artículo ==
+Usuario  -> UI     : Clic “Eliminar producto”
+UI       -> API    : DELETE /cart/items/{idProd}
+API      -> CART   : removeItem(sessionId, idProd)
+CART     -> SESS   : save(cart)
+CART     --> API   : CartSummary
+API      -> AN     : logEvent("removeItem", idProd)
+API      --> UI    : 200 + CartSummary
+UI       --> Usuario: Ítem eliminado
+
+== 4. Vaciar carrito ==
+Usuario  -> UI     : Clic “Vaciar carrito”
+UI       -> API    : DELETE /cart
+API      -> CART   : clearCart(sessionId)
+CART     -> SESS   : save(emptyCart)
+API      -> AN     : logEvent("clearCart")
+API      --> UI    : 200 - carrito vacío
+UI       --> Usuario: Carrito vacío
+
+== 5. Aplicar cupón (opcional) ==
+Usuario  -> UI     : Ingresa código promo “SUMMER15”
+UI       -> API    : POST /cart/coupon {code}
+API      -> PROMO  : validate(code, cart)
+alt Cupón válido
+  PROMO --> API    : {tipo, valor}
+  API   -> CART    : applyDiscount(sessionId, tipo, valor)
+  CART  -> SESS    : save(cart)
+  CART  --> API    : CartSummary
+  API   --> UI     : 200 + CartSummary
+  UI    --> Usuario: Descuento aplicado
+else Cupón inválido / expirado
+  PROMO --> API    : ERROR
+  API   --> UI     : 400 Cupón inválido
+  UI    --> Usuario: Mensaje de error
+end
+
+== 6. Visualizar carrito ==
+Usuario  -> UI     : Abre página “/carrito”
+UI       -> API    : GET /cart
+API      -> CART   : getCart(sessionId)
+CART     -> SESS   : load(cart)
+CART     --> API   : CartSummary
+API      --> UI    : 200 + CartSummary
+UI       --> Usuario: Muestra resumen (subtotal, envío, impuestos, total)
+
+== 7. Continuar al pago ==
+Usuario  -> UI     : Clic “Continuar al pago”
+UI       -> CHECK  : POST /startCheckout {sessionId}
+CHECK    --> UI    : URL /checkout
+UI       -> Usuario: Redirige al flujo de pago
+
 @enduml

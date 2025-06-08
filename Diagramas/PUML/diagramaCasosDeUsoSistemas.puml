@@ -1,0 +1,31 @@
+@startuml
+title Diagrama de Casos de Uso – Plena Studio
+
+actor Usuario
+actor "Administrador (Diseñador)" as Admin
+actor "Sistema de Pagos" as Pagos
+actor "Sistema de Inventario" as Inventario
+actor "Servicio de Correo" as Correo
+
+package Sistema {
+  usecase "Navegar y Seleccionar\nProductos" as UC1
+  usecase "Realizar Compra" as UC2
+  usecase "Administrar Catálogo" as UC3
+  usecase "Procesar Pago" as UC4
+  usecase "Actualizar Inventario" as UC5
+  usecase "Enviar Notificaciones\npor Correo" as UC6
+}
+
+Usuario --> UC1
+Usuario --> UC2
+Admin --> UC3
+
+UC2 --> UC4 : Procesa transacción
+UC2 --> UC5 : Actualiza stock
+UC2 --> UC6 : Envía confirmación
+
+Pagos <-- UC4
+Inventario <-- UC5
+Correo <-- UC6
+
+@enduml

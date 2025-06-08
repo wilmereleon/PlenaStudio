@@ -1,0 +1,56 @@
+@startuml
+title Secuencia – Visualización de Servicios, Información Institucional, Catálogo y Promociones
+
+actor Usuario
+participant "Frontend\n(SPA / Vue-React)" as UI
+participant "API Gateway" as API
+participant "ContentService" as CS
+database   "Content DB" as DB
+collections "Cache / CDN" as CACHE
+participant "AnalyticsService" as AN
+
+== Cargar página de inicio ==
+Usuario  -> UI       : Solicita https://PlenaStudio.co
+UI       -> CACHE    : GET /home.html
+alt Home disponible en CDN
+  CACHE  --> UI      : HTML + JS + CSS
+else Cache MISS
+  UI     -> API      : GET /home
+  API    --> UI      : Plantilla de inicio
+end
+UI       --> Usuario : Renderiza página principal
+
+== Seleccionar sección ==
+Usuario  -> UI       : Clic «Nosotros» / «Servicios»\nó «Promociones»
+UI       -> API      : GET /content?section=Promociones
+
+== Recuperar contenido ==
+API      -> CACHE    : lookup(section)
+alt Cache HIT
+  CACHE  --> API     : JSON sección
+else Cache MISS
+  API    -> CS       : fetchSection(section)
+  CS     -> DB       : SELECT * FROM contenido\nWHERE tipo = 'Promociones'
+  DB     --> CS      : Datos de la sección
+  CS     --> API     : JSON sección
+  API    -> CACHE    : write(section, JSON, TTL)
+end
+
+== Enviar respuesta ==
+API      --> UI      : JSON sección
+UI       --> Usuario : Renderiza imágenes, textos,\nenlaces a productos
+
+== Registrar vista ==
+API      -> AN       : logView(userId?, section, timestamp)
+
+== Flujo opcional – clic en promoción ==
+alt Usuario hace clic en promoción
+  Usuario -> UI      : Selecciona promo ID
+  UI      -> API     : GET /promoRedirect?id=ID
+  API     -> CS      : resolvePromo(ID)
+  CS      --> API    : URL destino (producto u oferta)
+  API     --> UI     : 302 Redirect URL
+  UI      -> Usuario : Navega a producto / carrito
+  API     -> AN      : logClick(userId?, promoId, timestamp)
+end
+@enduml

@@ -1,13 +1,76 @@
-@startuml BusquedaProductos
-actor "Usuario" as U
-participant "Interfaz Web (React)" as FE
-participant "API Backend (Express)" as BE
-participant "Base de Datos (MySQL)" as DB
+@startuml
+title Secuencia Detallada – Búsqueda y Filtro de Productos
 
-U -> FE: Ingresa término de búsqueda y/o aplica filtros
-FE -> BE: GET /products?query=...&filter=...
-BE -> DB: SELECT productos WHERE (condiciones según query y filtros)
-DB --> BE: Devuelve lista de productos filtrados
-BE --> FE: Responde con datos de productos
-FE --> U: Muestra resultados de búsqueda
+actor Usuario
+participant "SPA / Frontend"               as UI
+participant "AutocompleteService"          as SUGG
+participant "API Gateway"                  as API
+collections "Cache (Redis / CDN)"          as CACHE
+participant "SearchService"                as SEARCH
+database   "SearchIndex (Elastic / Solr)"  as INDEX
+participant "ProductService"               as PROD
+database   "CatalogDB"                     as DB
+participant "AnalyticsService"             as AN
+
+== 1. Autocompletado mientras escribe ==
+Usuario  -> UI     : Teclea “pulser…”
+UI       -> SUGG   : GET /suggest?q=pulser
+SUGG     -> SEARCH : prefixSearch("pulser")
+SEARCH   -> INDEX  : prefix query
+INDEX    --> SEARCH: lista términos
+SEARCH   --> SUGG  : {sugerencias}
+SUGG     --> UI    : JSON sugerencias
+UI       --> Usuario: Muestra dropdown de autocompletado
+
+== 2. Enviar búsqueda y filtros ==
+Usuario  -> UI     : Entra «pulseras» + filtros (color=rojo, precio<30)
+UI       -> API    : GET /search?q=pulseras&color=rojo&maxPrice=30&p=1
+
+== 3. Verificar caché ==
+API      -> CACHE  : lookup(key = hash(consulta+filtros+página))
+alt Cache HIT
+  CACHE  --> API   : JSON resultados
+  API    -> AN     : log("search-hit", q, filtros, t)
+  API    --> UI    : 200 + resultados
+  UI     --> Usuario: Renderiza tarjetas
+else Cache MISS
+  CACHE  --> API   : MISS
+
+  == 4. Consultar índice de búsqueda ==
+  API     -> SEARCH : search(q, filtros, sort, paginado)
+  SEARCH  -> INDEX  : consulta compuesta
+  INDEX   --> SEARCH: lista de productIds + puntaje
+
+  == 5. Obtener detalles de productos ==
+  SEARCH  --> API   : productIds
+  API     -> PROD   : POST /products/bulk {ids}
+  PROD    -> DB     : SELECT * FROM productos WHERE id IN (...)
+  DB      --> PROD  : rows
+  PROD    --> API   : JSON detalles
+
+  == 6. Agregar info de disponibilidad (opcional) ==
+  ' (Se omite para no sobrecargar el diagrama) '
+
+  == 7. Responder y cachear ==
+  API     -> CACHE  : set(key, resultados, TTL)
+  API     -> AN     : log("search-miss", q, filtros, t)
+  API     --> UI    : 200 + resultados
+  UI      --> Usuario: Tarjetas + paginador
+end
+
+== 8. Interacción de filtros adicionales ==
+Usuario  -> UI     : Cambia filtro «material = plata»
+UI       -> API    : GET /search?q=pulseras&material=plata&p=1
+...     (Repite pasos 3-7) ...
+
+== 9. Manejo de No Resultados ==
+alt Sin coincidencias
+  API --> UI       : 200 + []
+  UI  --> Usuario  : Mensaje “No se encontraron productos”
+end
+
+== 10. Analítica de clic ==
+Usuario  -> UI     : Clic en producto #123
+UI       -> AN     : log("click", prodId=123, q, filtros, pos)
+
 @enduml
