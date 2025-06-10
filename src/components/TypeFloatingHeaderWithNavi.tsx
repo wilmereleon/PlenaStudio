@@ -75,17 +75,30 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
               </div>
             ) : (
               <Link 
-                to="/login" 
-                className="btn btn-sm"
+                to="/login"
+                className={styles.botonInicioSesion}
                 style={{
-                  backgroundColor: 'var(--color-lightgreen)',
-                  borderColor: 'var(--color-lightgreen)',
-                  color: 'white',
-                  fontWeight: 600
+                  height: "40px",
+                  minWidth: "120px",
+                  backgroundColor: "#e6fcf3",
+                  color: "#2C3E50",
+                  border: "1px solid #232c2b",
+                  borderRadius: "8px", // Cambiado a 8px
+                  boxSizing: "border-box",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "0 20px",
+                  fontSize: "12px",
+                  fontFamily: "Lato, Arial, sans-serif",
+                  fontWeight: 400,
+                  boxShadow: "none",
+                  textAlign: "center",
+                  transition: "none",
+                  textDecoration: "none"
                 }}
               >
-                <i className="bi bi-box-arrow-in-right me-1"></i>
-                Iniciar Sesión
+                Iniciar sesión
               </Link>
             )}
           </div>
