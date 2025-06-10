@@ -1,0 +1,44 @@
+@startuml
+title Diagrama de Casos de Uso 5: Visualización de Servicios, Información Corporativa y Gestión de Promociones
+top to bottom direction
+
+' Declaración de actores
+actor "Usuario" as Usuario
+actor "Administrador de Contenido" as AdmCont
+
+' Contenedor principal para el caso de uso
+rectangle "CU_ICP_01: Visualización de Servicios, Información Corporativa y Gestión de Promociones" {
+
+  usecase "Acceder a la página principal" as UC1
+  usecase "Seleccionar opción\n(Nosotros / Servicios / Promociones)" as UC2
+  usecase "Cargar contenido dinámico\n(Servicios, Información Corporativa,\nPromociones)" as UC3
+  usecase "Navegar por el contenido\n(incluye imágenes, textos y vínculos)" as UC4
+  usecase "Redirigir según clic en\npromoción (ofertas/productos)" as UC5
+  usecase "Registrar interacción\npara análisis (opcional)" as UC6
+  
+  ' Acciones derivadas (Requisitos Especiales convertidos en acciones concretas)
+  usecase "RC1: Mostrar panel de administración de contenido\n(Actualizar textos, imágenes, vigencia)" as RC1 <<especial>>
+  usecase "RC2: Mostrar panel de diseño responsivo y accesible\n(Conforme a WCAG 2.1)" as RC2 <<especial>>
+  usecase "RC3: Mostrar tiempo de carga en ventana\n(≤ 2 seg en condiciones normales)" as RC3 <<especial>>
+  usecase "RC4: Almacenar de forma estructurada\npara reutilización (marketing, newsletter)" as RC4 <<especial>>
+}
+
+' Relaciones de actor con casos de uso principales
+Usuario --> UC1 : "entra al sitio"
+UC1 --> UC2 : "selecciona opción"
+UC2 --> UC3 : "solicita contenido"
+UC3 --> UC4 : "visualiza información"
+UC4 --> UC5 : "clic en promoción"
+UC5 --> UC6 : "flujo interactivo"
+
+' Inclusión de acciones concretas (requisitos especiales)
+UC2 --> RC1 : <<include>>
+UC2 --> RC2 : <<include>>
+UC3 --> RC3 : <<include>>
+UC3 --> RC4 : <<include>>
+
+' Relaciones para la supervisión por parte del Administrador de Contenido
+AdmCont --> RC1 : "gestiona y actualiza"
+AdmCont --> RC4 : "verifica estructura"
+
+@enduml

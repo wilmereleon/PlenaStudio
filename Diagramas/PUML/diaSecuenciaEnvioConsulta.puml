@@ -1,13 +1,50 @@
-@startuml FormularioContacto
-actor "Usuario" as U
-participant "Interfaz Web (React)" as FE
-participant "API Backend (Express)" as BE
-participant "Sistema de Notificaciones" as Notif
+@startuml
+title Secuencia – Envío de Formulario de Contacto / Consulta
 
-U -> FE: Completa formulario de contacto (nombre, correo, mensaje)
-FE -> BE: POST /contact (datos)
-BE -> Notif: Enviar notificación al equipo de soporte
-Notif --> BE: Confirmación de envío de notificación
-BE --> FE: Respuesta exitosa
-FE --> U: Muestra mensaje de confirmación
+actor Usuario
+participant "UI\n(Formulario de Contacto)" as UI
+participant "API Backend\n(FormController)" as API
+participant "Servicio de Validación" as VAL
+participant "Servicio CAPTCHA" as CAPTCHA
+database   "Base de Datos" as DB
+participant "Sistema de Notificaciones" as NOTIF
+actor "Administrador de Soporte" as Admin
+
+== Navegación ==
+Usuario -> UI   : Solicita /contacto
+UI     -> Usuario : Renderiza formulario
+
+== Envío ==
+Usuario -> UI   : Completa datos y pulsa «Enviar»
+UI   -> API     : POST /contacto { nombre, email, asunto, mensaje, captcha }
+
+== Validación ==
+API  -> VAL     : validarCampos(...)
+VAL  --> API    : OK
+API  -> CAPTCHA : verificar(token)
+CAPTCHA --> API : OK
+
+alt A1 ‒ Datos incompletos / e-mail inválido
+    VAL --> API    : listaErrores
+    API --> UI     : 400 + errores
+    UI  --> Usuario: Muestra mensajes de error
+else A1b ‒ CAPTCHA inválido
+    CAPTCHA --> API: errorCaptcha
+    API     --> UI : Error CAPTCHA
+    UI      --> Usuario: Solicita reintento
+else Datos válidos
+    API -> DB      : INSERT consulta (timestamp, #ticket)
+    DB  --> API    : idTicket
+    API -> NOTIF   : enviarConfirmación(Usuario, idTicket)
+    API -> NOTIF   : notificarSoporte(Admin, idTicket)
+    NOTIF -> Admin : Email «Nueva consulta #idTicket»
+    API --> UI     : 200 OK + idTicket
+    UI  --> Usuario: Muestra Nº de ticket
+end
+
+alt A3 ‒ Error al enviar notificación
+    NOTIF --> API  : falloEnvio
+    API   --> UI   : Notifica error y ofrece reintentar
+    UI    --> Usuario: Mensaje de contingencia
+end
 @enduml

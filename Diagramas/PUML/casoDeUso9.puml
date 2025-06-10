@@ -1,0 +1,32 @@
+@startuml
+title Diagrama de Casos de Uso 9: Gestión de Pedidos e Historial de Compras
+Top to bottom direction
+
+' Declaración de actores
+actor "Usuario\nAutenticado" as Usuario
+actor "Sistema de Gestión de Pedidos" as SGP
+
+' Contenedor principal para el caso de uso
+rectangle "CU_GPC_01: Gestión de Pedidos e Historial de Compras" {
+
+  usecase "Acceder a la sección de Pedidos" as UC1
+  usecase "Consultar Historial de Compras" as UC2
+  usecase "Ver Detalles del Pedido" as UC3
+  usecase "Realizar Seguimiento del Pedido" as UC4
+  usecase "Cancelar Pedido" as UC5
+  usecase "Reordenar Pedido" as UC6
+}
+
+' Relaciones entre el Usuario y los casos de uso
+Usuario --> UC1 : "Ingresa a la sección de Pedidos"
+UC1 --> UC2 : "Consulta historial de compras"
+UC2 --> UC3 : "Selecciona pedido para ver detalles"
+UC3 --> UC4 : "Visualiza seguimiento"
+UC3 --> UC5 : "Cancela pedido (si procede)"
+UC3 --> UC6 : "Reordena pedido"
+
+' Relaciones con el Sistema de Gestión de Pedidos
+SGP --> UC1 : "Actualiza estado de pedidos"
+SGP --> UC2 : "Registra historial de compras"
+
+@enduml

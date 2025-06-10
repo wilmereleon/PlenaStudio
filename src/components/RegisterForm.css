@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* src/components/RegisterForm.css */
 .registro-container {
   width: 90%;
@@ -56,3 +57,187 @@ button {
 a {
   color: #2a2a2a;
 }
+=======
+.registro-bg {
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 40px;
+}
+
+.registro-logo img {
+  max-width: 260px;
+  margin-bottom: 10px;
+}
+
+.registro-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: #232c2b;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.registro-form {
+  background: #fff;
+  border: 1.5px solid #bfc8c6;
+  border-radius: 12px;
+  max-width: 900px;
+  width: 95%;
+  margin: 0 auto;
+  padding: 32px 24px 24px 24px;
+  box-sizing: border-box;
+}
+
+.registro-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.registro-legend {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 18px;
+  color: #232c2b;
+}
+
+.registro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px 24px;
+}
+
+.registro-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.registro-col label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #232c2b;
+  font-size: 1rem;
+}
+
+.registro-col input,
+.registro-col select {
+  border: 1.5px solid #bfc8c6;
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  background: #F4D7D7; /* Aplica el fondo a todos los inputs/selects */
+  transition: border 0.2s;
+  color: #232c2b;
+}
+
+/* Placeholders con fondo y color */
+.registro-col input::placeholder,
+.registro-col select::placeholder {
+  background: #F4D7D7;
+  color: #888;
+  opacity: 1;
+}
+
+/* Para select que no soporta ::placeholder */
+.registro-col select:invalid {
+  color: #888;
+  background: #F4D7D7;
+}
+
+.registro-col input:focus,
+.registro-col select:focus {
+  outline: none;
+  border-color: #7ca16b;
+}
+
+.registro-col input.error,
+.registro-col select.error {
+  background: #f8d6d6;
+  border-color: #e57373;
+}
+
+/* APLICAR AQUÍ EL NUEVO CÓDIGO */
+.registro-password {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.registro-eye {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+}
+
+.registro-eye img {
+  width: 22px;
+  height: 22px;
+}
+
+.registro-botones {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin: 108px 0 24px 0;
+}
+
+.registro-botones .cancelar,
+.registro-botones .registrar {
+  min-width: 140px;
+  border: none;
+  border-radius: 20px;
+  padding: 0;
+  height: 31px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  background: #8ABF69;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registro-botones .cancelar:hover,
+.registro-botones .registrar:hover {
+  background: #6ea04e;
+}
+
+.registro-login {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #232c2b;
+}
+
+.registro-login a {
+  color: #232c2b;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .registro-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .registro-form {
+    padding: 18px 6px 12px 6px;
+  }
+  .registro-grid {
+    grid-template-columns: 1fr;
+    gap: 14px 0;
+  }
+}
+>>>>>>> master

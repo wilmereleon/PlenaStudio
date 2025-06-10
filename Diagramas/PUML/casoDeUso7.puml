@@ -1,0 +1,44 @@
+@startuml
+title Diagrama de Casos de Uso 7: Gestión de Carrito de Compras
+top to bottom direction
+
+' Declaración de actores
+actor "Usuario\nAutenticado" as Usuario
+actor "Sistema de Inventario" as Inventario
+actor "Módulo de Checkout" as Checkout
+
+' Contenedor principal para el caso de uso
+rectangle "CU_GCC_01: Gestión de Carrito de Compras" {
+
+  usecase "Seleccionar producto en el catálogo" as UC1
+  usecase "Agregar producto al carrito" as UC2
+  usecase "Modificar cantidad de producto" as UC3
+  usecase "Eliminar artículo del carrito" as UC4
+  usecase "Vaciar carrito" as UC5
+  usecase "Visualizar resumen de compra\nen tiempo real" as UC6
+  usecase "Proceder al pago (Checkout)" as UC7
+  
+  ' Acciones concretas derivadas de los requisitos especiales
+  usecase "Notificar cambios en stock/precio" as RC1 <<especial>>
+}
+
+' Relaciones de actor con casos de uso
+Usuario --> UC1 : "navega y selecciona producto"
+UC1 --> UC2 : "clic en 'Agregar al carrito'"
+UC2 --> Inventario : "valida stock"
+Inventario --> UC2 : "confirma disponibilidad"
+UC2 --> UC6 : "actualiza resumen"
+
+Usuario --> UC3 : "modifica cantidad"
+Usuario --> UC4 : "elimina producto"
+Usuario --> UC5 : "vacía carrito"
+
+UC6 --> UC7 : "resumen actualizado"
+Usuario --> UC7 : "opta por pagar"
+UC7 --> Checkout : "invoca módulo de pago"
+
+' Extensión para notificar cambios de stock o precio
+UC2 .> RC1 : <<extend>>
+RC1 --> Inventario : "verifica disponibilidad y cambios"
+
+@enduml

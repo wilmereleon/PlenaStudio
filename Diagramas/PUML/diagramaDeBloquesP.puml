@@ -1,0 +1,18 @@
+@startuml
+title Diagrama de Bloques – Plena Studio
+
+rectangle "Plena Studio" as PlenaStudio
+rectangle "User Interface" as UI
+rectangle "Backend" as Backend
+rectangle "Database" as Database
+rectangle "Payment Service" as PaymentService
+rectangle "Notification System" as NotificationSystem
+
+PlenaStudio --> UI
+UI --> Backend
+Backend --> Database : Stores product,\ncustomer, and order data
+Backend --> PaymentService : Processes payments
+Backend --> NotificationSystem
+PaymentService --> NotificationSystem : Sends emails
+
+@enduml

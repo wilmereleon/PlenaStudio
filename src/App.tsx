@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useEffect } from "react";
 import {
   Routes,
@@ -6,6 +8,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import PginaWeb from "./pages/PginaWeb";
+import RegisterForm from "./components/RegisterForm"; // <-- Agrega esta línea
 
 function App() {
   const action = useNavigationType();
@@ -46,6 +49,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<PginaWeb />} />
+      <Route path="/register" element={<RegisterForm />} /> {/* <-- Agrega esta línea */}
     </Routes>
   );
 }
