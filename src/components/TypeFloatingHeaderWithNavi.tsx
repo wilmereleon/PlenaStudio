@@ -1,6 +1,8 @@
 import { FunctionComponent } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./TypeFloatingHeaderWithNavi.module.css";
+import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 export type TypeFloatingHeaderWithNaviType = {
   className?: string;
@@ -10,6 +12,7 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
   TypeFloatingHeaderWithNaviType
 > = ({ className = "" }) => {
   const navigate = useNavigate();
+  const { user, logout, isAuthenticated } = useAuth();
 
   return (
     <header
@@ -51,10 +54,40 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
             alt=""
             src="/cart.svg"
           />
-          <div className={styles.botonInicioSesion}>
-            <div className={styles.contenedorDeTexto}>
-              <div className={styles.inicioTexto}>Iniciar sesión</div>
-            </div>
+          <div className="d-flex align-items-center">
+            {isAuthenticated ? (
+              <div className="d-flex align-items-center">
+                <span className="me-3 text-muted">
+                  <i className="bi bi-person-circle me-1"></i>
+                  Hola, {user?.nombre}
+                </span>
+                <button 
+                  onClick={logout}
+                  className="btn btn-outline-secondary btn-sm"
+                  style={{
+                    borderColor: 'var(--color-slategray)',
+                    color: 'var(--color-slategray)'
+                  }}
+                >
+                  <i className="bi bi-box-arrow-right me-1"></i>
+                  Cerrar Sesión
+                </button>
+              </div>
+            ) : (
+              <Link 
+                to="/login" 
+                className="btn btn-sm"
+                style={{
+                  backgroundColor: 'var(--color-lightgreen)',
+                  borderColor: 'var(--color-lightgreen)',
+                  color: 'white',
+                  fontWeight: 600
+                }}
+              >
+                <i className="bi bi-box-arrow-in-right me-1"></i>
+                Iniciar Sesión
+              </Link>
+            )}
           </div>
           <div
             className={styles.botonRegistrate}
