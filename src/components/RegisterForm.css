@@ -1,0 +1,58 @@
+/* src/components/RegisterForm.css */
+.registro-container {
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+input, select {
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #aaa;
+}
+
+input.error, select.error {
+  background-color: #f9d5d3;
+  border-color: red;
+}
+
+.botones {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+button {
+  margin: 0 10px;
+  padding: 10px 30px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.cancelar {
+  background-color: #ccc;
+}
+
+.registrar {
+  background-color: #86b44d;
+  color: white;
+}
+
+a {
+  color: #2a2a2a;
+}
