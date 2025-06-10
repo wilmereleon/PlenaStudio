@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./TypeFloatingHeaderWithNavi.module.css";
 
 export type TypeFloatingHeaderWithNaviType = {
@@ -8,6 +9,8 @@ export type TypeFloatingHeaderWithNaviType = {
 const TypeFloatingHeaderWithNavi: FunctionComponent<
   TypeFloatingHeaderWithNaviType
 > = ({ className = "" }) => {
+  const navigate = useNavigate();
+
   return (
     <header
       className={[styles.typefloatingHeaderWithNavi, className].join(" ")}
@@ -53,7 +56,11 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
               <div className={styles.inicioTexto}>Iniciar sesión</div>
             </div>
           </div>
-          <div className={styles.botonRegistrate}>
+          <div
+            className={styles.botonRegistrate}
+            onClick={() => navigate("/register")}
+            style={{ cursor: "pointer" }}
+          >
             <div className={styles.contenedorDeTexto}>
               <b className={styles.inicioTexto}>Registrarse</b>
             </div>
