@@ -32,6 +32,43 @@
   color: var(--color-darkslategray-100);
   font-family: var(--font-lato);
 }
+/* --- Ticker styles integrados --- */
+.tickerWrapper {
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px; /* Ajusta según tu diseño */
+}
+
+.ticker {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.tickerText {
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #232c2b;
+  animation: tickerMove 15s linear infinite;
+}
+
+@keyframes tickerMove {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+/* --- Fin ticker --- */
 .figmaIpsumComponent {
   margin: 0;
   width: 100%;

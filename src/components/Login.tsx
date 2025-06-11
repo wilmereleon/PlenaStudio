@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import styles from './Login.module.css';
+// Asegúrate de tener instalado 'bootstrap-icons' y de importar su CSS en tu App.tsx o main.tsx
 
 const LoginForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -78,7 +79,7 @@ const LoginForm: React.FC = () => {
                 value={formData.password}
                 onChange={handleChange}
                 disabled={isSubmitting}
-                style={{ background: "#F4D7D7" }}
+                style={{ background: "#F4D7D7", width: "100%" }} // Asegura el mismo ancho que el de correo
                 required
               />
               <span

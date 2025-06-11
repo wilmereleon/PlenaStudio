@@ -8,7 +8,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import PginaWeb from "./pages/PginaWeb";
-import RegisterForm from "./components/RegisterForm"; // <-- Agrega esta línea
+import RegisterForm from "./components/RegisterForm";
 import Login from "./pages/Login";
 
 function App() {
@@ -31,6 +31,8 @@ function App() {
         title = "";
         metaDescription = "";
         break;
+      default:
+        break;
     }
 
     if (title) {
@@ -50,9 +52,10 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<PginaWeb />} />
-      <Route path="/register" element={<RegisterForm />} /> {/* <-- Agrega esta línea */}
+      <Route path="/register" element={<RegisterForm />} />
       <Route path="/login" element={<Login />} />
     </Routes>
   );
 }
+
 export default App;
