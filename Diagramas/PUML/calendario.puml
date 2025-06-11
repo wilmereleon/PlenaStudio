@@ -2,11 +2,11 @@
 Project starts 2025-05-21
 
 ' Iteración 1: Planificación, Diseño y Revisión de Diseño
-[Planeación (Wílmer, Juan, Carlos)] lasts 5 days
-[Diseño (Wílmer, Juan, Carlos)] lasts 6 days
-[Diseño (Wílmer, Juan, Carlos)] starts at [Planeación (Wílmer, Juan, Carlos)]'s end
-[Revisión de Diseño (Wílmer, Juan, Carlos)] lasts 4 days
-[Revisión de Diseño (Wílmer, Juan, Carlos)] starts at [Diseño (Wílmer, Juan, Carlos)]'s end
+[Planeación (Wílmer, Juan, Carlos, Gustavo)] lasts 5 days
+[Diseño (Wílmer, Juan, Carlos, Gustavo)] lasts 6 days
+[Diseño (Wílmer, Juan, Carlos, Gustavo)] starts at [Planeación (Wílmer, Juan, Carlos, Gustavo)]'s end
+[Revisión de Diseño (Wílmer, Juan, Carlos, Gustavo)] lasts 4 days
+[Revisión de Diseño (Wílmer, Juan, Carlos, Gustavo)] starts at [Diseño (Wílmer, Juan, Carlos, Gustavo)]'s end
 
 [Release 1: Planificación, Diseño y Revisión de Diseño] happens on 2025-05-27
 
@@ -14,22 +14,22 @@ Project starts 2025-05-21
 [Acta 2: Planificación del Equipo y Estrategia de Iteración] happens on 2025-05-27
 
 ' Iteración 2: Codificación, Revisión de Código y Compilación
-[Codificación (Wílmer, Juan, Carlos)] lasts 8 days
-[Codificación (Wílmer, Juan, Carlos)] starts at [Revisión de Diseño (Wílmer, Juan, Carlos)]'s end
-[Revisión de Código (Wílmer, Juan, Carlos)] lasts 4 days
-[Revisión de Código (Wílmer, Juan, Carlos)] starts at [Codificación (Wílmer, Juan, Carlos)]'s end
-[Compilación e Integración (Wílmer, Juan, Carlos)] lasts 4 days
-[Compilación e Integración (Wílmer, Juan, Carlos)] starts at [Revisión de Código (Wílmer, Juan, Carlos)]'s end
+[Codificación (Wílmer, Juan, Carlos, Gustavo)] lasts 8 days
+[Codificación (Wílmer, Juan, Carlos, Gustavo)] starts at [Revisión de Diseño (Wílmer, Juan, Carlos, Gustavo)]'s end
+[Revisión de Código (Wílmer, Juan, Carlos, Gustavo)] lasts 4 days
+[Revisión de Código (Wílmer, Juan, Carlos, Gustavo)] starts at [Codificación (Wílmer, Juan, Carlos, Gustavo)]'s end
+[Compilación e Integración (Wílmer, Juan, Carlos, Gustavo)] lasts 4 days
+[Compilación e Integración (Wílmer, Juan, Carlos, Gustavo)] starts at [Revisión de Código (Wílmer, Juan, Carlos, Gustavo)]'s end
 
 [Release 2: Codificación, Revisión de Código y Compilación] happens on 2025-06-10
 
 [Acta 3: Estrategia de Calidad y Validación] happens on 2025-06-07
 
 ' Iteración 3: Pruebas y Postmortem
-[Pruebas (Wílmer, Juan, Carlos)] lasts 7 days
-[Pruebas (Wílmer, Juan, Carlos)] starts at [Compilación e Integración (Wílmer, Juan, Carlos)]'s end
-[Postmortem y Ajustes Finales (Wílmer, Juan, Carlos)] lasts 7 days
-[Postmortem y Ajustes Finales (Wílmer, Juan, Carlos)] starts at [Pruebas (Wílmer, Juan, Carlos)]'s end
+[Pruebas (Wílmer, Juan, Carlos, Gustavo)] lasts 7 days
+[Pruebas (Wílmer, Juan, Carlos, Gustavo)] starts at [Compilación e Integración (Wílmer, Juan, Carlos, Gustavo)]'s end
+[Postmortem y Ajustes Finales (Wílmer, Juan, Carlos, Gustavo)] lasts 7 days
+[Postmortem y Ajustes Finales (Wílmer, Juan, Carlos, Gustavo)] starts at [Pruebas (Wílmer, Juan, Carlos, Gustavo)]'s end
 
 [Release 3: Pruebas y Postmortem] happens on 2025-06-24
 
