@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import PginaWeb from "./pages/PginaWeb";
 import RegisterForm from "./components/RegisterForm"; // <-- Agrega esta línea
+import Login from "./pages/Login";
 
 function App() {
   const action = useNavigationType();
@@ -50,6 +51,7 @@ function App() {
     <Routes>
       <Route path="/" element={<PginaWeb />} />
       <Route path="/register" element={<RegisterForm />} /> {/* <-- Agrega esta línea */}
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }
