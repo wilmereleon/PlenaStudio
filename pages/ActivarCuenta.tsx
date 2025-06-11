@@ -1,6 +1,6 @@
-// pages/ActivarCuenta.tsx
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { activateUser } from '../utils/userStorage';
+import { activateUser } from '../src/utils/userStorage';
 
 const ActivarCuenta = () => {
   const [params] = useSearchParams();
@@ -15,3 +15,5 @@ const ActivarCuenta = () => {
 
   return <p>Cuenta activada. Ya puedes iniciar sesión.</p>;
 };
+
+export default ActivarCuenta;
