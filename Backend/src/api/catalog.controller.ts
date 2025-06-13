@@ -1,8 +1,19 @@
-// src/api/catalog.controller.ts
 import { Request, Response } from "express";
-import productService from "../services/product.service";
 
-export const getProducts = async (req: Request, res: Response) => {
-  const products = await productService.getAllProducts();
-  res.json(products);
+/**
+ * Controlador para el catálogo de productos.
+ */
+export const catalogController = {
+  getAllProducts(req: Request, res: Response) {
+    // Simulación de productos
+    res.json([
+      // { id: 1, nombre: "Producto 1", ... }
+    ]);
+  },
+
+  getProductById(req: Request, res: Response) {
+    const { id } = req.params;
+    // Buscar producto por id
+    res.json({ id, nombre: "Producto de ejemplo" });
+  }
 };
