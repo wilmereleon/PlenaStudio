@@ -4,26 +4,50 @@ import styles from "./TypeFloatingHeaderWithNavi.module.css";
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
+/**
+ * TypeFloatingHeaderWithNaviType
+ * 
+ * Tipado de las props que recibe el componente TypeFloatingHeaderWithNavi.
+ * 
+ * @property {string} [className] - Clase CSS adicional para el componente.
+ */
 export type TypeFloatingHeaderWithNaviType = {
   className?: string;
 };
 
+/**
+ * TypeFloatingHeaderWithNavi
+ * 
+ * Componente de encabezado flotante con navegación para Plena Studio.
+ * Muestra el logo, enlaces de navegación, iconos de búsqueda y carrito, y botones de autenticación.
+ * 
+ * @component
+ * 
+ * @param {TypeFloatingHeaderWithNaviType} props - Propiedades del componente.
+ * @param {string} [props.className] - Clase CSS adicional.
+ * 
+ * @returns {JSX.Element} El encabezado de navegación.
+ */
 const TypeFloatingHeaderWithNavi: FunctionComponent<
   TypeFloatingHeaderWithNaviType
 > = ({ className = "" }) => {
+  // Hook para navegación programática
   const navigate = useNavigate();
+  // Hook de autenticación personalizada
   const { user, logout, isAuthenticated } = useAuth();
 
   return (
     <header
       className={[styles.typefloatingHeaderWithNavi, className].join(" ")}
     >
+      {/* Logo de la marca */}
       <div className={styles.brandDeMarcaYLogo}>
         <img className={styles.icon} loading="lazy" alt="" src="/icon@2x.png" />
         <img className={styles.icon1} alt="" src="/icon-1@2x.png" />
       </div>
       <div className={styles.contornoDeEncabezado}>
         <div className={styles.enlacesDeNavegacin}>
+          {/* Enlaces de navegación principales */}
           <div className={styles.inicio}>
             <div className={styles.inicioTexto}>Inicio</div>
           </div>
@@ -42,6 +66,7 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
           <div className={styles.bufandas}>
             <div className={styles.inicioTexto}>Bufandas</div>
           </div>
+          {/* Iconos de búsqueda y carrito */}
           <img
             className={styles.searchSharpIcon}
             loading="lazy"
@@ -54,6 +79,7 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
             alt=""
             src="/cart.svg"
           />
+          {/* Botones de autenticación */}
           <div className="d-flex align-items-center">
             {isAuthenticated ? (
               <div className="d-flex align-items-center">
@@ -83,7 +109,7 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
                   backgroundColor: "#e6fcf3",
                   color: "#2C3E50",
                   border: "1px solid #232c2b",
-                  borderRadius: "8px", // Cambiado a 8px
+                  borderRadius: "8px",
                   boxSizing: "border-box",
                   display: "flex",
                   alignItems: "center",
@@ -102,6 +128,7 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
               </Link>
             )}
           </div>
+          {/* Botón de registro */}
           <div
             className={styles.botonRegistrate}
             onClick={() => navigate("/register")}

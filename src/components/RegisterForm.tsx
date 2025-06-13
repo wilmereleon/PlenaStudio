@@ -3,6 +3,18 @@ import { v4 as uuidv4 } from 'uuid';
 import { saveUser, getUserByEmail } from '../utils/userStorage';
 import './RegisterForm.css';
 
+/**
+ * Interfaz para los datos del formulario de registro.
+ * @property {string} nombres - Nombres del usuario.
+ * @property {string} apellidos - Apellidos del usuario.
+ * @property {string} correo - Correo electrónico del usuario.
+ * @property {string} direccion - Dirección de residencia.
+ * @property {string} celular - Teléfono celular.
+ * @property {string} tipoIdentificacion - Tipo de identificación.
+ * @property {string} numeroIdentificacion - Número de identificación.
+ * @property {string} contraseña - Contraseña.
+ * @property {string} confirmar - Confirmación de la contraseña.
+ */
 interface FormData {
   nombres: string;
   apellidos: string;
@@ -15,11 +27,26 @@ interface FormData {
   confirmar: string;
 }
 
+/**
+ * Interfaz para los errores del formulario.
+ * Cada campo puede tener un error booleano.
+ */
 interface Errores {
   [key: string]: boolean;
 }
 
+/**
+ * RegisterForm
+ * 
+ * Componente de formulario de registro de usuario para Plena Studio.
+ * Permite a los usuarios crear una cuenta ingresando sus datos personales y credenciales.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} El formulario de registro.
+ */
 const RegisterForm: React.FC = () => {
+  // Estado para los datos del formulario
   const [formData, setFormData] = useState<FormData>({
     nombres: '',
     apellidos: '',
@@ -32,18 +59,30 @@ const RegisterForm: React.FC = () => {
     confirmar: ''
   });
 
+  // Estado para los errores de validación
   const [errores, setErrores] = useState<Errores>({});
+  // Estado para mostrar/ocultar la contraseña
   const [showPassword, setShowPassword] = useState(false);
+  // Estado para mostrar/ocultar la confirmación de contraseña
   const [showConfirm, setShowConfirm] = useState(false);
 
+  /**
+   * Maneja los cambios en los campos del formulario.
+   * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} e - Evento de cambio del input o select.
+   */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  /**
+   * Maneja el envío del formulario, valida los campos y guarda el usuario si es válido.
+   * @param {React.FormEvent<HTMLFormElement>} e - Evento de envío del formulario.
+   */
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newErrors: Errores = {};
 
+    // Validaciones de los campos
     if (!formData.nombres) newErrors.nombres = true;
     if (!formData.apellidos) newErrors.apellidos = true;
     if (!formData.correo.includes('@')) newErrors.correo = true;
@@ -57,6 +96,7 @@ const RegisterForm: React.FC = () => {
 
     setErrores(newErrors);
 
+    // Si no hay errores, guarda el usuario y muestra alerta de registro exitoso
     if (Object.keys(newErrors).length === 0) {
       const token = uuidv4();
       const user = {
@@ -69,6 +109,9 @@ const RegisterForm: React.FC = () => {
     }
   };
 
+  /**
+   * Limpia el formulario y los errores.
+   */
   const limpiarFormulario = () => {
     setFormData({
       nombres: '',
@@ -94,6 +137,7 @@ const RegisterForm: React.FC = () => {
         <fieldset className="registro-fieldset">
           <legend className="registro-legend">Tus datos</legend>
           <div className="registro-grid">
+            {/* Campos de datos personales */}
             <div className="registro-col">
               <label>Nombres</label>
               <input className={errores.nombres ? 'error' : ''} placeholder="Ingresa tu nombre aquí" name="nombres" value={formData.nombres} onChange={handleChange} />
@@ -140,6 +184,7 @@ const RegisterForm: React.FC = () => {
                   onChange={handleChange}
                   style={{ background: "#F4D7D7", borderRadius: 20, paddingRight: 36 }}
                 />
+                {/* Icono para mostrar/ocultar contraseña */}
                 <span
                   className="registro-eye"
                   onClick={() => setShowPassword(!showPassword)}
@@ -169,6 +214,7 @@ const RegisterForm: React.FC = () => {
                   onChange={handleChange}
                   style={{ background: "#F4D7D7", borderRadius: 20, paddingRight: 36 }}
                 />
+                {/* Icono para mostrar/ocultar confirmación */}
                 <span
                   className="registro-eye"
                   onClick={() => setShowConfirm(!showConfirm)}
@@ -187,6 +233,7 @@ const RegisterForm: React.FC = () => {
             </div>
           </div>
         </fieldset>
+        {/* Botones de acción */}
         <div className="registro-botones">
           <button
             type="button"
@@ -204,6 +251,7 @@ const RegisterForm: React.FC = () => {
             Regístrate
           </button>
         </div>
+        {/* Enlace para usuarios ya registrados */}
         <div className="registro-login" style={{ textAlign: "center", marginTop: 8 }}>
           <div>¿Ya estás registrado?</div>
           <a href="/login" style={{ display: "block", marginTop: 4 }}>Iniciar sesión</a>

@@ -1,0 +1,59 @@
+@startuml
+' Diagrama de Objetos para el componente Product de Plena Studio
+
+object Product {
+  className: string
+  nathanDumlaoKixfBEdypUnsplash: string
+  emptyInfoHeight: string
+  emptyInfoDisplay: string
+  emptyInfoStyle: string
+}
+
+object styles
+
+object imgProducto {
+  src: nathanDumlaoKixfBEdypUnsplash
+  alt: ""
+}
+
+object nombreProducto {
+  value: "Arete Arlequeen RF-200"
+}
+
+object precioProducto {
+  value: "$125.300"
+  style: emptyInfoStyle
+}
+
+object iconoCarrito {
+  src: "/cart-1.svg"
+}
+
+object iconoFavorito {
+  src: "/heart.svg"
+}
+
+object botonComprar {
+  label: "COMPRAR"
+}
+
+object botonAnadirCarro {
+  label: "AÑADIR A CARRO"
+}
+
+object cantidad {
+  value: "CANTIDAD: 1"
+  icon: "/chevrondown.svg"
+}
+
+Product -- styles : aplica estilos
+Product -- imgProducto : renderiza
+Product -- nombreProducto : renderiza
+Product -- precioProducto : renderiza
+Product -- iconoCarrito : muestra
+Product -- iconoFavorito : muestra
+Product -- botonComprar : muestra
+Product -- botonAnadirCarro : muestra
+Product -- cantidad : muestra
+
+@enduml

@@ -2,8 +2,35 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import styles from './Login.module.css';
-// Asegúrate de tener instalado 'bootstrap-icons' y de importar su CSS en tu App.tsx o main.tsx
 
+/**
+ * LoginForm
+ * 
+ * Componente de formulario de inicio de sesión para Plena Studio.
+ * Permite a los usuarios ingresar su correo y contraseña para autenticarse.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} El formulario de inicio de sesión.
+ * 
+ * @state
+ * @property {Object} formData - Estado que almacena los valores de los campos del formulario.
+ * @property {string} formData.email - Correo electrónico ingresado por el usuario.
+ * @property {string} formData.password - Contraseña ingresada por el usuario.
+ * @property {string} error - Mensaje de error a mostrar si ocurre algún problema en el login.
+ * @property {boolean} isSubmitting - Indica si el formulario está en proceso de envío.
+ * @property {boolean} showPassword - Indica si la contraseña debe mostrarse en texto plano.
+ * 
+ * @function handleChange
+ * Actualiza el estado formData cuando el usuario escribe en los campos del formulario.
+ * 
+ * @param {React.ChangeEvent<HTMLInputElement>} e - Evento de cambio del input.
+ * 
+ * @function handleSubmit
+ * Maneja el envío del formulario, valida los campos y llama a la función de login.
+ * 
+ * @param {React.FormEvent} e - Evento de envío del formulario.
+ */
 const LoginForm: React.FC = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -16,6 +43,10 @@ const LoginForm: React.FC = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  /**
+   * Actualiza el estado del formulario cuando el usuario escribe en los campos.
+   * @param {React.ChangeEvent<HTMLInputElement>} e - Evento de cambio del input.
+   */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
       ...prev,
@@ -24,6 +55,10 @@ const LoginForm: React.FC = () => {
     setError('');
   };
 
+  /**
+   * Maneja el envío del formulario, valida los campos y realiza el login.
+   * @param {React.FormEvent} e - Evento de envío del formulario.
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -79,7 +114,7 @@ const LoginForm: React.FC = () => {
                 value={formData.password}
                 onChange={handleChange}
                 disabled={isSubmitting}
-                style={{ background: "#F4D7D7", width: "100%" }} // Asegura el mismo ancho que el de correo
+                style={{ background: "#F4D7D7", width: "100%" }}
                 required
               />
               <span

@@ -1,5 +1,11 @@
 import { AccountStatus, LoginAttempt, LoginCredentials, User } from "../types/auth";
 
+/**
+ * AuthService
+ * 
+ * Servicio para gestionar la autenticación de usuarios en Plena Studio.
+ * Maneja el registro y validación de usuarios, sesiones, intentos de login, bloqueo de cuentas y recuperación del usuario actual.
+ */
 class AuthService {
   private readonly USERS_KEY = 'plena_users';
   private readonly CURRENT_USER_KEY = 'plena_current_user';
@@ -11,10 +17,16 @@ class AuthService {
   private readonly BLOCK_DURATION = 30 * 60 * 1000; // 30 minutos
   private readonly SESSION_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 días
 
+  /**
+   * Constructor: Inicializa usuarios por defecto si no existen.
+   */
   constructor() {
     this.initializeDefaultUsers();
   }
 
+  /**
+   * Inicializa usuarios por defecto en localStorage si no existen.
+   */
   private initializeDefaultUsers(): void {
     const existingUsers = this.getStoredUsers();
     if (existingUsers.length === 0) {
@@ -47,19 +59,39 @@ class AuthService {
     }
   }
 
+  /**
+   * Hashea la contraseña usando base64 y un salt fijo.
+   * @param password Contraseña en texto plano.
+   * @returns {string} Contraseña hasheada.
+   */
   private hashPassword(password: string): string {
     return btoa(password + 'salt_plena_studio');
   }
 
+  /**
+   * Verifica si la contraseña coincide con el hash almacenado.
+   * @param password Contraseña en texto plano.
+   * @param hash Hash almacenado.
+   * @returns {boolean} true si coincide, false si no.
+   */
   private verifyPassword(password: string, hash: string): boolean {
     return this.hashPassword(password) === hash;
   }
 
+  /**
+   * Obtiene todos los usuarios almacenados.
+   * @returns {any[]} Lista de usuarios.
+   */
   private getStoredUsers(): any[] {
     const users = localStorage.getItem(this.USERS_KEY);
     return users ? JSON.parse(users) : [];
   }
 
+  /**
+   * Obtiene el estado de la cuenta de un usuario por email.
+   * @param email Correo electrónico.
+   * @returns {AccountStatus} Estado de la cuenta.
+   */
   private getAccountStatus(email: string): AccountStatus {
     const statusData = localStorage.getItem(this.ACCOUNT_STATUS_KEY);
     const allStatus: AccountStatus[] = statusData ? JSON.parse(statusData) : [];
@@ -70,6 +102,10 @@ class AuthService {
     };
   }
 
+  /**
+   * Actualiza el estado de la cuenta de un usuario.
+   * @param status Estado actualizado.
+   */
   private updateAccountStatus(status: AccountStatus): void {
     const statusData = localStorage.getItem(this.ACCOUNT_STATUS_KEY);
     let allStatus: AccountStatus[] = statusData ? JSON.parse(statusData) : [];
@@ -84,6 +120,11 @@ class AuthService {
     localStorage.setItem(this.ACCOUNT_STATUS_KEY, JSON.stringify(allStatus));
   }
 
+  /**
+   * Registra un intento de login en el historial.
+   * @param email Correo electrónico.
+   * @param success Si el intento fue exitoso.
+   */
   private logLoginAttempt(email: string, success: boolean): void {
     const attemptsData = localStorage.getItem(this.LOGIN_ATTEMPTS_KEY);
     const attempts: LoginAttempt[] = attemptsData ? JSON.parse(attemptsData) : [];
@@ -103,6 +144,11 @@ class AuthService {
     localStorage.setItem(this.LOGIN_ATTEMPTS_KEY, JSON.stringify(attempts));
   }
 
+  /**
+   * Verifica si la cuenta está bloqueada y calcula el tiempo restante.
+   * @param email Correo electrónico.
+   * @returns {Object} Objeto con flag de bloqueo y tiempo restante.
+   */
   private isAccountBlocked(email: string): { blocked: boolean; timeLeft?: number } {
     const status = this.getAccountStatus(email);
     
@@ -120,6 +166,12 @@ class AuthService {
     return { blocked: true, timeLeft };
   }
 
+  /**
+   * Realiza el login de un usuario.
+   * @param credentials Credenciales de inicio de sesión.
+   * @returns {Promise<{ user: User; token: string }>} Usuario autenticado y token.
+   * @throws Error si la cuenta está bloqueada o las credenciales son incorrectas.
+   */
   async login(credentials: LoginCredentials): Promise<{ user: User; token: string }> {
     const { email, password } = credentials;
     
@@ -182,6 +234,11 @@ class AuthService {
     return { user: userWithoutPassword, token };
   }
 
+  /**
+   * Genera un token de sesión para el usuario.
+   * @param userId ID del usuario.
+   * @returns {string} Token generado.
+   */
   private generateToken(userId: string): string {
     const tokenData = {
       userId,
@@ -191,6 +248,10 @@ class AuthService {
     return btoa(JSON.stringify(tokenData));
   }
 
+  /**
+   * Obtiene el usuario autenticado actual si la sesión es válida.
+   * @returns {User | null} Usuario autenticado o null si no hay sesión válida.
+   */
   getCurrentUser(): User | null {
     try {
       const sessionData = localStorage.getItem(this.SESSION_KEY);
@@ -208,15 +269,26 @@ class AuthService {
     }
   }
 
+  /**
+   * Indica si hay un usuario autenticado.
+   * @returns {boolean} true si hay usuario autenticado, false si no.
+   */
   isAuthenticated(): boolean {
     return this.getCurrentUser() !== null;
   }
 
+  /**
+   * Cierra la sesión del usuario actual.
+   */
   logout(): void {
     localStorage.removeItem(this.SESSION_KEY);
     localStorage.removeItem(this.CURRENT_USER_KEY);
   }
 
+  /**
+   * Obtiene el historial de intentos de login.
+   * @returns {LoginAttempt[]} Lista de intentos de login.
+   */
   getLoginAttempts(): LoginAttempt[] {
     const attemptsData = localStorage.getItem(this.LOGIN_ATTEMPTS_KEY);
     return attemptsData ? JSON.parse(attemptsData) : [];

@@ -1,0 +1,38 @@
+@startuml
+' Diagrama de Objetos para el componente LoginForm de Plena Studio (usando class para mostrar métodos)
+
+class LoginForm {
+  formData_email: string
+  formData_password: string
+  error: string
+  isSubmitting: boolean
+  showPassword: boolean
+  +handleChange(e: React.ChangeEvent<HTMLInputElement>): void
+  +handleSubmit(e: React.FormEvent): Promise<void>
+}
+
+object useAuth
+object useNavigate
+object styles
+
+object inputEmail {
+  id: "email"
+  name: "email"
+  type: "email"
+  value: formData_email
+}
+
+object inputPassword {
+  id: "password"
+  name: "password"
+  type: showPassword ? "text" : "password"
+  value: formData_password
+}
+
+LoginForm -- useAuth : usa
+LoginForm -- useNavigate : navega
+LoginForm -- styles : aplica estilos
+LoginForm -- inputEmail : renderiza
+LoginForm -- inputPassword : renderiza
+
+@enduml

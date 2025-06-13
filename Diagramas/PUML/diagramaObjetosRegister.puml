@@ -1,0 +1,46 @@
+@startuml
+' Diagrama de Objetos para el componente RegisterForm de Plena Studio
+
+object RegisterForm {
+  formData_nombres: string
+  formData_apellidos: string
+  formData_correo: string
+  formData_direccion: string
+  formData_celular: string
+  formData_tipoIdentificacion: string
+  formData_numeroIdentificacion: string
+  formData_contraseña: string
+  formData_confirmar: string
+  errores: boolean
+  showPassword: boolean
+  showConfirm: boolean
+}
+
+object uuidv4
+object saveUser
+object getUserByEmail
+
+object inputNombres
+object inputApellidos
+object inputCorreo
+object inputDireccion
+object inputCelular
+object selectTipoIdentificacion
+object inputNumeroIdentificacion
+object inputContraseña
+object inputConfirmar
+
+RegisterForm -- uuidv4 : genera token
+RegisterForm -- saveUser : guarda usuario
+RegisterForm -- getUserByEmail : valida correo
+RegisterForm -- inputNombres : renderiza
+RegisterForm -- inputApellidos : renderiza
+RegisterForm -- inputCorreo : renderiza
+RegisterForm -- inputDireccion : renderiza
+RegisterForm -- inputCelular : renderiza
+RegisterForm -- selectTipoIdentificacion : renderiza
+RegisterForm -- inputNumeroIdentificacion : renderiza
+RegisterForm -- inputContraseña : renderiza
+RegisterForm -- inputConfirmar : renderiza
+
+@enduml
