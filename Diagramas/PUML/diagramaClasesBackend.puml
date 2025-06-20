@@ -72,19 +72,57 @@ package "models" {
 ' REPOSITORIES (repositories)
 ' =======================
 package "repositories" {
-  class OrderRepository
-  class UserRepository
+  class OrderRepository {
+    + save(order: Order): Order
+    + getByUser(userId: string): Order[]
+    + getById(id: string): Order | undefined
+    + updateStatus(id: string, estado: Order["estado"]): boolean
+  }
+  class UserRepository {
+    + save(user: User): User
+    + findByEmail(email: string): User | undefined
+    + findById(id: string): User | undefined
+    + update(id: string, data: Partial<User>): boolean
+    + getAll(): User[]
+  }
   class ProductRepository
+  class ContactRepository {
+    + save(message: ContactMessage): ContactMessage
+    + getAll(): ContactMessage[]
+    + markAsRead(id: string): boolean
+  }
 }
 
 ' =======================
 ' SERVICES (services)
 ' =======================
 package "services" {
-  class AuthService
-  class CartService
-  class ContactService
-  class SearchService
+  class AuthService {
+    + register({ nombre, apellido, email, password }): Promise<{ id, nombre, apellido, email }>
+    + login({ email, password }): Promise<{ user, token }>
+  }
+  class CartService {
+    + getCart(userId: string)
+    + addToCart(userId: string, productId: string, cantidad: number)
+    + removeFromCart(userId: string, productId: string)
+    + clearCart(userId: string)
+  }
+  class ContactService {
+    + saveMessage(nombre: string, email: string, mensaje: string): ContactMessage
+    + getAllMessages(): ContactMessage[]
+    + markAsRead(id: string): boolean
+  }
+  class SearchService {
+    + search(query: string): Product[]
+    + getAll(): Product[]
+  }
+  class ProductService {
+    + create(product: Product): Product
+    + update(id: string, data: Partial<Product>): Product
+    + delete(id: string): boolean
+    + getById(id: string): Product
+    + getAll(): Product[]
+  }
 }
 
 ' =======================
@@ -109,6 +147,10 @@ package "adapters" {
 
   class PaymentAdapter {
     + processPayment(amount: number, currency: string, paymentMethod: any): Promise<{ success: boolean; transactionId?: string; error?: string }>
+  }
+
+  class DB {
+    + createPool(config): Pool
   }
 }
 
@@ -175,6 +217,22 @@ package "api" {
   class SearchRoutes {
     + GET /
   }
+
+  class App {
+    + use()
+    + get()
+  }
+
+  class Server {
+    + listen(port)
+  }
+
+  App ..> AuthRoutes : usa >
+  App ..> CartRoutes : usa >
+  App ..> CatalogRoutes : usa >
+  App ..> ContactRoutes : usa >
+  App ..> SearchRoutes : usa >
+  Server ..> App : usa >
 }
 
 ' =======================
@@ -199,12 +257,21 @@ OrderRepository ..> Order
 UserRepository ..> User
 ProductRepository ..> Product
 SearchService ..> Product
+ContactService ..> ContactRepository
+ProductService ..> ProductRepository : usa >
+ProductService ..> Product : gestiona >
 
 ' Adaptadores y servicios
 SearchService ..> CacheAdapter : usa >
 ContactService ..> EmailAdapter : usa >
 ContactService ..> NotificationAdapter : usa >
 OrderRepository ..> PaymentAdapter : usa >
+
+' Repositorios y base de datos
+OrderRepository ..> DB : usa >
+UserRepository ..> DB : usa >
+ProductRepository ..> DB : usa >
+ContactRepository ..> DB : usa >
 
 ' Controladores y servicios
 AuthController ..> AuthService : usa >
