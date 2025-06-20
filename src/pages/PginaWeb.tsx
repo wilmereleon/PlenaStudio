@@ -11,13 +11,11 @@ const PginaWeb: FunctionComponent = () => {
   return (
     <div className={styles.pginaWeb}>
       <section className={styles.informadorDeEventos}>
-        <div className={styles.textoDeNavegacin}>
-          <div className={styles.enlace}>
-            <div className={styles.etiquetaDeTexto}>
-              <b className={styles.navLabel}>
-                ENVÍOS GRATIS A TODA COLOMBIA POR COMPRAS SUPERIORES A $100 000
-              </b>
-            </div>
+        <div className={styles.tickerWrapper}>
+          <div className={styles.ticker}>
+            <span className={styles.tickerText}>
+              ENVÍOS GRATIS A TODA COLOMBIA POR COMPRAS SUPERIORES A $100 000
+            </span>
           </div>
         </div>
       </section>

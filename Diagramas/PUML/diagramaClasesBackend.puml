@@ -1,0 +1,289 @@
+@startuml
+
+' =======================
+' MODELS (models)
+' =======================
+package "models" {
+  class User {
+    +id: string
+    +nombre: string
+    +apellido: string
+    +email: string
+    +passwordHash: string
+    +fechaRegistro: string
+    +direccion: string
+    +telefono: string
+    +rol: "cliente" | "admin"
+    +activo: boolean
+  }
+
+  class Product {
+    +id: string
+    +nombre: string
+    +descripcion: string
+    +categoria: string
+    +precio: number
+    +stock: number
+    +imagen: string
+    +caracteristicas: string
+  }
+
+  class OrderItem {
+    +productId: string
+    +nombre: string
+    +cantidad: number
+    +precioUnitario: number
+  }
+
+  class Order {
+    +id: string
+    +userId: string
+    +items: OrderItem[]
+    +total: number
+    +fecha: string
+    +estado: "pendiente" | "pagado" | "enviado" | "entregado" | "cancelado"
+    +direccionEnvio: string
+    +metodoPago: string
+  }
+
+  class ContactMessage {
+    +id: string
+    +nombre: string
+    +email: string
+    +mensaje: string
+    +fecha: string
+    +leido: boolean
+  }
+
+  class CartItem {
+    +productId: string
+    +nombre: string
+    +cantidad: number
+    +precioUnitario: number
+  }
+
+  class Cart {
+    +userId: string
+    +items: CartItem[]
+  }
+}
+
+' =======================
+' REPOSITORIES (repositories)
+' =======================
+package "repositories" {
+  class OrderRepository {
+    + save(order: Order): Order
+    + getByUser(userId: string): Order[]
+    + getById(id: string): Order | undefined
+    + updateStatus(id: string, estado: Order["estado"]): boolean
+  }
+  class UserRepository {
+    + save(user: User): User
+    + findByEmail(email: string): User | undefined
+    + findById(id: string): User | undefined
+    + update(id: string, data: Partial<User>): boolean
+    + getAll(): User[]
+  }
+  class ProductRepository
+  class ContactRepository {
+    + save(message: ContactMessage): ContactMessage
+    + getAll(): ContactMessage[]
+    + markAsRead(id: string): boolean
+  }
+}
+
+' =======================
+' SERVICES (services)
+' =======================
+package "services" {
+  class AuthService {
+    + register({ nombre, apellido, email, password }): Promise<{ id, nombre, apellido, email }>
+    + login({ email, password }): Promise<{ user, token }>
+  }
+  class CartService {
+    + getCart(userId: string)
+    + addToCart(userId: string, productId: string, cantidad: number)
+    + removeFromCart(userId: string, productId: string)
+    + clearCart(userId: string)
+  }
+  class ContactService {
+    + saveMessage(nombre: string, email: string, mensaje: string): ContactMessage
+    + getAllMessages(): ContactMessage[]
+    + markAsRead(id: string): boolean
+  }
+  class SearchService {
+    + search(query: string): Product[]
+    + getAll(): Product[]
+  }
+  class ProductService {
+    + create(product: Product): Product
+    + update(id: string, data: Partial<Product>): Product
+    + delete(id: string): boolean
+    + getById(id: string): Product
+    + getAll(): Product[]
+  }
+}
+
+' =======================
+' ADAPTERS (adapters)
+' =======================
+package "adapters" {
+  class CacheAdapter {
+    - cache: Map<string, { value: any; expiresAt?: number }>
+    + set(key: string, value: any, ttl?: number): void
+    + get<T = any>(key: string): T | undefined
+    + delete(key: string): void
+    + clear(): void
+  }
+
+  class EmailAdapter {
+    + sendEmail(to: string, subject: string, html: string): Promise<void>
+  }
+
+  class NotificationAdapter {
+    + send(to: string, message: string, channel: 'email' | 'sms' | 'push' = 'email'): Promise<void>
+  }
+
+  class PaymentAdapter {
+    + processPayment(amount: number, currency: string, paymentMethod: any): Promise<{ success: boolean; transactionId?: string; error?: string }>
+  }
+
+  class DB {
+    + createPool(config): Pool
+  }
+}
+
+' =======================
+' MIDDLEWARES (middlewares)
+' =======================
+package "middlewares" {
+  class AuthMiddleware {
+    + authMiddleware(req: Request, res: Response, next: NextFunction): void
+  }
+}
+
+' =======================
+' API (api)
+' =======================
+package "api" {
+  class AuthController {
+    + register(req: Request, res: Response): Promise<void>
+    + login(req: Request, res: Response): Promise<void>
+    + logout(req: Request, res: Response): void
+  }
+
+  class CartController {
+    + getCart(req: Request, res: Response): void
+    + addToCart(req: Request, res: Response): void
+    + removeFromCart(req: Request, res: Response): void
+    + clearCart(req: Request, res: Response): void
+  }
+
+  class AuthRoutes {
+    + POST /login
+    + POST /logout
+  }
+
+  class CartRoutes {
+    + GET /
+    + POST /add
+    + POST /remove
+    + POST /clear
+  }
+
+  class CatalogController {
+    + getAllProducts(req: Request, res: Response): void
+    + getProductById(req: Request, res: Response): void
+  }
+
+  class CatalogRoutes {
+    + GET /
+    + GET /:id
+  }
+
+  class ContactController {
+    + sendContactForm(req: Request, res: Response): Promise<void>
+  }
+
+  class ContactRoutes {
+    + POST /
+  }
+
+  class SearchController {
+    + search(req: Request, res: Response): void
+  }
+
+  class SearchRoutes {
+    + GET /
+  }
+
+  class App {
+    + use()
+    + get()
+  }
+
+  class Server {
+    + listen(port)
+  }
+
+  App ..> AuthRoutes : usa >
+  App ..> CartRoutes : usa >
+  App ..> CatalogRoutes : usa >
+  App ..> ContactRoutes : usa >
+  App ..> SearchRoutes : usa >
+  Server ..> App : usa >
+}
+
+' =======================
+' RELACIONES ENTRE CLASES
+' =======================
+
+' Modelos
+User "1" -- "0..*" Order : realiza >
+User "1" -- "1" Cart : tiene >
+Order "1" -- "1..*" OrderItem : contiene >
+Cart "1" -- "0..*" CartItem : contiene >
+CartItem "1" -- "1" Product : referencia >
+OrderItem "1" -- "1" Product : referencia >
+User "1" -- "0..*" ContactMessage : envía >
+
+' Servicios y repositorios
+AuthService ..> UserRepository
+CartService ..> Cart
+CartService ..> CartItem
+ContactService ..> ContactMessage
+OrderRepository ..> Order
+UserRepository ..> User
+ProductRepository ..> Product
+SearchService ..> Product
+ContactService ..> ContactRepository
+ProductService ..> ProductRepository : usa >
+ProductService ..> Product : gestiona >
+
+' Adaptadores y servicios
+SearchService ..> CacheAdapter : usa >
+ContactService ..> EmailAdapter : usa >
+ContactService ..> NotificationAdapter : usa >
+OrderRepository ..> PaymentAdapter : usa >
+
+' Repositorios y base de datos
+OrderRepository ..> DB : usa >
+UserRepository ..> DB : usa >
+ProductRepository ..> DB : usa >
+ContactRepository ..> DB : usa >
+
+' Controladores y servicios
+AuthController ..> AuthService : usa >
+CartController ..> CartService : usa >
+CatalogController ..> ProductRepository : usa >
+ContactController ..> EmailAdapter : usa >
+
+' Rutas y controladores
+AuthRoutes ..> AuthController : usa >
+CartRoutes ..> CartController : usa >
+CatalogRoutes ..> CatalogController : usa >
+ContactRoutes ..> ContactController : usa >
+SearchRoutes ..> SearchController : usa >
+
+@enduml

@@ -1,56 +1,55 @@
 @startuml
-title Diagrama de Componentes - Plena Studio (Frontend & Backend)
+' Diagrama de Componentes para evidenciar la API RESTful
 
-package "Frontend" {
-  [UI Principal] as UI
-  [Catálogo de Productos] as Catalogo
-  [Carrito de Compras] as Carrito
-  [Checkout] as Checkout
-  [Autenticación de Usuario] as AuthFront
-  [Búsqueda y Filtros] as BusquedaFiltros
-  [Página Institucional] as Institucional
-
-  UI --> Catalogo
-  UI --> Carrito
-  UI --> Checkout
-  UI --> AuthFront
-  UI --> BusquedaFiltros
-  UI --> Institucional
+package "Cliente" {
+  [Cliente HTTP]
 }
 
-package "Backend" {
-  [API de Autenticación] as AuthAPI
-  [API de Productos] as ProductosAPI
-  [API de Carrito] as CarritoAPI
-  [API de Checkout] as CheckoutAPI
-  [API de Búsqueda] as BusquedaAPI
-  [API de Contenido Institucional] as InstitucionalAPI
-  [Gestión de Sesión] as Sesion
-  [Gestión de Inventario] as Inventario
-  [Sistema de Pagos] as Pagos
-  [Servicio de Correo] as Correo
-  [Base de Datos] as DB
-
-  AuthAPI --> Sesion
-  AuthAPI --> DB
-  ProductosAPI --> Inventario
-  ProductosAPI --> DB
-  CarritoAPI --> ProductosAPI
-  CarritoAPI --> DB
-  CheckoutAPI --> CarritoAPI
-  CheckoutAPI --> Pagos
-  CheckoutAPI --> Correo
-  CheckoutAPI --> DB
-  BusquedaAPI --> ProductosAPI
-  InstitucionalAPI --> DB
+package "API RESTful" {
+  [AuthController]
+  [CartController]
+  [ProductController]
+  [OrderController]
+  [ContactController]
 }
 
-' Relaciones Frontend <-> Backend
-AuthFront --> AuthAPI
-Catalogo --> ProductosAPI
-Carrito --> CarritoAPI
-Checkout --> CheckoutAPI
-BusquedaFiltros --> BusquedaAPI
-Institucional --> InstitucionalAPI
+package "Servicios" {
+  [AuthService]
+  [CartService]
+  [ContactService]
+  [OrderRepository]
+  [UserRepository]
+  [ProductRepository]
+}
+
+package "Modelos" {
+  [User]
+  [Product]
+  [Order]
+  [ContactMessage]
+  [Cart]
+}
+
+' Relaciones Cliente -> API RESTful (endpoints)
+[Cliente HTTP] --> [AuthController] : POST /api/auth/login\nPOST /api/auth/register
+[Cliente HTTP] --> [CartController] : GET /api/cart\nPOST /api/cart/add
+[Cliente HTTP] --> [ProductController] : GET /api/products\nGET /api/products/:id
+[Cliente HTTP] --> [OrderController] : POST /api/orders
+[Cliente HTTP] --> [ContactController] : POST /api/contact
+
+' Relaciones API RESTful -> Servicios
+[AuthController] --> [AuthService]
+[CartController] --> [CartService]
+[ProductController] --> [ProductRepository]
+[OrderController] --> [OrderRepository]
+[ContactController] --> [ContactService]
+
+' Relaciones Servicios -> Repositorios/Modelos
+[AuthService] --> [UserRepository]
+[CartService] --> [Cart]
+[ContactService] --> [ContactMessage]
+[OrderRepository] --> [Order]
+[UserRepository] --> [User]
+[ProductRepository] --> [Product]
 
 @enduml
