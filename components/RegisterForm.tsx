@@ -1,5 +1,5 @@
 // components/RegisterForm.tsx
-import { saveUser, getUserByEmail } from '../utils/userStorage';
+import { saveUser, getUserByEmail } from '../src/utils/userStorage';
 import { v4 as uuidv4 } from 'uuid';
 
 const handleRegister = (formData) => {
