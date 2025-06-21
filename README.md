@@ -2,7 +2,8 @@
 
 - **Vista de la interfaz:**
 
-  [![Pantalla de inicio de sesión](https://via.placeholder.com/400x200?text=Login+Plena+Studio)](https://capable-kiss.surge.sh/)
+  [![Pantalla de Home](https://via.placeholder.com/400x200?text=Login+Plena+Studio)](https://capable-kiss.surge.sh/)
+  [![Pantalla de Home](https://via.placeholder.com/400x200?text=Login+Plena+Studio)](https://capable-kiss.surge.sh/login)
 
 - **Ejemplo de petición a la API:**
 
@@ -36,7 +37,7 @@
 
 - **Vista de la interfaz:**
 
-  ![Pantalla de registro](https://via.placeholder.com/400x200?text=Registro+Plena+Studio)
+  ![Pantalla de registro]([https://via.placeholder.com/400x200?text=Registro+Plena+Studio](https://capable-kiss.surge.sh/register))
 
 - **Ejemplo de petición a la API:**
 
