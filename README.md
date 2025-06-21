@@ -1,42 +1,93 @@
-## **Code**
+### **Inicio de Sesión**
 
-```typescript
-// Backend: Ejemplo de endpoint para obtener productos
-app.get('/api/catalog', (req, res) => {
-  res.json(productService.getAll());
-});
+- **Vista de la interfaz:**
 
-// Backend: Servicio de productos (product.service.ts)
-class ProductService {
-  create(product: Product): Product { /* ... */ }
-  update(id: string, data: Partial<Product>): Product { /* ... */ }
-  delete(id: string): boolean { /* ... */ }
-  getById(id: string): Product { /* ... */ }
-  getAll(): Product[] { /* ... */ }
-}
+  ![Pantalla de inicio de sesión](https://via.placeholder.com/400x200?text=Login+Plena+Studio)
 
-// Frontend: Ejemplo de componente React para mostrar productos
-function Catalogo() {
-  const [productos, setProductos] = useState([]);
-  useEffect(() => {
-    fetch('/api/catalog')
-      .then(res => res.json())
-      .then(setProductos);
-  }, []);
-  return (
-    <div>
-      {productos.map(p => (
-        <div key={p.id}>
-          <h3>{p.nombre}</h3>
-          <p>{p.descripcion}</p>
-          <span>${p.precio}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
+- **Ejemplo de petición a la API:**
 
-// Prueba unitaria (Jest)
-test('ProductService.getAll retorna un array', () => {
-  expect(Array.isArray(productService.getAll())).toBe(true);
-});
+  ```http
+  POST /api/auth/login
+  Content-Type: application/json
+
+  {
+    "email": "usuario@correo.com",
+    "password": "123456"
+  }
+  ```
+
+- **Respuesta esperada:**
+
+  ```json
+  {
+    "user": {
+      "id": "1",
+      "nombre": "Juan",
+      "apellido": "Pérez",
+      "email": "usuario@correo.com"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+  ```
+
+---
+
+### **Registro de Usuario**
+
+- **Vista de la interfaz:**
+
+  ![Pantalla de registro](https://via.placeholder.com/400x200?text=Registro+Plena+Studio)
+
+- **Ejemplo de petición a la API:**
+
+  ```http
+  POST /api/auth/register
+  Content-Type: application/json
+
+  {
+    "nombre": "Ana",
+    "apellido": "López",
+    "email": "ana@correo.com",
+    "password": "abcdef"
+  }
+  ```
+
+- **Respuesta esperada:**
+
+  ```json
+  {
+    "id": "2",
+    "nombre": "Ana",
+    "apellido": "López",
+    "email": "ana@correo.com"
+  }
+  ```
+
+---
+
+### **Carrito de Compras**
+
+- **Vista de la interfaz:**
+
+  ![Pantalla del carrito](https://via.placeholder.com/400x200?text=Carrito+de+Compras)
+
+- **Ejemplo de petición para obtener el carrito:**
+
+  ```http
+  GET /api/cart?userId=1
+  ```
+
+- **Respuesta esperada:**
+
+  ```json
+  {
+    "userId": "1",
+    "items": [
+      {
+        "productId": "1",
+        "nombre": "Arete Dorado",
+        "cantidad": 2,
+        "precioUnitario": 50000
+      }
+    ]
+  }
