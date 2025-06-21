@@ -2,7 +2,7 @@
 
 - **Vista de la interfaz:**
 
-  ![Pantalla de inicio de sesión](https://via.placeholder.com/400x200?text=Login+Plena+Studio)
+  [![Pantalla de inicio de sesión](https://via.placeholder.com/400x200?text=Login+Plena+Studio)](https://capable-kiss.surge.sh/)
 
 - **Ejemplo de petición a la API:**
 
