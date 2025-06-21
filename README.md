@@ -1,8 +1,30 @@
-# Plena Estudio
 
-  Note: Please ensure you have installed <code><a href="https://nodejs.org/en/download/">nodejs</a></code> with a minimum version of 20.
+## **Preview**
 
-  To preview and run the project on your device:
-  1) Open project folder in <a href="https://code.visualstudio.com/download">Visual Studio Code</a>
-  2) In the terminal, run `npm install`
-  3) Run `npm start` to view project in browser
+> **Vista previa de Plena Studio**
+>
+> - **Frontend:**  
+>   ![Vista del catálogo de productos](https://via.placeholder.com/600x300?text=Catalogo+de+Productos)
+>
+>   _Catálogo de productos mostrando nombre, imagen y precio._
+>
+> - **Backend:**  
+>   Ejemplo de respuesta JSON del endpoint `/api/catalog`:
+>   ```json
+>   [
+>     {
+>       "id": "1",
+>       "nombre": "Arete Dorado",
+>       "descripcion": "Arete elegante",
+>       "categoria": "Aretes",
+>       "precio": 50000,
+>       "stock": 10
+>     }
+>   ]
+>   ```
+>
+> - **Pruebas unitarias:**  
+>   ![Resultado de pruebas](https://via.placeholder.com/400x100?text=Tests+OK)
+>
+>   _Todas las pruebas unitarias pasan correctamente._
+
