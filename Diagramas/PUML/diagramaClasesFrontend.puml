@@ -1,0 +1,114 @@
+@startuml
+' Paquetes principales
+package "components" {
+  class TypeFloatingHeaderWithNavi {
+    +className: string
+    +render(): JSX.Element
+  }
+  class TypeStackedSimpleFooter {
+    +render(): JSX.Element
+  }
+  class RegisterForm {
+    +render(): JSX.Element
+  }
+  class Login {
+    +render(): JSX.Element
+  }
+}
+
+package "pages" {
+  class Aretes {
+    +addItem(producto: Producto): void
+    +render(): JSX.Element
+  }
+  class Bufandas {
+    +addItem(producto: Producto): void
+    +render(): JSX.Element
+  }
+  class Combinaciones {
+    +addItem(producto: Producto): void
+    +render(): JSX.Element
+  }
+  class Anillos {
+    +addItem(producto: Producto): void
+    +render(): JSX.Element
+  }
+  class Pulseras {
+    +addItem(producto: Producto): void
+    +render(): JSX.Element
+  }
+  class ShoppingCart {
+    +updateQuantity(productId: string, cantidad: number): void
+    +removeItem(productId: string): void
+    +applyDiscount(): void
+    +checkout(): void
+    +render(): JSX.Element
+  }
+  class PginaWeb {
+    +render(): JSX.Element
+  }
+}
+
+package "context" {
+  class CartContext {
+    +cartItems: CartItem[]
+    +addItem(producto: Producto, cantidad: number = 1): void
+    +updateQuantity(productId: string, cantidad: number): void
+    +removeItem(productId: string): void
+    +subtotal: number
+    +total: number
+    +applyDiscount(): void
+    +checkout(): void
+  }
+  class CartProvider {
+    +children: ReactNode
+    +render(): JSX.Element
+  }
+  class useCart {
+    +(): CartContext
+  }
+}
+
+package "context" {
+  class productosDisponibles {
+    +productId: string
+    +nombre: string
+    +descripcion: string
+    +precio: number
+    +imagen: string
+  }
+  class Producto
+  class CartItem {
+    +cantidad: number
+  }
+}
+
+package "hooks" {
+  class useAuth {
+    +user: object
+    +logout(): void
+    +isAuthenticated: boolean
+  }
+}
+
+package "App" {
+  class App {
+    +render(): JSX.Element
+  }
+}
+
+' Relaciones
+Aretes ..> CartContext : useCart()
+Bufandas ..> CartContext : useCart()
+Combinaciones ..> CartContext : useCart()
+Anillos ..> CartContext : useCart()
+Pulseras ..> CartContext : useCart()
+ShoppingCart ..> CartContext : useContext()
+TypeFloatingHeaderWithNavi ..> CartContext : useCart()
+TypeFloatingHeaderWithNavi ..> useAuth
+App ..> CartProvider
+CartProvider ..> CartContext
+CartItem --|> Producto
+CartContext ..> productosDisponibles
+
+@enduml
