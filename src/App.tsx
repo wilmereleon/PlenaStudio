@@ -10,6 +10,13 @@ import {
 import PginaWeb from "./pages/PginaWeb";
 import RegisterForm from "./components/RegisterForm";
 import Login from "./pages/Login";
+import { CartProvider } from "./context/CartContext";
+import Aretes from "./pages/Aretes";
+import Bufandas from "./pages/Bufandas";
+import Combinaciones from "./pages/Combinaciones";
+import Anillos from "./pages/Anillos";
+import Pulseras from "./pages/Pulseras";
+import ShoppingCart from "./pages/ShoppingCart";
 
 /**
  * App
@@ -66,11 +73,19 @@ function App() {
 
   // Definición de rutas principales de la aplicación
   return (
-    <Routes>
-      <Route path="/" element={<PginaWeb />} />
-      <Route path="/register" element={<RegisterForm />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
+    <CartProvider>
+      <Routes>
+        <Route path="/" element={<PginaWeb />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/aretes" element={<Aretes />} />
+        <Route path="/bufandas" element={<Bufandas />} />
+        <Route path="/combinaciones" element={<Combinaciones />} />
+        <Route path="/anillos" element={<Anillos />} />
+        <Route path="/pulseras" element={<Pulseras />} />
+        <Route path="/shopping-cart" element={<ShoppingCart />} />
+      </Routes>
+    </CartProvider>
   );
 }
 

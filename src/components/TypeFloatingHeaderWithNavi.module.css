@@ -1,3 +1,16 @@
+/* ...existing code... */
+
+/* Línea divisoria entre la cenefa de envíos y el navbar */
+.divisor-navbar {
+  width: 100%;
+  height: 1.5px;
+  background: #e3e3e3;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+}
+
+
 .loginBtn {
   font-family: var(--font-lato);
   font-size: var(--font-size-14);
@@ -8,6 +21,7 @@
   padding: var(--padding-8) var(--padding-16);
   border-radius: var(--br-8);
   transition: all 0.3s ease;
+  
 }
 
 .loginBtn:hover {
@@ -71,7 +85,16 @@
 .inicioTexto {
   position: relative;
   line-height: 160%;
+  margin-left: 0.2rem;
 }
+
+.inicioTexto:hover,
+.inicioTexto:focus {
+  color: #232c2b;
+  background: #BEE8DB;
+  text-decoration: none;
+}
+
 .aretes,
 .bufandas,
 .inicio {
@@ -81,6 +104,7 @@
   align-items: center;
   justify-content: flex-start;
   padding: 0 var(--padding-16);
+  
 }
 .aretes,
 .bufandas {
@@ -118,11 +142,21 @@
   height: 43px;
   background-color: var(--color-mintcream);
   box-sizing: border-box;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
 .botonRegistrate {
   background-color: var(--color-lightgreen);
   color: var(--color-mintcream);
+  margin-left: 0.2rem;
 }
+
+.botonRegistrate:hover,
+.botonRegistrate:focus {
+  background: #7bb86f;
+  color: #ECFDF5;
+}
+
 .contornoDeEncabezado,
 .enlacesDeNavegacin,
 .typefloatingHeaderWithNavi {
@@ -131,10 +165,14 @@
   align-items: center;
   justify-content: flex-end;
 }
+
+
+
 .enlacesDeNavegacin {
   align-self: stretch;
   border-radius: var(--br-16);
-  gap: 13px;
+  gap: 2.8rem;
+  margin-right: 2.5rem;
 }
 .contornoDeEncabezado,
 .typefloatingHeaderWithNavi {
@@ -155,4 +193,28 @@
   .enlacesDeNavegacin {
     display: none;
   }
+}
+
+
+.cartBadge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #DFFAF2;
+  color: #2C3E50;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 50%;
+  min-width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px #0002;
+  z-index: 10;
+  border: 2.5px solid #8ABF69; /* Borde verde para distinguir */
+  padding: 0 6px;
+  pointer-events: none;
+  transition: border 0.2s;
 }
