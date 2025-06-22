@@ -1,4 +1,5 @@
 @startuml
+top to bottom direction
 package "Frontend" {
   [App.tsx] as App
   [Product.tsx] as Product
@@ -20,6 +21,17 @@ package "Frontend" {
   [TypeSideBySideImages.module.css] as SideBySideImagesCSS
   [TypeStackedSimpleFooter.module.css] as StackedSimpleFooterCSS
   [TypeSubscribePillInputCT.module.css] as SubscribePillInputCTCSS
+
+  [RegisterForm.tsx] as RegisterForm
+  [Login.tsx] as Login
+  [LoginForm.tsx] as LoginForm
+  [ShoppingCart.tsx] as ShoppingCart
+  [CartContext.tsx] as CartContext
+  [CartProvider.tsx] as CartProvider
+  [useCart.tsx] as useCart
+  [useAuth.tsx] as useAuth
+  [AuthService.ts] as AuthService
+  [RegisterForm.test.tsx] as RegisterFormTest
 }
 
 ' Relaciones principales de componentes
@@ -30,6 +42,9 @@ App --> TypeFloatingHeaderWithNavi
 App --> TypeSideBySideImages
 App --> TypeStackedSimpleFooter
 App --> TypeSubscribePillInputCT
+App --> RegisterForm
+App --> Login
+App --> ShoppingCart
 
 Property1CardsPopularProdu --> Product
 
@@ -45,5 +60,17 @@ IndexTS --> App
 IndexTS --> ReportWebVitals
 IndexTS --> GlobalCSS
 App --> TypingsDTs
+
+' Relaciones de contexto y servicios
+App --> CartProvider
+CartProvider --> CartContext
+ShoppingCart --> CartContext
+TypeFloatingHeaderWithNavi --> useCart
+TypeFloatingHeaderWithNavi --> useAuth
+LoginForm --> useAuth
+useAuth --> AuthService
+
+' Tests
+RegisterFormTest ..> RegisterForm : testea
 
 @enduml
