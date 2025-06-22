@@ -1,4 +1,7 @@
 @startuml
+' Permite mezclar clases y componentes en el mismo diagrama
+allowmixing
+
 ' Definición del componente del API Backend con sus clases internas (Controladores y Servicios)
 component "API Backend\n(Node.js, Express)" as API {
   ' Declaración de clases internas para el API
@@ -50,17 +53,64 @@ component "Frontend\n(React)" as FE {
     +render()
     +updateCart()
   }
-  
-  ' Relaciones: Podrían interactuar internamente o derivar de un componente base (opcional)
+  class RegisterForm {
+    +handleChange()
+    +handleSubmit()
+    +limpiarFormulario()
+    +render()
+  }
+  class Login {
+    +render()
+  }
+  class LoginForm {
+    +handleChange()
+    +handleSubmit()
+    +render()
+  }
+  class ShoppingCart {
+    +cartItems
+    +updateQuantity()
+    +removeItem()
+    +subtotal
+    +total
+    +applyDiscount()
+    +checkout()
+    +render()
+  }
+  class CartContext {
+    +cartItems
+    +addItem()
+    +updateQuantity()
+    +removeItem()
+    +subtotal
+    +total
+    +applyDiscount()
+    +checkout()
+  }
+  class CartProvider {
+    +children
+    +render()
+  }
+  class useCart
+  class useAuth
+  class AuthService
+  class RegisterFormTest
+
+  ' Relaciones internas principales
   HomePage --> ProductPage : navega a
   ProductPage --> CartPage : añade producto
+  RegisterFormTest ..> RegisterForm : testea
+  ShoppingCart --> CartContext
+  CartProvider --> CartContext
+  LoginForm --> useAuth
+  useAuth --> AuthService
+  CartPage --> ShoppingCart
 }
 
 ' Componente para la Base de Datos
 database "MySQL Database" as DB
 
 ' Relación entre el API y la Base de Datos
-' Los servicios se comunican con la Base de Datos para operaciones CRUD.
 UserService --> DB : Consulta/Actualización
 ProductService --> DB : Consulta/Actualización
 OrderService --> DB : Consulta/Actualización

@@ -143,3 +143,13 @@
     gap: var(--gap-20);
   }
 }
+
+.divisoria {
+  width: 100%;
+  border: none;
+  border-top: 2px solid #e6e6e6;
+  margin: 0;
+  height: 0;
+  background: transparent;
+  display: block;
+}

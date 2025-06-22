@@ -1,17 +1,73 @@
 @startuml
+left to right direction
+
 ' Paquetes principales
 package "components" {
   class TypeFloatingHeaderWithNavi {
-    +className: string
+    +className?: string
     +render(): JSX.Element
+    -useNavigate()
+    -useAuth()
+    -useCart()
+    -cartItems: CartItem[]
+    -totalArticulos: number
   }
   class TypeStackedSimpleFooter {
+    +className?: string
     +render(): JSX.Element
   }
   class RegisterForm {
+    -formData: FormData
+    -errores: Errores
+    -showPassword: boolean
+    -showConfirm: boolean
+    +handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void
+    +handleSubmit(e: React.FormEvent<HTMLFormElement>): void
+    +limpiarFormulario(): void
     +render(): JSX.Element
   }
   class Login {
+    +render(): JSX.Element
+  }
+  class LoginForm {
+    -formData: { email: string, password: string }
+    -error: string
+    -isSubmitting: boolean
+    -showPassword: boolean
+    +handleChange(e: React.ChangeEvent<HTMLInputElement>): void
+    +handleSubmit(e: React.FormEvent): Promise<void>
+    +render(): JSX.Element
+  }
+  class Product {
+    +className: string
+    +nathanDumlaoKixfBEdypUnsplash: string
+    +emptyInfoHeight: CSSProperties["height"]
+    +emptyInfoDisplay: CSSProperties["display"]
+    +render(): JSX.Element
+  }
+  class ProductType {
+    +className?: string
+    +nathanDumlaoKixfBEdypUnsplash?: string
+    +emptyInfoHeight?: CSSProperties["height"]
+    +emptyInfoDisplay?: CSSProperties["display"]
+  }
+  class Property1CardsPopularProdu {
+    +className?: string
+    +render(): JSX.Element
+  }
+  class Property1SoftwareHeroTripl {
+    +className?: string
+    +render(): JSX.Element
+  }
+  class Property1SoftwareHeroTriplType {
+    +className?: string
+  }
+  class TypeSideBySideImages {
+    +className?: string
+    +render(): JSX.Element
+  }
+  class TypeSubscribePillInputCT {
+    +className?: string
     +render(): JSX.Element
   }
 }
@@ -20,26 +76,34 @@ package "pages" {
   class Aretes {
     +addItem(producto: Producto): void
     +render(): JSX.Element
+    -productosAretes: { productId: string, nombre: string, descripcion: string, precio: number, imagen: string }[]
   }
   class Bufandas {
     +addItem(producto: Producto): void
     +render(): JSX.Element
+    -productosBufandas: { productId: string, nombre: string, descripcion: string, precio: number, imagen: string }[]
   }
   class Combinaciones {
     +addItem(producto: Producto): void
     +render(): JSX.Element
+    -productosCombinaciones: { productId: string, nombre: string, descripcion: string, precio: number, imagen: string }[]
   }
   class Anillos {
     +addItem(producto: Producto): void
     +render(): JSX.Element
+    -productosAnillos: { productId: string, nombre: string, descripcion: string, precio: number, imagen: string }[]
   }
   class Pulseras {
     +addItem(producto: Producto): void
     +render(): JSX.Element
+    -productosPulseras: any[]
   }
   class ShoppingCart {
+    +cartItems: CartItem[]
     +updateQuantity(productId: string, cantidad: number): void
     +removeItem(productId: string): void
+    +subtotal: number
+    +total: number
     +applyDiscount(): void
     +checkout(): void
     +render(): JSX.Element
@@ -52,7 +116,7 @@ package "pages" {
 package "context" {
   class CartContext {
     +cartItems: CartItem[]
-    +addItem(producto: Producto, cantidad: number = 1): void
+    +addItem(producto: Producto, cantidad?: number): void
     +updateQuantity(productId: string, cantidad: number): void
     +removeItem(productId: string): void
     +subtotal: number
@@ -67,9 +131,6 @@ package "context" {
   class useCart {
     +(): CartContext
   }
-}
-
-package "context" {
   class productosDisponibles {
     +productId: string
     +nombre: string
@@ -80,14 +141,101 @@ package "context" {
   class Producto
   class CartItem {
     +cantidad: number
+    +productId: string
+    +nombre: string
+    +descripcion: string
+    +precio: number
+    +imagen: string
   }
 }
 
 package "hooks" {
   class useAuth {
-    +user: object
+    +user: User | null
+    +loading: boolean
+    +login(credentials: { email: string, password: string }): Promise<any>
     +logout(): void
     +isAuthenticated: boolean
+  }
+}
+
+package "services" {
+  class AuthService {
+    -USERS_KEY: string
+    -CURRENT_USER_KEY: string
+    -LOGIN_ATTEMPTS_KEY: string
+    -ACCOUNT_STATUS_KEY: string
+    -SESSION_KEY: string
+    -MAX_LOGIN_ATTEMPTS: number
+    -BLOCK_DURATION: number
+    -SESSION_DURATION: number
+    +login(credentials: LoginCredentials): Promise<{ user: User; token: string }>
+    +getCurrentUser(): User | null
+    +isAuthenticated(): boolean
+    +logout(): void
+    +getLoginAttempts(): LoginAttempt[]
+    ' Métodos privados omitidos por brevedad
+  }
+}
+
+package "types" {
+  class User {
+    +id: string
+    +nombre: string
+    +apellido: string
+    +edad: number
+    +tipoIdentificacion: string
+    +numeroIdentificacion: string
+    +email: string
+    +fechaRegistro: string
+  }
+  class LoginCredentials {
+    +email: string
+    +password: string
+  }
+  class RegisterData {
+    +nombre: string
+    +apellido: string
+    +edad: number
+    +tipoIdentificacion: string
+    +numeroIdentificacion: string
+    +email: string
+    +password: string
+    +confirmPassword: string
+  }
+  class LoginAttempt {
+    +email: string
+    +timestamp: number
+    +success: boolean
+    +ip?: string
+  }
+  class AccountStatus {
+    +email: string
+    +isBlocked: boolean
+    +blockUntil?: number
+    +failedAttempts: number
+    +lastAttempt?: number
+  }
+}
+
+package "utils" {
+  class UserStorageUser {
+    +nombres: string
+    +apellidos: string
+    +correo: string
+    +direccion: string
+    +celular: string
+    +tipoIdentificacion: string
+    +numeroIdentificacion: string
+    +contraseña: string
+    +confirmar: string
+    +activo: boolean
+    +token: string
+  }
+  class userStorage {
+    +saveUser(user: UserStorageUser): void
+    +getUserByEmail(email: string): UserStorageUser | undefined
+    +activateUser(token: string): void
   }
 }
 
@@ -95,6 +243,38 @@ package "App" {
   class App {
     +render(): JSX.Element
   }
+}
+
+package "index" {
+  class index {
+    +render(): void
+  }
+}
+
+package "reportWebVitals" {
+  class reportWebVitals {
+    +default(onPerfEntry?: ReportHandler): void
+  }
+  class ReportHandler
+  reportWebVitals ..> ReportHandler
+}
+
+package "components.__tests__" {
+  class Login_test_tsx {
+    +test: void
+  }
+  class RegisterForm_test_tsx {
+    +renderiza el formulario de registro(): void
+    +muestra errores si se envía vacío(): void
+    +envía el formulario correctamente con datos válidos(): void
+  }
+  ' Añadido: clase para el test real de RegisterForm
+  class RegisterForm_test_tsx_real {
+    +renderiza el formulario de registro(): void
+    +muestra errores si se envía vacío(): void
+    +envía el formulario correctamente con datos válidos(): void
+  }
+  RegisterForm_test_tsx_real ..> RegisterForm : testea
 }
 
 ' Relaciones
@@ -107,8 +287,39 @@ ShoppingCart ..> CartContext : useContext()
 TypeFloatingHeaderWithNavi ..> CartContext : useCart()
 TypeFloatingHeaderWithNavi ..> useAuth
 App ..> CartProvider
+App ..> PginaWeb
+App ..> RegisterForm
+App ..> Login
+App ..> Aretes
+App ..> Bufandas
+App ..> Combinaciones
+App ..> Anillos
+App ..> Pulseras
+App ..> ShoppingCart
 CartProvider ..> CartContext
 CartItem --|> Producto
 CartContext ..> productosDisponibles
+Login_test_tsx ..> Login : test render
+RegisterForm_test_tsx ..> RegisterForm : test render
+RegisterForm_test_tsx_real ..> RegisterForm : test render
+LoginForm ..> useAuth
+LoginForm ..> Login
+Product ..> ProductType
+Property1CardsPopularProdu ..> Product
+Property1SoftwareHeroTripl ..> Property1SoftwareHeroTriplType
+PginaWeb ..> TypeFloatingHeaderWithNavi
+PginaWeb ..> TypeSideBySideImages
+PginaWeb ..> Property1CardsPopularProdu
+PginaWeb ..> Property1SoftwareHeroTripl
+PginaWeb ..> TypeSubscribePillInputCT
+PginaWeb ..> TypeStackedSimpleFooter
+useAuth ..> AuthService : authService
+AuthService ..> User
+AuthService ..> LoginCredentials
+AuthService ..> LoginAttempt
+AuthService ..> AccountStatus
+userStorage ..> UserStorageUser
+index ..> App : render()
+reportWebVitals ..> ReportHandler
 
 @enduml

@@ -2,7 +2,21 @@
 title Diagrama de Componentes – Plena Studio
 
 ' Componente del Frontend
-component "React SPA\n(Frontend)" as Frontend
+allowmixing
+package "Frontend" {
+  component "React SPA\n(Frontend)" as Frontend
+  component "App.tsx" as App
+  component "RegisterForm.tsx" as RegisterForm
+  component "Login.tsx" as Login
+  component "LoginForm.tsx" as LoginForm
+  component "ShoppingCart.tsx" as ShoppingCart
+  component "CartContext.tsx" as CartContext
+  component "CartProvider.tsx" as CartProvider
+  component "useCart.tsx" as useCart
+  component "useAuth.tsx" as useAuth
+  component "AuthService.ts" as AuthService
+  component "RegisterForm.test.tsx" as RegisterFormTest
+}
 
 ' Agrupación de componentes del Backend
 package "Backend" {
@@ -34,9 +48,20 @@ package "Backend" {
 ' Base de Datos
 database "MySQL Database" as DB
 
-' Relaciones entre componentes
+' Relaciones entre componentes Frontend
+App --> RegisterForm
+App --> Login
+App --> LoginForm
+App --> ShoppingCart
+App --> CartProvider
+CartProvider --> CartContext
+ShoppingCart --> CartContext
+RegisterFormTest ..> RegisterForm : testea
+LoginForm --> useAuth
+useAuth --> AuthService
+App --> useCart
 
-' El Frontend consume los Controladores
+' El Frontend consume los Controladores del Backend
 Frontend --> AuthCtrl : Login / Register
 Frontend --> CatCtrl : List Products
 Frontend --> CartCtrl : Update Cart

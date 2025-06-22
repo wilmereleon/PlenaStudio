@@ -19,6 +19,8 @@ const PginaWeb: FunctionComponent = () => {
           </div>
         </div>
       </section>
+      {/* Línea divisoria */}
+      <hr className={styles.divisoria} />
       <TypeFloatingHeaderWithNavi />
       <section className={styles.content}>
         <div className={styles.textContainer}>
