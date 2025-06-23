@@ -1,5 +1,6 @@
 import { FunctionComponent, useState, useEffect, useRef } from "react";
-import { useCart, productosDisponibles, type Producto } from "../context/CartContext";
+import { useCart } from "../context/CartContext";
+import { productosDisponibles, type Producto } from "../types/productos";
 import TypeFloatingHeaderWithNavi from "../components/TypeFloatingHeaderWithNavi";
 import TypeStackedSimpleFooter from "../components/TypeStackedSimpleFooter";
 import Product from "../components/Product";
@@ -15,19 +16,18 @@ const Catalogo: FunctionComponent = () => {
   const sliderRef = useRef<HTMLDivElement>(null);
   
   const productsPerPage = 12;
-
   // Categorías de productos
   const categories = [
     { id: "todos", name: "Todos los productos", count: productosDisponibles.length },
-    { id: "aretes", name: "Aretes", count: productosDisponibles.filter(p => p.nombre.toLowerCase().includes("arete")).length },
-    { id: "anillos", name: "Anillos", count: productosDisponibles.filter(p => p.nombre.toLowerCase().includes("anillo")).length },
+    { id: "aretes", name: "Aretes", count: productosDisponibles.filter((p: Producto) => p.nombre.toLowerCase().includes("arete")).length },
+    { id: "anillos", name: "Anillos", count: productosDisponibles.filter((p: Producto) => p.nombre.toLowerCase().includes("anillo")).length },
   ];
 
   // Filtrar productos por categoría
   const getFilteredProducts = (category: string) => {
     if (category === "todos") return productosDisponibles;
-    if (category === "aretes") return productosDisponibles.filter(p => p.nombre.toLowerCase().includes("arete"));
-    if (category === "anillos") return productosDisponibles.filter(p => p.nombre.toLowerCase().includes("anillo"));
+    if (category === "aretes") return productosDisponibles.filter((p: Producto) => p.nombre.toLowerCase().includes("arete"));
+    if (category === "anillos") return productosDisponibles.filter((p: Producto) => p.nombre.toLowerCase().includes("anillo"));
     return productosDisponibles;
   };
 

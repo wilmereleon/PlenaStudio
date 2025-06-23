@@ -1,5 +1,6 @@
 import { FunctionComponent, useMemo, type CSSProperties } from "react";
-import { useCart, type Producto } from "../context/CartContext";
+import { useCart } from "../context/CartContext";
+import { type Producto } from "../types/productos";
 import styles from "./Product.module.css";
 import OptimizedImage from "./OptimizedImage";
 

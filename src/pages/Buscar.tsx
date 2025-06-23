@@ -1,5 +1,6 @@
 import { FunctionComponent, useState, useEffect, useMemo } from "react";
-import { useCart, productosDisponibles, type Producto } from "../context/CartContext";
+import { useCart } from "../context/CartContext";
+import { productosDisponibles, type Producto } from "../types/productos";
 import TypeFloatingHeaderWithNavi from "../components/TypeFloatingHeaderWithNavi";
 import TypeStackedSimpleFooter from "../components/TypeStackedSimpleFooter";
 import OptimizedImage from "../components/OptimizedImage";
@@ -17,7 +18,7 @@ const Buscar: FunctionComponent = () => {
     const query = searchQuery.toLowerCase().trim();
     const words = query.split(/\s+/);
     
-    return productosDisponibles.filter(producto => {
+    return productosDisponibles.filter((producto: Producto) => {
       const searchableText = `${producto.nombre} ${producto.descripcion}`.toLowerCase();
       
       // Buscar que al menos una palabra coincida
@@ -153,7 +154,7 @@ const Buscar: FunctionComponent = () => {
               <>
                 {searchProducts.length > 0 ? (
                   <div className={styles.productsGrid}>
-                    {searchProducts.map((producto) => (
+                    {searchProducts.map((producto: Producto) => (
                       <div key={producto.productId} className={styles.productCardMobile}>
                         <OptimizedImage
                           src={`/InsumosIMG/${producto.imagen}`}

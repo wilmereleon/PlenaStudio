@@ -2,7 +2,8 @@ import React, { ReactNode, useState } from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import ShoppingCart from "../../pages/ShoppingCart";
-import { CartContext, CartItem } from "../../context/CartContext";
+import { CartContext } from "../../context/CartContext";
+import { CartItem } from "../../types/productos";
 
 // Mock de producto con las propiedades correctas
 const mockProduct: CartItem = {

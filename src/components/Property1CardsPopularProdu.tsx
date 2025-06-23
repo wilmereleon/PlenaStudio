@@ -1,6 +1,6 @@
 import { FunctionComponent, useState, useEffect } from "react";
 import Product from "./Product";
-import { productosDisponibles, type Producto } from "../context/CartContext";
+import { productosDisponibles, type Producto } from "../types/productos";
 import styles from "./Property1CardsPopularProdu.module.css";
 
 export type Property1CardsPopularProduType = {

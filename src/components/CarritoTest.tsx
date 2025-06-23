@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../hooks/useAuth';
+import { productosDisponibles } from '../types/productos';
 
 const CarritoTest: React.FC = () => {
   const { cartItems, addItem } = useCart();
   const { user, login, logout, isAuthenticated } = useAuth();
   const [loginData, setLoginData] = useState({ email: 'demo@plenastudio.com', password: 'password' });
 
-  // Producto de prueba
-  const productoTest = {
-    productId: "1",
-    nombre: "Aretes Luna Dorada",
-    descripcion: "Aretes elegantes de oro",
-    precio: 28000,
-    imagen: "earring01.jpeg"
-  };
+  // Usar el primer producto de la lista para pruebas
+  const productoTest = productosDisponibles[0];
   const handleLogin = async () => {
     try {
       console.log("🔄 INICIANDO LOGIN - Estado del carrito antes:", cartItems.length, "items");

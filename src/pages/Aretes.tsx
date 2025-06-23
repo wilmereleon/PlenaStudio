@@ -3,11 +3,11 @@ import TypeFloatingHeaderWithNavi from "../components/TypeFloatingHeaderWithNavi
 import TypeStackedSimpleFooter from "../components/TypeStackedSimpleFooter";
 import OptimizedImage from "../components/OptimizedImage";
 import styles from "./Catalogo.module.css";
-import { productosDisponibles } from "../context/CartContext"; // Importa el listado completo
+import { productosDisponibles, Producto } from "../types/productos"; // Importa el listado completo
 
 // Filtra todos los productos excepto los de id 3, 4, 5 y 15
 const productosAretes = productosDisponibles.filter(
-  p => !["3", "4", "5", "15"].includes(p.productId)
+  (p: Producto) => !["3", "4", "5", "15"].includes(p.productId)
 );
 
 const Aretes = () => {
@@ -16,10 +16,9 @@ const Aretes = () => {
   return (
     <div>
       <TypeFloatingHeaderWithNavi />
-      <main className={styles.main}>
-        <h1 className={styles.title}>Aretes</h1>
+      <main className={styles.main}>        <h1 className={styles.title}>Aretes</h1>
         <div className="row">
-          {productosAretes.map(producto => (
+          {productosAretes.map((producto: Producto) => (
             <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={producto.productId}>
               <div className={`card ${styles.productCard}`}>
                 <OptimizedImage
