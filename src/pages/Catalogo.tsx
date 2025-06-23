@@ -86,7 +86,7 @@ const Catalogo: FunctionComponent = () => {
   };
 
   return (
-    <div className={styles.catalogoPage}>
+    <div>
       <TypeFloatingHeaderWithNavi />
       
       <main className={styles.main}>
