@@ -1,0 +1,163 @@
+@startuml diagrama-base-datos
+!define DATABASE_DESIGN
+!theme aws-orange
+
+title Plena Studio - Diagrama de Base de Datos
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam monochrome false
+skinparam backgroundColor White
+skinparam classBorderColor Black
+skinparam packageBorderColor DarkBlue
+
+package "Base de Datos: plena-studio (PostgreSQL)" {
+
+  entity "usuario" as usuario {
+    **PK** id_usuario : INT AUTO_INCREMENT
+    --
+    nombre : VARCHAR(100) NOT NULL
+    email : VARCHAR(100) UNIQUE NOT NULL
+    password_hash : VARCHAR(255) NOT NULL
+    telefono : VARCHAR(20)
+    direccion : TEXT
+    fecha_registro : DATETIME DEFAULT CURRENT_TIMESTAMP
+    activo : BOOLEAN DEFAULT TRUE
+    email_verificado : BOOLEAN DEFAULT FALSE
+    token_verificacion : VARCHAR(255)
+    fecha_verificacion : DATETIME
+    ultimo_acceso : DATETIME
+  }
+
+  entity "producto" as producto {
+    **PK** id_producto : INT AUTO_INCREMENT
+    --
+    nombre : VARCHAR(255) NOT NULL
+    descripcion : TEXT
+    precio : DECIMAL(10,2) NOT NULL
+    imagen_url : VARCHAR(500)
+    stock : INT DEFAULT 0
+    activo : BOOLEAN DEFAULT TRUE
+    fecha_creacion : DATETIME DEFAULT CURRENT_TIMESTAMP
+    fecha_actualizacion : DATETIME ON UPDATE CURRENT_TIMESTAMP
+  }
+
+  entity "carrito" as carrito {
+    **PK** id_carrito : INT AUTO_INCREMENT
+    --
+    **FK** id_usuario : INT
+    fecha_creacion : DATETIME DEFAULT CURRENT_TIMESTAMP
+    fecha_actualizacion : DATETIME ON UPDATE CURRENT_TIMESTAMP
+  }
+
+  entity "carrito_item" as carrito_item {
+    **PK** id_item : INT AUTO_INCREMENT
+    --
+    **FK** id_carrito : INT NOT NULL
+    **FK** id_producto : INT NOT NULL
+    cantidad : INT NOT NULL DEFAULT 1
+    precio_unitario : DECIMAL(10,2) NOT NULL
+    fecha_agregado : DATETIME DEFAULT CURRENT_TIMESTAMP
+    --
+    **UK** unique_carrito_producto (id_carrito, id_producto)
+  }
+}
+
+' Relaciones entre tablas
+usuario ||--o{ carrito : "tiene"
+carrito ||--o{ carrito_item : "contiene"
+producto ||--o{ carrito_item : "incluido en"
+
+note right of usuario
+  **Tabla de Usuarios**
+  • Autenticación JWT
+  • Registro con verificación email
+  • Soft delete (campo activo)
+  • Tracking de último acceso
+  • Password hasheado con bcrypt
+end note
+
+note right of producto
+  **Catálogo de Productos**
+  • 20 productos precargados
+  • Gestión de stock
+  • URLs de imágenes
+  • Soft delete (campo activo)
+  • Timestamps automáticos
+end note
+
+note right of carrito
+  **Carrito de Usuario**
+  • Un carrito por usuario autenticado
+  • Persistencia entre sesiones
+  • Timestamps de actividad
+  • Cascade delete con usuario
+end note
+
+note right of carrito_item
+  **Items del Carrito**
+  • Relación Many-to-Many
+  • Constraint único por carrito+producto
+  • Precio unitario al momento de agregar
+  • Cantidad variable por item
+  • Cascade delete con carrito y producto
+end note
+
+package "Datos de Ejemplo Precargados" {
+  note as sample_data
+    **Usuario Demo:**
+    • Email: demo@plenastudio.com
+    • Password: password (hasheado)
+    • Email verificado: TRUE
+    
+    **20 Productos del Catálogo:**
+    • Aretes Luna Dorada ($28,000)
+    • Aretes Flor de Cristal ($32,000)
+    • Anillo Aurora Plateado ($24,000)
+    • Anillo Esencia Minimalista ($22,000)
+    • Anillo Corazón de Plata ($26,000)
+    • Y 15 productos adicionales...
+    
+    **Stock inicial:**
+    • Entre 25-55 unidades por producto
+    • Imágenes en carpeta InsumosIMG/
+  end note
+}
+
+package "Índices y Constrains" {
+  note as indexes
+    **Índices de Rendimiento:**
+    • PRIMARY KEY en todas las tablas
+    • UNIQUE en usuario.email
+    • UNIQUE COMPOSITE en carrito_item
+    • FOREIGN KEY con CASCADE DELETE
+    
+    **Validaciones:**
+    • Email único por usuario
+    • Precios mayor a 0
+    • Stock no negativo
+    • Cantidad carrito mayor a 0
+    
+    **Optimizaciones:**
+    • AUTO_INCREMENT en PKs
+    • DEFAULT values apropiados
+    • Timestamps automáticos
+  end note
+}
+
+legend bottom left
+  **Convenciones:**
+  • PK = Primary Key
+  • FK = Foreign Key  
+  • UK = Unique Key
+  • Cascade DELETE para integridad referencial
+  • Timestamps automáticos para auditoría
+  • Soft delete con campo 'activo'
+  
+  **Inicialización Docker:**
+  • Script: /script/01-init-database.sql
+  • Se ejecuta automáticamente al crear contenedor
+  • Datos de prueba incluidos
+  • Base de datos lista para usar
+endlegend
+
+@enduml

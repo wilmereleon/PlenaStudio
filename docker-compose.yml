@@ -1,0 +1,89 @@
+services:
+  # Base de datos MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: plena-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: plena-studio
+      MYSQL_USER: plena_user
+      MYSQL_PASSWORD: plena_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./script:/docker-entrypoint-initdb.d
+    networks:
+      - plena-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10  # Backend API
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: plena-backend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=plena_user
+      - DB_PASSWORD=plena_password
+      - DB_NAME=plena-studio
+      - JWT_SECRET=your-super-secret-jwt-key-change-in-production
+      - PORT=3001
+    ports:
+      - "3001:3001"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - plena-network
+    volumes:
+      - ./Backend/src:/app/src
+
+  # Frontend React
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: plena-frontend
+    restart: unless-stopped
+    environment:
+      - VITE_API_URL=http://localhost:3001
+      - VITE_APP_NAME=PlenaStudio
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - plena-network
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+
+  # Nginx como proxy reverso (opcional)
+  nginx:
+    image: nginx:alpine
+    container_name: plena-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - plena-network
+
+volumes:
+  mysql_data:
+
+networks:
+  plena-network:
+    driver: bridge

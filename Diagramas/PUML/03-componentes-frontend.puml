@@ -1,0 +1,197 @@
+@startuml componentes-frontend
+!define FRONTEND_ARCH
+!theme aws-orange
+
+title Plena Studio - Arquitectura de Componentes Frontend
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam monochrome false
+skinparam backgroundColor White
+skinparam componentBorderColor Black
+skinparam packageBorderColor DarkBlue
+
+package "React Frontend Application" {
+  
+  package "App Router & Context" {
+    component [App.tsx] as app
+    note right of app
+      • Router principal
+      • Gestión de rutas
+      • Scroll management
+      • Meta tags update
+    end note
+    
+    component [CartProvider] as cartProvider
+    note right of cartProvider
+      • Estado global del carrito
+      • Persistencia localStorage
+      • Sincronización con backend
+      • Gestión de productos
+    end note
+  }
+  
+  package "Authentication Layer" {
+    component [useAuth Hook] as useAuthHook
+    note right of useAuthHook
+      • Estado de autenticación
+      • Login/Logout functions
+      • Token management
+      • User data handling
+    end note
+    
+    component [authService] as authService
+    note right of authService
+      • API calls login/logout
+      • Token storage
+      • User registration
+      • Session validation
+    end note
+  }
+  
+  package "Pages Components" {
+    component [PginaWeb] as homepage
+    component [Login] as loginPage
+    component [Catalogo] as catalogPage
+    component [ShoppingCart] as cartPage
+    component [Buscar] as searchPage
+    
+    package "Category Pages" {
+      component [Aretes] as aretesPage
+      component [Bufandas] as bufandasPage
+      component [Anillos] as anillosPage
+      component [Pulseras] as pulserasPage
+      component [Combinaciones] as combinacionesPage
+    }
+  }
+  
+  package "UI Components" {
+    component [TypeFloatingHeaderWithNavi] as header
+    component [TypeStackedSimpleFooter] as footer
+    component [RegisterForm] as registerForm
+    component [Login Component] as loginComponent
+    component [Product] as productComponent
+    component [OptimizedImage] as imageComponent
+    
+    package "Hero & Layout" {
+      component [Property1SoftwareHeroTripl] as hero
+      component [Property1CardsPopularProdu] as popularCards
+      component [TypeSideBySideImages] as sideImages
+      component [TypeSubscribePillInputCT] as subscribeInput
+    }
+    
+    package "Testing Components" {
+      component [CarritoTest] as carritoTest
+      note right of carritoTest
+        • Componente de pruebas
+        • Validación de flujos
+        • Debug del carrito
+        • Test de autenticación
+      end note
+    }
+  }
+  
+  package "Services Layer" {
+    component [cartService] as cartServiceFE
+    note right of cartServiceFE
+      • API calls carrito
+      • CRUD operations
+      • Cart synchronization
+      • Error handling
+    end note
+    
+    component [API Base] as apiBase
+    note right of apiBase
+      • HTTP client config
+      • Base URL setup
+      • Headers management
+      • Interceptors
+    end note
+  }
+  
+  package "Types & Utils" {
+    component [Types Definitions] as types
+    note right of types
+      • CartItem interface
+      • Product interface
+      • User interface
+      • API response types
+    end note
+    
+    component [Utils Functions] as utils
+    note right of utils
+      • Helper functions
+      • Data formatters
+      • Validators
+      • Constants
+    end note
+  }
+}
+
+package "External Dependencies" {
+  component [React Router] as router
+  component [Bootstrap] as bootstrap
+  component [Bootstrap Icons] as icons
+  component [Axios/Fetch] as http
+}
+
+package "Backend API" {
+  component [REST API] as backend
+  note right of backend
+    • Authentication endpoints
+    • Cart CRUD endpoints
+    • Product catalog
+    • Search functionality
+  end note
+}
+
+' Relaciones principales
+app --> cartProvider : Wraps entire app
+app --> router : Uses routing
+cartProvider --> cartServiceFE : Service calls
+useAuthHook --> authService : Authentication logic
+authService --> backend : API requests
+cartServiceFE --> backend : Cart operations
+
+' Pages usando contexto y hooks
+homepage --> cartProvider : Cart context
+catalogPage --> cartProvider : Cart context
+cartPage --> cartProvider : Cart context
+searchPage --> cartProvider : Cart context
+loginPage --> useAuthHook : Auth hook
+
+' Componentes UI
+homepage --> header : Includes
+homepage --> footer : Includes
+homepage --> hero : Includes
+homepage --> popularCards : Includes
+catalogPage --> productComponent : Renders products
+productComponent --> imageComponent : Image optimization
+
+' Services y API
+cartServiceFE --> apiBase : HTTP config
+authService --> apiBase : HTTP config
+apiBase --> http : HTTP library
+
+' External styling
+app --> bootstrap : CSS framework
+app --> icons : Icon library
+
+' Testing
+carritoTest --> cartProvider : Tests cart functionality
+carritoTest --> useAuthHook : Tests authentication
+
+legend right
+  **Flujo de Datos Principal:**
+  1. Usuario interactúa con UI Components
+  2. Components usan Context (CartProvider) y Hooks (useAuth)
+  3. Context/Hooks llaman Services (cartService, authService)
+  4. Services hacen requests HTTP al Backend API
+  5. Respuestas actualizan estado global y UI
+  
+  **Persistencia:**
+  • CartContext: localStorage + backend sync
+  • useAuth: sessionStorage + JWT tokens
+  • Productos: Cache en memoria + API calls
+endlegend
+
+@enduml
