@@ -120,6 +120,23 @@ const CarritoTest: React.FC = () => {
           <li>🔑 Hacer login de nuevo (carrito debe aparecer desde la BD)</li>
         </ol>
       </div>
+
+      <div style={{ background: '#fff3cd', padding: '15px', borderRadius: '8px', marginBottom: '20px', border: '1px solid #ffeaa7' }}>
+        <h3>🔑 CREDENCIALES DE PRUEBA</h3>
+        <p><strong>Para entornos SIN backend (Surge/Vercel):</strong></p>
+        <div style={{ background: '#f8f9fa', padding: '10px', borderRadius: '4px', margin: '10px 0', fontSize: '14px' }}>
+          <strong>Usuarios disponibles:</strong><br/>
+          • <code>demo@plenastudio.com</code> / <code>password</code><br/>
+          • <code>admin@plenastudio.co</code> / <code>admin123</code><br/>
+          • <code>usuario@demo.com</code> / <code>demo123</code><br/>
+          • <code>test@test.com</code> / <code>test123</code><br/>
+          • <code>ana@example.com</code> / <code>ana123</code>
+        </div>
+        <p style={{ fontSize: '12px', color: '#666' }}>
+          ✅ Funciona en localhost, Surge, Vercel y cualquier entorno<br/>
+          ✅ Sistema de fallback automático sin backend
+        </p>
+      </div>
     </div>
   );
 };

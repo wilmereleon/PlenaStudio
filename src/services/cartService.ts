@@ -2,9 +2,8 @@ import { CartItem, productosDisponibles } from '../types/productos';
 
 /**
  * Servicio para gestionar la sincronización del carrito con el backend
- * Versión corregida y simplificada
  */
-class CartService {
+export class CartService {
   private static instance: CartService;
   private baseUrl: string;
 
@@ -14,17 +13,24 @@ class CartService {
       const hostname = window.location.hostname;
       
       if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        // Desarrollo local
         this.baseUrl = 'http://localhost:3000/api/cart';
       } else if (hostname.includes('surge.sh')) {
+        // Producción en Surge
         this.baseUrl = `https://${hostname}/api/cart`;
       } else if (hostname.includes('vercel.app')) {
+        // Producción en Vercel
         this.baseUrl = `https://${hostname}/api/cart`;
       } else {
+        // Fallback para otros entornos
         this.baseUrl = `${window.location.protocol}//${window.location.host}/api/cart`;
       }
     } else {
-      this.baseUrl = 'http://localhost:3000/api/cart';
+      // SSR fallback
+      this.baseUrl = '/api/cart';
     }
+    
+    console.log('🔧 CartService inicializado con baseUrl:', this.baseUrl);
   }
 
   static getInstance(): CartService {
@@ -34,14 +40,22 @@ class CartService {
     return CartService.instance;
   }
 
+  /**
+   * Obtiene el token de autenticación del localStorage
+   */
   private getAuthToken(): string | null {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('plena_auth_token');
+    const session = localStorage.getItem('plena_session');
+    if (session) {
+      const sessionData = JSON.parse(session);
+      return sessionData.token;
     }
     return null;
   }
 
-  private getAuthHeaders(): Record<string, string> {
+  /**
+   * Cabeceras para requests autenticados
+   */
+  private getAuthHeaders(): HeadersInit {
     const token = this.getAuthToken();
     return {
       'Content-Type': 'application/json',
@@ -49,11 +63,14 @@ class CartService {
     };
   }
 
+  /**
+   * Verifica si la API está disponible
+   */
   private async isApiAvailable(): Promise<boolean> {
     try {
       const healthUrl = this.baseUrl.replace('/cart', '/health');
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3000);
+      const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 segundos timeout
       
       const response = await fetch(healthUrl, {
         method: 'GET',
@@ -63,117 +80,104 @@ class CartService {
       clearTimeout(timeoutId);
       return response.ok;
     } catch (error) {
+      console.warn('⚠️ API no disponible:', error);
       return false;
     }
   }
 
-  private addItemLocal(productId: string, cantidad: number): void {
-    const producto = productosDisponibles.find(p => p.productId === productId);
-    if (!producto) return;
-
-    const localCartData = localStorage.getItem('plena_cart');
-    let localCart: CartItem[] = localCartData ? JSON.parse(localCartData) : [];
-
-    const existingItemIndex = localCart.findIndex(item => item.productId === productId);
-    if (existingItemIndex > -1) {
-      localCart[existingItemIndex].cantidad += cantidad;
-    } else {
-      localCart.push({
-        productId: producto.productId,
-        nombre: producto.nombre,
-        descripcion: producto.descripcion,
-        precio: producto.precio,
-        imagen: producto.imagen,
-        cantidad
-      });
+  /**
+   * Obtiene el carrito desde localStorage como fallback
+   */
+  private getLocalCart(): CartItem[] {
+    try {
+      const localCart = localStorage.getItem('plena_cart');
+      return localCart ? JSON.parse(localCart) : [];
+    } catch (error) {
+      console.error('Error al obtener carrito local:', error);
+      return [];
     }
-
-    localStorage.setItem('plena_cart', JSON.stringify(localCart));
   }
 
-  async getCart(): Promise<CartItem[]> {
+  /**
+   * Sincroniza el carrito local con el carrito del servidor al hacer login
+   * @param localCartItems Items del carrito local (localStorage)
+   */
+  async syncCartOnLogin(localCartItems: CartItem[]): Promise<CartItem[]> {
+    console.log('🔄 Iniciando sincronización del carrito...');
+    
+    // Verificar si la API está disponible
+    const apiAvailable = await this.isApiAvailable();
+    
+    if (!apiAvailable) {
+      console.warn('⚠️ API no disponible, manteniendo carrito local');
+      // En entornos sin backend (Surge/Vercel), mantener el carrito local
+      return localCartItems;
+    }
+
     try {
-      const isAvailable = await this.isApiAvailable();
-      if (!isAvailable) {
-        const localCartData = localStorage.getItem('plena_cart');
-        return localCartData ? JSON.parse(localCartData) : [];
+      const response = await fetch(`${this.baseUrl}/sync`, {
+        method: 'POST',
+        headers: this.getAuthHeaders(),
+        body: JSON.stringify({ localCartItems })
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al sincronizar carrito');
       }
 
+      const data = await response.json();
+      return data.cart || [];
+    } catch (error) {
+      console.error('Error al sincronizar carrito:', error);
+      return localCartItems; // Fallback al carrito local
+    }
+  }
+
+  /**
+   * Obtiene el carrito del usuario autenticado
+   */
+  async getCart(): Promise<CartItem[]> {
+    // Verificar si la API está disponible
+    const apiAvailable = await this.isApiAvailable();
+    
+    if (!apiAvailable) {
+      console.warn('⚠️ API no disponible, usando carrito local');
+      // Fallback: cargar desde localStorage
+      return this.getLocalCart();
+    }
+    
+    try {
       const response = await fetch(this.baseUrl, {
         method: 'GET',
         headers: this.getAuthHeaders()
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        return data.items || [];
-      } else {
-        const localCartData = localStorage.getItem('plena_cart');
-        return localCartData ? JSON.parse(localCartData) : [];
-      }
-    } catch (error) {
-      console.error('Error al obtener carrito:', error);
-      const localCartData = localStorage.getItem('plena_cart');
-      return localCartData ? JSON.parse(localCartData) : [];
-    }
-  }
-
-  async saveCart(items: CartItem[]): Promise<void> {
-    try {
-      const isAvailable = await this.isApiAvailable();
-      if (!isAvailable) {
-        localStorage.setItem('plena_cart', JSON.stringify(items));
-        return;
-      }
-
-      const response = await fetch(`${this.baseUrl}/save`, {
-        method: 'POST',
-        headers: this.getAuthHeaders(),
-        body: JSON.stringify({ items })
-      });
-
       if (!response.ok) {
-        localStorage.setItem('plena_cart', JSON.stringify(items));
+        throw new Error('Error al obtener carrito');
       }
+
+      return await response.json();
     } catch (error) {
-      console.error('Error al guardar carrito:', error);
-      localStorage.setItem('plena_cart', JSON.stringify(items));
+      console.error('Error al obtener carrito del servidor, usando local:', error);
+      return this.getLocalCart();
     }
   }
 
-  async syncCartOnLogin(localCart: CartItem[]): Promise<CartItem[]> {
-    try {
-      const isAvailable = await this.isApiAvailable();
-      if (!isAvailable) {
-        return localCart;
-      }
-
-      const response = await fetch(`${this.baseUrl}/sync`, {
-        method: 'POST',
-        headers: this.getAuthHeaders(),
-        body: JSON.stringify({ items: localCart })
-      });
-
-      if (response.ok) {
-        const serverCart = await response.json();
-        return serverCart.items || [];
-      } else {
-        return localCart;
-      }
-    } catch (error) {
-      console.log('Error en sincronización:', error);
-      return localCart;
+  /**
+   * Agrega un producto al carrito en el servidor o localmente
+   * @param productId ID del producto
+   * @param cantidad Cantidad a agregar
+   */
+  async addToCart(productId: string, cantidad: number): Promise<CartItem[]> {
+    // Verificar si la API está disponible
+    const apiAvailable = await this.isApiAvailable();
+    
+    if (!apiAvailable) {
+      console.warn('⚠️ API no disponible, agregando al carrito local');
+      return this.addToCartLocal(productId, cantidad);
     }
-  }
-
-  async addToCart(productId: string, cantidad: number = 1): Promise<CartItem[]> {
+    
     try {
-      const isAvailable = await this.isApiAvailable();
-      if (!isAvailable) {
-        this.addItemLocal(productId, cantidad);
-        return this.getCart();
-      }
-
       const response = await fetch(`${this.baseUrl}/add`, {
         method: 'POST',
         headers: this.getAuthHeaders(),
@@ -181,61 +185,138 @@ class CartService {
       });
 
       if (!response.ok) {
-        this.addItemLocal(productId, cantidad);
+        throw new Error('Error al agregar producto al carrito');
       }
-      
-      return this.getCart();
+
+      const data = await response.json();
+      return data.cart || [];
     } catch (error) {
-      console.error('Error al agregar item:', error);
-      this.addItemLocal(productId, cantidad);
-      return this.getCart();
+      console.error('Error al agregar producto al carrito del servidor, usando local:', error);
+      return this.addToCartLocal(productId, cantidad);
     }
   }
 
-  async removeFromCart(productId: string): Promise<CartItem[]> {
-    try {
-      const isAvailable = await this.isApiAvailable();
-      if (!isAvailable) {
-        const localCartData = localStorage.getItem('plena_cart');
-        if (localCartData) {
-          let localCart: CartItem[] = JSON.parse(localCartData);
-          localCart = localCart.filter(item => item.productId !== productId);
-          localStorage.setItem('plena_cart', JSON.stringify(localCart));
-        }
-        return this.getCart();
+  /**
+   * Agrega un producto al carrito local como fallback
+   */
+  private addToCartLocal(productId: string, cantidad: number): CartItem[] {
+    const currentCart = this.getLocalCart();
+    
+    // Buscar si el producto ya existe
+    const existingItemIndex = currentCart.findIndex(item => item.productId === productId);
+    
+    if (existingItemIndex >= 0) {
+      // Si existe, incrementar cantidad
+      currentCart[existingItemIndex].cantidad += cantidad;
+    } else {
+      // Buscar el producto en el catálogo disponible
+      const producto = productosDisponibles.find(p => p.productId === productId);
+      
+      if (!producto) {
+        console.error('Producto no encontrado:', productId);
+        return currentCart;
       }
+      
+      // Agregar producto con todos sus datos reales
+      const newItem: CartItem = {
+        ...producto,
+        cantidad
+      };
+      currentCart.push(newItem);
+    }
+    
+    // Guardar en localStorage
+    localStorage.setItem('plena_cart', JSON.stringify(currentCart));
+    console.log('✅ Producto agregado al carrito local:', productId);
+    
+    return currentCart;
+  }
 
+  /**
+   * Elimina un producto del carrito en el servidor o localmente
+   * @param productId ID del producto a eliminar
+   */
+  async removeFromCart(productId: string): Promise<CartItem[]> {
+    // Verificar si la API está disponible
+    const apiAvailable = await this.isApiAvailable();
+    
+    if (!apiAvailable) {
+      console.warn('⚠️ API no disponible, eliminando del carrito local');
+      return this.removeFromCartLocal(productId);
+    }
+    
+    try {
       const response = await fetch(`${this.baseUrl}/remove`, {
-        method: 'DELETE',
+        method: 'POST',
         headers: this.getAuthHeaders(),
         body: JSON.stringify({ productId })
       });
 
       if (!response.ok) {
-        const localCartData = localStorage.getItem('plena_cart');
-        if (localCartData) {
-          let localCart: CartItem[] = JSON.parse(localCartData);
-          localCart = localCart.filter(item => item.productId !== productId);
-          localStorage.setItem('plena_cart', JSON.stringify(localCart));
-        }
+        throw new Error('Error al eliminar producto del carrito');
       }
-      
-      return this.getCart();
+
+      const data = await response.json();
+      return data.cart || [];
     } catch (error) {
-      console.error('Error al remover item:', error);
-      const localCartData = localStorage.getItem('plena_cart');
-      if (localCartData) {
-        let localCart: CartItem[] = JSON.parse(localCartData);
-        localCart = localCart.filter(item => item.productId !== productId);
-        localStorage.setItem('plena_cart', JSON.stringify(localCart));
-      }
-      return this.getCart();
+      console.error('Error al eliminar producto del servidor, usando local:', error);
+      return this.removeFromCartLocal(productId);
     }
   }
 
+  /**
+   * Elimina un producto del carrito local como fallback
+   */
+  private removeFromCartLocal(productId: string): CartItem[] {
+    const currentCart = this.getLocalCart();
+    const updatedCart = currentCart.filter(item => item.productId !== productId);
+    
+    // Guardar en localStorage
+    localStorage.setItem('plena_cart', JSON.stringify(updatedCart));
+    console.log('✅ Producto eliminado del carrito local:', productId);
+    
+    return updatedCart;
+  }
+
+  /**
+   * Guarda el carrito completo en el servidor o localmente
+   * @param items Items del carrito a guardar
+   */
+  async saveCart(items: CartItem[]): Promise<void> {
+    // Verificar si la API está disponible
+    const apiAvailable = await this.isApiAvailable();
+    
+    if (!apiAvailable) {
+      console.warn('⚠️ API no disponible, guardando carrito localmente');
+      localStorage.setItem('plena_cart', JSON.stringify(items));
+      return;
+    }
+    
+    try {
+      const response = await fetch(this.baseUrl, {
+        method: 'POST',
+        headers: this.getAuthHeaders(),
+        body: JSON.stringify({ items })
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al guardar carrito');
+      }
+    } catch (error) {
+      console.error('Error al guardar carrito en servidor, usando local:', error);
+      localStorage.setItem('plena_cart', JSON.stringify(items));
+    }
+  }
+
+  /**
+   * Limpia el carrito en el servidor o localmente
+   */
   async clearCart(): Promise<void> {
-    const isAvailable = await this.isApiAvailable();
-    if (!isAvailable) {
+    // Verificar si la API está disponible
+    const apiAvailable = await this.isApiAvailable();
+    
+    if (!apiAvailable) {
+      console.warn('⚠️ API no disponible, limpiando carrito local');
       localStorage.removeItem('plena_cart');
       return;
     }
@@ -250,12 +331,12 @@ class CartService {
         throw new Error('Error al limpiar carrito');
       }
     } catch (error) {
-      console.error('Error al limpiar carrito:', error);
+      console.error('Error al limpiar carrito en servidor, limpiando local:', error);
       localStorage.removeItem('plena_cart');
     }
   }
+
 }
 
-const cartService = CartService.getInstance();
-export { cartService };
-export default cartService;
+// Exportar instancia singleton
+export const cartService = CartService.getInstance();
