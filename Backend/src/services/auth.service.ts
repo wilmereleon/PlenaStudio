@@ -15,20 +15,22 @@ export const authService = {
    */
   async register({ nombre, apellido, email, password }: { nombre: string; apellido: string; email: string; password: string }) {
     // Verifica si el email ya existe
-    const [rows] = await db.query("SELECT id FROM users WHERE email = ?", [email]);
+    const [rows] = await db.query("SELECT id_usuario FROM usuario WHERE email = ?", [email]);
     if ((rows as any[]).length > 0) throw new Error("El correo ya está registrado");
 
     // Hashea la contraseña
     const passwordHash = await bcrypt.hash(password, 10);
-    const id = uuidv4();
 
     // Inserta el usuario en la base de datos
     await db.query(
-      "INSERT INTO users (id, nombre, apellido, email, password_hash, fecha_registro) VALUES (?, ?, ?, ?, ?, NOW())",
-      [id, nombre, apellido, email, passwordHash]
+      "INSERT INTO usuario (nombre, apellido, email, password, fecha_registro) VALUES (?, ?, ?, ?, NOW())",
+      [nombre, apellido, email, passwordHash]
     );
 
-    return { id, nombre, apellido, email };
+    // Recupera el usuario insertado para devolver el id
+    const [userRows] = await db.query("SELECT id_usuario, nombre, apellido, email FROM usuario WHERE email = ?", [email]);
+    const user = (userRows as any[])[0];
+    return { id: user.id_usuario, nombre: user.nombre, apellido: user.apellido, email: user.email };
   },
 
   /**
@@ -39,23 +41,23 @@ export const authService = {
    */
   async login({ email, password }: { email: string; password: string }) {
     // Busca el usuario por email
-    const [rows] = await db.query("SELECT * FROM users WHERE email = ?", [email]);
+    const [rows] = await db.query("SELECT * FROM usuario WHERE email = ?", [email]);
     const user = (rows as any[])[0];
     if (!user) throw new Error("Usuario o contraseña incorrectos");
 
     // Compara la contraseña hasheada
-    const valid = await bcrypt.compare(password, user.password_hash);
+    const valid = await bcrypt.compare(password, user.password);
     if (!valid) throw new Error("Usuario o contraseña incorrectos");
 
     // Genera el token JWT
     const token = jwt.sign(
-      { userId: user.id, rol: user.rol },
+      { userId: user.id_usuario, email: user.email },
       process.env.JWT_SECRET || "secreto_super_seguro",
       { expiresIn: "7d" }
     );
 
     return {
-      user: { id: user.id, nombre: user.nombre, email: user.email, rol: user.rol },
+      user: { id: user.id_usuario, nombre: user.nombre, apellido: user.apellido, email: user.email },
       token
     };
   }

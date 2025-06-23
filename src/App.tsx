@@ -19,6 +19,7 @@ import Pulseras from "./pages/Pulseras";
 import ShoppingCart from "./pages/ShoppingCart";
 import Catalogo from "./pages/Catalogo";
 import Buscar from "./pages/Buscar";
+import CarritoTest from "./components/CarritoTest";
 
 /**
  * App
@@ -84,10 +85,10 @@ function App() {
         <Route path="/aretes" element={<Aretes />} />
         <Route path="/bufandas" element={<Bufandas />} />
         <Route path="/combinaciones" element={<Combinaciones />} />
-        <Route path="/anillos" element={<Anillos />} />
-        <Route path="/pulseras" element={<Pulseras />} />
+        <Route path="/anillos" element={<Anillos />} />        <Route path="/pulseras" element={<Pulseras />} />
         <Route path="/shopping-cart" element={<ShoppingCart />} />
         <Route path="/buscar" element={<Buscar />} />
+        <Route path="/test-carrito" element={<CarritoTest />} />
       </Routes>
     </CartProvider>
   );

@@ -29,7 +29,6 @@ export function useAuth() {
     setUser(currentUser);
     setLoading(false);
   }, []);
-
   /**
    * Inicia sesión con las credenciales proporcionadas.
    * @param {Object} credentials - Credenciales de inicio de sesión.
@@ -40,15 +39,27 @@ export function useAuth() {
   const login = async (credentials: { email: string; password: string }) => {
     const result = await authService.login(credentials);
     setUser(result.user);
+    
+    // Disparar evento personalizado para notificar cambio de autenticación
+    window.dispatchEvent(new CustomEvent('authStateChanged', { 
+      detail: { user: result.user, cart: result.cart } 
+    }));
+    
     return result;
-  };
-
-  /**
+  };  /**
    * Cierra la sesión del usuario actual.
    */
   const logout = () => {
+    console.log("🔴 Ejecutando logout...");
     authService.logout();
     setUser(null);
+    
+    // Disparar evento personalizado para notificar cambio de autenticación
+    window.dispatchEvent(new CustomEvent('authStateChanged', { 
+      detail: { user: null } 
+    }));
+    
+    console.log("🔴 Logout completado");
   };
 
   return {

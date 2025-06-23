@@ -1,12 +1,16 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import Login from '../Login';
 
-/**
- * Test para verificar que el formulario de inicio de sesión se renderiza correctamente.
- * Se asegura de que el texto "Iniciar sesión" esté presente en el documento.
- */
 test('muestra el formulario de inicio de sesión', () => {
-  render(<Login />);
-  expect(screen.getByText(/iniciar sesión/i)).toBeInTheDocument();
+  render(
+    <MemoryRouter>
+      <Login />
+    </MemoryRouter>
+  );
+  // Verifica que el título esté presente
+  expect(screen.getByRole('heading', { name: /iniciar sesión/i })).toBeInTheDocument();
+  // Verifica que el botón esté presente
+  expect(screen.getByRole('button', { name: /iniciar sesión/i })).toBeInTheDocument();
 });

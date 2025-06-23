@@ -5,6 +5,7 @@ import cartRoutes from "./api/cart.routes";
 import catalogRoutes from "./api/catalog.routes";
 import contactRoutes from "./api/contact.routes";
 import searchRoutes from "./api/search.routes";
+import userRoutes from "./api/user.routes";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/catalog", catalogRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/search", searchRoutes);
+app.use("/api", userRoutes);
 
 // Ruta de prueba
 app.get("/", (_req, res) => {

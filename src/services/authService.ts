@@ -1,4 +1,6 @@
 import { AccountStatus, LoginAttempt, LoginCredentials, User } from "../types/auth";
+import { cartService } from "./cartService";
+import { CartItem } from "../context/CartContext";
 
 /**
  * AuthService
@@ -165,73 +167,61 @@ class AuthService {
     const timeLeft = status.blockUntil ? status.blockUntil - Date.now() : 0;
     return { blocked: true, timeLeft };
   }
+  /**
+   * Realiza el login de un usuario contra el backend real.
+   * @param credentials Credenciales de inicio de sesión.
+   * @returns {Promise<{ user: User; token: string; cart: CartItem[] }>} Usuario autenticado, token y carrito sincronizado.
+   * @throws Error si las credenciales son incorrectas.
+   */
+  async login(credentials: LoginCredentials): Promise<{ user: User; token: string; cart?: CartItem[] }> {
+    const response = await fetch('http://localhost:3000/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(credentials)
+    });
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw new Error(data?.message || 'Error al iniciar sesión');
+    }
+    const data = await response.json();
+    
+    // Guardar datos de sesión
+    localStorage.setItem(this.SESSION_KEY, JSON.stringify(data));
+    localStorage.setItem(this.CURRENT_USER_KEY, JSON.stringify(data.user));
+    
+    // Sincronizar carrito local con el servidor
+    try {
+      const localCartItems = this.getLocalCartItems();
+      const syncedCart = await cartService.syncCartOnLogin(localCartItems);
+      
+      // Limpiar carrito local después de sincronización exitosa
+      this.clearLocalCart();
+      
+      return { ...data, cart: syncedCart };
+    } catch (cartError) {
+      console.warn('Error al sincronizar carrito, continuando con login:', cartError);
+      return data;
+    }
+  }
 
   /**
-   * Realiza el login de un usuario.
-   * @param credentials Credenciales de inicio de sesión.
-   * @returns {Promise<{ user: User; token: string }>} Usuario autenticado y token.
-   * @throws Error si la cuenta está bloqueada o las credenciales son incorrectas.
+   * Obtiene los items del carrito local (localStorage)
    */
-  async login(credentials: LoginCredentials): Promise<{ user: User; token: string }> {
-    const { email, password } = credentials;
-    
-    const blockStatus = this.isAccountBlocked(email);
-    if (blockStatus.blocked) {
-      const minutes = Math.ceil((blockStatus.timeLeft || 0) / 60000);
-      throw new Error(`Cuenta bloqueada. Intenta de nuevo en ${minutes} minutos.`);
+  private getLocalCartItems(): CartItem[] {
+    try {
+      const localCart = localStorage.getItem('plena_cart');
+      return localCart ? JSON.parse(localCart) : [];
+    } catch (error) {
+      console.error('Error al obtener carrito local:', error);
+      return [];
     }
-    
-    const users = this.getStoredUsers();
-    const user = users.find(u => u.email === email);
-    
-    if (!user) {
-      this.logLoginAttempt(email, false);
-      throw new Error('Credenciales incorrectas');
-    }
-    
-    const isValidPassword = this.verifyPassword(password, user.passwordHash);
-    
-    if (!isValidPassword) {
-      this.logLoginAttempt(email, false);
-      
-      const status = this.getAccountStatus(email);
-      status.failedAttempts += 1;
-      status.lastAttempt = Date.now();
-      
-      if (status.failedAttempts >= this.MAX_LOGIN_ATTEMPTS) {
-        status.isBlocked = true;
-        status.blockUntil = Date.now() + this.BLOCK_DURATION;
-        this.updateAccountStatus(status);
-        throw new Error(`Demasiados intentos fallidos. Cuenta bloqueada por 30 minutos.`);
-      }
-      
-      this.updateAccountStatus(status);
-      const remainingAttempts = this.MAX_LOGIN_ATTEMPTS - status.failedAttempts;
-      throw new Error(`Credenciales incorrectas. Te quedan ${remainingAttempts} intentos.`);
-    }
-    
-    this.logLoginAttempt(email, true);
-    
-    const status = this.getAccountStatus(email);
-    status.failedAttempts = 0;
-    status.isBlocked = false;
-    delete status.blockUntil;
-    this.updateAccountStatus(status);
-    
-    const token = this.generateToken(user.id);
-    const userWithoutPassword = { ...user };
-    delete userWithoutPassword.passwordHash;
-    
-    const session = {
-      user: userWithoutPassword,
-      token,
-      expiresAt: Date.now() + this.SESSION_DURATION
-    };
-    
-    localStorage.setItem(this.SESSION_KEY, JSON.stringify(session));
-    localStorage.setItem(this.CURRENT_USER_KEY, JSON.stringify(userWithoutPassword));
-    
-    return { user: userWithoutPassword, token };
+  }
+
+  /**
+   * Limpia el carrito local después de sincronización exitosa
+   */
+  private clearLocalCart(): void {
+    localStorage.removeItem('plena_cart');
   }
 
   /**
@@ -278,7 +268,7 @@ class AuthService {
   }
 
   /**
-   * Cierra la sesión del usuario actual.
+   * Cierra la sesión del usuario actual (solo frontend, borra sesión local).
    */
   logout(): void {
     localStorage.removeItem(this.SESSION_KEY);
