@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo, type CSSProperties } from "react";
+import { useCart, type Producto } from "../context/CartContext";
 import styles from "./Product.module.css";
 import OptimizedImage from "./OptimizedImage";
 
@@ -9,12 +10,14 @@ import OptimizedImage from "./OptimizedImage";
  * 
  * @property {string} [className] - Clase CSS adicional para el componente.
  * @property {string} [nathanDumlaoKixfBEdypUnsplash] - Ruta de la imagen del producto.
+ * @property {Producto} [producto] - Datos del producto del contexto.
  * @property {CSSProperties["height"]} [emptyInfoHeight] - Altura personalizada para el precio.
  * @property {CSSProperties["display"]} [emptyInfoDisplay] - Display personalizado para el precio.
  */
 export type ProductType = {
   className?: string;
   nathanDumlaoKixfBEdypUnsplash?: string;
+  producto?: Producto;
 
   /** Style props */
   emptyInfoHeight?: CSSProperties["height"];
@@ -40,9 +43,12 @@ export type ProductType = {
 const Product: FunctionComponent<ProductType> = ({
   className = "",
   nathanDumlaoKixfBEdypUnsplash,
+  producto,
   emptyInfoHeight,
   emptyInfoDisplay,
 }) => {
+  const { addItem } = useCart();
+
   /**
    * Memoiza los estilos personalizados para el precio.
    */
@@ -53,12 +59,31 @@ const Product: FunctionComponent<ProductType> = ({
     };
   }, [emptyInfoHeight, emptyInfoDisplay]);
 
+  // Usar datos del producto si está disponible, sino valores por defecto
+  const productName = producto?.nombre || "Arete Arlequeen RF-200";
+  const productPrice = producto?.precio || 125300;
+  const formattedPrice = `$${productPrice.toLocaleString()}`;
+
+  const handleAddToCart = () => {
+    if (producto) {
+      addItem(producto, 1);
+    }
+  };
+
+  const handleBuyNow = () => {
+    if (producto) {
+      addItem(producto, 1);
+      // Redirigir al carrito de compras
+      window.location.href = '/shopping-cart';
+    }
+  };
+
   return (
     <section className={[styles.product1, className].join(" ")}>
       {/* Imagen del producto */}
       <OptimizedImage
         src={nathanDumlaoKixfBEdypUnsplash || "/nathandumlaokixfbedyp64unsplash@2x.png"}
-        alt="Arete Arlequeen RF-200"
+        alt={productName}
         className={styles.nathanDumlaoKixfbedyp64UnspIcon}
         loading="lazy"
         sizes="(max-width: 576px) 260px, (max-width: 768px) 300px, (max-width: 1024px) 400px, 600px"
@@ -66,10 +91,10 @@ const Product: FunctionComponent<ProductType> = ({
       <div className={styles.content}>
         <div className={styles.info}>
           {/* Nombre del producto */}
-          <h3 className={styles.areteArlequeenRf200}>Arete Arlequeen RF-200</h3>
+          <h3 className={styles.areteArlequeenRf200}>{productName}</h3>
           {/* Precio del producto */}
           <b className={styles.emptyInfo} style={emptyInfoStyle}>
-            $125.300
+            {formattedPrice}
           </b>
         </div>
         {/* Iconos de carrito y favorito */}
@@ -84,20 +109,23 @@ const Product: FunctionComponent<ProductType> = ({
         </div>
         {/* Acciones de compra */}
         <div className={styles.compra}>
-          <div className={styles.comprar}>
-            <b className={styles.comprar1}>COMPRAR</b>
+          <div className={styles.productActions}>
+            <button 
+              className={styles.addToCartBtn}
+              onClick={handleAddToCart}
+              disabled={!producto}
+            >
+              Añadir al Carrito
+            </button>
+            <button 
+              className={styles.buyNowBtn}
+              onClick={handleBuyNow}
+              disabled={!producto}
+            >
+              Comprar Ahora
+            </button>
           </div>
-          <div className={styles.aadirACarro}>
-            <div className={styles.comprar1}>AÑADIR A CARRO</div>
-          </div>
-          <div className={styles.cantidad}>
-            <b className={styles.comprar1}>CANTIDAD: 1</b>
-            <img
-              className={styles.chevronDownIcon}
-              alt=""
-              src="/chevrondown.svg"
-            />
-          </div>
+          
         </div>
       </div>
     </section>
