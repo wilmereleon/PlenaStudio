@@ -7,11 +7,10 @@ import { authService } from "../services/auth.service";
 export const authController = {
   /**
    * Registro de usuario.
-   */
-  async register(req: Request, res: Response) {
+   */  async register(req: Request, res: Response) {
     try {
-      const { nombre, apellido, email, password } = req.body;
-      const user = await authService.register({ nombre, apellido, email, password });
+      const { nombre, email, password } = req.body;
+      const user = await authService.register({ nombre, email, password });
       res.status(201).json(user);
     } catch (error: any) {
       res.status(400).json({ error: error.message });

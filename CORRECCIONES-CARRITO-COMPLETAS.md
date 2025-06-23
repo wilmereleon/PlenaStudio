@@ -1,5 +1,34 @@
 # ✅ CORRECCIONES COMPLETADAS - CARRITO PERSISTENTE PLENA STUDIO
 
+## 🚀 ACTUALIZACIÓN CRÍTICA - JUNIO 23, 2025
+
+### 🔧 **PROBLEMA CRÍTICO ADICIONAL RESUELTO**
+- ❌ **Problema:** Los usuarios nuevos no se guardaban en la base de datos, solo en localStorage
+- ❌ **Causa:** Ruta `/api/auth/register` no estaba activa en el backend
+- ❌ **Error secundario:** Campo `apellido` no existe en la tabla `usuario` de la BD
+- ✅ **SOLUCIONADO:** Backend corregido, registro funciona completamente con BD real
+
+### ✅ **CORRECCIONES IMPLEMENTADAS HOY:**
+1. **Backend - Rutas de Autenticación:**
+   - ✅ Agregada ruta `/register` en `auth.routes.ts`
+   - ✅ Corregido servicio para eliminar campo `apellido` inexistente
+   - ✅ Corregido controlador y rutas de usuario
+   - ✅ Corregido campo `password` a `password_hash`
+
+2. **Pruebas de Validación Exitosas:**
+   - ✅ Registro: Usuario ID 2 creado en BD con hash de contraseña
+   - ✅ Login: Funciona con JWT token válido
+   - ✅ Frontend corriendo en http://localhost:5175
+   - ✅ Backend corriendo en http://localhost:3001
+
+3. **Estado Final:**
+   - ✅ **Registro completo:** BD real + fallback localStorage 
+   - ✅ **Login completo:** Validación con BD + JWT
+   - ✅ **Carrito sincronizado:** Funciona tras login/logout/registro
+   - ✅ **Componentes de prueba:** Disponibles para E2E testing
+
+---
+
 ## 🐛 Problemas Identificados y Solucionados
 
 ### **Problema 1: Sin productos en la base de datos**

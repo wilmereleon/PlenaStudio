@@ -19,6 +19,29 @@
 
 </div>
 
+---
+
+## 🎉 ESTADO ACTUAL - JUNIO 2025
+
+### ✅ **COMPLETAMENTE FUNCIONAL**
+- 🔐 **Autenticación:** Registro y login funcionando con BD real + fallback localStorage
+- 🛒 **Carrito:** Sincronización automática tras login/logout/registro
+- 🗄️ **Backend:** API completa con base de datos MySQL
+- 🌐 **Frontend:** React + TypeScript con Vite
+- 🐳 **Docker:** Entorno completo containerizado
+- 📱 **Responsive:** Diseño adaptable para móviles y desktop
+
+### 🧪 **COMPONENTES DE PRUEBA DISPONIBLES**
+- `/registro-test` - Pruebas de registro de usuario
+- `/cart-sync-test` - Pruebas de sincronización de carrito
+- `/auth-test` - Pruebas de autenticación
+- **Credenciales de prueba:** Ver `CREDENCIALES-ACCESO.md`
+
+### 📋 **DOCUMENTACIÓN ACTUALIZADA**
+- [`CORRECCIONES-CARRITO-COMPLETAS.md`](CORRECCIONES-CARRITO-COMPLETAS.md) - Estado final de correcciones
+- [`CREDENCIALES-ACCESO.md`](CREDENCIALES-ACCESO.md) - Usuarios de prueba y acceso
+- [`README-Docker.md`](README-Docker.md) - Guía completa de Docker
+
 ## 📋 Tabla de Contenidos
 
 - [✨ Características](#-características)

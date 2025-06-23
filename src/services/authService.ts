@@ -10,6 +10,7 @@ import { CartItem } from "../types/productos";
  * Funciona tanto con backend disponible como en modo fallback (solo frontend).
  */
 class AuthService {
+  private static instance: AuthService | null = null;
   private readonly USERS_KEY = 'plena_users';
   private readonly CURRENT_USER_KEY = 'plena_current_user';
   private readonly LOGIN_ATTEMPTS_KEY = 'plena_login_attempts';
@@ -20,12 +21,19 @@ class AuthService {
   private readonly BLOCK_DURATION = 30 * 60 * 1000; // 30 minutos
   private readonly SESSION_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 días
 
-  private baseUrl: string;
+  private baseUrl: string = '';
 
   /**
    * Constructor: Inicializa usuarios por defecto y configura URLs dinámicas.
    */
   constructor() {
+    if (AuthService.instance) {
+      console.log('⚠️ DEBUG - AuthService ya existe, reutilizando instancia');
+      return AuthService.instance;
+    }
+    
+    console.log('🔧 DEBUG - Creando nueva instancia de AuthService');
+    AuthService.instance = this;
     // Configurar URL base según el entorno
     if (typeof window !== 'undefined') {
       const hostname = window.location.hostname;
@@ -68,14 +76,17 @@ class AuthService {
       return false;
     }
   }
-
   /**
    * Inicializa usuarios por defecto en localStorage si no existen.
    * Incluye usuarios adicionales para pruebas en entornos sin backend.
    */
   private initializeDefaultUsers(): void {
     const existingUsers = this.getStoredUsers();
+    console.log('🔧 DEBUG initializeDefaultUsers - Usuarios existentes:', existingUsers.length);
+    
     if (existingUsers.length === 0) {
+      console.log('🔧 DEBUG initializeDefaultUsers - No hay usuarios, creando por defecto...');
+      
       const defaultUsers = [
         {
           id: '1',
@@ -130,10 +141,12 @@ class AuthService {
           email: 'ana@example.com',
           fechaRegistro: new Date().toISOString(),
           passwordHash: this.hashPassword('ana123')
-        }
-      ];
+        }      ];
 
       localStorage.setItem(this.USERS_KEY, JSON.stringify(defaultUsers));
+      console.log('✅ DEBUG initializeDefaultUsers - Usuarios por defecto creados:', defaultUsers.length);
+    } else {
+      console.log('✅ DEBUG initializeDefaultUsers - Ya existen usuarios, no se modificará nada');
     }
   }
 
@@ -155,14 +168,23 @@ class AuthService {
   private verifyPassword(password: string, hash: string): boolean {
     return this.hashPassword(password) === hash;
   }
-
   /**
    * Obtiene todos los usuarios almacenados.
    * @returns {any[]} Lista de usuarios.
    */
   private getStoredUsers(): any[] {
-    const users = localStorage.getItem(this.USERS_KEY);
-    return users ? JSON.parse(users) : [];
+    try {
+      const users = localStorage.getItem(this.USERS_KEY);
+      const parsedUsers = users ? JSON.parse(users) : [];
+      console.log('📝 DEBUG getStoredUsers - Total usuarios:', parsedUsers.length);
+      if (parsedUsers.length > 0) {
+        console.log('📝 DEBUG getStoredUsers - Emails:', parsedUsers.map((u: any) => u.email));
+      }
+      return parsedUsers;
+    } catch (error) {
+      console.error('❌ Error al obtener usuarios del localStorage:', error);
+      return [];
+    }
   }
 
   /**
@@ -296,9 +318,11 @@ class AuthService {
             token: data.token,
             timestamp: Date.now()
           };
-          
-          localStorage.setItem(this.SESSION_KEY, JSON.stringify(sessionData));
+            localStorage.setItem(this.SESSION_KEY, JSON.stringify(sessionData));
           localStorage.setItem(this.CURRENT_USER_KEY, JSON.stringify(data.user));
+          
+          // DISPARAR EVENTO DE CAMBIO DE AUTENTICACIÓN para que CartContext sincronice
+          this.notifyAuthStateChange(data.user);
           
           console.log('✅ Login exitoso con backend');
           return data;
@@ -321,7 +345,8 @@ class AuthService {
    */
   private async loginLocal(credentials: LoginCredentials): Promise<{ user: User; token: string; cart?: CartItem[] }> {
     console.log('🔧 Ejecutando login local para:', credentials.email);
-      // Verificar intentos de login bloqueados
+    
+    // Verificar intentos de login bloqueados
     const blockStatus = this.isAccountBlocked(credentials.email);
     if (blockStatus.blocked) {
       throw new Error('Cuenta bloqueada por demasiados intentos fallidos. Intenta en 30 minutos.');
@@ -329,9 +354,15 @@ class AuthService {
     
     // Buscar usuario en localStorage
     const users = this.getStoredUsers();
+    console.log('📝 DEBUG - Usuarios disponibles:', users.length);
+    console.log('📝 DEBUG - Emails disponibles:', users.map(u => u.email));
+    console.log('📝 DEBUG - Buscando email:', credentials.email);
+    
     const user = users.find(u => u.email === credentials.email);
     
     if (!user) {
+      console.error('❌ DEBUG - Usuario no encontrado en la lista');
+      console.log('📝 DEBUG - Usuarios completos:', JSON.stringify(users, null, 2));
       this.recordFailedAttempt(credentials.email);
       throw new Error('Usuario no encontrado');
     }
@@ -366,13 +397,15 @@ class AuthService {
       token: token,
       timestamp: Date.now()
     };
-    
-    localStorage.setItem(this.SESSION_KEY, JSON.stringify(sessionData));
+      localStorage.setItem(this.SESSION_KEY, JSON.stringify(sessionData));
     localStorage.setItem(this.CURRENT_USER_KEY, JSON.stringify(userData));
     
     // Obtener carrito local para sincronizar
     const localCart = localStorage.getItem('plena_cart');
     const cartItems: CartItem[] = localCart ? JSON.parse(localCart) : [];
+    
+    // DISPARAR EVENTO DE CAMBIO DE AUTENTICACIÓN para que CartContext sincronice
+    this.notifyAuthStateChange(userData);
     
     console.log('✅ Login local exitoso para:', credentials.email);
     
@@ -380,6 +413,163 @@ class AuthService {
       user: userData,
       token: token,
       cart: cartItems
+    };
+  }
+
+  /**
+   * Registra un nuevo usuario en el sistema
+   */
+  async register(userData: {
+    nombre: string;
+    apellido: string;
+    email: string;
+    password: string;
+    edad?: number;
+    tipoIdentificacion?: string;
+    numeroIdentificacion?: string;
+  }): Promise<{ user: User; token: string }> {
+    console.log('📝 Registrando nuevo usuario:', userData.email);
+    
+    // Verificar si la API está disponible
+    const apiAvailable = await this.isApiAvailable();
+    
+    if (apiAvailable) {
+      try {
+        // Intentar registro con backend
+        const response = await fetch(`${this.baseUrl}/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData)
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          
+          // Guardar datos de sesión
+          const sessionData = {
+            user: data.user,
+            token: data.token,
+            timestamp: Date.now()
+          };
+            localStorage.setItem(this.SESSION_KEY, JSON.stringify(sessionData));
+          localStorage.setItem(this.CURRENT_USER_KEY, JSON.stringify(data.user));
+          
+          // DISPARAR EVENTO DE CAMBIO DE AUTENTICACIÓN para que CartContext sincronice
+          this.notifyAuthStateChange(data.user);
+          
+          console.log('✅ Registro exitoso con backend');
+          return data;
+        } else {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData?.message || 'Error en el registro');
+        }
+      } catch (error) {
+        console.warn('⚠️ Error con backend, usando registro local:', error);
+        return this.registerLocal(userData);
+      }
+    } else {
+      // Sin backend disponible, usar registro local
+      console.log('🔧 API no disponible, usando registro local');
+      return this.registerLocal(userData);
+    }
+  }
+  /**
+   * Registro local como fallback cuando la API no está disponible
+   */
+  private async registerLocal(userData: {
+    nombre: string;
+    apellido: string;
+    email: string;
+    password: string;
+    edad?: number;
+    tipoIdentificacion?: string;
+    numeroIdentificacion?: string;
+  }): Promise<{ user: User; token: string }> {
+    console.log('🔧 Ejecutando registro local para:', userData.email);
+    
+    // Verificar si el email ya existe
+    const users = this.getStoredUsers();
+    console.log('📝 DEBUG REGISTRO - Usuarios existentes:', users.length);
+    console.log('📝 DEBUG REGISTRO - Emails existentes:', users.map(u => u.email));
+    
+    const existingUser = users.find(u => u.email === userData.email);
+    
+    if (existingUser) {
+      throw new Error('El email ya está registrado');
+    }
+    
+    // Crear nuevo usuario
+    const newUser = {
+      id: (users.length + 1).toString(),
+      nombre: userData.nombre,
+      apellido: userData.apellido,
+      email: userData.email,
+      edad: userData.edad || 25,
+      tipoIdentificacion: userData.tipoIdentificacion || 'CC',
+      numeroIdentificacion: userData.numeroIdentificacion || '00000000',
+      fechaRegistro: new Date().toISOString(),
+      passwordHash: this.hashPassword(userData.password)
+    };
+    
+    console.log('📝 DEBUG REGISTRO - Nuevo usuario creado:', {
+      id: newUser.id,
+      email: newUser.email,
+      passwordHash: newUser.passwordHash.substring(0, 20) + '...'
+    });
+      // Agregar a la lista de usuarios
+    users.push(newUser);
+    localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
+    
+    console.log('📝 DEBUG REGISTRO - Usuario guardado en localStorage');
+    console.log('📝 DEBUG REGISTRO - Total usuarios después del registro:', users.length);
+    
+    // Verificar inmediatamente que se guardó correctamente
+    setTimeout(() => {
+      const verificacion = this.getStoredUsers();
+      const usuarioVerificado = verificacion.find((u: any) => u.email === userData.email);
+      console.log('✅ DEBUG REGISTRO - Verificación ASYNC de guardado:', !!usuarioVerificado);
+      if (!usuarioVerificado) {
+        console.error('❌ PROBLEMA: Usuario no se guardó correctamente en localStorage');
+      }
+    }, 100);
+    
+    // Verificar sincrónicamente también
+    const verificacionSync = this.getStoredUsers();
+    const usuarioVerificadoSync = verificacionSync.find((u: any) => u.email === userData.email);
+    console.log('✅ DEBUG REGISTRO - Verificación SYNC de guardado:', !!usuarioVerificadoSync);
+    
+    // Crear token temporal para la sesión
+    const token = btoa(`${newUser.email}:${Date.now()}:plena_session`);
+    
+    // Preparar datos del usuario
+    const userResponse: User = {
+      id: newUser.id,
+      nombre: newUser.nombre,
+      apellido: newUser.apellido,
+      email: newUser.email,
+      edad: newUser.edad,
+      tipoIdentificacion: newUser.tipoIdentificacion,
+      numeroIdentificacion: newUser.numeroIdentificacion,
+      fechaRegistro: newUser.fechaRegistro
+    };
+    
+    // Guardar sesión automáticamente tras registro
+    const sessionData = {
+      user: userResponse,
+      token: token,
+      timestamp: Date.now()
+    };
+      localStorage.setItem(this.SESSION_KEY, JSON.stringify(sessionData));
+    localStorage.setItem(this.CURRENT_USER_KEY, JSON.stringify(userResponse));
+    
+    // DISPARAR EVENTO DE CAMBIO DE AUTENTICACIÓN para que CartContext sincronice
+    this.notifyAuthStateChange(userResponse);
+    
+    console.log('✅ Registro local exitoso para:', userData.email);
+    
+    return {
+      user: userResponse,
+      token: token
     };
   }
 
@@ -442,16 +632,7 @@ class AuthService {
    * Indica si hay un usuario autenticado.
    * @returns {boolean} true si hay usuario autenticado, false si no.
    */
-  isAuthenticated(): boolean {
-    return this.getCurrentUser() !== null;
-  }
-
-  /**
-   * Cierra la sesión del usuario actual (solo frontend, borra sesión local).
-   */
-  logout(): void {
-    localStorage.removeItem(this.SESSION_KEY);
-    localStorage.removeItem(this.CURRENT_USER_KEY);
+  isAuthenticated(): boolean {    return this.getCurrentUser() !== null;
   }
 
   /**
@@ -477,7 +658,6 @@ class AuthService {
     
     this.updateAccountStatus(status);
   }
-
   /**
    * Limpia los intentos fallidos de login tras un login exitoso
    */
@@ -488,6 +668,33 @@ class AuthService {
     delete status.blockUntil;
     
     this.updateAccountStatus(status);
+  }
+
+  /**
+   * Notifica cambios en el estado de autenticación para sincronización del carrito
+   */
+  private notifyAuthStateChange(user: User | null): void {
+    console.log('📡 Disparando evento authStateChanged:', user ? user.email : 'logout');
+    
+    if (typeof window !== 'undefined') {
+      const event = new CustomEvent('authStateChanged', {
+        detail: { user }
+      });
+      window.dispatchEvent(event);
+    }
+  }
+
+  /**
+   * Logout del usuario actual
+   */
+  logout(): void {
+    localStorage.removeItem(this.SESSION_KEY);
+    localStorage.removeItem(this.CURRENT_USER_KEY);
+    
+    // Notificar logout para limpiar carrito
+    this.notifyAuthStateChange(null);
+    
+    console.log('🚪 Usuario deslogueado');
   }
 }
 

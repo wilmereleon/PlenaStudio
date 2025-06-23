@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Auth System</title>
+</head>
+<body>
+    <h1>Debug Sistema de Autenticación</h1>
+    
+    <div>
+        <h2>Registro</h2>
+        <button onclick="testRegister()">Registrar Usuario Test</button>
+        <div id="register-result"></div>
+    </div>
+    
+    <div>
+        <h2>Login</h2>
+        <button onclick="testLogin()">Login Usuario Test</button>
+        <div id="login-result"></div>
+    </div>
+    
+    <div>
+        <h2>Usuarios en localStorage</h2>
+        <button onclick="showStoredUsers()">Mostrar Usuarios</button>
+        <div id="users-result"></div>
+    </div>
+    
+    <div>
+        <h2>Limpiar</h2>
+        <button onclick="clearStorage()">Limpiar localStorage</button>
+    </div>
+
+    <script>
+        // Simular funciones del authService
+        const USERS_KEY = 'plena_users';
+        
+        function hashPassword(password) {
+            return btoa(password + 'salt_plena_studio');
+        }
+        
+        function getStoredUsers() {
+            const users = localStorage.getItem(USERS_KEY);
+            return users ? JSON.parse(users) : [];
+        }
+        
+        function testRegister() {
+            console.log('🧪 Iniciando test de registro...');
+            
+            const users = getStoredUsers();
+            const testEmail = 'test' + Date.now() + '@example.com';
+            
+            const newUser = {
+                id: (users.length + 1).toString(),
+                nombre: 'Test',
+                apellido: 'Usuario',
+                email: testEmail,
+                edad: 25,
+                tipoIdentificacion: 'CC',
+                numeroIdentificacion: '99999999',
+                fechaRegistro: new Date().toISOString(),
+                passwordHash: hashPassword('test123')
+            };
+            
+            users.push(newUser);
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+            
+            document.getElementById('register-result').innerHTML = 
+                `✅ Usuario registrado: ${testEmail}<br>` +
+                `ID: ${newUser.id}<br>` +
+                `Hash: ${newUser.passwordHash.substring(0, 20)}...`;
+                
+            // Guardar email para próximo test
+            window.lastTestEmail = testEmail;
+            
+            console.log('✅ Usuario registrado:', newUser);
+        }
+        
+        function testLogin() {
+            if (!window.lastTestEmail) {
+                document.getElementById('login-result').innerHTML = '❌ Primero registra un usuario';
+                return;
+            }
+            
+            console.log('🧪 Iniciando test de login...');
+            
+            const users = getStoredUsers();
+            const user = users.find(u => u.email === window.lastTestEmail);
+            
+            if (!user) {
+                document.getElementById('login-result').innerHTML = '❌ Usuario no encontrado en localStorage';
+                console.error('❌ Usuario no encontrado:', window.lastTestEmail);
+                console.log('📝 Usuarios disponibles:', users.map(u => u.email));
+                return;
+            }
+            
+            const passwordCorrect = hashPassword('test123') === user.passwordHash;
+            
+            document.getElementById('login-result').innerHTML = 
+                `✅ Usuario encontrado: ${user.email}<br>` +
+                `Contraseña correcta: ${passwordCorrect}<br>` +
+                `Hash almacenado: ${user.passwordHash.substring(0, 20)}...<br>` +
+                `Hash calculado: ${hashPassword('test123').substring(0, 20)}...`;
+                
+            console.log('✅ Login test completado:', {
+                found: true,
+                passwordCorrect,
+                user: user.email
+            });
+        }
+        
+        function showStoredUsers() {
+            const users = getStoredUsers();
+            let html = `Total usuarios: ${users.length}<br><br>`;
+            
+            users.forEach((user, index) => {
+                html += `${index + 1}. ${user.email} (ID: ${user.id})<br>`;
+            });
+            
+            document.getElementById('users-result').innerHTML = html;
+            console.log('📝 Usuarios en localStorage:', users);
+        }
+        
+        function clearStorage() {
+            localStorage.removeItem(USERS_KEY);
+            localStorage.removeItem('plena_current_user');
+            localStorage.removeItem('plena_session');
+            localStorage.removeItem('plena_login_attempts');
+            localStorage.removeItem('plena_account_status');
+            
+            console.log('🧹 localStorage limpiado');
+            alert('localStorage limpiado');
+        }
+        
+        // Inicializar usuarios por defecto al cargar
+        window.onload = function() {
+            console.log('🔧 Inicializando debug de autenticación...');
+            showStoredUsers();
+        };
+    </script>
+</body>
+</html>

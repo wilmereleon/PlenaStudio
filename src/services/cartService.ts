@@ -277,22 +277,26 @@ export class CartService {
     
     return updatedCart;
   }
-
   /**
    * Guarda el carrito completo en el servidor o localmente
    * @param items Items del carrito a guardar
    */
   async saveCart(items: CartItem[]): Promise<void> {
+    console.log('💾 CartService.saveCart - Guardando carrito:', items.length, 'productos');
+    console.log('💾 CartService.saveCart - Productos:', items.map(item => `${item.nombre} x${item.cantidad}`));
+    
     // Verificar si la API está disponible
     const apiAvailable = await this.isApiAvailable();
     
     if (!apiAvailable) {
       console.warn('⚠️ API no disponible, guardando carrito localmente');
       localStorage.setItem('plena_cart', JSON.stringify(items));
+      console.log('✅ Carrito guardado en localStorage');
       return;
     }
     
     try {
+      console.log('📡 Enviando carrito al servidor...');
       const response = await fetch(this.baseUrl, {
         method: 'POST',
         headers: this.getAuthHeaders(),
@@ -302,9 +306,12 @@ export class CartService {
       if (!response.ok) {
         throw new Error('Error al guardar carrito');
       }
+      
+      console.log('✅ Carrito guardado en servidor exitosamente');
     } catch (error) {
-      console.error('Error al guardar carrito en servidor, usando local:', error);
+      console.error('❌ Error al guardar carrito en servidor, usando local:', error);
       localStorage.setItem('plena_cart', JSON.stringify(items));
+      console.log('✅ Carrito guardado en localStorage como fallback');
     }
   }
 

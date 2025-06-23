@@ -113,6 +113,43 @@ console.log('Usuario autenticado:', result.user);
 
 ---
 
+## 📝 REGISTRO DE NUEVOS USUARIOS
+
+### ✅ **Sistema de Registro Mejorado**
+
+#### 🔧 **Cómo Funciona:**
+- ✅ **Con backend (localhost):** Registro en base de datos real
+- ✅ **Sin backend (Surge/Vercel):** Registro en localStorage automático
+- ✅ **Validación de emails:** No permite emails duplicados
+- ✅ **Login inmediato:** Tras registro exitoso, el usuario queda autenticado
+
+#### 📋 **Datos Requeridos para Registro:**
+```javascript
+{
+  nombre: "Tu Nombre",
+  apellido: "Tu Apellido", 
+  email: "tu@email.com",
+  password: "tu_password" // Mínimo 6 caracteres
+  // Campos opcionales:
+  edad: 25,
+  tipoIdentificacion: "CC",
+  numeroIdentificacion: "12345678"
+}
+```
+
+#### 🧪 **Componente de Prueba:**
+- Importar `<RegistroTest />` para testing completo
+- Genera usuarios con emails únicos automáticamente
+- Verifica que login funcione con usuarios recién registrados
+
+### 🔐 **Flujo Completo de Usuario:**
+1. **Registro** → Usuario se crea en localStorage/BD
+2. **Autenticación automática** → Usuario queda logueado
+3. **Persistencia** → Datos se mantienen entre sesiones
+4. **Login posterior** → Puede usar sus credenciales normalmente
+
+---
+
 ## ✅ ESTADO ACTUAL
 
 **Implementación:** ✅ Completada

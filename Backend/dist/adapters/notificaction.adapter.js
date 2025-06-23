@@ -1,0 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.notificationAdapter = exports.NotificationAdapter = void 0;
+/**
+ * NotificationAdapter
+ *
+ * Adaptador simple para gestionar notificaciones dentro del backend.
+ * Permite enviar notificaciones por distintos canales (ej: email, SMS, push).
+ * Esta implementación es un stub y puede extenderse según los canales requeridos.
+ */
+class NotificationAdapter {
+    /**
+     * Envía una notificación.
+     * @param to Destinatario de la notificación.
+     * @param message Mensaje de la notificación.
+     * @param channel Canal de envío (ej: 'email', 'sms', 'push').
+     * @returns Promise<void>
+     */
+    async send(to, message, channel = 'email') {
+        // Aquí puedes integrar con otros adapters (ej: email, SMS, push)
+        // Por defecto, solo imprime en consola (stub)
+        console.log(`[NOTIFICACIÓN][${channel}] Para: ${to} | Mensaje: ${message}`);
+        // Ejemplo de integración:
+        // if (channel === 'email') await sendEmail(to, 'Notificación', message);
+    }
+}
+exports.NotificationAdapter = NotificationAdapter;
+exports.notificationAdapter = new NotificationAdapter();

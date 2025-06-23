@@ -20,6 +20,9 @@ import ShoppingCart from "./pages/ShoppingCart";
 import Catalogo from "./pages/Catalogo";
 import Buscar from "./pages/Buscar";
 import CarritoTest from "./components/CarritoTest";
+import AuthDebug from "./components/AuthDebug";
+import AuthTest from "./components/AuthTest";
+import CartSyncTest from "./components/CartSyncTest";
 
 /**
  * App
@@ -84,11 +87,12 @@ function App() {
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/aretes" element={<Aretes />} />
         <Route path="/bufandas" element={<Bufandas />} />
-        <Route path="/combinaciones" element={<Combinaciones />} />
-        <Route path="/anillos" element={<Anillos />} />        <Route path="/pulseras" element={<Pulseras />} />
+        <Route path="/combinaciones" element={<Combinaciones />} />        <Route path="/anillos" element={<Anillos />} />        <Route path="/pulseras" element={<Pulseras />} />
         <Route path="/shopping-cart" element={<ShoppingCart />} />
-        <Route path="/buscar" element={<Buscar />} />
-        <Route path="/test-carrito" element={<CarritoTest />} />
+        <Route path="/buscar" element={<Buscar />} />        <Route path="/test-carrito" element={<CarritoTest />} />
+        <Route path="/auth-debug" element={<AuthDebug />} />
+        <Route path="/auth-test" element={<AuthTest />} />
+        <Route path="/cart-sync-test" element={<CartSyncTest />} />
       </Routes>
     </CartProvider>
   );

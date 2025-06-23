@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { authService } from '../services/authService';
 import './RegisterForm.css';
 
 interface FormData {
@@ -56,32 +57,30 @@ const RegisterForm: React.FC = () => {
     if (formData.contraseña !== formData.confirmar) newErrors.confirmar = true;
 
     setErrores(newErrors);
-    setMensaje(null);
-
-    if (Object.keys(newErrors).length === 0) {
+    setMensaje(null);    if (Object.keys(newErrors).length === 0) {
       setCargando(true);
       try {
-        // Mapeo de campos para la tabla usuario
-        const payload = {
+        // Usar authService que maneja fallback automático
+        const userData = {
           nombre: formData.nombres,
           apellido: formData.apellidos,
           email: formData.correo,
-          password: formData.contraseña
+          password: formData.contraseña,
+          edad: 25, // Valor por defecto
+          tipoIdentificacion: formData.tipoIdentificacion || 'CC',
+          numeroIdentificacion: formData.numeroIdentificacion
         };
-        const response = await fetch('http://localhost:3000/api/usuarios', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        if (response.ok) {
-          setMensaje('Registro exitoso. Revisa tu correo para activar la cuenta.');
-          limpiarFormulario();
-        } else {
-          const data = await response.json().catch(() => ({}));
-          setMensaje(data?.message || 'Error al registrar usuario.');
-        }
-      } catch (error) {
-        setMensaje('Error de conexión con el servidor.');
+        
+        console.log('📝 Registrando usuario:', userData.email);
+        const result = await authService.register(userData);
+        
+        setMensaje('✅ Registro exitoso. Ya puedes usar tus credenciales para iniciar sesión.');
+        console.log('✅ Usuario registrado:', result.user);
+        limpiarFormulario();
+        
+      } catch (error: any) {
+        console.error('❌ Error en registro:', error);
+        setMensaje(error.message || 'Error al registrar usuario.');
       } finally {
         setCargando(false);
       }

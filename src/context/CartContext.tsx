@@ -120,18 +120,21 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       loadCartFromLocalStorage();
     }
   };
-
   /**
    * Sincroniza cambios con el servidor si el usuario está autenticado
    */
   const syncWithServer = async (newCartItems: CartItem[]) => {
     if (isAuthenticated) {
+      console.log('🔄 CartContext.syncWithServer - Usuario autenticado, sincronizando:', newCartItems.length, 'productos');
       try {
         await cartService.saveCart(newCartItems);
+        console.log('✅ CartContext.syncWithServer - Sincronización exitosa');
       } catch (error) {
-        console.error('Error al sincronizar carrito con servidor:', error);
+        console.error('❌ CartContext.syncWithServer - Error al sincronizar carrito con servidor:', error);
         // En caso de error, mantener el carrito local pero mostrar advertencia
       }
+    } else {
+      console.log('⚠️ CartContext.syncWithServer - Usuario no autenticado, saltando sincronización');
     }
   };
   /**
@@ -172,30 +175,35 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     if (isAuthenticated) {
       try {
         const updatedCart = await cartService.addToCart(producto.productId, cantidad);
-        setCartItems(updatedCart);
-      } catch (error) {
+        setCartItems(updatedCart);      } catch (error) {
         console.error('Error al agregar producto:', error);
         // Fallback a comportamiento local
-        addItemLocal(producto, cantidad);
+        await addItemLocal(producto, cantidad);
       }
     } else {
-      addItemLocal(producto, cantidad);
+      await addItemLocal(producto, cantidad);
     }
   };
-
   // Añadir producto localmente (fallback o usuarios no autenticados)
-  const addItemLocal = (producto: Producto, cantidad: number = 1) => {
+  const addItemLocal = async (producto: Producto, cantidad: number = 1) => {
+    let newCartItems: CartItem[] = [];
+    
     setCartItems(prev => {
       const existe = prev.find(item => item.productId === producto.productId);
       if (existe) {
-        return prev.map(item =>
+        newCartItems = prev.map(item =>
           item.productId === producto.productId
             ? { ...item, cantidad: item.cantidad + cantidad }
             : item
         );
+      } else {
+        newCartItems = [...prev, { ...producto, cantidad }];
       }
-      return [...prev, { ...producto, cantidad }];
+      return newCartItems;
     });
+    
+    // Sincronizar con servidor si el usuario está autenticado
+    await syncWithServer(newCartItems);
   };
 
   // Actualizar cantidad
@@ -212,20 +220,26 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     if (isAuthenticated) {
       try {
         const updatedCart = await cartService.removeFromCart(productId);
-        setCartItems(updatedCart);
-      } catch (error) {
+        setCartItems(updatedCart);      } catch (error) {
         console.error('Error al eliminar producto:', error);
         // Fallback a comportamiento local
-        removeItemLocal(productId);
+        await removeItemLocal(productId);
       }
     } else {
-      removeItemLocal(productId);
+      await removeItemLocal(productId);
     }
   };
-
   // Remover producto localmente (fallback o usuarios no autenticados)
-  const removeItemLocal = (productId: string) => {
-    setCartItems(prev => prev.filter(item => item.productId !== productId));
+  const removeItemLocal = async (productId: string) => {
+    let newCartItems: CartItem[] = [];
+    
+    setCartItems(prev => {
+      newCartItems = prev.filter(item => item.productId !== productId);
+      return newCartItems;
+    });
+    
+    // Sincronizar con servidor si el usuario está autenticado
+    await syncWithServer(newCartItems);
   };
 
   // Calcular subtotal y total
