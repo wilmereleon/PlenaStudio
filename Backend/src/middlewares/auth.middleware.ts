@@ -1,9 +1,21 @@
 import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+
+// Extender la interfaz Request para incluir user
+declare global {
+  namespace Express {
+    interface Request {
+      user?: {
+        userId: string;
+        rol?: string;
+      };
+    }
+  }
+}
 
 /**
  * Middleware de autenticación para rutas protegidas.
- * Verifica la presencia de un token (por ejemplo, en el header Authorization).
- * Si el token es válido, permite el acceso; si no, responde con 401.
+ * Verifica y decodifica el token JWT, extrayendo el userId.
  */
 export function authMiddleware(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
@@ -14,12 +26,21 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction) 
 
   const token = authHeader.split(" ")[1];
 
-  // Aquí deberías validar el token (por ejemplo, JWT)
-  // Por ahora, aceptamos cualquier token que no sea vacío
-  if (!token || token === "null") {
+  try {
+    // Verificar y decodificar el token JWT
+    const decoded = jwt.verify(
+      token, 
+      process.env.JWT_SECRET || "secreto_super_seguro"
+    ) as { userId: string; rol?: string };
+    
+    // Agregar información del usuario al request
+    req.user = {
+      userId: decoded.userId,
+      rol: decoded.rol
+    };
+
+    next();
+  } catch (error) {
     return res.status(401).json({ error: "No autorizado: token inválido" });
   }
-
-  // Si el token es válido, continúa con la siguiente función
-  next();
 }

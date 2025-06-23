@@ -1,44 +1,86 @@
-import React from "react";
+import React, { ReactNode, useState } from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import ShoppingCart from "../../pages/ShoppingCart";
-import { CartProvider } from "../../context/CartContext";
+import { CartContext, CartItem } from "../../context/CartContext";
 
-/**
- * Renderiza un componente envuelto en el CartProvider para simular el contexto del carrito.
- * @param ui Componente a renderizar.
- * @returns Render result de Testing Library.
- */
-const renderWithProvider = (ui: React.ReactElement) => {
-  return render(<CartProvider>{ui}</CartProvider>);
+// Mock de producto con las propiedades correctas
+const mockProduct: CartItem = {
+  productId: "1",
+  nombre: "Aretes de prueba",
+  descripcion: "Aretes de prueba",
+  precio: 50000,
+  imagen: "/InsumosIMG/aretes-test.png",
+  cantidad: 2,
+};
+
+// Wrapper para simular el contexto con estado real
+function CartProviderTest({
+  children,
+  initialCartItems = [],
+}: {
+  children: ReactNode;
+  initialCartItems?: CartItem[];
+}) {
+  const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
+
+  const removeItem = (productId: string) =>
+    setCartItems(items => items.filter(item => item.productId !== productId));
+
+  const updateQuantity = jest.fn();
+
+  const subtotal = cartItems.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
+  const total = subtotal;
+
+  return (
+    <CartContext.Provider
+      value={{
+        cartItems,
+        addItem: jest.fn(),
+        removeItem,
+        updateQuantity,
+        subtotal,
+        total,
+        applyDiscount: jest.fn(),
+        checkout: jest.fn(),
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
+}
+
+const renderWithProvider = (ui: React.ReactElement, cartItems: CartItem[] = []) => {
+  return render(
+    <MemoryRouter>
+      <CartProviderTest initialCartItems={cartItems}>
+        {ui}
+      </CartProviderTest>
+    </MemoryRouter>
+  );
 };
 
 describe("ShoppingCart", () => {
-  /**
-   * Verifica que el carrito se renderiza vacío mostrando los textos correspondientes.
-   */
   it("renderiza el carrito vacío", () => {
     renderWithProvider(<ShoppingCart />);
-    expect(screen.getByText(/carrito/i)).toBeInTheDocument();
-    expect(screen.getByText(/no hay productos/i)).toBeInTheDocument();
+    // Usar heading específico para evitar coincidencias múltiples
+    expect(screen.getByRole('heading', { name: /tu carrito de compras/i })).toBeInTheDocument();
+    expect(screen.getByText(/no hay productos en el carrito/i)).toBeInTheDocument();
   });
 
-  /**
-   * Test de ejemplo para mostrar productos agregados al carrito.
-   * Debe ser implementado según la lógica de tu contexto.
-   */
   it("muestra productos agregados al carrito", () => {
-    // Simular productos en el contexto sería ideal, pero depende de la implementación.
-    // Aquí solo se muestra la estructura básica del test.
-    // Puedes mockear el contexto o extender este test según tu lógica.
+    renderWithProvider(<ShoppingCart />, [mockProduct]);
+    // El nombre aparece en nombre y descripción, así que usamos getAllByText
+    expect(screen.getAllByText(/aretes de prueba/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/\$?50,?0?0?0?/i)).toBeInTheDocument();
+    // Si tienes un label para cantidad, usa getByLabelText, si no, puedes omitir esta línea o buscar el input por role
   });
 
-  /**
-   * Test de ejemplo para eliminar productos del carrito.
-   * Debe ser implementado según la lógica de tu contexto.
-   */
   it("permite eliminar productos del carrito", () => {
-    // Similar al anterior, aquí deberías simular un producto y luego eliminarlo.
-    // fireEvent.click(screen.getByRole("button", { name: /eliminar/i }));
-    // expect(...).not.toBeInTheDocument();
+    renderWithProvider(<ShoppingCart />, [mockProduct]);
+    const deleteButton = screen.getByRole("button", { name: /eliminar/i });
+    fireEvent.click(deleteButton);
+    expect(screen.queryByText(/aretes de prueba/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/no hay productos en el carrito/i)).toBeInTheDocument();
   });
 });

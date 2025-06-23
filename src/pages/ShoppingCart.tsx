@@ -25,24 +25,28 @@ const ShoppingCart = () => {
             <button className={styles.secondaryButton}>Remueve selección</button>
           </div>
           <div className={styles.itemsGrid}>
-            {cartItems.map(item => (
-              <div className={styles.itemCard} key={item.productId}>
-                <img src={`/InsumosIMG/${item.imagen}`} alt={item.nombre} className={styles.itemImage} />
-                <div className={styles.itemInfo}>
-                  <div className={styles.itemName}>{item.nombre}</div>
-                  <div className={styles.itemDesc}>{item.descripcion}</div>
-                  <div className={styles.itemPrice}>${item.precio.toLocaleString()}</div>
-                  <input
-                    type="number"
-                    min={1}
-                    value={item.cantidad}
-                    onChange={e => updateQuantity(item.productId, Number(e.target.value))}
-                    className={styles.quantityInput}
-                  />
-                  <button className={styles.removeButton} onClick={() => removeItem(item.productId)}>Quitar</button>
+            {cartItems.length === 0 ? (
+              <div>No hay productos en el carrito</div>
+            ) : (
+              cartItems.map(item => (
+                <div className={styles.itemCard} key={item.productId}>
+                  <img src={`/InsumosIMG/${item.imagen}`} alt={item.nombre} className={styles.itemImage} />
+                  <div className={styles.itemInfo}>
+                    <div className={styles.itemName}>{item.nombre}</div>
+                    <div className={styles.itemDesc}>{item.descripcion}</div>
+                    <div className={styles.itemPrice}>${item.precio.toLocaleString()}</div>
+                    <input
+                      type="number"
+                      min={1}
+                      value={item.cantidad}
+                      onChange={e => updateQuantity(item.productId, Number(e.target.value))}
+                      className={styles.quantityInput}
+                    />
+                    <button className={styles.removeButton} onClick={() => removeItem(item.productId)}>Eliminar</button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </section>
 
