@@ -1,9 +1,10 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./TypeFloatingHeaderWithNavi.module.css";
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useCart } from '../context/CartContext'; // Importa el hook del carrito
+import OptimizedImage from './OptimizedImage';
 
 export type TypeFloatingHeaderWithNaviType = {
   className?: string;
@@ -15,19 +16,49 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
   const navigate = useNavigate();
   const { user, logout, isAuthenticated } = useAuth();
   const { cartItems } = useCart(); // Obtén los items del carrito
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Suma total de artículos en el carrito
   const totalArticulos = cartItems.reduce((sum, item) => sum + item.cantidad, 0);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <header
       className={[styles.typefloatingHeaderWithNavi, className].join(" ")}
     >
       <div className={styles.brandDeMarcaYLogo}>
-        <img className={styles.icon} loading="lazy" alt="" src="/icon@2x.png" />
-        <img className={styles.icon1} alt="" src="/icon-1@2x.png" />
+        <OptimizedImage 
+          src="/icon@2x.png" 
+          alt="Plena Studio Logo" 
+          className={styles.icon} 
+          loading="eager"
+          sizes="(max-width: 576px) 200px, 284px"
+        />
+        <OptimizedImage 
+          src="/icon-1@2x.png" 
+          alt="Plena Studio Icon" 
+          className={styles.icon1} 
+          loading="eager"
+          sizes="(max-width: 576px) 60px, 73px"
+        />
       </div>
       <div className={styles.contornoDeEncabezado}>
+        {/* Hamburger button for mobile */}
+        <button 
+          className={styles.hamburgerButton}
+          onClick={toggleMenu}
+          aria-label="Menú de navegación"
+        >
+          <div className={`${styles.hamburgerIcon} ${isMenuOpen ? styles.open : ''}`}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+
         <nav className={styles.enlacesDeNavegacin}>
           <Link to="/" className={styles.inicioTexto}>Inicio</Link>
           <Link to="/combinaciones" className={styles.inicioTexto}>Combinaciones</Link>
@@ -116,6 +147,150 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.open : ''}`}>
+        <nav className={styles.mobileNavLinks}>
+          <Link 
+            to="/" 
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <i className="bi bi-house-door me-2"></i>Inicio
+          </Link>
+          <Link 
+            to="/combinaciones" 
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <i className="bi bi-palette me-2"></i>Combinaciones
+          </Link>
+          <Link 
+            to="/aretes" 
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <i className="bi bi-gem me-2"></i>Aretes
+          </Link>
+          <Link 
+            to="/anillos" 
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <i className="bi bi-circle me-2"></i>Anillos
+          </Link>
+          <Link 
+            to="/pulseras" 
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <i className="bi bi-watch me-2"></i>Pulseras
+          </Link>
+          <Link 
+            to="/bufandas" 
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <i className="bi bi-wind me-2"></i>Bufandas
+          </Link>
+        </nav>
+
+        <div className={styles.mobileActions}>
+          <button 
+            className={styles.mobileSearchButton}
+            onClick={() => {
+              navigate("/buscar");
+              setIsMenuOpen(false);
+            }}
+          >
+            <i className="bi bi-search"></i>
+            <span>Buscar</span>
+          </button>
+          
+          <button 
+            className={styles.mobileCartButton}
+            onClick={() => {
+              navigate("/shopping-cart");
+              setIsMenuOpen(false);
+            }}
+          >
+            <i className="bi bi-cart"></i>
+            <span>Carrito ({totalArticulos})</span>
+          </button>
+
+          {isAuthenticated ? (
+            <div style={{ marginTop: '20px', padding: '15px 0', borderTop: '1px solid #f0f0f0' }}>
+              <div style={{ marginBottom: '10px', fontSize: '14px', color: '#666' }}>
+                <i className="bi bi-person-circle me-2"></i>
+                Hola, {user?.nombre}
+              </div>
+              <button 
+                onClick={() => {
+                  logout();
+                  setIsMenuOpen(false);
+                }}
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  background: '#f8fafb',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '14px'
+                }}
+              >
+                <i className="bi bi-box-arrow-right me-2"></i>
+                Cerrar Sesión
+              </button>
+            </div>
+          ) : (
+            <div style={{ marginTop: '20px', padding: '15px 0', borderTop: '1px solid #f0f0f0' }}>
+              <button 
+                onClick={() => {
+                  navigate("/login");
+                  setIsMenuOpen(false);
+                }}
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  background: '#e6fcf3',
+                  border: '1px solid #232c2b',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  marginBottom: '10px',
+                  fontSize: '14px'
+                }}
+              >
+                Iniciar Sesión
+              </button>
+              <button 
+                onClick={() => {
+                  navigate("/register");
+                  setIsMenuOpen(false);
+                }}
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  background: '#8ABF69',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '14px'
+                }}
+              >
+                Registrarse
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Overlay */}
+      <div 
+        className={`${styles.overlay} ${isMenuOpen ? styles.open : ''}`}
+        onClick={() => setIsMenuOpen(false)}
+      ></div>
     </header>
   );
 };

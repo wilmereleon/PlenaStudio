@@ -1,5 +1,6 @@
 import { FunctionComponent, useMemo, type CSSProperties } from "react";
 import styles from "./Product.module.css";
+import OptimizedImage from "./OptimizedImage";
 
 /**
  * ProductType
@@ -55,11 +56,12 @@ const Product: FunctionComponent<ProductType> = ({
   return (
     <section className={[styles.product1, className].join(" ")}>
       {/* Imagen del producto */}
-      <img
+      <OptimizedImage
+        src={nathanDumlaoKixfBEdypUnsplash || "/nathandumlaokixfbedyp64unsplash@2x.png"}
+        alt="Arete Arlequeen RF-200"
         className={styles.nathanDumlaoKixfbedyp64UnspIcon}
         loading="lazy"
-        alt=""
-        src={nathanDumlaoKixfBEdypUnsplash}
+        sizes="(max-width: 576px) 260px, (max-width: 768px) 300px, (max-width: 1024px) 400px, 600px"
       />
       <div className={styles.content}>
         <div className={styles.info}>

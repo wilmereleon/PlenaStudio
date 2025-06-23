@@ -5,6 +5,7 @@ import Property1CardsPopularProdu from "../components/Property1CardsPopularProdu
 import Property1SoftwareHeroTripl from "../components/Property1SoftwareHeroTripl";
 import TypeSubscribePillInputCT from "../components/TypeSubscribePillInputCT";
 import TypeStackedSimpleFooter from "../components/TypeStackedSimpleFooter";
+import OptimizedImage from "../components/OptimizedImage";
 import styles from "./PginaWeb.module.css";
 
 const PginaWeb: FunctionComponent = () => {
@@ -28,11 +29,12 @@ const PginaWeb: FunctionComponent = () => {
             Plena Studio: Expresa tu esencia, redefine tu estilo
           </h2>
         </div>
-        <img
-          className={styles.videoContainerIcon}
-          loading="lazy"
-          alt=""
+        <OptimizedImage
           src="/video-container@2x.png"
+          alt="Plena Studio - Expresa tu esencia, redefine tu estilo"
+          className={styles.videoContainerIcon}
+          loading="eager"
+          sizes="(max-width: 576px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 1280px"
         />
       </section>
       <TypeSideBySideImages />
