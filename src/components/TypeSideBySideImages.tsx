@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
 import styles from "./TypeSideBySideImages.module.css";
+import OptimizedImage from "./OptimizedImage";
 
 export type TypeSideBySideImagesType = {
   className?: string;
@@ -20,11 +21,12 @@ const TypeSideBySideImages: FunctionComponent<TypeSideBySideImagesType> = ({
         </div>
         <section className={styles.featureGrid}>
           <div className={styles.cards}>
-            <img
+            <OptimizedImage
+              src="/image--lummi@2x.png"
+              alt="Combo Bufanda FLORES translucid + Aretes HOJAS"
               className={styles.imageLummi}
               loading="lazy"
-              alt=""
-              src="/image--lummi@2x.png"
+              sizes="(max-width: 576px) 260px, (max-width: 768px) 300px, (max-width: 1024px) 340px, 365px"
             />
             <div className={styles.copy}>
               <h3 className={styles.featureTitle}>

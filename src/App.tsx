@@ -17,6 +17,7 @@ import Combinaciones from "./pages/Combinaciones";
 import Anillos from "./pages/Anillos";
 import Pulseras from "./pages/Pulseras";
 import ShoppingCart from "./pages/ShoppingCart";
+import Catalogo from "./pages/Catalogo";
 
 /**
  * App
@@ -78,6 +79,7 @@ function App() {
         <Route path="/" element={<PginaWeb />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/aretes" element={<Aretes />} />
         <Route path="/bufandas" element={<Bufandas />} />
         <Route path="/combinaciones" element={<Combinaciones />} />

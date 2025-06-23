@@ -14,7 +14,7 @@ const ShoppingCart = () => {
         <h1 className={styles.title}>Tu carrito de compras</h1>
         <p className={styles.subtitle}>Revise los artículos seleccionados antes de proceder al pago</p>
         <div className={styles.actions}>
-          <button className={styles.secondaryButton} onClick={() => window.location.href = "/catalog"}>Continúa comprando</button>
+          <button className={styles.secondaryButton} onClick={() => window.location.href = "/Catalogo"}>Continúa comprando</button>
           <button className={styles.primaryButton} onClick={checkout}>Pagar</button>
         </div>
 

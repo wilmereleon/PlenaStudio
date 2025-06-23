@@ -61,14 +61,17 @@
 .icon1 {
   position: relative;
   object-fit: cover;
+  z-index: 1000;
 }
 .icon {
-  height: 73px;
   width: 284px;
+  height: 73px;
+  transition: width 0.2s, height 0.2s;
 }
 .icon1 {
   width: 73px;
-  max-height: 100%;
+  height: 73px;
+  transition: width 0.2s, height 0.2s;
 }
 .brandDeMarcaYLogo {
   height: 89px;
@@ -81,6 +84,8 @@
   padding: 0 var(--padding-16) 0 var(--padding-10);
   box-sizing: border-box;
   gap: var(--gap-4);
+  position: relative;
+  z-index: 1002; 
 }
 .inicioTexto {
   position: relative;
@@ -139,7 +144,8 @@
   text-align: center;
 }
 .botonInicioSesion {
-  height: 43px;
+  height: 44px;
+  
   background-color: var(--color-mintcream);
   box-sizing: border-box;
   margin-right: 0.5rem;
@@ -149,6 +155,7 @@
   background-color: var(--color-lightgreen);
   color: var(--color-mintcream);
   margin-left: 0.2rem;
+  
 }
 
 .botonRegistrate:hover,
@@ -183,15 +190,205 @@
   justify-content: space-between;
   padding: var(--padding-8) var(--padding-30) var(--padding-8) var(--padding-8);
   gap: 0;
-  z-index: 6;
   text-align: left;
   font-size: var(--font-size-12);
   color: var(--color-darkslategray-100);
   font-family: var(--font-lato);
+  position: relative;
+  z-index: 1002;
 }
-@media screen and (max-width: 1300px) {
+/* Hamburger Menu Styles */
+.hamburgerButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  min-height: 44px;
+  min-width: 44px;
+  position: relative;
+  z-index: 1003;
+  transition: background-color 0.2s ease;
+}
+
+.hamburgerButton:hover {
+  background-color: rgba(123, 184, 111, 0.1);
+  border-radius: 8px;
+}
+
+.hamburgerIcon {
+  width: 24px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1004;
+}
+
+.hamburgerIcon span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: var(--color-darkslategray-100);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburgerIcon.open span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburgerIcon.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerIcon.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 280px;
+  height: 100vh;
+  background: #fff;
+  z-index: 1001;
+  transition: left 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 80px 0 20px 0;
+  overflow-y: auto;
+}
+
+.mobileMenu.open {
+  left: 0;
+}
+
+.mobileNavLinks {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1002;
+}
+
+.mobileNavLink {
+  display: block;
+  padding: 18px 0;
+  min-height: 44px;
+  color: var(--color-darkslategray-100);
+  text-decoration: none;
+  font-family: var(--font-lato);
+  font-size: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  margin: 2px 0;
+  padding-left: 8px;
+  position: relative;
+  z-index: 1003;
+}
+
+.mobileNavLink:hover {
+  color: #7bb86f;
+  text-decoration: none;
+  background-color: rgba(123, 184, 111, 0.1);
+}
+
+.mobileActions {
+  margin-top: 20px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+  z-index: 1002;
+}
+
+.mobileCartButton,
+.mobileSearchButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  min-height: 44px;
+  background: #f8fafb;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  position: relative;
+  z-index: 1003;
+}
+
+.mobileCartButton:hover,
+.mobileSearchButton:hover {
+  background: #f0f0f0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media screen and (max-width: 991px) {
   .enlacesDeNavegacin {
     display: none;
+  }
+  
+  .hamburgerButton {
+    display: block;
+  }
+
+  .typefloatingHeaderWithNavi {
+    position: relative;
+    z-index: 1005;
+  }
+
+  .brandDeMarcaYLogo {
+    position: relative;
+    z-index: 1004; 
+  }
+
+  .botonInicioSesion,
+  .botonRegistrate,
+  .contenedorDeTexto {
+    display: none !important;
+  }
+
+  .icon {
+    width: 180px;
+    height: 50px;
+  }
+  .icon1 {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Show navigation on tablets but hide some items */
+@media screen and (min-width: 992px) and (max-width: 1300px) {
+  .enlacesDeNavegacin {
+    gap: 1.5rem;
+  }
+  
+  .enlacesDeNavegacin .inicioTexto {
+    font-size: 11px;
+    padding: 0 8px;
   }
 }
 
@@ -218,3 +415,4 @@
   pointer-events: none;
   transition: border 0.2s;
 }
+

@@ -1,6 +1,7 @@
 import { useCart } from "../context/CartContext";
 import TypeFloatingHeaderWithNavi from "../components/TypeFloatingHeaderWithNavi";
 import TypeStackedSimpleFooter from "../components/TypeStackedSimpleFooter";
+import OptimizedImage from "../components/OptimizedImage";
 import styles from "./Catalogo.module.css";
 
 // No hay productos de pulseras en el listado original, así que mostramos un mensaje
@@ -23,10 +24,12 @@ const Pulseras = () => {
             {productosPulseras.map(producto => (
               <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={producto.productId}>
                 <div className={`card ${styles.productCard}`}>
-                  <img
+                  <OptimizedImage
                     src={`/InsumosIMG/${producto.imagen}`}
-                    className="card-img-top"
                     alt={producto.nombre}
+                    className="card-img-top"
+                    loading="lazy"
+                    sizes="(max-width: 576px) 260px, (max-width: 768px) 180px, (max-width: 1024px) 200px, 250px"
                     style={{ height: 200, objectFit: "cover" }}
                   />
                   <div className="card-body">
@@ -36,7 +39,7 @@ const Pulseras = () => {
                     <button
                       className="btn"
                       style={{ background: "#7bb86f", color: "#fff" }}
-                      onClick={() => addItem(producto.productId)}
+                      onClick={() => addItem(producto)}
                     >
                       <i className="bi bi-cart-plus"></i> Agregar al carrito
                     </button>

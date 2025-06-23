@@ -50,7 +50,8 @@
   line-height: 150%;
   font-weight: 700;
   font-family: var(--font-garamond);
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 .featureDescription {
   line-height: 160%;
@@ -112,9 +113,16 @@
   flex-direction: row;
   align-items: center;
   padding: var(--padding-10) var(--padding-20);
+  min-height: 44px;
   text-align: center;
   font-size: var(--font-size-12);
   color: var(--color-mintcream);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.botonAgregarCarrito:hover {
+  background-color: #7bb86f;
 }
 .cards,
 .copy {
@@ -126,7 +134,8 @@
   gap: var(--gap-8);
 }
 .cards {
-  height: 551px;
+  height: auto;
+  width: 100%;
   flex: 1;
   align-items: center;
   gap: var(--gap-16);
@@ -134,10 +143,10 @@
   max-width: 360px;
 }
 .featureGrid {
-  height: 571px;
-  width: 504px;
+  height: auto;
+  width: 100%;
   min-width: 280px;
-  max-width: 1200px;
+  max-width: 504px;
   text-align: left;
   font-size: var(--font-size-14);
   color: var(--color-darkslategray-100);
@@ -154,10 +163,12 @@
   align-content: center;
 }
 .container {
-  height: 595px;
   flex: 1;
   gap: var(--gap-48);
   max-width: 1200px;
+  width: 100%;
+  min-height: 400px;
+  box-sizing: border-box;
 }
 .typesideBySideImages {
   align-self: stretch;
@@ -277,21 +288,153 @@
     box-sizing: border-box;
   }
 }
-@media screen and (max-width: 450px) {
+
+@media screen and (max-width: 768px) {
   .heading {
-    font-size: 34px;
-    line-height: 40px;
+    font-size: 42px;
+    line-height: 50px;
   }
   .subheading {
-    font-size: var(--font-size-24);
-    line-height: 34px;
+    font-size: 28px;
+    line-height: 40px;
+  }
+  .container {
+    gap: var(--gap-32);
+    padding: 0 var(--padding-16);
+  }
+  .headingContainer {
+    max-width: 450px;
+  }
+  .cards {
+    max-width: 340px;
+  }
+  .imageLummi {
+    height: 300px;
+  }
+  .typesideBySideImages {
+    padding: 80px var(--padding-20) 40px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    gap: var(--gap-32);
+  }
+  .headingContainer {
+    text-align: center;
+    min-width: 100%;
+  }
+  .featureGrid {
+    width: 100%;
+  }
+  .cards {
+    max-width: 100%;
+    min-width: 100%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .heading {
+    font-size: 36px;
+    line-height: 42px;
+  }
+  .subheading {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .container {
+    gap: var(--gap-24);
+    padding: 0 var(--padding-12);
+  }
+  .cards {
+    min-width: 260px;
+  }
+  .imageLummi {
+    height: 240px;
+  }
+  .featureTitle {
+    font-size: var(--font-size-15);
+    line-height: 140%;
+  }
+  .featureDescription1 {
+    font-size: var(--font-size-13);
+    line-height: 24px;
+  }
+  .botonAgregarCarrito {
+    padding: var(--padding-12) var(--padding-16);
+    font-size: var(--font-size-11);
+  }
+  .typesideBySideImages {
+    padding: 50px var(--padding-12) 30px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .heading {
+    font-size: 32px;
+    line-height: 38px;
+  }
+  .subheading {
+    font-size: 20px;
+    line-height: 28px;
   }
   .featureGrid {
     gap: var(--gap-20);
   }
+  .featureTitle {
+    font-size: var(--font-size-16);
+  }
+  .container {
+    gap: var(--gap-20);
+    padding: 0 var(--padding-8);
+  }
+  .cards {
+    min-width: 240px;
+    padding: 0 var(--padding-8);
+  }
+  .imageLummi {
+    height: 200px;
+  }
+  .botonAgregarCarrito {
+    padding: var(--padding-14) var(--padding-12);
+    font-size: var(--font-size-10);
+    min-height: 48px;
+  }
   .typesideBySideImages {
-    padding-top: 59px;
-    padding-bottom: 21px;
+    padding: 30px var(--padding-8) 20px;
     box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .heading {
+    font-size: 28px;
+    line-height: 34px;
+  }
+  .subheading {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .container {
+    gap: var(--gap-16);
+    padding: 0 var(--padding-4);
+  }
+  .cards {
+    min-width: 220px;
+  }
+  .imageLummi {
+    height: 180px;
+  }
+  .featureTitle {
+    font-size: var(--font-size-14);
+  }
+  .featureDescription1 {
+    font-size: var(--font-size-12);
+    line-height: 20px;
+  }
+  .botonAgregarCarrito {
+    padding: var(--padding-12) var(--padding-8);
+    font-size: var(--font-size-9);
   }
 }

@@ -20,22 +20,21 @@ const TypeSubscribePillInputCT: FunctionComponent<
               Manténgase informado con nuestras últimas novedades y ofertas.
             </div>
           </div>
-          <div className={styles.inputButtonCombo}>
+          <form className={styles.inputButtonCombo}>
             <div className={styles.input}>
-              <div className={styles.inputForm}>
-                <div className={styles.textContainer}>
-                  <div className={styles.placeholderText}>
-                    Introduce tu dirección de correo electrónico
-                  </div>
-                </div>
-              </div>
+              <input
+                type="email"
+                placeholder="Introduce tu dirección de correo electrónico"
+                className={styles.inputForm}
+                required
+              />
             </div>
-            <div className={styles.button}>
+            <button type="submit" className={styles.button}>
               <div className={styles.textContainer1}>
                 <div className={styles.cta}>Subscríbete</div>
               </div>
-            </div>
-          </div>
+            </button>
+          </form>
         </div>
       </div>
     </section>

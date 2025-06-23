@@ -57,6 +57,15 @@
   border: 1px solid var(--color-slategray);
   box-sizing: border-box;
   padding: var(--padding-16) var(--padding-15);
+  width: 100%;
+  font-size: var(--font-size-14);
+  color: var(--color-slategray);
+  font-family: var(--font-lato);
+  outline: none;
+}
+.inputForm:focus {
+  border-color: var(--color-lightgreen);
+  box-shadow: 0 0 0 2px rgba(123, 184, 111, 0.2);
 }
 .input {
   flex: 1;
@@ -81,14 +90,16 @@
   padding: var(--padding-4);
 }
 .button {
-  height: 40px;
+  height: 44px;
+  min-height: 44px;
   width: 192px;
   margin: 0 !important;
   position: absolute;
   right: 8px;
-  bottom: 8px;
+  bottom: 6px;
   border-radius: 999px;
   background-color: var(--color-lightgreen);
+  border: none;
   padding: var(--padding-12) var(--padding-20);
   box-sizing: border-box;
   min-width: 140px;
@@ -97,6 +108,11 @@
   text-align: center;
   font-size: var(--font-size-12);
   color: var(--color-honeydew);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.button:hover {
+  background-color: #7bb86f;
 }
 .inputButtonCombo {
   width: 100%;
@@ -180,6 +196,55 @@
     box-sizing: border-box;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .heading {
+    font-size: 38px;
+    line-height: 45px;
+  }
+  .inputForm {
+    height: 50px;
+    padding: var(--padding-12) var(--padding-12);
+  }
+  .button {
+    width: 160px;
+    height: 44px;
+    min-height: 44px;
+    right: 3px;
+    bottom: 3px;
+  }
+  .container {
+    padding: var(--padding-48) var(--padding-20);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .heading {
+    font-size: 35px;
+    line-height: 42px;
+  }
+  .subheading {
+    font-size: var(--font-size-14);
+  }
+  .inputForm {
+    height: 48px;
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--padding-8);
+  }
+  .button {
+    position: static;
+    width: 100%;
+    margin-top: var(--padding-8);
+    max-width: none;
+  }
+  .input {
+    min-width: 200px;
+  }
+  .container {
+    padding: var(--padding-40) var(--padding-16);
+  }
+}
 @media screen and (max-width: 450px) {
   .heading {
     font-size: 31px;
@@ -189,5 +254,37 @@
     padding-top: 47px;
     padding-bottom: 47px;
     box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .heading {
+    font-size: 28px;
+    line-height: 34px;
+  }
+  .subheading {
+    font-size: var(--font-size-13);
+  }
+  .container {
+    padding: var(--padding-32) var(--padding-12);
+  }
+  .inputButtonCombo {
+    gap: var(--gap-4);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .heading {
+    font-size: 26px;
+    line-height: 32px;
+  }
+  .subheading {
+    font-size: var(--font-size-12);
+  }
+  .container {
+    padding: var(--padding-24) var(--padding-8);
+  }
+  .copyComponent {
+    gap: var(--gap-20);
   }
 }
