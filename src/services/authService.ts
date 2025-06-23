@@ -184,24 +184,14 @@ class AuthService {
       throw new Error(data?.message || 'Error al iniciar sesión');
     }
     const data = await response.json();
-    
-    // Guardar datos de sesión
+      // Guardar datos de sesión
     localStorage.setItem(this.SESSION_KEY, JSON.stringify(data));
     localStorage.setItem(this.CURRENT_USER_KEY, JSON.stringify(data.user));
     
-    // Sincronizar carrito local con el servidor
-    try {
-      const localCartItems = this.getLocalCartItems();
-      const syncedCart = await cartService.syncCartOnLogin(localCartItems);
-      
-      // Limpiar carrito local después de sincronización exitosa
-      this.clearLocalCart();
-      
-      return { ...data, cart: syncedCart };
-    } catch (cartError) {
-      console.warn('Error al sincronizar carrito, continuando con login:', cartError);
-      return data;
-    }
+    // NO sincronizar el carrito aquí - esto se manejará en CartContext
+    // para evitar conflictos con el estado del carrito
+    
+    return data;
   }
 
   /**

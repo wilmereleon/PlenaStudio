@@ -62,24 +62,24 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    checkAuth();
-      // Escuchar cambios de autenticación
+    checkAuth();    // Escuchar cambios de autenticación
     const handleAuthChange = (e: CustomEvent) => {
-      const { user, cart } = e.detail;
+      const { user } = e.detail;
       const wasAuthenticated = isAuthenticated;
       const newAuthState = !!user;
+      
+      console.log("🔄 Cambio de autenticación detectado:", { 
+        wasAuthenticated, 
+        newAuthState, 
+        currentCartSize: cartItems.length 
+      });
       
       setIsAuthenticated(newAuthState);
       
       if (newAuthState && !wasAuthenticated) {
         // LOGIN: Usuario se autentica
-        if (cart) {
-          // Login exitoso con carrito sincronizado desde servidor
-          setCartItems(cart);
-        } else {
-          // Login exitoso, cargar carrito del servidor
-          loadCartFromServer();
-        }
+        console.log("🟢 LOGIN detectado - sincronizando carrito");
+        syncCartOnLogin();
       } else if (!newAuthState && wasAuthenticated) {
         // LOGOUT: Usuario se desautentica
         console.log("🔴 Usuario hizo logout - limpiando carrito");
@@ -155,6 +155,38 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         console.error('Error al sincronizar carrito con servidor:', error);
         // En caso de error, mantener el carrito local pero mostrar advertencia
       }
+    }
+  };
+  /**
+   * Sincroniza el carrito local con el servidor durante el login
+   */
+  const syncCartOnLogin = async () => {
+    try {
+      console.log("🔄 Iniciando sincronización de carrito en login...");
+      
+      // Obtener carrito local actual
+      const localCart = [...cartItems];
+      console.log("📦 Carrito local actual:", localCart);
+      
+      if (localCart.length > 0) {
+        // Si hay productos en el carrito local, sincronizarlos con el servidor
+        console.log("🔄 Sincronizando carrito local con servidor...");
+        const syncedCart = await cartService.syncCartOnLogin(localCart);
+        console.log("✅ Carrito sincronizado exitosamente:", syncedCart);
+        setCartItems(syncedCart);
+        
+        // Limpiar carrito local después de sincronización exitosa
+        localStorage.removeItem('plena_cart');
+        console.log("🗑️ Carrito local limpiado después de sincronización");
+      } else {
+        // Si no hay carrito local, cargar del servidor
+        console.log("📥 Cargando carrito del servidor...");
+        await loadCartFromServer();
+      }
+    } catch (error) {
+      console.error('❌ Error en sincronización de carrito:', error);
+      // En caso de error, mantener el carrito local
+      console.log("🔄 Manteniendo carrito local por error en sincronización");
     }
   };
 

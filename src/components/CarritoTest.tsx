@@ -5,7 +5,7 @@ import { useAuth } from '../hooks/useAuth';
 const CarritoTest: React.FC = () => {
   const { cartItems, addItem } = useCart();
   const { user, login, logout, isAuthenticated } = useAuth();
-  const [loginData, setLoginData] = useState({ email: 'wilmereleon@hotmail.com', password: 'test123' });
+  const [loginData, setLoginData] = useState({ email: 'demo@plenastudio.com', password: 'password' });
 
   // Producto de prueba
   const productoTest = {
@@ -15,11 +15,16 @@ const CarritoTest: React.FC = () => {
     precio: 28000,
     imagen: "earring01.jpeg"
   };
-
   const handleLogin = async () => {
     try {
+      console.log("🔄 INICIANDO LOGIN - Estado del carrito antes:", cartItems.length, "items");
       await login(loginData);
-      console.log("✅ Login exitoso");
+      console.log("✅ LOGIN EXITOSO - Verificando carrito después del login...");
+      
+      // Esperar un momento para que se complete la sincronización
+      setTimeout(() => {
+        console.log("🛒 CARRITO DESPUÉS DEL LOGIN:", cartItems.length, "items");
+      }, 1000);
     } catch (error) {
       console.error("❌ Error en login:", error);
     }
@@ -29,10 +34,10 @@ const CarritoTest: React.FC = () => {
     logout();
     console.log("🔴 Logout ejecutado");
   };
-
   const handleAddToCart = () => {
+    console.log("🛒 AGREGANDO PRODUCTO - Estado antes:", cartItems.length, "items");
     addItem(productoTest, 1);
-    console.log("🛒 Producto agregado al carrito");
+    console.log("🛒 PRODUCTO AGREGADO - Estado después:", cartItems.length + 1, "items (esperado)");
   };
 
   return (
@@ -89,6 +94,24 @@ const CarritoTest: React.FC = () => {
           <button onClick={handleAddToCart} style={{ padding: '5px 10px', background: '#007bff', color: 'white', border: 'none', borderRadius: '4px' }}>
             🛒 Agregar Aretes al Carrito
           </button>
+        </div>
+      </div>      <div style={{ background: '#e9f7ef', padding: '15px', borderRadius: '8px', marginBottom: '20px' }}>
+        <h3>🔧 PRUEBA ESPECÍFICA: Persistencia del Carrito en Login</h3>
+        <p><strong>Problema corregido:</strong> El carrito se desaparecía al hacer login</p>
+        <p><strong>Solución:</strong> Sincronización automática del carrito local con el servidor</p>
+        
+        <div style={{ background: '#fff', padding: '10px', borderRadius: '4px', margin: '10px 0' }}>
+          <h4>Pasos de prueba recomendados:</h4>
+          <ol>
+            <li>🛒 <strong>Agregar productos SIN login</strong> → Los productos se guardan en localStorage</li>
+            <li>🔑 <strong>Hacer login</strong> → Los productos se sincronizan automáticamente con el servidor</li>
+            <li>✅ <strong>Verificar</strong> → El carrito mantiene los productos después del login</li>
+            <li>🔄 <strong>Recargar página</strong> → Los productos persisten desde la base de datos</li>
+          </ol>
+        </div>
+        
+        <div style={{ background: '#f8f9fa', padding: '8px', borderRadius: '4px', fontSize: '14px' }}>
+          <strong>Estado actual:</strong> Carrito con {cartItems.length} items | Usuario: {isAuthenticated ? '✅ Autenticado' : '❌ No autenticado'}
         </div>
       </div>
 

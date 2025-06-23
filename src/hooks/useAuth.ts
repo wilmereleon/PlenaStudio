@@ -35,18 +35,18 @@ export function useAuth() {
    * @param {string} credentials.email - Correo electrónico.
    * @param {string} credentials.password - Contraseña.
    * @returns {Promise<any>} Resultado del login.
-   */
-  const login = async (credentials: { email: string; password: string }) => {
+   */  const login = async (credentials: { email: string; password: string }) => {
     const result = await authService.login(credentials);
     setUser(result.user);
     
     // Disparar evento personalizado para notificar cambio de autenticación
+    // El carrito se sincronizará en CartContext
     window.dispatchEvent(new CustomEvent('authStateChanged', { 
-      detail: { user: result.user, cart: result.cart } 
+      detail: { user: result.user } 
     }));
     
     return result;
-  };  /**
+  };/**
    * Cierra la sesión del usuario actual.
    */
   const logout = () => {
