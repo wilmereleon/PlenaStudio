@@ -30,7 +30,7 @@ const PginaWeb: FunctionComponent = () => {
           </h2>
         </div>
         <OptimizedImage
-          src="./InsumosIMG/womenEarring09.jpeg"
+          src="/video-container@2x.png"
           alt="Plena Studio - Expresa tu esencia, redefine tu estilo"
           className={styles.videoContainerIcon}
           loading="eager"

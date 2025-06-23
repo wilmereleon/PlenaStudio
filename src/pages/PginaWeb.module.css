@@ -154,12 +154,27 @@
   display: block;
 }
 
-.videoContainerIcon {
-  align-self: stretch;
-  border-radius: 32px;
-  max-width: 100%;
-  overflow: hidden;
-  max-height: 100%;
-  object-fit: cover;
-  margin-bottom: 32px; /* Espacio debajo de la imagen */
+@media screen and (max-width: 800px) {
+  .videoContainerIcon {
+    width: 100vw;
+    min-height: 180px;
+    display: block;
+    margin-bottom: 24px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .videoContainerIcon {
+    width: 100%;
+    max-width: 100vw;
+    min-height: 120px;
+    display: block;
+    margin-bottom: 16px;
+    border-radius: 32px;
+  }
+  .content, .textContainer {
+    width: 100%;
+    max-width: 100vw;
+    padding: 0;
+  }
 }
