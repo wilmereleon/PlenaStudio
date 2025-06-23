@@ -153,3 +153,13 @@
   background: transparent;
   display: block;
 }
+
+.videoContainerIcon {
+  align-self: stretch;
+  border-radius: 32px;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: cover;
+  margin-bottom: 32px; /* Espacio debajo de la imagen */
+}
