@@ -18,6 +18,7 @@ import Anillos from "./pages/Anillos";
 import Pulseras from "./pages/Pulseras";
 import ShoppingCart from "./pages/ShoppingCart";
 import Catalogo from "./pages/Catalogo";
+import Buscar from "./pages/Buscar";
 
 /**
  * App
@@ -86,6 +87,7 @@ function App() {
         <Route path="/anillos" element={<Anillos />} />
         <Route path="/pulseras" element={<Pulseras />} />
         <Route path="/shopping-cart" element={<ShoppingCart />} />
+        <Route path="/buscar" element={<Buscar />} />
       </Routes>
     </CartProvider>
   );
