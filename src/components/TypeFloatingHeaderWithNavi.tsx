@@ -66,6 +66,7 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
           <Link to="/anillos" className={styles.inicioTexto}>Anillos</Link>
           <Link to="/pulseras" className={styles.inicioTexto}>Pulseras</Link>
           <Link to="/bufandas" className={styles.inicioTexto}>Bufandas</Link>
+          <Link to="/catalogo" className={styles.inicioTexto}>Catálogo</Link>
           <img
             className={styles.searchSharpIcon}
             loading="lazy"
@@ -192,6 +193,13 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
             onClick={() => setIsMenuOpen(false)}
           >
             <i className="bi bi-wind me-2"></i>Bufandas
+          </Link>
+          <Link 
+            to="/catalogo" 
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <i className="bi bi-grid me-2"></i>Catálogo
           </Link>
         </nav>
 
