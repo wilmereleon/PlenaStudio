@@ -1,0 +1,179 @@
+@startuml ComponenteDiagram-PlenaStudio
+!theme aws-orange
+title Diagrama de Componentes - Plena Studio (Docker)
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam monochrome false
+skinparam backgroundColor White
+skinparam componentBorderColor Black
+skinparam packageBorderColor DarkBlue
+
+package "Frontend Container (React + TypeScript)" {
+    
+    component [App.tsx] as App
+    note right of App : Componente principal\nConfigura rutas y navegación
+    
+    package "Pages" {
+        component [PginaWeb.tsx] as Home
+        component [Login.tsx] as Login
+        component [Catalogo.tsx] as Catalogo
+        component [Aretes.tsx] as Aretes
+        component [Anillos.tsx] as Anillos
+        component [Pulseras.tsx] as Pulseras
+        component [Bufandas.tsx] as Bufandas
+        component [ShoppingCart.tsx] as Cart
+        component [Buscar.tsx] as Search
+        component [RegisterForm.tsx] as Register
+    }
+    
+    package "Components" {
+        component [TypeFloatingHeaderWithNavi.tsx] as Header
+        component [Product.tsx] as ProductComp
+        component [OptimizedImage.tsx] as ImageComp
+        component [CarritoTest.tsx] as CartTest
+        component [TypeStackedSimpleFooter.tsx] as Footer
+    }
+    
+    package "Context & Hooks" {
+        component [CartContext.tsx] as CartContext
+        note right of CartContext : Estado global del carrito\n20 productos disponibles\nPersistencia local/servidor
+        
+        component [useAuth.ts] as AuthHook
+        note right of AuthHook : Hook de autenticación\nManejo de sesiones\nEventos personalizados
+    }
+    
+    package "Services" {
+        component [authService.ts] as AuthService
+        note right of AuthService : Servicio de autenticación\nLogin/logout\nSincronización de carrito
+        
+        component [cartService.ts] as CartService
+        note right of CartService : Servicio de carrito\nSingleton\nSincronización con backend
+    }
+    
+    package "Types" {
+        component [auth.ts] as AuthTypes
+    }
+}
+
+package "Backend Container (Node.js + TypeScript + Express)" {
+    
+    component [app.ts] as BackendApp
+    note right of BackendApp : Aplicación Express\nConfiguración CORS\nMiddlewares globales
+    
+    component [server.ts] as Server
+    note right of Server : Servidor HTTP\nPuerto 3001 (Docker)\nPuerto 3000 (Local)
+    
+    package "API Routes" {
+        component [auth.routes.ts] as AuthRoutes
+        component [cart.routes.ts] as CartRoutes
+        component [catalog.routes.ts] as CatalogRoutes
+        component [contact.routes.ts] as ContactRoutes
+        component [search.routes.ts] as SearchRoutes
+        component [user.routes.ts] as UserRoutes
+    }
+    
+    package "Controllers" {
+        component [auth.controller.ts] as AuthController
+        component [cart.controller.ts] as CartController
+        component [catalog.controller.ts] as CatalogController
+        component [contact.controller.ts] as ContactController
+        component [search.controller.ts] as SearchController
+    }
+    
+    package "Services" {
+        component [auth.service.ts] as BackendAuthService
+        component [cart.service.ts] as BackendCartService
+        component [contact.service.ts] as BackendContactService
+        component [search.service.ts] as BackendSearchService
+    }
+    
+    package "Middlewares" {
+        component [auth.middleware.ts] as AuthMiddleware
+        note right of AuthMiddleware : Verificación JWT\nExtracción userId\nProtección de rutas
+    }
+    
+    component [db.ts] as Database
+    note right of Database : Conexión MySQL\nPool de conexiones\nConfiguración BD
+}
+
+package "Database Container (MySQL 8.0)" {
+    database "MySQL Database" as MySQLDB
+    entity "usuario" as UserTable
+    entity "producto" as ProductTable
+    entity "carrito" as CartTable
+    entity "carrito_item" as CartItemTable
+}
+
+package "Infrastructure (Docker)" {
+    component [Docker Compose] as Docker
+    note right of Docker : Orquestación de servicios\n4 contenedores\nRed privada
+    
+    component [Nginx Proxy] as Nginx
+    note right of Nginx : Proxy reverso\nBalanceador\nServidor estático
+}
+
+' Relaciones Frontend internas
+App --> Home
+App --> Login
+App --> Catalogo
+App --> CartContext
+Home --> Header
+Home --> Footer
+Catalogo --> ProductComp
+ProductComp --> ImageComp
+CartContext --> CartService
+AuthHook --> AuthService
+
+' Relaciones Backend internas
+BackendApp --> AuthRoutes
+BackendApp --> CartRoutes
+BackendApp --> CatalogRoutes
+AuthRoutes --> AuthController
+CartRoutes --> CartController
+CatalogRoutes --> CatalogController
+AuthController --> BackendAuthService
+CartController --> BackendCartService
+BackendAuthService --> Database
+BackendCartService --> Database
+Server --> BackendApp
+
+' Relaciones Database internas
+MySQLDB --> UserTable
+MySQLDB --> ProductTable
+MySQLDB --> CartTable
+MySQLDB --> CartItemTable
+
+' Relaciones Frontend-Backend (HTTP API)
+AuthService --> AuthRoutes : "POST /api/auth/login\nPOST /api/auth/logout"
+CartService --> CartRoutes : "GET /api/cart\nPOST /api/cart/add\nPOST /api/cart/sync"
+
+' Relaciones Infrastructure
+Docker --> App : "Maneja"
+Docker --> BackendApp : "Maneja"
+Docker --> MySQLDB : "Maneja"
+Docker --> Nginx : "Maneja"
+Nginx --> App : "Proxy a Frontend"
+Nginx --> BackendApp : "Proxy a Backend"
+
+' Relaciones Database FK
+CartTable --> UserTable : "FK: id_usuario"
+CartItemTable --> CartTable : "FK: id_carrito"
+CartItemTable --> ProductTable : "FK: id_producto"
+
+legend right
+  **Puertos Docker:**
+  • Frontend: Puerto 80 (Nginx)
+  • Backend: Puerto 3001 (Express)
+  • Database: Puerto 5432 (MySQL)
+  
+  **Volúmenes:**
+  • Backend src/ montado para desarrollo
+  • Script SQL de inicialización
+  • Datos MySQL persistentes
+  
+  **Red:**
+  • Bridge network interna
+  • Solo Nginx expuesto públicamente
+endlegend
+
+@enduml

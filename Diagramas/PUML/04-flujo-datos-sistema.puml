@@ -1,0 +1,172 @@
+@startuml flujo-datos-sistema
+!define DATA_FLOW
+!theme aws-orange
+
+title Plena Studio - Flujo de Datos del Sistema Completo
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam monochrome false
+skinparam backgroundColor White
+skinparam actorBorderColor Black
+skinparam participantBorderColor Black
+
+actor Usuario as user
+participant "Frontend\n(React)" as frontend
+participant "Nginx\n(Reverse Proxy)" as nginx
+participant "Backend API\n(Express/TypeScript)" as backend
+database "PostgreSQL\nDatabase" as db
+participant "Docker\nContainers" as docker
+
+== Inicialización del Sistema ==
+
+user -> docker : docker-compose up
+activate docker
+docker -> db : Inicializa BD con script SQL
+docker -> backend : Levanta servidor API (puerto 3001)
+docker -> frontend : Build y serve React app
+docker -> nginx : Configura proxy (puerto 80)
+activate nginx
+activate backend
+activate db
+nginx --> user : Sistema disponible en http://localhost
+
+== Autenticación de Usuario ==
+
+user -> frontend : Accede a login
+frontend -> nginx : GET /login
+nginx -> frontend : Página de login
+user -> frontend : Ingresa credenciales
+frontend -> nginx : POST /api/auth/login
+nginx -> backend : Forward request
+backend -> db : SELECT usuario WHERE email
+db -> backend : Datos del usuario
+backend -> backend : Valida password + genera JWT
+backend -> nginx : JWT token + user data
+nginx -> frontend : Token de autenticación
+frontend -> frontend : Guarda token en sessionStorage
+frontend -> user : Redirecciona a dashboard
+
+== Gestión del Carrito ==
+
+group Carga inicial del carrito
+  frontend -> frontend : Lee localStorage
+  frontend -> nginx : GET /api/cart (con JWT header)
+  nginx -> backend : Forward con token
+  backend -> backend : Valida JWT + extrae userId
+  backend -> db : SELECT carrito WHERE userId
+  db -> backend : Items del carrito BD
+  backend -> nginx : Cart items
+  nginx -> frontend : Carrito sincronizado
+  frontend -> frontend : Actualiza CartContext
+end
+
+group Agregar producto
+  user -> frontend : Clic "Agregar al carrito"
+  frontend -> frontend : Actualiza estado local
+  frontend -> nginx : POST /api/cart/add
+  nginx -> backend : Forward request
+  backend -> db : INSERT/UPDATE cart_items
+  db -> backend : Confirmación
+  backend -> nginx : Carrito actualizado
+  nginx -> frontend : Respuesta exitosa
+  frontend -> user : UI actualizada
+end
+
+== Navegación y Catálogo ==
+
+user -> frontend : Navega a catálogo
+frontend -> nginx : GET /api/catalog
+nginx -> backend : Forward request
+backend -> db : SELECT productos
+db -> backend : Lista de productos
+backend -> nginx : Productos JSON
+nginx -> frontend : Catálogo cargado
+frontend -> user : Muestra productos
+
+== Búsqueda ==
+
+user -> frontend : Busca productos
+frontend -> nginx : GET /api/search?q=keyword
+nginx -> backend : Forward con parámetros
+backend -> db : SELECT productos WHERE nombre LIKE...
+db -> backend : Resultados filtrados
+backend -> nginx : Productos encontrados
+nginx -> frontend : Resultados de búsqueda
+frontend -> user : Lista filtrada
+
+== Checkout y Logout ==
+
+group Logout
+  user -> frontend : Clic logout
+  frontend -> nginx : POST /api/auth/logout
+  nginx -> backend : Forward request
+  backend -> backend : Invalida token (blacklist)
+  backend -> nginx : Logout exitoso
+  nginx -> frontend : Confirmación
+  frontend -> frontend : Limpia sessionStorage + localStorage
+  frontend -> user : Redirecciona a home
+end
+
+== Monitoreo y Logs ==
+
+docker -> docker : Logs de contenedores
+note right of docker
+  **Comandos de monitoreo:**
+  • docker-compose ps
+  • docker-compose logs -f
+  • docker-compose logs backend
+end note
+
+== Flujo de Datos en Tiempo Real ==
+
+note over frontend, db
+  **Persistencia Multicapa:**
+  1. **Frontend**: localStorage (cache local)
+  2. **Session**: sessionStorage (autenticación)
+  3. **Backend**: Base de datos PostgreSQL
+  4. **Sync**: Automática en login/logout
+end note
+
+note over nginx
+  **Nginx como Reverse Proxy:**
+  • Puerto 80 → Frontend estático
+  • /api/* → Backend API (puerto 3001)
+  • Balanceo de carga
+  • Compresión gzip
+  • Headers de seguridad
+end note
+
+note over backend
+  **Middleware Chain:**
+  1. CORS handling
+  2. JSON body parser
+  3. JWT authentication
+  4. Route handlers
+  5. Error handling
+end note
+
+note over db
+  **Base de Datos:**
+  • Usuarios y autenticación
+  • Productos del catálogo
+  • Carritos de compras
+  • Sesiones activas
+  • Logs de auditoria
+end note
+
+legend right
+  **Estados del Sistema:**
+  • ✅ Activo: Todos los servicios funcionando
+  • 🔄 Sincronizando: Datos en tránsito
+  • ❌ Error: Fallo en algún componente
+  • 🔐 Autenticado: Usuario con sesión válida
+  • 🛒 Carrito: Estado persistente activo
+  
+  **Puertos Docker:**
+  • Frontend: Puerto 80 (Nginx)
+  • Backend: Puerto 3001 (Express)
+  • Database: Puerto 5432 (PostgreSQL)
+  • Interno: Red docker bridge
+endlegend
+
+@enduml

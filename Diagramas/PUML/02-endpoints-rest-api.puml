@@ -1,0 +1,170 @@
+@startuml endpoints-rest-api
+!define RESTFUL_API
+!theme aws-orange
+
+title Plena Studio - Endpoints REST API
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam monochrome false
+skinparam backgroundColor White
+skinparam actorBorderColor Black
+skinparam participantBorderColor Black
+
+package "API REST Backend - Puerto 3001" {
+  
+  package "Auth Endpoints (/api/auth)" as auth {
+    [POST /login] as login
+    note right of login
+      **Body:** { email, password }
+      **Response:** JWT token + user data
+      **Status:** 200 OK / 401 Unauthorized
+    end note
+    
+    [POST /logout] as logout
+    note right of logout
+      **Header:** Authorization: Bearer <token>
+      **Response:** Success message
+      **Status:** 200 OK
+    end note
+  }
+  
+  package "User Registration (/api)" as users {
+    [POST /usuarios] as register
+    note right of register
+      **Body:** { nombre, apellido, email, password }
+      **Response:** User created + confirmation
+      **Status:** 201 Created / 400 Bad Request
+    end note
+  }
+  
+  package "Cart Endpoints (/api/cart)" as cart {
+    note top of cart : Todos requieren autenticación (JWT)
+    
+    [GET /] as getCart
+    note right of getCart
+      **Header:** Authorization: Bearer <token>
+      **Response:** Cart items array
+      **Status:** 200 OK / 401 Unauthorized
+    end note
+    
+    [POST /] as saveCart
+    note right of saveCart
+      **Body:** { items: CartItem[] }
+      **Response:** Saved cart confirmation
+      **Status:** 200 OK / 401 Unauthorized
+    end note
+    
+    [POST /add] as addToCart
+    note right of addToCart
+      **Body:** { productId, quantity }
+      **Response:** Updated cart
+      **Status:** 200 OK / 401 Unauthorized
+    end note
+    
+    [POST /remove] as removeFromCart
+    note right of removeFromCart
+      **Body:** { productId }
+      **Response:** Updated cart
+      **Status:** 200 OK / 401 Unauthorized
+    end note
+    
+    [POST /clear] as clearCart
+    note right of clearCart
+      **Header:** Authorization: Bearer <token>
+      **Response:** Empty cart confirmation
+      **Status:** 200 OK / 401 Unauthorized
+    end note
+    
+    [POST /sync] as syncCart
+    note right of syncCart
+      **Body:** { localCart: CartItem[] }
+      **Response:** Merged cart items
+      **Status:** 200 OK / 401 Unauthorized
+    end note
+  }
+  
+  package "Catalog Endpoints (/api/catalog)" as catalog {
+    [GET /] as getAllProducts
+    note right of getAllProducts
+      **Query Params:** ?page=1&limit=10&category=...
+      **Response:** Products array + pagination
+      **Status:** 200 OK
+    end note
+    
+    [GET /:id] as getProductById
+    note right of getProductById
+      **Params:** productId (number)
+      **Response:** Product object
+      **Status:** 200 OK / 404 Not Found
+    end note
+  }
+  
+  package "Search Endpoints (/api/search)" as search {
+    [GET /] as searchProducts
+    note right of searchProducts
+      **Query Params:** ?q=keyword&category=...
+      **Response:** Filtered products array
+      **Status:** 200 OK
+    end note
+  }
+  
+  package "Contact Endpoints (/api/contact)" as contact {
+    [POST /] as sendContact
+    note right of sendContact
+      **Body:** { nombre, email, mensaje }
+      **Response:** Email sent confirmation
+      **Status:** 200 OK / 400 Bad Request
+    end note
+  }
+  
+  package "Health Check" as health {
+    [GET /] as healthCheck
+    note right of healthCheck
+      **Response:** { message: "API funcionando" }
+      **Status:** 200 OK
+    end note
+  }
+}
+
+package "External Dependencies" as external {
+  database "PostgreSQL\nBase de Datos" as db
+  cloud "Email Service" as email
+}
+
+' Relaciones con base de datos
+auth --> db : Validación usuarios
+users --> db : Crear usuarios
+cart --> db : CRUD carrito
+catalog --> db : Consultar productos
+search --> db : Buscar productos
+
+' Relaciones con servicios externos
+contact --> email : Enviar emails
+
+' Middleware de autenticación
+note as authMiddleware
+  **Middleware de Autenticación**
+  - Valida JWT token en header
+  - Extrae userId del token
+  - Bloquea acceso sin token válido
+  - Se aplica a todos los endpoints /cart
+end note
+
+authMiddleware ..> cart : Protege endpoints
+
+legend right
+  **Estados HTTP Comunes:**
+  • 200 OK - Operación exitosa
+  • 201 Created - Recurso creado
+  • 400 Bad Request - Datos inválidos
+  • 401 Unauthorized - Sin autenticación
+  • 404 Not Found - Recurso no encontrado
+  • 500 Internal Error - Error del servidor
+  
+  **Autenticación:**
+  • JWT Bearer Token en header
+  • Expiración configurable
+  • Logout invalida token
+endlegend
+
+@enduml
