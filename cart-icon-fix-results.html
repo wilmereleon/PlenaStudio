@@ -169,15 +169,24 @@ loadCartFromLocalStorage(); // Carga inmediata sin timeout
         <div class="status status-good">
             <h4>✅ Estado: CORRECCIÓN EXITOSA</h4>
             <p>La aplicación ha sido reconstruida con Docker y el comportamiento del carrito ha sido corregido.</p>
-        </div>
-
-        <div class="warning-box">
+        </div>        <div class="warning-box">
             <h4>⚠️ Puntos importantes a verificar:</h4>
             <ul>
                 <li>El contenedor frontend fue reconstruido con <code>docker-compose build frontend --no-cache</code></li>
                 <li>Los cambios están activos en <code>http://localhost</code></li>
                 <li>El comportamiento debe ser consistente en todas las páginas</li>
                 <li>Los logs de la consola deben mostrar la sincronización correcta</li>
+            </ul>
+        </div>
+
+        <div class="error">
+            <h4>❌ PROBLEMA ADICIONAL IDENTIFICADO Y CORREGIDO</h4>
+            <h5>🛒 Persistencia de Carrito en Base de Datos</h5>
+            <ul>
+                <li><strong>Problema:</strong> Los artículos del carrito no se guardaban en la BD cuando el usuario hacía logout</li>
+                <li><strong>Causa:</strong> El logout solo limpiaba localStorage sin sincronizar con la base de datos</li>
+                <li><strong>Solución:</strong> Implementado logout asíncrono que guarda carrito en BD antes de cerrar sesión</li>
+                <li><strong>Test Disponible:</strong> <a href="test-carrito-persistencia-completo.html" target="_blank" style="color: #721c24; text-decoration: underline;">Test Completo de Persistencia</a></li>
             </ul>
         </div>
     </div>
@@ -219,10 +228,11 @@ loadCartFromLocalStorage(); // Carga inmediata sin timeout
 
     <div class="next-steps">
         <h2>🚀 Próximos Pasos</h2>
-        
-        <div class="status status-good">
-            <h4>✅ Corrección Completada</h4>
-            <p>La funcionalidad del carrito ahora funciona correctamente. El ícono permanece visible durante todas las transiciones de autenticación.</p>
+          <div class="status status-good">
+            <h4>✅ Corrección Completada - AMBOS PROBLEMAS SOLUCIONADOS</h4>
+            <p><strong>1. Ícono del carrito:</strong> Ya no desaparece durante transiciones de login/logout</p>
+            <p><strong>2. Persistencia en BD:</strong> El carrito ahora se guarda correctamente en la base de datos antes del logout</p>
+            <p>La aplicación está funcionando correctamente con ambas correcciones implementadas.</p>
         </div>
         
         <h4>Enlaces útiles para verificación:</h4>
