@@ -15,6 +15,7 @@
 [🚀 Demo en Vivo](#-demo-rápido) •
 [📖 Documentación](#-documentación) •
 [🐳 Docker Setup](#-instalación-con-docker) •
+[📤 Compartir Proyecto](#-compartir-proyecto) •
 [🛠️ Desarrollo](#-desarrollo-local)
 
 </div>
@@ -48,6 +49,7 @@
 - [🏗️ Arquitectura](#️-arquitectura)
 - [🚀 Demo Rápido](#-demo-rápido)
 - [🐳 Instalación con Docker](#-instalación-con-docker)
+- [📤 Compartir Proyecto](#-compartir-proyecto)
 - [🛠️ Desarrollo Local](#️-desarrollo-local)
 - [📖 Documentación](#-documentación)
 - [🧪 Testing](#-testing)
@@ -184,6 +186,91 @@ docker-compose down -v
 # Eliminar imágenes locales
 docker rmi plena-studio-frontend plena-studio-backend
 ```
+
+## 📤 Compartir Proyecto
+
+### ⚡ **Inicio Rápido para Compartir**
+
+```powershell
+# Script automatizado (Windows)
+.\preparar-compartir.ps1
+
+# O manualmente:
+docker-compose up --build -d
+```
+
+### 🎯 **Métodos de Compartición**
+
+| Método | Facilidad | Profesionalismo | Tiempo |
+|--------|-----------|-----------------|--------|
+| **🐳 Docker Hub** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 30 min |
+| **📂 GitHub** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 15 min |
+| **📦 ZIP** | ⭐⭐⭐ | ⭐⭐⭐ | 5 min |
+
+### 🚀 **Opción 1: Docker Hub (Recomendado)**
+
+```bash
+# 1. Construir imágenes
+docker-compose build
+
+# 2. Etiquetar para Docker Hub
+docker tag plena-frontend tu-usuario/plena-studio-frontend:latest
+docker tag plena-backend tu-usuario/plena-studio-backend:latest
+
+# 3. Subir a Docker Hub
+docker login
+docker push tu-usuario/plena-studio-frontend:latest
+docker push tu-usuario/plena-studio-backend:latest
+
+# 4. Compartir docker-compose.public.yml
+```
+
+### 📂 **Opción 2: GitHub + Docker**
+
+```bash
+# 1. Subir a repositorio público
+git add .
+git commit -m "Plena Studio con Docker"
+git push origin main
+
+# 2. Compartir URL del repositorio
+# 3. Usuario ejecuta: git clone [URL] && docker-compose up --build -d
+```
+
+### 📦 **Opción 3: ZIP Completo**
+
+```bash
+# 1. Crear archivo comprimido con:
+# - docker-compose.public.yml (renombrado a docker-compose.yml)
+# - Dockerfile.frontend, Backend/Dockerfile
+# - src/, public/, script/
+# - INSTRUCCIONES-EJECUCION.md
+
+# 2. Usuario extrae y ejecuta: docker-compose up --build -d
+```
+
+### 🌐 **Acceso Remoto (Opcional)**
+
+- Configurar Nginx para dominio y SSL
+- Usar servicios como Ngrok para túneles temporales
+
+### 📚 **Documentación de Compartición**
+
+| Archivo | Descripción | Usuario Objetivo |
+|---------|-------------|------------------|
+| [`GUIA-COMPARTIR-DOCKER.md`](GUIA-COMPARTIR-DOCKER.md) | Guía técnica completa | Desarrolladores |
+| [`INSTRUCCIONES-EJECUCION.md`](INSTRUCCIONES-EJECUCION.md) | Instrucciones simples | Usuarios finales |
+| [`RESUMEN-COMPARTIR-DOCKER.md`](RESUMEN-COMPARTIR-DOCKER.md) | Comparación de métodos | Todos |
+| [`docker-compose.public.yml`](docker-compose.public.yml) | Configuración pública | Distribución |
+| [`preparar-compartir.ps1`](preparar-compartir.ps1) | Script automatizado | Windows |
+
+### 🎯 **URLs de Acceso (Compartidas)**
+
+| Servicio | URL | Descripción |
+|----------|-----|-------------|
+| Frontend | http://localhost:3000 | Aplicación React |
+| Backend API | http://localhost:3001 | API Node.js |
+| Base de Datos | localhost:3308 | MySQL Server |
 
 ## 🛠️ Desarrollo Local
 
