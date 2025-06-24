@@ -76,17 +76,22 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
             onClick={() => navigate("/buscar")}
           />
           {/* Icono de carrito con badge */}
-          <div style={{ position: "relative", display: "inline-block" }}>
+          <div 
+            style={{ position: "relative", display: "inline-block", cursor: "pointer" }}
+            onClick={(e) => {
+              console.log("🛒 Cart container clicked - user authenticated:", isAuthenticated);
+              console.log("🛒 Total articles:", totalArticulos);
+              console.log("🛒 Event target:", e.target);
+              console.log("🛒 Navigating to /shopping-cart");
+              navigate("/shopping-cart");
+            }}
+          >
             <img
               className={styles.searchSharpIcon}
               loading="lazy"
               alt="Carrito"
               src="/cart.svg"
               style={{ cursor: "pointer" }}
-              onClick={() => {
-                console.log("🛒 Cart button clicked - navigating to /shopping-cart");
-                navigate("/shopping-cart");
-              }}
             />
             {totalArticulos > 0 && (
               <span className={styles.cartBadge}>{totalArticulos}</span>
@@ -141,15 +146,17 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
             </Link>
           )}
         </div>
-        <div
-          className={styles.botonRegistrate}
-          onClick={() => navigate("/register")}
-          style={{ cursor: "pointer" }}
-        >
-          <div className={styles.contenedorDeTexto}>
-            <b className={styles.inicioTexto}>Registrarse</b>
+        {!isAuthenticated && (
+          <div
+            className={styles.botonRegistrate}
+            onClick={() => navigate("/register")}
+            style={{ cursor: "pointer" }}
+          >
+            <div className={styles.contenedorDeTexto}>
+              <b className={styles.inicioTexto}>Registrarse</b>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Mobile Menu */}
@@ -221,7 +228,9 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
           <button 
             className={styles.mobileCartButton}
             onClick={() => {
-              console.log("🛒 Mobile cart button clicked - navigating to /shopping-cart");
+              console.log("🛒 Mobile cart button clicked - user authenticated:", isAuthenticated);
+              console.log("🛒 Mobile total articles:", totalArticulos);
+              console.log("🛒 Mobile navigating to /shopping-cart");
               navigate("/shopping-cart");
               setIsMenuOpen(false);
             }}

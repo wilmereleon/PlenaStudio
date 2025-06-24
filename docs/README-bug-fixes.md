@@ -24,11 +24,17 @@ Este directorio contiene la documentación detallada de todos los bugs identific
    - **Tiempo:** ~30 minutos
    - **Archivos:** Formulario de registro
 
-4. **[Cart Button Navigation](./bug-fix-cart-button-navigation.md)**
-   - **Estado:** ✅ VERIFICADO FUNCIONAL
-   - **Impacto:** Medio - Navegación del carrito (era percepción, no bug real)
-   - **Tiempo:** ~1 hora
-   - **Archivos:** Header component + debug logging
+4. **[Cart Button Navigation for Authenticated Users](./bug-fix-cart-button-authenticated-users.md)**
+   - **Estado:** ✅ RESUELTO
+   - **Impacto:** Medio - Navegación del carrito + UI cleanup para usuarios loggeados
+   - **Tiempo:** ~2 horas
+   - **Archivos:** Header component + debug logging + conditional UI rendering
+
+5. **[Cancel Button Navigation](./bug-fix-cancel-button-navigation.md)**
+   - **Estado:** ✅ RESUELTO
+   - **Impacto:** Medio - Botón cancelar en registro ahora navega a home
+   - **Tiempo:** ~45 minutos
+   - **Archivos:** RegisterForm component + useNavigate implementation
 
 ## Resumen de Impacto
 
@@ -170,6 +176,6 @@ console.log('❌ Error en registro:', error);
 ---
 
 **Última Actualización:** 2024-12-27  
-**Total Bugs Documentados:** 4  
+**Total Bugs Documentados:** 5  
 **Estado General:** ✅ ESTABLE  
 **Calidad de Código:** 📈 MEJORADA

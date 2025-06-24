@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './RegisterForm.css';
 
 interface FormData {
@@ -18,6 +19,8 @@ interface Errores {
 }
 
 const RegisterForm: React.FC = () => {
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState<FormData>({
     nombres: '',
     apellidos: '',
@@ -103,6 +106,11 @@ const RegisterForm: React.FC = () => {
       confirmar: ''
     });
     setErrores({});
+  };
+
+  const handleCancel = () => {
+    console.log("🔙 Cancel button clicked - navigating to home page");
+    navigate('/');
   };
 
   return (
@@ -271,7 +279,7 @@ const RegisterForm: React.FC = () => {
           <button
             type="button"
             className="cancelar"
-            onClick={limpiarFormulario}
+            onClick={handleCancel}
             style={{ background: "#8ABF69", borderRadius: 20, width: 136, height: 31 }}
             disabled={cargando}
           >
