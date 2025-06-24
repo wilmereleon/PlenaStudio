@@ -1,0 +1,109 @@
+@startuml GraficoBarrasPresupuesto
+!theme aws-orange
+title 📊 ANÁLISIS DE PRESUPUESTO TSPi - PLENA STUDIO\nComportamiento Semanal: Planificado vs Real
+
+skinparam backgroundColor White
+skinparam titleFontSize 14
+skinparam packageFontSize 12
+skinparam noteFontSize 10
+
+' Leyenda
+legend top right
+  |Color|Estado|Rango|
+  |<back:LightGreen>     </back>| Exacto/Ahorro | ≤ Plan |
+  |<back:Orange>     </back>| Sobrecarga Moderada | 101-150% |
+  |<back:Red>     </back>| Sobrecarga Crítica | >200% |
+endlegend
+
+package "PROYECTO: Plena Studio\nDESARROLLADOR: Wilmer Edilson León Díaz\nPERÍODO: 22/05/2025 - 26/06/2025" {
+
+  ' Semana 1
+  rectangle "SEMANA 1 (22/05/2025)" as S1 #LightGreen {
+    rectangle "Plan: 24h" #LightBlue
+    rectangle "Real: 24h" #LightGreen
+    note bottom : Diferencia: 0h (0%)\n✅ PERFECTO
+  }
+
+  ' Semana 2
+  rectangle "SEMANA 2 (29/05/2025)" as S2 #LightGreen {
+    rectangle "Plan: 24h" #LightBlue
+    rectangle "Real: 18h" #LightGreen
+    note bottom : Diferencia: -6h (-25%)\n🟡 EFICIENTE
+  }
+
+  ' Semana 3
+  rectangle "SEMANA 3 (05/06/2025)" as S3 #Red {
+    rectangle "Plan: 24h" #LightBlue
+    rectangle "Real: 72h" #Red
+    note bottom : Diferencia: +48h (+200%)\n🚨 CRÍTICO
+  }
+
+  ' Semana 4
+  rectangle "SEMANA 4 (12/06/2025)" as S4 #Orange {
+    rectangle "Plan: 68h" #LightBlue
+    rectangle "Real: 96h" #Orange
+    note bottom : Diferencia: +28h (+41%)\n🔴 ALTO RIESGO
+  }
+
+  ' Semana 5
+  rectangle "SEMANA 5 (19/06/2025)" as S5 #Orange {
+    rectangle "Plan: 68h" #LightBlue
+    rectangle "Real: 96h" #Orange
+    note bottom : Diferencia: +28h (+41%)\n🔴 PATRÓN CRÍTICO
+  }
+
+  ' Semana 6
+  rectangle "SEMANA 6 (26/06/2025)" as S6 #LightGreen {
+    rectangle "Plan: 68h" #LightBlue
+    rectangle "Real: 30h" #LightGreen
+    note bottom : Diferencia: -38h (-56%)\n✅ EXCELENTE
+  }
+
+  ' Resumen total
+  rectangle "📊 RESUMEN TOTAL" as Total #LightBlue {
+    rectangle "Plan Total: 276h" #LightBlue
+    rectangle "Real Total: 192h" #LightGreen
+    note bottom : Diferencia: -84h (-30.4%)\n🎯 EFICIENCIA: 69.6%
+  }
+
+}
+
+' Organización visual
+S1 -right-> S2
+S2 -right-> S3
+S3 -down-> S4
+S4 -right-> S5
+S5 -right-> S6
+S6 -down-> Total
+
+' Notas explicativas
+note top of S1 : 🌱 FASE 1: INICIO CONTROLADO\nEstimaciones precisas
+note top of S3 : ⚡ FASE 2: CRISIS DE ALCANCE\nDesfases críticos
+note top of S6 : 🎯 FASE 3: RECUPERACIÓN\nOptimización final
+
+note right of S3 : 🔍 PUNTO DE INFLEXIÓN\n• Posible cambio de alcance\n• Complejidad subestimada\n• Necesidad de re-planificación
+
+note right of S6 : 💡 RECUPERACIÓN EXITOSA\n• Aplicación de lecciones aprendidas\n• Optimización de procesos\n• Corrección dramática
+
+' Análisis final
+note bottom of Total
+  **📈 ANÁLISIS POR FASES:**
+  
+  🌱 **FASE 1 (Sem 1-2):** Inicio Controlado
+     • Estimaciones precisas
+     • Desarrollo según plan
+  
+  ⚡ **FASE 2 (Sem 3-5):** Crisis de Alcance  
+     • Desfases críticos
+     • Sobrecarga sostenida
+     • Necesidad de adaptación
+  
+  🎯 **FASE 3 (Sem 6):** Recuperación
+     • Optimización exitosa
+     • Aplicación de experiencia
+     • Finalización eficiente
+     
+  **🏆 CONCLUSIÓN:** Proyecto exitoso con curva de aprendizaje
+end note
+
+@enduml

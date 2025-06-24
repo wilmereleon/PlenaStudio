@@ -1,0 +1,139 @@
+@startuml TSPi-Budget-Analysis
+!theme aws-orange
+title Análisis de Comportamiento del Presupuesto TSPi\nWilmer Edilson León Díaz - Grupo 13
+skinparam defaultFontName Arial
+skinparam defaultFontSize 10
+skinparam backgroundColor White
+
+' Configuración del gráfico de barras
+!define PLANNED_COLOR #4CAF50
+!define ACTUAL_COLOR #2196F3
+!define DIFFERENCE_COLOR #FF5722
+!define CUMULATIVE_COLOR #9C27B0
+
+' Datos de la tabla
+!procedure $bar($week, $planned, $actual, $cumulative_planned, $cumulative_actual)
+rectangle "$week" as week$week {
+  rectangle "Planificado: $planned h" as planned$week PLANNED_COLOR
+  rectangle "Real: $actual h" as actual$week ACTUAL_COLOR
+  rectangle "Acum. Plan: $cumulative_planned h" as cum_plan$week
+  rectangle "Acum. Real: $cumulative_actual h" as cum_actual$week
+}
+!endprocedure
+
+' Análisis por semanas
+package "Análisis Semanal del Presupuesto" {
+  
+  ' Semana 1
+  rectangle "Semana 1\n22/05/2025" as week1 {
+    rectangle "Planificado: 24.0 h" as plan1 PLANNED_COLOR
+    rectangle "Real: 24.0 h" as real1 ACTUAL_COLOR
+    rectangle "Diferencia: 0.0 h" as diff1 #4CAF50
+    note right of diff1 : ✅ Presupuesto exacto
+  }
+  
+  ' Semana 2  
+  rectangle "Semana 2\n29/05/2025" as week2 {
+    rectangle "Planificado: 24.0 h" as plan2 PLANNED_COLOR
+    rectangle "Real: 18.0 h" as real2 ACTUAL_COLOR
+    rectangle "Diferencia: -6.0 h" as diff2 #FFC107
+    note right of diff2 : ⚠️ Ligera subestimación
+  }
+  
+  ' Semana 3
+  rectangle "Semana 3\n05/06/2025" as week3 {
+    rectangle "Planificado: 24.0 h" as plan3 PLANNED_COLOR
+    rectangle "Real: 72.0 h" as real3 DIFFERENCE_COLOR
+    rectangle "Diferencia: +48.0 h" as diff3 DIFFERENCE_COLOR
+    note right of diff3 : 🚨 CRÍTICO: 300% más tiempo
+  }
+  
+  ' Semana 4
+  rectangle "Semana 4\n12/06/2025" as week4 {
+    rectangle "Planificado: 68.0 h" as plan4 PLANNED_COLOR
+    rectangle "Real: 96.0 h" as real4 DIFFERENCE_COLOR
+    rectangle "Diferencia: +28.0 h" as diff4 DIFFERENCE_COLOR
+    note right of diff4 : 🚨 ALTO: 141% del planificado
+  }
+  
+  ' Semana 5
+  rectangle "Semana 5\n19/06/2025" as week5 {
+    rectangle "Planificado: 68.0 h" as plan5 PLANNED_COLOR
+    rectangle "Real: 96.0 h" as real5 DIFFERENCE_COLOR
+    rectangle "Diferencia: +28.0 h" as diff5 DIFFERENCE_COLOR
+    note right of diff5 : 🚨 ALTO: Patrón repetitivo
+  }
+  
+  ' Semana 6
+  rectangle "Semana 6\n26/06/2025" as week6 {
+    rectangle "Planificado: 68.0 h" as plan6 PLANNED_COLOR
+    rectangle "Real: 30.0 h" as real6 ACTUAL_COLOR
+    rectangle "Diferencia: -38.0 h" as diff6 #4CAF50
+    note right of diff6 : ✅ Mejora significativa
+  }
+}
+
+' Análisis acumulativo
+package "Análisis Acumulativo" {
+  rectangle "Totales del Proyecto" as totals {
+    rectangle "Total Planificado\n276.0 horas" as total_plan PLANNED_COLOR
+    rectangle "Total Real\n192.0 horas" as total_real ACTUAL_COLOR
+    rectangle "Diferencia Total\n-84.0 horas" as total_diff #4CAF50
+    rectangle "Eficiencia\n69.6%" as efficiency CUMULATIVE_COLOR
+  }
+}
+
+' Métricas clave
+package "Métricas y Tendencias" {
+  rectangle "Análisis de Variación" as metrics {
+    rectangle "Promedio Semanal Planificado\n46.0 horas" as avg_plan
+    rectangle "Promedio Semanal Real\n32.0 horas" as avg_real
+    rectangle "Desviación Estándar\n±31.2 horas" as std_dev
+    rectangle "Coeficiente de Variación\n97.5%" as cv
+  }
+  
+  rectangle "Fases Críticas" as critical {
+    rectangle "Semana 3: Desfase Presupuestario\n+300% tiempo estimado" as phase1 DIFFERENCE_COLOR
+    rectangle "Semanas 4-5: Sobrecarga Sostenida\n+141% tiempo estimado" as phase2 DIFFERENCE_COLOR
+    rectangle "Semana 6: Corrección y Optimización\n-56% tiempo estimado" as phase3 #4CAF50
+  }
+}
+
+' Recomendaciones
+package "Recomendaciones de Mejora" {
+  rectangle "Acciones Correctivas" as recommendations {
+    rectangle "1. Revisión de Estimaciones\nImplementar técnicas de estimación\nmás precisas" as rec1 #E1F5FE
+    rectangle "2. Control de Alcance\nDefinir claramente los entregables\nde cada sprint" as rec2 #E8F5E8
+    rectangle "3. Monitoreo Continuo\nRevisiones semanales del avance\nvs. presupuesto" as rec3 #FFF3E0
+    rectangle "4. Buffer de Contingencia\nIncluir 20-25% de tiempo adicional\npara imprevistos" as rec4 #FCE4EC
+  }
+}
+
+' Conexiones lógicas
+week1 --> week2 : "Progreso"
+week2 --> week3 : "Progreso"
+week3 --> week4 : "Escalación"
+week4 --> week5 : "Sostenimiento"
+week5 --> week6 : "Corrección"
+
+totals --> metrics : "Análisis"
+metrics --> critical : "Identificación"
+critical --> recommendations : "Mejoras"
+
+' Leyenda con colores
+legend right
+  **Código de Colores:**
+  <back:PLANNED_COLOR>   </back> Tiempo Planificado
+  <back:ACTUAL_COLOR>   </back> Tiempo Real Ejecutado
+  <back:DIFFERENCE_COLOR>   </back> Sobrecarga Crítica
+  <back:#4CAF50>   </back> Dentro del Presupuesto
+  <back:#FFC107>   </back> Alerta Moderada
+  
+  **Métricas Clave:**
+  • Eficiencia Total: 69.6%
+  • Ahorro Total: 84 horas
+  • Semana Crítica: Semana 3 (+300%)
+  • Mejor Semana: Semana 6 (-56%)
+endlegend
+
+@enduml

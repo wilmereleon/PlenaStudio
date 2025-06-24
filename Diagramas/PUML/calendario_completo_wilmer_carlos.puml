@@ -1,0 +1,121 @@
+@startgantt calendario_completo_detallado
+Project starts 2025-05-22
+
+' === SEMANAS 1-3: EQUIPO COMPLETO ===
+[S1-S3 PLAN+HLD+HLDINSP Equipo Completo] lasts 18 days
+
+' === SEMANA 4: HLDINSP + IT + DOC ===
+' Carlos (gagonzalezro) - Análisis y Revisión
+[Carlos HLDINSP Diagrama casos] lasts 1 days
+[Carlos HLDINSP Diagrama procesos] lasts 1 days
+[Carlos HLDINSP Actualizacion proceso] lasts 1 days
+[Carlos HLDINSP UML planning] lasts 1 days
+
+' Wilmer - Desarrollo y Documentación
+[Wilmer HLDINSP Revisar UML] lasts 1 days
+[Wilmer IT Pruebas formularios] lasts 1 days
+[Wilmer DOC Montaje documentacion] lasts 1 days
+[Wilmer DOC Comunicacion documento] lasts 1 days
+
+' === SEMANA 5: ITERACION 2 - PM + IT ===
+' Carlos - Análisis y Planificación
+[Carlos ITP Analisis carrito] lasts 1 days
+[Carlos ITP Diseño pruebas] lasts 1 days
+[Carlos ITP Validacion arquitectura] lasts 1 days
+
+' Wilmer - Implementación y Desarrollo
+[Wilmer PM Contexto carrito] lasts 1 days
+[Wilmer IT Pruebas unitarias] lasts 1 days
+[Wilmer IT Funcionalidad UI] lasts 2 days
+
+' === SEMANA 6: TESTING Y FINALIZACION ===
+' Carlos - Testing y Validación
+[Carlos IT Testing validacion] lasts 1 days
+[Carlos ST Pruebas NPM] lasts 1 days
+
+' Wilmer - Testing y Refactorización
+[Wilmer IT Testing funcionalidad] lasts 1 days
+[Wilmer ST Pruebas flujo NPM] lasts 1 days
+[Wilmer PM Refactorizacion] lasts 1 days
+
+' === SEMANA 7: CARLOS EXTENDIDA - PM + DOC ===
+[Carlos PM Documentacion tecnica] lasts 1 days
+[Carlos PM Optimizacion] lasts 1 days
+[Carlos PM Validacion final] lasts 1 days
+
+' === DEPENDENCIAS CARLOS ===
+[Carlos HLDINSP Diagrama casos] starts at [S1-S3 PLAN+HLD+HLDINSP Equipo Completo]'s end
+[Carlos HLDINSP Diagrama procesos] starts at [Carlos HLDINSP Diagrama casos]'s end
+[Carlos HLDINSP Actualizacion proceso] starts at [Carlos HLDINSP Diagrama procesos]'s end
+[Carlos HLDINSP UML planning] starts at [Carlos HLDINSP Actualizacion proceso]'s end
+[Carlos ITP Analisis carrito] starts at [Carlos HLDINSP UML planning]'s end
+[Carlos ITP Diseño pruebas] starts at [Carlos ITP Analisis carrito]'s end
+[Carlos ITP Validacion arquitectura] starts at [Carlos ITP Diseño pruebas]'s end
+[Carlos IT Testing validacion] starts at [Carlos ITP Validacion arquitectura]'s end
+[Carlos ST Pruebas NPM] starts at [Carlos IT Testing validacion]'s end
+[Carlos PM Documentacion tecnica] starts at [Carlos ST Pruebas NPM]'s end
+[Carlos PM Optimizacion] starts at [Carlos PM Documentacion tecnica]'s end
+[Carlos PM Validacion final] starts at [Carlos PM Optimizacion]'s end
+
+' === DEPENDENCIAS WILMER ===
+[Wilmer HLDINSP Revisar UML] starts at [S1-S3 PLAN+HLD+HLDINSP Equipo Completo]'s end
+[Wilmer IT Pruebas formularios] starts at [Wilmer HLDINSP Revisar UML]'s end
+[Wilmer DOC Montaje documentacion] starts at [Wilmer IT Pruebas formularios]'s end
+[Wilmer DOC Comunicacion documento] starts at [Wilmer DOC Montaje documentacion]'s end
+[Wilmer PM Contexto carrito] starts at [Wilmer DOC Comunicacion documento]'s end
+[Wilmer IT Pruebas unitarias] starts at [Wilmer PM Contexto carrito]'s end
+[Wilmer IT Funcionalidad UI] starts at [Wilmer IT Pruebas unitarias]'s end
+[Wilmer IT Testing funcionalidad] starts at [Wilmer IT Funcionalidad UI]'s end
+[Wilmer ST Pruebas flujo NPM] starts at [Wilmer IT Testing funcionalidad]'s end
+[Wilmer PM Refactorizacion] starts at [Wilmer ST Pruebas flujo NPM]'s end
+
+' === ACTAS DEL PROYECTO ===
+[Acta 1 Inicio del Proyecto] happens on 2025-05-22
+[Acta 2 Planificacion del Equipo] happens on 2025-05-29
+[Acta 3 Estrategia de Calidad] happens on 2025-06-12
+[Acta 4 Seguimiento de Iteraciones] happens on 2025-06-19
+[Acta 5 Retrospectiva del Proyecto] happens on 2025-06-24
+[Acta 6 Cierre del Proyecto] happens on 2025-06-24
+
+' === RELEASES DEL PROYECTO ===
+[Release 1 Diseño y Prototipos] happens on 2025-06-09
+[Release 2 Funcionalidad Principal] happens on 2025-06-23
+[Release Final Plena Studio] happens on 2025-06-24
+
+' === MILESTONES SEMANALES ===
+[Milestone Semana 1 Completada] happens on 2025-05-26
+[Milestone Semana 2 Completada] happens on 2025-06-02
+[Milestone Semana 3 Completada] happens on 2025-06-09
+[Milestone Semana 4 Completada] happens on 2025-06-16
+[Milestone Semana 5 Completada] happens on 2025-06-23
+[Milestone Semana 6 Completada] happens on 2025-06-24
+[Milestone Carlos Finalizado] happens at [Carlos PM Validacion final]'s end
+
+' === COLORES POR RESPONSABLE ===
+[S1-S3 PLAN+HLD+HLDINSP Equipo Completo] is colored in LightBlue
+
+[Carlos HLDINSP Diagrama casos] is colored in LightGreen
+[Carlos HLDINSP Diagrama procesos] is colored in LightGreen
+[Carlos HLDINSP Actualizacion proceso] is colored in LightGreen
+[Carlos HLDINSP UML planning] is colored in LightGreen
+[Carlos ITP Analisis carrito] is colored in LightGreen
+[Carlos ITP Diseño pruebas] is colored in LightGreen
+[Carlos ITP Validacion arquitectura] is colored in LightGreen
+[Carlos IT Testing validacion] is colored in LightGreen
+[Carlos ST Pruebas NPM] is colored in LightGreen
+[Carlos PM Documentacion tecnica] is colored in LightGreen
+[Carlos PM Optimizacion] is colored in LightGreen
+[Carlos PM Validacion final] is colored in LightGreen
+
+[Wilmer HLDINSP Revisar UML] is colored in Orange
+[Wilmer IT Pruebas formularios] is colored in Orange
+[Wilmer DOC Montaje documentacion] is colored in Orange
+[Wilmer DOC Comunicacion documento] is colored in Orange
+[Wilmer PM Contexto carrito] is colored in Orange
+[Wilmer IT Pruebas unitarias] is colored in Orange
+[Wilmer IT Funcionalidad UI] is colored in Orange
+[Wilmer IT Testing funcionalidad] is colored in Orange
+[Wilmer ST Pruebas flujo NPM] is colored in Orange
+[Wilmer PM Refactorizacion] is colored in Orange
+
+@endgantt

@@ -1,0 +1,99 @@
+@startuml DiagramaPresupuestoTSPi
+!theme aws-orange
+title Comportamiento del Presupuesto por Semanas - Proyecto Plena Studio
+skinparam defaultFontName Arial
+skinparam defaultFontSize 10
+skinparam backgroundColor White
+skinparam titleFontSize 14
+skinparam titleFontColor DarkBlue
+
+' Configuración de colores para las barras
+skinparam rectangle {
+    BackgroundColor<<Planificado>> LightBlue
+    BorderColor<<Planificado>> DarkBlue
+    BackgroundColor<<Real>> Orange
+    BorderColor<<Real>> DarkRed
+    BackgroundColor<<Positivo>> LightGreen
+    BorderColor<<Positivo>> DarkGreen
+    BackgroundColor<<Negativo>> LightCoral
+    BorderColor<<Negativo>> DarkRed
+}
+
+' Leyenda
+legend top right
+|Color|Significado|
+|<back:LightBlue>     </back>| Horas Planificadas |
+|<back:Orange>     </back>| Horas Reales |
+|<back:LightGreen>     </back>| Ahorro (bajo plan) |
+|<back:LightCoral>     </back>| Sobrecarga (sobre plan) |
+endlegend
+
+' Semana 1
+package "Semana 1 (22/05/2025)" as S1 {
+    rectangle "24h" as S1_Plan <<Planificado>>
+    rectangle "24h" as S1_Real <<Real>>
+    note bottom of S1 : Diferencia: 0h (0%)\n✅ PERFECTO
+}
+
+' Semana 2  
+package "Semana 2 (29/05/2025)" as S2 {
+    rectangle "24h" as S2_Plan <<Planificado>>
+    rectangle "18h" as S2_Real <<Positivo>>
+    note bottom of S2 : Diferencia: -6h (-25%)\n🟡 BUENO
+}
+
+' Semana 3
+package "Semana 3 (05/06/2025)" as S3 {
+    rectangle "24h" as S3_Plan <<Planificado>>
+    rectangle "72h" as S3_Real <<Negativo>>
+    note bottom of S3 : Diferencia: +48h (+200%)\n🔴 CRÍTICO
+}
+
+' Semana 4
+package "Semana 4 (12/06/2025)" as S4 {
+    rectangle "68h" as S4_Plan <<Planificado>>
+    rectangle "96h" as S4_Real <<Negativo>>
+    note bottom of S4 : Diferencia: +28h (+41%)\n🔴 ALTO RIESGO
+}
+
+' Semana 5
+package "Semana 5 (19/06/2025)" as S5 {
+    rectangle "68h" as S5_Plan <<Planificado>>
+    rectangle "96h" as S5_Real <<Negativo>>
+    note bottom of S5 : Diferencia: +28h (+41%)\n🔴 PATRÓN CRÍTICO
+}
+
+' Semana 6
+package "Semana 6 (26/06/2025)" as S6 {
+    rectangle "68h" as S6_Plan <<Planificado>>
+    rectangle "30h" as S6_Real <<Positivo>>
+    note bottom of S6 : Diferencia: -38h (-56%)\n✅ EXCELENTE
+}
+
+' Organización horizontal
+S1 -right-> S2
+S2 -right-> S3  
+S3 -down-> S4
+S4 -right-> S5
+S5 -right-> S6
+
+' Totales finales
+package "📊 RESUMEN TOTAL" as Total {
+    rectangle "276h" as Total_Plan <<Planificado>>
+    rectangle "192h" as Total_Real <<Positivo>>
+    note bottom of Total : Diferencia Total: -84h (-30.4%)\nEficiencia: 69.6% ✅
+}
+
+S6 -down-> Total
+
+' Fases del proyecto
+note top of S1 : 🌱 FASE 1: Inicio Controlado
+note top of S3 : ⚡ FASE 2: Crisis de Alcance  
+note top of S6 : 🎯 FASE 3: Recuperación
+
+' Observaciones clave
+note right of S3 : 🚨 PUNTO DE INFLEXIÓN\nPosible cambio de alcance\no complejidad inesperada
+
+note right of S6 : 💡 CORRECCIÓN DRAMÁTICA\nAplicación de lecciones\naprendidas
+
+@enduml
