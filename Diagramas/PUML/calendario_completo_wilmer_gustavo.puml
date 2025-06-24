@@ -5,11 +5,11 @@ Project starts 2025-05-22
 [S1-S3 PLAN+HLD+HLDINSP Equipo Completo] lasts 18 days
 
 ' === SEMANA 4: HLDINSP + IT + DOC ===
-' Carlos (gagonzalezro) - Análisis y Revisión
-[Carlos HLDINSP Diagrama casos] lasts 1 days
-[Carlos HLDINSP Diagrama procesos] lasts 1 days
-[Carlos HLDINSP Actualizacion proceso] lasts 1 days
-[Carlos HLDINSP UML planning] lasts 1 days
+' Gustavo Adolfo González (gagonzalezro) - Análisis y Revisión
+[Gustavo HLDINSP Diagrama casos] lasts 1 days
+[Gustavo HLDINSP Diagrama procesos] lasts 1 days
+[Gustavo HLDINSP Actualizacion proceso] lasts 1 days
+[Gustavo HLDINSP UML planning] lasts 1 days
 
 ' Wilmer - Desarrollo y Documentación
 [Wilmer HLDINSP Revisar UML] lasts 1 days
@@ -18,10 +18,10 @@ Project starts 2025-05-22
 [Wilmer DOC Comunicacion documento] lasts 1 days
 
 ' === SEMANA 5: ITERACION 2 - PM + IT ===
-' Carlos - Análisis y Planificación
-[Carlos ITP Analisis carrito] lasts 1 days
-[Carlos ITP Diseño pruebas] lasts 1 days
-[Carlos ITP Validacion arquitectura] lasts 1 days
+' Gustavo - Análisis y Planificación
+[Gustavo ITP Analisis carrito] lasts 1 days
+[Gustavo ITP Diseño pruebas] lasts 1 days
+[Gustavo ITP Validacion arquitectura] lasts 1 days
 
 ' Wilmer - Implementación y Desarrollo
 [Wilmer PM Contexto carrito] lasts 1 days
@@ -29,33 +29,33 @@ Project starts 2025-05-22
 [Wilmer IT Funcionalidad UI] lasts 2 days
 
 ' === SEMANA 6: TESTING Y FINALIZACION ===
-' Carlos - Testing y Validación
-[Carlos IT Testing validacion] lasts 1 days
-[Carlos ST Pruebas NPM] lasts 1 days
+' Gustavo - Testing y Validación
+[Gustavo IT Testing validacion] lasts 1 days
+[Gustavo ST Pruebas NPM] lasts 1 days
 
 ' Wilmer - Testing y Refactorización
 [Wilmer IT Testing funcionalidad] lasts 1 days
 [Wilmer ST Pruebas flujo NPM] lasts 1 days
 [Wilmer PM Refactorizacion] lasts 1 days
 
-' === SEMANA 7: CARLOS EXTENDIDA - PM + DOC ===
-[Carlos PM Documentacion tecnica] lasts 1 days
-[Carlos PM Optimizacion] lasts 1 days
-[Carlos PM Validacion final] lasts 1 days
+' === SEMANA 7: GUSTAVO EXTENDIDA - PM + DOC ===
+[Gustavo PM Documentacion tecnica] lasts 1 days
+[Gustavo PM Optimizacion] lasts 1 days
+[Gustavo PM Validacion final] lasts 1 days
 
-' === DEPENDENCIAS CARLOS ===
-[Carlos HLDINSP Diagrama casos] starts at [S1-S3 PLAN+HLD+HLDINSP Equipo Completo]'s end
-[Carlos HLDINSP Diagrama procesos] starts at [Carlos HLDINSP Diagrama casos]'s end
-[Carlos HLDINSP Actualizacion proceso] starts at [Carlos HLDINSP Diagrama procesos]'s end
-[Carlos HLDINSP UML planning] starts at [Carlos HLDINSP Actualizacion proceso]'s end
-[Carlos ITP Analisis carrito] starts at [Carlos HLDINSP UML planning]'s end
-[Carlos ITP Diseño pruebas] starts at [Carlos ITP Analisis carrito]'s end
-[Carlos ITP Validacion arquitectura] starts at [Carlos ITP Diseño pruebas]'s end
-[Carlos IT Testing validacion] starts at [Carlos ITP Validacion arquitectura]'s end
-[Carlos ST Pruebas NPM] starts at [Carlos IT Testing validacion]'s end
-[Carlos PM Documentacion tecnica] starts at [Carlos ST Pruebas NPM]'s end
-[Carlos PM Optimizacion] starts at [Carlos PM Documentacion tecnica]'s end
-[Carlos PM Validacion final] starts at [Carlos PM Optimizacion]'s end
+' === DEPENDENCIAS GUSTAVO ===
+[Gustavo HLDINSP Diagrama casos] starts at [S1-S3 PLAN+HLD+HLDINSP Equipo Completo]'s end
+[Gustavo HLDINSP Diagrama procesos] starts at [Gustavo HLDINSP Diagrama casos]'s end
+[Gustavo HLDINSP Actualizacion proceso] starts at [Gustavo HLDINSP Diagrama procesos]'s end
+[Gustavo HLDINSP UML planning] starts at [Gustavo HLDINSP Actualizacion proceso]'s end
+[Gustavo ITP Analisis carrito] starts at [Gustavo HLDINSP UML planning]'s end
+[Gustavo ITP Diseño pruebas] starts at [Gustavo ITP Analisis carrito]'s end
+[Gustavo ITP Validacion arquitectura] starts at [Gustavo ITP Diseño pruebas]'s end
+[Gustavo IT Testing validacion] starts at [Gustavo ITP Validacion arquitectura]'s end
+[Gustavo ST Pruebas NPM] starts at [Gustavo IT Testing validacion]'s end
+[Gustavo PM Documentacion tecnica] starts at [Gustavo ST Pruebas NPM]'s end
+[Gustavo PM Optimizacion] starts at [Gustavo PM Documentacion tecnica]'s end
+[Gustavo PM Validacion final] starts at [Gustavo PM Optimizacion]'s end
 
 ' === DEPENDENCIAS WILMER ===
 [Wilmer HLDINSP Revisar UML] starts at [S1-S3 PLAN+HLD+HLDINSP Equipo Completo]'s end
@@ -89,23 +89,23 @@ Project starts 2025-05-22
 [Milestone Semana 4 Completada] happens on 2025-06-16
 [Milestone Semana 5 Completada] happens on 2025-06-23
 [Milestone Semana 6 Completada] happens on 2025-06-24
-[Milestone Carlos Finalizado] happens at [Carlos PM Validacion final]'s end
+[Milestone Gustavo Finalizado] happens at [Gustavo PM Validacion final]'s end
 
 ' === COLORES POR RESPONSABLE ===
 [S1-S3 PLAN+HLD+HLDINSP Equipo Completo] is colored in LightBlue
 
-[Carlos HLDINSP Diagrama casos] is colored in LightGreen
-[Carlos HLDINSP Diagrama procesos] is colored in LightGreen
-[Carlos HLDINSP Actualizacion proceso] is colored in LightGreen
-[Carlos HLDINSP UML planning] is colored in LightGreen
-[Carlos ITP Analisis carrito] is colored in LightGreen
-[Carlos ITP Diseño pruebas] is colored in LightGreen
-[Carlos ITP Validacion arquitectura] is colored in LightGreen
-[Carlos IT Testing validacion] is colored in LightGreen
-[Carlos ST Pruebas NPM] is colored in LightGreen
-[Carlos PM Documentacion tecnica] is colored in LightGreen
-[Carlos PM Optimizacion] is colored in LightGreen
-[Carlos PM Validacion final] is colored in LightGreen
+[Gustavo HLDINSP Diagrama casos] is colored in LightGreen
+[Gustavo HLDINSP Diagrama procesos] is colored in LightGreen
+[Gustavo HLDINSP Actualizacion proceso] is colored in LightGreen
+[Gustavo HLDINSP UML planning] is colored in LightGreen
+[Gustavo ITP Analisis carrito] is colored in LightGreen
+[Gustavo ITP Diseño pruebas] is colored in LightGreen
+[Gustavo ITP Validacion arquitectura] is colored in LightGreen
+[Gustavo IT Testing validacion] is colored in LightGreen
+[Gustavo ST Pruebas NPM] is colored in LightGreen
+[Gustavo PM Documentacion tecnica] is colored in LightGreen
+[Gustavo PM Optimizacion] is colored in LightGreen
+[Gustavo PM Validacion final] is colored in LightGreen
 
 [Wilmer HLDINSP Revisar UML] is colored in Orange
 [Wilmer IT Pruebas formularios] is colored in Orange

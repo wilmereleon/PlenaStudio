@@ -1,10 +1,10 @@
-# 📊 CRONOLOGÍA COMPLETA TSPi - PLENA STUDIO CON WILMER Y CARLOS
+# 📊 CRONOLOGÍA COMPLETA TSPi - PLENA STUDIO CON WILMER Y GUSTAVO
 
 ## 🎯 RESUMEN EJECUTIVO
 
 **Proyecto:** Plena Studio - Desarrollo completo  
-**Responsables:** Wilmer León (Lead Developer) + Carlos González (Quality Analyst)  
-**Período:** 22 mayo - 24 junio + extensión semana 7 (Carlos)  
+**Responsables:** Wilmer León (Lead Developer) + Gustavo Adolfo González (Quality Analyst)  
+**Período:** 22 mayo - 24 junio + extensión semana 7 (Gustavo)  
 **Total Tareas:** 22 tareas específicas + 6 actas + 3 releases + 7 milestones
 
 ---
@@ -16,7 +16,7 @@
 **Tareas:** 10 tareas específicas en semanas 4-6  
 **Fases:** HLDINSP, IT, DOC, PM, ST
 
-### 🟢 **CARLOS GONZÁLEZ (gagonzalezro)**
+### 🟢 **GUSTAVO ADOLFO GONZÁLEZ (gagonzalezro)**
 **Rol:** Analista de calidad y testing  
 **Tareas:** 12 tareas específicas en semanas 4-7  
 **Fases:** HLDINSP, ITP, IT, ST, PM, DOC
@@ -27,7 +27,7 @@
 
 ### 🔵 **SEMANAS 1-3: EQUIPO COMPLETO** (22 mayo - 9 junio)
 **Duración:** 18 días  
-**Responsables:** Wilmer, Juan, Carlos, Gustavo  
+**Responsables:** Wilmer, Juan, Gustavo, Carlos  
 **Fases:** PLAN + HLD + HLDINSP (inicial)  
 **Entregables:**
 - ✅ Reconocimiento de datos y especificaciones
@@ -39,7 +39,7 @@
 
 ### 🟡 **SEMANA 4: HLDINSP + IT + DOC** (12-16 junio)
 
-#### 🟢 **TAREAS DE CARLOS (Análisis y Revisión)**
+#### 🟢 **TAREAS DE GUSTAVO (Análisis y Revisión)**
 | Tarea | Fase | Duración | Descripción |
 |-------|------|----------|-------------|
 | **Diagrama casos** | HLDINSP | 1 día | Reacondicionamiento de diagramas de casos de uso |
@@ -63,7 +63,7 @@
 
 ### 🟢 **SEMANA 5: ITERACIÓN 2 - PM + IT** (19-23 junio)
 
-#### 🟢 **TAREAS DE CARLOS (Análisis y Planificación)**
+#### 🟢 **TAREAS DE GUSTAVO (Análisis y Planificación)**
 | Tarea | Fase | Duración | Descripción |
 |-------|------|----------|-------------|
 | **Análisis carrito** | ITP | 1 día | Análisis del contexto del carrito de compras |
@@ -86,7 +86,7 @@
 
 ### 🔴 **SEMANA 6: TESTING Y FINALIZACIÓN** (24 junio)
 
-#### 🟢 **TAREAS DE CARLOS (Testing y Validación)**
+#### 🟢 **TAREAS DE GUSTAVO (Testing y Validación)**
 | Tarea | Fase | Duración | Descripción |
 |-------|------|----------|-------------|
 | **Testing validación** | IT | 1 día | Validación de funcionalidades implementadas |
@@ -107,9 +107,9 @@
 
 ---
 
-### 🟣 **SEMANA 7: CARLOS EXTENDIDA - PM + DOC** (Post 24 junio)
+### 🟣 **SEMANA 7: GUSTAVO EXTENDIDA - PM + DOC** (Post 24 junio)
 
-#### 🟢 **TAREAS ADICIONALES DE CARLOS**
+#### 🟢 **TAREAS ADICIONALES DE GUSTAVO**
 | Tarea | Fase | Duración | Descripción |
 |-------|------|----------|-------------|
 | **Documentación técnica** | PM | 1 día | Creación de documentación técnica final |
@@ -117,7 +117,7 @@
 | **Validación final** | PM | 1 día | Validación final completa del proyecto |
 
 **📋 Entregables Semana 7:**
-- ✅ **Milestone: Carlos Finalizado**
+- ✅ **Milestone: Gustavo Finalizado**
 
 ---
 
@@ -127,19 +127,19 @@
 | Desarrollador | Tareas | Días | Semanas | Fases Cubiertas |
 |---------------|--------|------|---------|-----------------|
 | **Wilmer** | 10 | 11 días | 4-6 | HLDINSP, IT, DOC, PM, ST |
-| **Carlos** | 12 | 12 días | 4-7 | HLDINSP, ITP, IT, ST, PM, DOC |
+| **Gustavo** | 12 | 12 días | 4-7 | HLDINSP, ITP, IT, ST, PM, DOC |
 | **Equipo Completo** | - | 18 días | 1-3 | PLAN, HLD, HLDINSP |
 
 ### 📈 **DISTRIBUCIÓN POR FASE TSP**
 ```
 PLAN     ████████████████████ (Semanas 1-3 - Equipo)
 HLD      ████████████████████ (Semanas 1-3 - Equipo)  
-HLDINSP  ██████████ (Semana 3 - Equipo + Semana 4 - Carlos/Wilmer)
-ITP      ████ (Semana 5 - Carlos)
-IT       ████████ (Semanas 4-6 - Wilmer/Carlos)
-ST       ████ (Semana 6 - Wilmer/Carlos)
-PM       ████████ (Semanas 5-7 - Wilmer/Carlos)
-DOC      ████ (Semanas 4,7 - Wilmer/Carlos)
+HLDINSP  ██████████ (Semana 3 - Equipo + Semana 4 - Gustavo/Wilmer)
+ITP      ████ (Semana 5 - Gustavo)
+IT       ████████ (Semanas 4-6 - Wilmer/Gustavo)
+ST       ████ (Semana 6 - Wilmer/Gustavo)
+PM       ████████ (Semanas 5-7 - Wilmer/Gustavo)
+DOC      ████ (Semanas 4,7 - Wilmer/Gustavo)
 ```
 
 ### 🏆 **EVENTOS IMPORTANTES**
@@ -154,31 +154,31 @@ DOC      ████ (Semanas 4,7 - Wilmer/Carlos)
 ## 🔄 **TRABAJO EN PARALELO Y COORDINACIÓN**
 
 ### 🤝 **SEMANA 4:** 
-- **Carlos:** Enfoque en análisis y revisión de diagramas
+- **Gustavo:** Enfoque en análisis y revisión de diagramas
 - **Wilmer:** Enfoque en desarrollo y documentación
 - **Coordinación:** Trabajo complementario sin dependencias críticas
 
 ### ⚡ **SEMANA 5:**
-- **Carlos:** Planificación de testing y validación
+- **Gustavo:** Planificación de testing y validación
 - **Wilmer:** Implementación y desarrollo de funcionalidades
-- **Coordinación:** Carlos prepara pruebas para lo que Wilmer desarrolla
+- **Coordinación:** Gustavo prepara pruebas para lo que Wilmer desarrolla
 
 ### 🎯 **SEMANA 6:**
-- **Carlos:** Testing y validación de calidad
+- **Gustavo:** Testing y validación de calidad
 - **Wilmer:** Testing técnico y refactorización
 - **Coordinación:** Validación conjunta del sistema
 
 ### 🔚 **SEMANA 7:**
-- **Carlos:** Documentación final y optimización (solo)
+- **Gustavo:** Documentación final y optimización (solo)
 - **Wilmer:** Proyecto finalizado
-- **Coordinación:** Carlos cierra aspectos de calidad y documentación
+- **Coordinación:** Gustavo cierra aspectos de calidad y documentación
 
 ---
 
 ## 🚀 **RESULTADOS Y CONCLUSIONES**
 
 ### ✅ **OBJETIVOS CUMPLIDOS**
-1. **Cronología completa** con participación de Wilmer y Carlos
+1. **Cronología completa** con participación de Wilmer y Gustavo
 2. **Distribución equilibrada** de tareas por competencias
 3. **Paralelismo eficiente** entre desarrolladores
 4. **Seguimiento completo** con actas, releases y milestones
@@ -188,12 +188,12 @@ DOC      ████ (Semanas 4,7 - Wilmer/Carlos)
 - **Tiempo total:** 6 semanas + 1 semana extensión
 - **Recursos:** 2 desarrolladores especializados + equipo inicial
 - **Cobertura:** 8 fases TSP completamente cubiertas
-- **Calidad:** Double-checking entre Wilmer y Carlos
+- **Calidad:** Double-checking entre Wilmer y Gustavo
 
 ### 🎯 **FORTALEZAS DEL MODELO**
 1. **Especialización:** Cada desarrollador enfocado en sus fortalezas
 2. **Redundancia:** Testing cruzado para asegurar calidad
-3. **Flexibilidad:** Extensión de Carlos para tareas adicionales
+3. **Flexibilidad:** Extensión de Gustavo para tareas adicionales
 4. **Trazabilidad:** Documentación completa del proceso
 
 **El modelo TSPi implementado demuestra una gestión eficiente de recursos y una distribución óptima de responsabilidades, asegurando tanto la calidad técnica como la documentación completa del proyecto Plena Studio.**

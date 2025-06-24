@@ -9,7 +9,7 @@
 - ✅ **Análisis de productividad** y métricas de calidad
 
 ### 📅 **2. CRONOLOGÍA Y CALENDARIO**
-- ✅ **Calendario Gantt único** con participación Wilmer + Carlos
+- ✅ **Calendario Gantt único** con participación Wilmer + Gustavo
 - ✅ **7 semanas detalladas** (22 mayo - post 24 junio)
 - ✅ **Dependencias cronológicas** correctas entre tareas
 - ✅ **Colores diferenciados** por responsable
@@ -34,16 +34,16 @@ c:\xampp\htdocs\PlenaStudio\Diagramas\PUML\INTEGRACION-COMPLETA-TSPI-GITHUB.md
 - 📅 Cronología TSPi integrada (semanas 1-7)
 - 🎯 Mapeo TSPi ↔ GitHub por fases
 - 📋 Métricas de productividad y calidad
-- 🤝 Análisis coordinación Wilmer ↔ Carlos
+- 🤝 Análisis coordinación Wilmer ↔ Gustavo
 - ✅ Conclusiones y recomendaciones
 
 ### 🗓️ **CALENDARIO GANTT**
 ```
-c:\xampp\htdocs\PlenaStudio\Diagramas\PUML\calendario_completo_wilmer_carlos.puml
+c:\xampp\htdocs\PlenaStudio\Diagramas\PUML\calendario_completo_wilmer_gustavo.puml
 ```
 **Contenido:**
 - 📅 Cronología completa 7 semanas
-- 👥 Tareas específicas Wilmer + Carlos
+- 👥 Tareas específicas Wilmer + Gustavo
 - 🔗 Dependencias entre tareas
 - 🎨 Colores por responsable
 - 📋 Actas, releases y milestones
@@ -79,18 +79,18 @@ c:\xampp\htdocs\PlenaStudio\Diagramas\PUML\Diagramas\PNG\calendario_completo_det
 
 ---
 
-## 🎯 **COORDINACIÓN WILMER ↔ CARLOS**
+## 🎯 **COORDINACIÓN WILMER ↔ GUSTAVO**
 
 ### 📅 **CRONOLOGÍA COORDINADA**
 - **Semanas 1-3:** Equipo completo (Diseño + Planificación)
-- **Semana 4:** Carlos (Análisis) + Wilmer (Desarrollo)
-- **Semana 5:** Carlos (Testing) + Wilmer (Implementación)
+- **Semana 4:** Gustavo (Análisis) + Wilmer (Desarrollo)
+- **Semana 5:** Gustavo (Testing) + Wilmer (Implementación)
 - **Semana 6:** Ambos (Testing y Validación)
-- **Semana 7:** Carlos (Documentación) + Wilmer (Pendientes)
+- **Semana 7:** Gustavo (Documentación) + Wilmer (Pendientes)
 
 ### 🔗 **DEPENDENCIAS CRÍTICAS**
-1. **Carlos → Wilmer:** Validaciones técnicas para desarrollo
-2. **Wilmer → Carlos:** Entregables funcionales para testing
+1. **Gustavo → Wilmer:** Validaciones técnicas para desarrollo
+2. **Wilmer → Gustavo:** Entregables funcionales para testing
 3. **Ambos → Proyecto:** Documentación técnica conjunta
 
 ---
@@ -124,7 +124,7 @@ c:\xampp\htdocs\PlenaStudio\Diagramas\PUML\Diagramas\PNG\calendario_completo_det
 - ✅ **100% de issues sin reabrir** (calidad de entrega)
 - ✅ **87.1% de finalización** (alta productividad)
 - ✅ **100% de milestones entregados** (cumplimiento cronológico)
-- ✅ **Coordinación efectiva** Wilmer ↔ Carlos
+- ✅ **Coordinación efectiva** Wilmer ↔ Gustavo
 
 ### 📈 **ÁREAS DE MEJORA**
 - 🔄 **Gestión de dependencias**: Base de datos como bloqueador
@@ -161,7 +161,7 @@ c:\xampp\htdocs\PlenaStudio\Diagramas\PUML\Diagramas\PNG\calendario_completo_det
 
 ### 🎖️ **EQUIPO DE DESARROLLO**
 - **👨‍💻 Lead Developer:** Wilmer Edilson León Díaz (@wilmereleon)
-- **🔍 Quality Analyst:** Carlos González (@gagonzalezro)
+- **🔍 Quality Analyst:** Gustavo Adolfo González (@gagonzalezro)
 - **📊 Proyecto:** Plena Studio - E-commerce de joyas y accesorios
 - **🔗 Repository:** [GitHub - PlenaStudio](https://github.com/wilmereleon/PlenaStudio)
 
