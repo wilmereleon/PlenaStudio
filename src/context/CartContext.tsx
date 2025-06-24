@@ -52,21 +52,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       });
       
       setIsAuthenticated(newAuthState);
-      
-      if (newAuthState && !wasAuthenticated) {
+        if (newAuthState && !wasAuthenticated) {
         // LOGIN: Usuario se autentica
         console.log("🟢 LOGIN detectado - sincronizando carrito");
-        syncCartOnLogin();
-      } else if (!newAuthState && wasAuthenticated) {
+        syncCartOnLogin();      } else if (!newAuthState && wasAuthenticated) {
         // LOGOUT: Usuario se desautentica
-        console.log("🔴 Usuario hizo logout - limpiando carrito");
-        setCartItems([]); // Limpiar carrito inmediatamente
+        console.log("🔴 Usuario hizo logout - procesando carrito");
         setDiscount(0);   // Limpiar descuentos
         
-        // Cargar carrito local si existe (para sesión no autenticada)
-        setTimeout(() => {
-          loadCartFromLocalStorage();
-        }, 100);
+        // IMPORTANTE: El carrito ya fue guardado en BD por authService.logout()
+        // Ahora cargar carrito local inmediatamente (sin timeout para evitar parpadeo)
+        console.log("🔄 Cargando carrito desde localStorage después del logout");
+        loadCartFromLocalStorage();
       }
     };
     
@@ -119,22 +116,31 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       // Fallback a carrito local en caso de error
       loadCartFromLocalStorage();
     }
-  };
-  /**
+  };  /**
    * Sincroniza cambios con el servidor si el usuario está autenticado
    */
   const syncWithServer = async (newCartItems: CartItem[]) => {
     if (isAuthenticated) {
       console.log('🔄 CartContext.syncWithServer - Usuario autenticado, sincronizando:', newCartItems.length, 'productos');
+      console.log('📦 CartContext.syncWithServer - Productos a sincronizar:', newCartItems.map(item => `${item.nombre} x${item.cantidad}`));
+      
       try {
         await cartService.saveCart(newCartItems);
-        console.log('✅ CartContext.syncWithServer - Sincronización exitosa');
+        console.log('✅ CartContext.syncWithServer - Carrito guardado en BD exitosamente');
       } catch (error) {
         console.error('❌ CartContext.syncWithServer - Error al sincronizar carrito con servidor:', error);
         // En caso de error, mantener el carrito local pero mostrar advertencia
+        console.log('🔄 Fallback: manteniendo carrito local hasta próxima sincronización');
+        
+        // Guardar en localStorage como fallback
+        localStorage.setItem('plena_cart', JSON.stringify(newCartItems));
+        console.log('💾 Carrito guardado en localStorage como fallback');
       }
     } else {
-      console.log('⚠️ CartContext.syncWithServer - Usuario no autenticado, saltando sincronización');
+      console.log('⚠️ CartContext.syncWithServer - Usuario no autenticado, guardando solo en localStorage');
+      // Para usuarios no autenticados, guardar en localStorage
+      localStorage.setItem('plena_cart', JSON.stringify(newCartItems));
+      console.log('💾 Carrito guardado en localStorage para usuario no autenticado');
     }
   };
   /**
@@ -169,18 +175,22 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       console.log("🔄 Manteniendo carrito local por error en sincronización");
     }
   };
-
   // Añadir producto al carrito
   const addItem = async (producto: Producto, cantidad: number = 1) => {
     if (isAuthenticated) {
       try {
+        console.log('🛒 Usuario autenticado - agregando producto al servidor:', producto.nombre);
         const updatedCart = await cartService.addToCart(producto.productId, cantidad);
-        setCartItems(updatedCart);      } catch (error) {
-        console.error('Error al agregar producto:', error);
+        setCartItems(updatedCart);
+        console.log('✅ Producto agregado al carrito del servidor exitosamente');
+      } catch (error) {
+        console.error('❌ Error al agregar producto al servidor:', error);
         // Fallback a comportamiento local
+        console.log('🔄 Fallback: agregando producto localmente');
         await addItemLocal(producto, cantidad);
       }
     } else {
+      console.log('👤 Usuario no autenticado - agregando producto localmente:', producto.nombre);
       await addItemLocal(producto, cantidad);
     }
   };

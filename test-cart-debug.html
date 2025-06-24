@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico del Carrito - Login/Logout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .warning { background: #fff3cd; color: #856404; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #218838; }
+        .logout-btn { background: #dc3545; }
+        .logout-btn:hover { background: #c82333; }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔍 Diagnóstico del Problema del Carrito</h2>
+        <p><strong>Problema:</strong> El ícono y enlace del carrito desaparecen después del login</p>
+        
+        <div id="status"></div>
+        
+        <div>
+            <button onclick="agregarProductoPrueba()">🛒 Agregar Producto de Prueba</button>
+            <button onclick="loginPrueba()">🔑 Login Prueba (demo@plenastudio.com)</button>
+            <button onclick="logoutPrueba()" class="logout-btn">🚪 Logout</button>
+            <button onclick="verificarEstado()">🔍 Verificar Estado</button>
+            <button onclick="clearAll()">🗑️ Limpiar Todo</button>
+        </div>
+        
+        <div id="debug-info"></div>
+    </div>
+
+    <script>
+        let debugInfo = '';
+        
+        function log(message, type = 'info') {
+            console.log(message);
+            debugInfo += `[${new Date().toLocaleTimeString()}] ${message}\n`;
+            updateDebugDisplay();
+            
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="${type}">${message}</div>`;
+        }
+        
+        function updateDebugDisplay() {
+            document.getElementById('debug-info').innerHTML = `<h3>📋 Log de Diagnóstico:</h3><pre>${debugInfo}</pre>`;
+        }
+        
+        function getCartFromLocalStorage() {
+            try {
+                const cart = localStorage.getItem('plena_cart');
+                return cart ? JSON.parse(cart) : [];
+            } catch (error) {
+                log(`❌ Error al leer carrito local: ${error.message}`, 'error');
+                return [];
+            }
+        }
+        
+        function getCurrentUser() {
+            try {
+                const user = localStorage.getItem('plena_current_user');
+                return user ? JSON.parse(user) : null;
+            } catch (error) {
+                log(`❌ Error al leer usuario actual: ${error.message}`, 'error');
+                return null;
+            }
+        }
+        
+        function agregarProductoPrueba() {
+            const productoTest = {
+                productId: 'test-001',
+                nombre: 'Aretes de Prueba',
+                precio: 35000,
+                descripcion: 'Producto de prueba para diagnóstico',
+                imagen: 'aretes-1.jpg',
+                categoria: 'aretes',
+                cantidad: 1
+            };
+            
+            const cart = getCartFromLocalStorage();
+            const exists = cart.find(item => item.productId === productoTest.productId);
+            
+            if (exists) {
+                exists.cantidad += 1;
+                log(`➕ Incrementada cantidad de producto existente: ${exists.cantidad}`, 'success');
+            } else {
+                cart.push(productoTest);
+                log(`🆕 Nuevo producto agregado al carrito`, 'success');
+            }
+            
+            localStorage.setItem('plena_cart', JSON.stringify(cart));
+            verificarEstado();
+        }
+        
+        async function loginPrueba() {
+            try {
+                log('🔑 Iniciando login de prueba...', 'info');
+                
+                // Simular el login como lo hace el frontend real
+                const credentials = {
+                    email: 'demo@plenastudio.com',
+                    password: 'password'
+                };
+                
+                // Verificar estado ANTES del login
+                const cartAntes = getCartFromLocalStorage();
+                log(`📦 Carrito ANTES del login: ${cartAntes.length} productos`, 'info');
+                
+                // Simular el llamado al backend o login local
+                const usuarios = JSON.parse(localStorage.getItem('plena_users') || '[]');
+                const usuario = usuarios.find(u => u.email === credentials.email);
+                
+                if (!usuario) {
+                    throw new Error('Usuario no encontrado');
+                }
+                
+                // Verificar password (simulado)
+                const userData = {
+                    id: usuario.id,
+                    nombre: usuario.nombre,
+                    apellido: usuario.apellido,
+                    email: usuario.email,
+                    edad: usuario.edad,
+                    tipoIdentificacion: usuario.tipoIdentificacion,
+                    numeroIdentificacion: usuario.numeroIdentificacion,
+                    fechaRegistro: usuario.fechaRegistro
+                };
+                
+                // Guardar usuario actual
+                localStorage.setItem('plena_current_user', JSON.stringify(userData));
+                
+                // Disparar evento de cambio de autenticación
+                window.dispatchEvent(new CustomEvent('authStateChanged', { 
+                    detail: { user: userData } 
+                }));
+                
+                log(`✅ Login exitoso para: ${userData.nombre}`, 'success');
+                
+                // Verificar estado DESPUÉS del login
+                setTimeout(() => {
+                    const cartDespues = getCartFromLocalStorage();
+                    log(`📦 Carrito DESPUÉS del login: ${cartDespues.length} productos`, 'info');
+                    verificarEstado();
+                }, 100);
+                
+            } catch (error) {
+                log(`❌ Error en login: ${error.message}`, 'error');
+            }
+        }
+        
+        function logoutPrueba() {
+            try {
+                log('🚪 Iniciando logout...', 'info');
+                
+                // Verificar estado ANTES del logout
+                const cartAntes = getCartFromLocalStorage();
+                log(`📦 Carrito ANTES del logout: ${cartAntes.length} productos`, 'info');
+                
+                // Limpiar usuario actual
+                localStorage.removeItem('plena_current_user');
+                localStorage.removeItem('plena_session');
+                
+                // Disparar evento de cambio de autenticación
+                window.dispatchEvent(new CustomEvent('authStateChanged', { 
+                    detail: { user: null } 
+                }));
+                
+                log(`✅ Logout completado`, 'success');
+                
+                // Verificar estado DESPUÉS del logout
+                setTimeout(() => {
+                    const cartDespues = getCartFromLocalStorage();
+                    log(`📦 Carrito DESPUÉS del logout: ${cartDespues.length} productos`, 'info');
+                    verificarEstado();
+                }, 100);
+                
+            } catch (error) {
+                log(`❌ Error en logout: ${error.message}`, 'error');
+            }
+        }
+        
+        function verificarEstado() {
+            const cart = getCartFromLocalStorage();
+            const user = getCurrentUser();
+            const session = localStorage.getItem('plena_session');
+            
+            log('🔍 ESTADO ACTUAL:', 'info');
+            log(`  👤 Usuario: ${user ? user.nombre + ' (' + user.email + ')' : 'No autenticado'}`, 'info');
+            log(`  🛒 Carrito: ${cart.length} productos`, 'info');
+            log(`  🎫 Sesión: ${session ? 'Activa' : 'No activa'}`, 'info');
+            
+            if (cart.length > 0) {
+                cart.forEach((item, index) => {
+                    log(`    ${index + 1}. ${item.nombre} x${item.cantidad}`, 'info');
+                });
+            }
+            
+            // Verificar localStorage completo
+            log('💾 localStorage keys:', 'info');
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('plena_')) {
+                    const value = localStorage.getItem(key);
+                    let preview = value ? value.substring(0, 100) : 'null';
+                    if (value && value.length > 100) preview += '...';
+                    log(`    ${key}: ${preview}`, 'info');
+                }
+            }
+        }
+        
+        function clearAll() {
+            localStorage.clear();
+            debugInfo = '';
+            log('🗑️ Todo limpiado', 'warning');
+            updateDebugDisplay();
+        }
+        
+        // Escuchar eventos de cambio de autenticación
+        window.addEventListener('authStateChanged', (e) => {
+            const { user } = e.detail;
+            log(`📡 Evento authStateChanged recibido: ${user ? user.email : 'logout'}`, 'warning');
+        });
+        
+        // Estado inicial
+        verificarEstado();
+    </script>
+</body>
+</html>

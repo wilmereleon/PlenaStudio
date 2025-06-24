@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Completo - Persistencia del Carrito en BD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.6;
+        }
+        .main-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-left: 6px solid #667eea;
+        }
+        .problem-section {
+            background: linear-gradient(135deg, #ff9a8b 0%, #fad0c4 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 6px solid #ff6b6b;
+        }
+        .solution-section {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 6px solid #00d2ff;
+        }
+        .test-step {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #ff8a80;
+        }
+        .code-display {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .code-display .comment { color: #6a9955; }
+        .code-display .keyword { color: #569cd6; }
+        .code-display .string { color: #ce9178; }
+        .code-display .function { color: #dcdcaa; }
+        .status-indicator {
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .status-success {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #0d5530;
+            border-left: 6px solid #28a745;
+        }
+        .status-warning {
+            background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);
+            color: #856404;
+            border-left: 6px solid #ffc107;
+        }
+        .status-error {
+            background: linear-gradient(135deg, #fda085 0%, #f6d365 100%);
+            color: #721c24;
+            border-left: 6px solid #dc3545;
+        }
+        .test-scenario {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            position: relative;
+        }
+        .test-scenario::before {
+            content: "🧪";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: white;
+            padding: 5px 10px;
+            font-size: 20px;
+        }
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            color: white;
+        }
+        .btn-warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        .btn-info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        .iframe-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+        }
+        .log-console {
+            background: #0d1117;
+            color: #c9d1d9;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 2px solid #30363d;
+        }
+        .log-success { color: #3fb950; }
+        .log-error { color: #f85149; }
+        .log-warning { color: #d29922; }
+        .log-info { color: #58a6ff; }
+        .checklist {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .checklist ul {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+        .checklist li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+            font-size: 18px;
+        }
+        .implementation-details {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 6px solid #8e44ad;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .testing { animation: pulse 2s infinite; }
+    </style>
+</head>
+<body>
+    <div class="main-header">
+        <h1>🛒 TEST COMPLETO DE PERSISTENCIA DEL CARRITO</h1>
+        <h2>Validación de Guardado en Base de Datos</h2>
+        <p>Verificación integral de la sincronización del carrito entre localStorage y MySQL</p>
+    </div>
+
+    <div class="problem-section">
+        <h2>🚨 PROBLEMA IDENTIFICADO</h2>
+        <p><strong>ISSUE:</strong> Los artículos del carrito no se estaban guardando en la base de datos MySQL cuando el usuario hacía logout, causando que se perdieran permanentemente los productos del carrito al volver a hacer login.</p>
+        
+        <div class="status-indicator status-error">
+            <span>❌</span>
+            <div>
+                <strong>Comportamiento Incorrecto:</strong><br>
+                Usuario autenticado → Agrega productos → Logout → Login → Carrito vacío (productos perdidos)
+            </div>
+        </div>
+    </div>
+
+    <div class="solution-section">
+        <h2>✅ SOLUCIÓN IMPLEMENTADA</h2>
+        <p><strong>CORRECCIÓN:</strong> Se modificó el proceso de logout para guardar automáticamente el carrito en la base de datos antes de cerrar la sesión del usuario.</p>
+        
+        <div class="status-indicator status-success">
+            <span>✅</span>
+            <div>
+                <strong>Comportamiento Correcto:</strong><br>
+                Usuario autenticado → Agrega productos → Logout (guarda en BD) → Login → Carrito restaurado desde BD
+            </div>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>🔧 CAMBIOS TÉCNICOS IMPLEMENTADOS</h2>
+        
+        <div class="implementation-details">
+            <h3>📁 Archivo: src/services/authService.ts</h3>
+            <div class="code-display">
+<span class="comment">// ANTES: Logout sin guardar carrito</span>
+<span class="function">logout</span>(): <span class="keyword">void</span> {
+  localStorage.<span class="function">removeItem</span>(<span class="string">'plena_session'</span>);
+  localStorage.<span class="function">removeItem</span>(<span class="string">'plena_current_user'</span>);
+  <span class="comment">// ❌ No guardaba carrito en BD</span>
+}
+
+<span class="comment">// DESPUÉS: Logout con persistencia en BD</span>
+<span class="keyword">async</span> <span class="function">logout</span>(): Promise&lt;<span class="keyword">void</span>&gt; {
+  <span class="keyword">const</span> currentUser = <span class="keyword">this</span>.<span class="function">getCurrentUser</span>();
+  <span class="keyword">if</span> (currentUser) {
+    <span class="keyword">const</span> localCartItems = <span class="keyword">this</span>.<span class="function">getLocalCartItems</span>();
+    <span class="keyword">if</span> (localCartItems.length > <span class="string">0</span>) {
+      <span class="keyword">await</span> cartService.<span class="function">saveCart</span>(localCartItems);
+      <span class="comment">// ✅ Guarda carrito en BD antes del logout</span>
+    }
+  }
+  localStorage.<span class="function">removeItem</span>(<span class="string">'plena_session'</span>);
+  localStorage.<span class="function">removeItem</span>(<span class="string">'plena_current_user'</span>);
+}
+            </div>
+        </div>
+
+        <div class="implementation-details">
+            <h3>📁 Archivo: src/hooks/useAuth.ts</h3>
+            <div class="code-display">
+<span class="comment">// ANTES: Logout síncrono</span>
+<span class="keyword">const</span> logout = () => {
+  authService.<span class="function">logout</span>();
+  <span class="function">setUser</span>(<span class="keyword">null</span>);
+};
+
+<span class="comment">// DESPUÉS: Logout asíncrono con persistencia</span>
+<span class="keyword">const</span> logout = <span class="keyword">async</span> () => {
+  <span class="keyword">try</span> {
+    <span class="keyword">await</span> authService.<span class="function">logout</span>(); <span class="comment">// Espera a que guarde en BD</span>
+    <span class="function">setUser</span>(<span class="keyword">null</span>);
+    window.<span class="function">dispatchEvent</span>(<span class="keyword">new</span> CustomEvent(<span class="string">'authStateChanged'</span>, { 
+      detail: { user: <span class="keyword">null</span> } 
+    }));
+  } <span class="keyword">catch</span> (error) {
+    console.<span class="function">error</span>(<span class="string">"Error durante logout:"</span>, error);
+  }
+};
+            </div>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>🧪 ESCENARIOS DE PRUEBA</h2>
+        
+        <div class="test-scenario">
+            <h3>Escenario 1: Usuario No Autenticado → Login con Carrito Local</h3>
+            <div class="test-step">
+                <strong>Paso 1:</strong> Sin estar logueado, agregar 2-3 productos al carrito
+                <br><em>Resultado esperado: Productos se guardan en localStorage</em>
+            </div>
+            <div class="test-step">
+                <strong>Paso 2:</strong> Hacer login con una cuenta válida
+                <br><em>Resultado esperado: Carrito local se sincroniza con BD automáticamente</em>
+            </div>
+            <div class="test-step">
+                <strong>Paso 3:</strong> Verificar que el carrito mantiene los productos
+                <br><em>Resultado esperado: Todos los productos siguen visibles en el carrito</em>
+            </div>
+        </div>
+
+        <div class="test-scenario">
+            <h3>Escenario 2: Usuario Autenticado → Logout → Login (Persistencia en BD)</h3>
+            <div class="test-step">
+                <strong>Paso 1:</strong> Estando logueado, agregar varios productos al carrito
+                <br><em>Resultado esperado: Productos se guardan inmediatamente en BD</em>
+            </div>
+            <div class="test-step">
+                <strong>Paso 2:</strong> Hacer logout
+                <br><em>Resultado esperado: Carrito se guarda en BD antes del logout completo</em>
+            </div>
+            <div class="test-step">
+                <strong>Paso 3:</strong> Volver a hacer login con la misma cuenta
+                <br><em>Resultado esperado: Carrito se restaura desde BD con todos los productos</em>
+            </div>
+        </div>
+
+        <div class="test-scenario">
+            <h3>Escenario 3: Verificación de Logs y Comportamiento del Ícono</h3>
+            <div class="test-step">
+                <strong>Verificar:</strong> El ícono del carrito NUNCA desaparece durante las transiciones
+                <br><em>Resultado esperado: Badge del carrito siempre visible con conteo correcto</em>
+            </div>
+            <div class="test-step">
+                <strong>Verificar:</strong> Logs en la consola del navegador muestran sincronización correcta
+                <br><em>Resultado esperado: Logs de guardado y carga desde BD</em>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>🖥️ APLICACIÓN EN VIVO</h2>
+        
+        <div class="btn-container">
+            <a href="http://localhost" target="_blank" class="btn btn-primary">🏠 Página Principal</a>
+            <a href="http://localhost/Catalogo" target="_blank" class="btn btn-success">🛍️ Catálogo (Agregar Productos)</a>
+            <a href="http://localhost/shopping-cart" target="_blank" class="btn btn-info">🛒 Ver Carrito</a>
+            <a href="http://localhost/login" target="_blank" class="btn btn-warning">🔑 Login/Logout</a>
+        </div>
+        
+        <div class="iframe-container">
+            <h3>Vista en Vivo de la Aplicación:</h3>
+            <iframe src="http://localhost" title="Plena Studio Application"></iframe>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>📊 LOGS ESPERADOS EN CONSOLA</h2>
+        
+        <h3>🔄 Durante Login con Carrito Local:</h3>
+        <div class="log-console">
+<span class="log-info">🔑 Intentando login para: demo@plenastudio.com</span>
+<span class="log-success">🔄 Cambio de autenticación detectado: { wasAuthenticated: false, newAuthState: true, currentCartSize: 2 }</span>
+<span class="log-success">🟢 LOGIN detectado - sincronizando carrito</span>
+<span class="log-info">🔄 Iniciando sincronización de carrito en login...</span>
+<span class="log-info">📦 Carrito local actual: [productos...]</span>
+<span class="log-success">✅ Carrito sincronizado exitosamente</span>
+<span class="log-warning">🗑️ Carrito local limpiado después de sincronización</span>
+        </div>
+
+        <h3>🚪 Durante Logout (Nuevo Comportamiento):</h3>
+        <div class="log-console">
+<span class="log-warning">🔴 Ejecutando logout...</span>
+<span class="log-info">🚪 Iniciando logout...</span>
+<span class="log-success">💾 Guardando carrito antes del logout...</span>
+<span class="log-success">💾 Guardando 3 productos en BD antes del logout</span>
+<span class="log-info">💾 CartService.saveCart - Guardando carrito: 3 productos</span>
+<span class="log-info">📡 Enviando carrito al servidor...</span>
+<span class="log-success">✅ Carrito guardado en servidor exitosamente</span>
+<span class="log-success">✅ Carrito persistido en BD antes del logout</span>
+<span class="log-warning">🔴 Usuario hizo logout - cargando carrito local</span>
+<span class="log-success">🔴 Logout completado exitosamente</span>
+        </div>
+
+        <h3>🔄 Durante Login Posterior (Restauración desde BD):</h3>
+        <div class="log-console">
+<span class="log-info">🔑 Intentando login para: demo@plenastudio.com</span>
+<span class="log-success">✅ Login exitoso con backend</span>
+<span class="log-info">🔄 Cambio de autenticación detectado: { wasAuthenticated: false, newAuthState: true, currentCartSize: 0 }</span>
+<span class="log-success">🟢 LOGIN detectado - sincronizando carrito</span>
+<span class="log-info">📥 Cargando carrito del servidor...</span>
+<span class="log-success">✅ Carrito restaurado desde BD: 3 productos</span>
+        </div>
+    </div>
+
+    <div class="checklist">
+        <h2>✅ CHECKLIST DE VALIDACIÓN</h2>
+        <ul>
+            <li>Carrito se guarda en BD automáticamente para usuarios autenticados</li>
+            <li>Logout guarda carrito en BD antes de cerrar sesión</li>
+            <li>Login restaura carrito desde BD correctamente</li>
+            <li>Ícono del carrito permanece visible durante todas las transiciones</li>
+            <li>Sincronización entre localStorage y BD funciona sin errores</li>
+            <li>Fallback a localStorage funciona cuando BD no está disponible</li>
+            <li>Logs detallados muestran cada paso del proceso</li>
+            <li>No hay pérdida de productos durante login/logout</li>
+        </ul>
+    </div>
+
+    <div class="test-container">
+        <h2>🔍 INSTRUCCIONES DE PRUEBA PASO A PASO</h2>
+        
+        <div class="status-indicator status-warning">
+            <span>⚠️</span>
+            <div>
+                <strong>Importante:</strong> Abrir las herramientas de desarrollador (F12) para ver los logs en tiempo real durante las pruebas.
+            </div>
+        </div>
+
+        <h3>🧪 Prueba Completa de Persistencia:</h3>
+        <ol style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+            <li><strong>Abrir</strong> la aplicación en el iframe arriba o en una nueva pestaña</li>
+            <li><strong>Sin loguearse:</strong> Ir al catálogo y agregar 2-3 productos al carrito</li>
+            <li><strong>Verificar:</strong> El badge del carrito muestra el número correcto</li>
+            <li><strong>Hacer login</strong> con: <code>demo@plenastudio.com</code> / <code>password</code></li>
+            <li><strong>Observar logs:</strong> Debe mostrar sincronización de carrito con BD</li>
+            <li><strong>Agregar más productos</strong> estando logueado</li>
+            <li><strong>Hacer logout</strong> y observar logs de guardado en BD</li>
+            <li><strong>Volver a hacer login</strong> con la misma cuenta</li>
+            <li><strong>Verificar:</strong> Todos los productos deben seguir en el carrito</li>
+        </ol>
+    </div>
+
+    <div class="test-container">
+        <h2>🎯 RESULTADOS ESPERADOS</h2>
+        
+        <div class="status-indicator status-success">
+            <span>✅</span>
+            <div>
+                <strong>Éxito Total:</strong> Los productos del carrito se mantienen después de logout/login, confirmando que se guardan correctamente en la base de datos MySQL.
+            </div>
+        </div>
+        
+        <div class="status-indicator status-success">
+            <span>🔄</span>
+            <div>
+                <strong>Sincronización Perfecta:</strong> El carrito se sincroniza automáticamente entre localStorage (usuarios no autenticados) y base de datos (usuarios autenticados).
+            </div>
+        </div>
+        
+        <div class="status-indicator status-success">
+            <span>👁️</span>
+            <div>
+                <strong>Ícono Persistente:</strong> El ícono del carrito permanece visible con el conteo correcto durante todas las transiciones de autenticación.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🧪 TEST DE PERSISTENCIA DE CARRITO INICIADO');
+            console.log('📋 Abre las herramientas de desarrollador para ver los logs en tiempo real');
+            console.log('🔗 Sigue las instrucciones paso a paso para validar la funcionalidad');
+            
+            // Verificar conexión con la aplicación
+            fetch('http://localhost')
+                .then(response => {
+                    if (response.ok) {
+                        const status = document.createElement('div');
+                        status.className = 'status-indicator status-success';
+                        status.innerHTML = '<span>🌐</span><div><strong>Conexión Exitosa:</strong> La aplicación Plena Studio está ejecutándose correctamente en localhost</div>';
+                        document.body.appendChild(status);
+                    }
+                })
+                .catch(error => {
+                    const status = document.createElement('div');
+                    status.className = 'status-indicator status-error';
+                    status.innerHTML = '<span>❌</span><div><strong>Error de Conexión:</strong> No se puede conectar con la aplicación. Verifica que Docker esté ejecutándose.</div>';
+                    document.body.appendChild(status);
+                });
+                
+            // Auto-refresh cada 2 minutos para mantener actualizado
+            setTimeout(() => {
+                const refresh = confirm('¿Quieres actualizar la página para mantener el test actualizado?');
+                if (refresh) location.reload();
+            }, 120000);
+        });
+        
+        // Función para destacar elementos durante las pruebas
+        function highlightElement(selector) {
+            const element = document.querySelector(selector);
+            if (element) {
+                element.classList.add('testing');
+                setTimeout(() => element.classList.remove('testing'), 3000);
+            }
+        }
+    </script>
+</body>
+</html>

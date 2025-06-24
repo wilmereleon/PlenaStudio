@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Registro Frontend</title>
+</head>
+<body>
+    <h1>Test de Registro desde Frontend</h1>
+    <form id="testForm">
+        <div>
+            <label>Nombres:</label>
+            <input type="text" id="nombres" value="Frontend Test">
+        </div>
+        <div>
+            <label>Apellidos:</label>
+            <input type="text" id="apellidos" value="Usuario">
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="email" id="correo" value="frontend-test@plenastudio.com">
+        </div>
+        <div>
+            <label>Dirección:</label>
+            <input type="text" id="direccion" value="Calle Test 123">
+        </div>
+        <div>
+            <label>Celular:</label>
+            <input type="text" id="celular" value="3001234567">
+        </div>
+        <div>
+            <label>Tipo ID:</label>
+            <select id="tipoIdentificacion">
+                <option value="CC">CC</option>
+            </select>
+        </div>
+        <div>
+            <label>Número ID:</label>
+            <input type="text" id="numeroIdentificacion" value="123456789">
+        </div>
+        <div>
+            <label>Contraseña:</label>
+            <input type="password" id="contraseña" value="password123">
+        </div>
+        <div>
+            <label>Confirmar:</label>
+            <input type="password" id="confirmar" value="password123">
+        </div>
+        <button type="submit">Registrar</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById('testForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                nombres: document.getElementById('nombres').value,
+                apellidos: document.getElementById('apellidos').value,
+                correo: document.getElementById('correo').value,
+                direccion: document.getElementById('direccion').value,
+                celular: document.getElementById('celular').value,
+                tipoIdentificacion: document.getElementById('tipoIdentificacion').value,
+                numeroIdentificacion: document.getElementById('numeroIdentificacion').value,
+                contraseña: document.getElementById('contraseña').value,
+                confirmar: document.getElementById('confirmar').value
+            };
+            
+            console.log('🔧 Datos del formulario:', formData);
+            
+            // Simular la función handleSubmit del RegisterForm
+            try {
+                const userData = {
+                    nombre: formData.nombres,
+                    apellido: formData.apellidos,
+                    email: formData.correo,
+                    password: formData.contraseña,
+                    edad: 25,
+                    tipoIdentificacion: formData.tipoIdentificacion || 'CC',
+                    numeroIdentificacion: formData.numeroIdentificacion
+                };
+                
+                console.log('📝 Registrando usuario:', userData.email);
+                
+                // Determinar la URL base (simular VITE_API_URL)
+                const apiUrl = import.meta.env?.VITE_API_URL || 'http://backend:3001';
+                console.log('🌐 URL API:', apiUrl);
+                
+                // Intentar con backend directo
+                const response = await fetch(`${apiUrl}/api/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('✅ Usuario registrado:', result.user);
+                    document.getElementById('resultado').innerHTML = `
+                        <h3 style="color: green;">✅ Registro exitoso</h3>
+                        <p>Usuario: ${result.user.nombre}</p>
+                        <p>Email: ${result.user.email}</p>
+                        <p>Token: ${result.token}</p>
+                    `;
+                } else {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData?.message || 'Error en el registro');
+                }
+                
+            } catch (error) {
+                console.error('❌ Error en registro:', error);
+                document.getElementById('resultado').innerHTML = `
+                    <h3 style="color: red;">❌ Error en el registro</h3>
+                    <p>${error.message}</p>
+                    <p>Probando con localhost:3001...</p>
+                `;
+                
+                // Fallback: intentar con localhost
+                try {
+                    const response = await fetch('http://localhost:3001/api/auth/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(userData)
+                    });
+                    
+                    if (response.ok) {
+                        const result = await response.json();
+                        console.log('✅ Usuario registrado con localhost:', result.user);
+                        document.getElementById('resultado').innerHTML = `
+                            <h3 style="color: green;">✅ Registro exitoso (localhost)</h3>
+                            <p>Usuario: ${result.user.nombre}</p>
+                            <p>Email: ${result.user.email}</p>
+                            <p>Token: ${result.token}</p>
+                        `;
+                    } else {
+                        const errorData = await response.json().catch(() => ({}));
+                        throw new Error(errorData?.message || 'Error en el registro con localhost');
+                    }
+                } catch (localhostError) {
+                    console.error('❌ Error con localhost también:', localhostError);
+                    document.getElementById('resultado').innerHTML = `
+                        <h3 style="color: red;">❌ Error total</h3>
+                        <p>Error backend: ${error.message}</p>
+                        <p>Error localhost: ${localhostError.message}</p>
+                    `;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

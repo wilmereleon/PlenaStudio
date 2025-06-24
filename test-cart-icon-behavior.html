@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Cart Icon Behavior</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .warning { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f1aeb5; }
+        .test-step {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #0056b3; }
+        .cart-icon-test {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        .cart-count {
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🛒 Test: Cart Icon Behavior During Login/Logout</h1>
+    
+    <div class="cart-icon-test">
+        <span>🛒 Cart Icon</span>
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+    <div class="test-container">
+        <h2>🎯 Objetivo de la Prueba</h2>
+        <p>Verificar que el ícono del carrito <strong>permanece visible</strong> y refleja correctamente el estado del carrito durante las transiciones de login/logout, sin desaparecer temporalmente.</p>
+    </div>
+
+    <div class="test-container">
+        <h2>📋 Estado Actual</h2>
+        <div id="authStatus" class="status warning">
+            <strong>Usuario:</strong> <span id="userEmail">No autenticado</span><br>
+            <strong>Estado:</strong> <span id="authState">❌ Sin autenticar</span><br>
+            <strong>Carrito:</strong> <span id="cartItems">0 items</span>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>🧪 Pasos de Prueba</h2>
+        
+        <div class="test-step">
+            <strong>Paso 1:</strong> Agregar productos al carrito SIN estar logueado
+            <br>
+            <button onclick="addProductToCart()">➕ Agregar Producto Test</button>
+            <span id="step1Status"></span>
+        </div>
+
+        <div class="test-step">
+            <strong>Paso 2:</strong> Hacer login (observar si el carrito permanece visible)
+            <br>
+            <button onclick="performLogin()">🔑 Login Demo</button>
+            <span id="step2Status"></span>
+        </div>
+
+        <div class="test-step">
+            <strong>Paso 3:</strong> Agregar más productos estando logueado
+            <br>
+            <button onclick="addProductToCart()">➕ Agregar Otro Producto</button>
+            <span id="step3Status"></span>
+        </div>
+
+        <div class="test-step">
+            <strong>Paso 4:</strong> Hacer logout (observar comportamiento del carrito)
+            <br>
+            <button onclick="performLogout()">🚪 Logout</button>
+            <span id="step4Status"></span>
+        </div>
+
+        <div class="test-step">
+            <strong>Paso 5:</strong> Login nuevamente (verificar restauración del carrito)
+            <br>
+            <button onclick="performLogin()">🔑 Login Nuevamente</button>
+            <span id="step5Status"></span>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>📊 Logs de Consola</h2>
+        <div id="consoleLogs" style="background: #000; color: #0f0; padding: 10px; border-radius: 4px; font-family: monospace; height: 200px; overflow-y: auto;">
+            # Logs aparecerán aquí...
+        </div>
+        <button onclick="clearLogs()">🗑️ Limpiar Logs</button>
+    </div>
+
+    <script>
+        // Variables globales para simular el comportamiento
+        let isAuthenticated = false;
+        let cartItems = [];
+        let userEmail = null;
+
+        // Simular productos de prueba
+        const testProducts = [
+            { id: '1', name: 'Producto Test 1', price: 25000 },
+            { id: '2', name: 'Producto Test 2', price: 35000 },
+            { id: '3', name: 'Producto Test 3', price: 45000 }
+        ];
+
+        // Funciones de utilidad
+        function updateStatus() {
+            document.getElementById('userEmail').textContent = userEmail || 'No autenticado';
+            document.getElementById('authState').textContent = isAuthenticated ? '✅ Autenticado' : '❌ Sin autenticar';
+            document.getElementById('cartItems').textContent = `${cartItems.length} items`;
+            document.getElementById('cartCount').textContent = cartItems.length;
+            
+            // Actualizar color del estado
+            const statusDiv = document.getElementById('authStatus');
+            statusDiv.className = isAuthenticated ? 'status success' : 'status warning';
+        }
+
+        function logToConsole(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logDiv = document.getElementById('consoleLogs');
+            logDiv.innerHTML += `[${timestamp}] ${message}\n`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
+
+        function clearLogs() {
+            document.getElementById('consoleLogs').innerHTML = '# Logs limpiados...\n';
+        }
+
+        // Simular comportamiento del carrito
+        function addProductToCart() {
+            const randomProduct = testProducts[Math.floor(Math.random() * testProducts.length)];
+            cartItems.push(randomProduct);
+            
+            logToConsole(`🛒 PRODUCTO AGREGADO: ${randomProduct.name} (Total: ${cartItems.length} items)`);
+            
+            // Simular sincronización con servidor si está autenticado
+            if (isAuthenticated) {
+                logToConsole(`🔄 Sincronizando carrito con servidor...`);
+                setTimeout(() => {
+                    logToConsole(`✅ Carrito sincronizado con BD`);
+                }, 500);
+            } else {
+                logToConsole(`💾 Guardando en localStorage (usuario no autenticado)`);
+            }
+            
+            updateStatus();
+        }
+
+        function performLogin() {
+            logToConsole(`🔑 INICIANDO LOGIN...`);
+            logToConsole(`📦 Estado del carrito ANTES del login: ${cartItems.length} items`);
+            
+            // Simular proceso de login
+            setTimeout(() => {
+                isAuthenticated = true;
+                userEmail = 'demo@plenastudio.com';
+                
+                logToConsole(`✅ LOGIN EXITOSO`);
+                logToConsole(`🔄 Sincronizando carrito local con servidor...`);
+                
+                // Simular sincronización (el carrito NO debe desaparecer aquí)
+                setTimeout(() => {
+                    logToConsole(`📦 Estado del carrito DESPUÉS del login: ${cartItems.length} items`);
+                    logToConsole(`✅ Sincronización completada - carrito preservado`);
+                    updateStatus();
+                }, 800);
+                
+                updateStatus();
+            }, 1000);
+        }
+
+        function performLogout() {
+            logToConsole(`🚪 EJECUTANDO LOGOUT...`);
+            logToConsole(`📦 Estado del carrito ANTES del logout: ${cartItems.length} items`);
+            
+            isAuthenticated = false;
+            userEmail = null;
+            
+            // El carrito se limpia en logout (comportamiento esperado)
+            cartItems = [];
+            
+            logToConsole(`🔴 Usuario desautenticado`);
+            logToConsole(`🗑️ Carrito limpiado tras logout`);
+            logToConsole(`📦 Estado del carrito DESPUÉS del logout: ${cartItems.length} items`);
+            
+            updateStatus();
+        }
+
+        // Inicializar
+        updateStatus();
+        logToConsole(`🚀 Test iniciado - verificando comportamiento del carrito`);
+        
+        // Instrucciones
+        setTimeout(() => {
+            logToConsole(`📋 INSTRUCCIONES:`);
+            logToConsole(`1. Agregar productos SIN login`);
+            logToConsole(`2. Hacer login (verificar que el carrito NO desaparece)`);
+            logToConsole(`3. Agregar más productos`);
+            logToConsole(`4. Hacer logout (carrito debe limpiarse)`);
+            logToConsole(`5. Login nuevamente (carrito debe restaurarse desde BD)`);
+        }, 1000);
+
+        // Detectar si estamos en la aplicación real de React
+        if (window.location.hostname === 'localhost' || window.location.hostname.includes('plenastudio')) {
+            setTimeout(() => {
+                logToConsole(`🌐 DETECTADO: Aplicación Plena Studio`);
+                logToConsole(`🔗 Abrir consola del navegador (F12) para ver logs de React`);
+                logToConsole(`🔗 Navegar a /Catalogo para probar con carrito real`);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

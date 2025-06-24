@@ -46,20 +46,31 @@ export function useAuth() {
     }));
     
     return result;
-  };/**
+  };  /**
    * Cierra la sesión del usuario actual.
    */
-  const logout = () => {
+  const logout = async () => {
     console.log("🔴 Ejecutando logout...");
-    authService.logout();
-    setUser(null);
     
-    // Disparar evento personalizado para notificar cambio de autenticación
-    window.dispatchEvent(new CustomEvent('authStateChanged', { 
-      detail: { user: null } 
-    }));
-    
-    console.log("🔴 Logout completado");
+    try {
+      // Ejecutar logout asíncrono para guardar carrito en BD
+      await authService.logout();
+      setUser(null);
+      
+      // Disparar evento personalizado para notificar cambio de autenticación
+      window.dispatchEvent(new CustomEvent('authStateChanged', { 
+        detail: { user: null } 
+      }));
+      
+      console.log("🔴 Logout completado exitosamente");
+    } catch (error) {
+      console.error("❌ Error durante logout:", error);
+      // Aún así limpiar el estado local en caso de error
+      setUser(null);
+      window.dispatchEvent(new CustomEvent('authStateChanged', { 
+        detail: { user: null } 
+      }));
+    }
   };
 
   return {

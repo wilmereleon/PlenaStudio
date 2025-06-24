@@ -31,21 +31,29 @@ class AuthService {
       console.log('⚠️ DEBUG - AuthService ya existe, reutilizando instancia');
       return AuthService.instance;
     }
-    
-    console.log('🔧 DEBUG - Creando nueva instancia de AuthService');
+      console.log('🔧 DEBUG - Creando nueva instancia de AuthService');
     AuthService.instance = this;
-    // Configurar URL base según el entorno
+    
+    // Configurar URL base según el entorno usando variables de entorno
     if (typeof window !== 'undefined') {
-      const hostname = window.location.hostname;
+      // Priorizar variable de entorno VITE_API_URL
+      const apiUrl = import.meta.env.VITE_API_URL;
       
-      if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        this.baseUrl = 'http://localhost:3000/api/auth';
-      } else if (hostname.includes('surge.sh')) {
-        this.baseUrl = `https://${hostname}/api/auth`;
-      } else if (hostname.includes('vercel.app')) {
-        this.baseUrl = `https://${hostname}/api/auth`;
+      if (apiUrl) {
+        this.baseUrl = `${apiUrl}/api/auth`;
+        console.log('🔧 Usando VITE_API_URL:', apiUrl);
       } else {
-        this.baseUrl = `${window.location.protocol}//${window.location.host}/api/auth`;
+        // Fallback a detección automática por hostname
+        const hostname = window.location.hostname;      
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+          this.baseUrl = 'http://localhost:3001/api/auth';
+        } else if (hostname.includes('surge.sh')) {
+          this.baseUrl = `https://${hostname}/api/auth`;
+        } else if (hostname.includes('vercel.app')) {
+          this.baseUrl = `https://${hostname}/api/auth`;
+        } else {
+          this.baseUrl = `${window.location.protocol}//${window.location.host}/api/auth`;
+        }
       }
     } else {
       this.baseUrl = '/api/auth';
@@ -267,13 +275,12 @@ class AuthService {
   }  /**
    * Obtiene la URL base de la API según el entorno
    */
-  private getApiBaseUrl(): string {
-    if (typeof window !== 'undefined') {
+  private getApiBaseUrl(): string {    if (typeof window !== 'undefined') {
       const hostname = window.location.hostname;
       
-      if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        // Desarrollo local
-        return 'http://localhost:3000/api';
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {        // Desarrollo local - usar variable de entorno o puerto 3001 por defecto
+        const apiUrl = (import.meta as any).env.VITE_API_URL || 'http://localhost:3001';
+        return `${apiUrl}/api`;
       } else if (hostname.includes('surge.sh')) {
         // Producción en Surge
         return `https://${hostname}/api`;
@@ -683,18 +690,40 @@ class AuthService {
       window.dispatchEvent(event);
     }
   }
-
   /**
    * Logout del usuario actual
    */
-  logout(): void {
+  async logout(): Promise<void> {
+    console.log('🚪 Iniciando logout...');
+    
+    // IMPORTANTE: Guardar carrito en BD antes del logout si el usuario está autenticado
+    const currentUser = this.getCurrentUser();
+    if (currentUser) {
+      console.log('💾 Guardando carrito antes del logout...');
+      try {
+        // Obtener carrito actual del localStorage y guardarlo en BD
+        const localCartItems = this.getLocalCartItems();
+        if (localCartItems.length > 0) {
+          console.log('💾 Guardando', localCartItems.length, 'productos en BD antes del logout');
+          await cartService.saveCart(localCartItems);
+          console.log('✅ Carrito guardado en BD exitosamente antes del logout');
+        } else {
+          console.log('ℹ️ No hay productos en el carrito para guardar');
+        }
+      } catch (error) {
+        console.error('❌ Error al guardar carrito antes del logout:', error);
+        // Continuar con el logout aunque falle el guardado
+      }
+    }
+    
+    // Limpiar datos de sesión local
     localStorage.removeItem(this.SESSION_KEY);
     localStorage.removeItem(this.CURRENT_USER_KEY);
     
-    // Notificar logout para limpiar carrito
+    // Notificar logout para sincronización del carrito
     this.notifyAuthStateChange(null);
     
-    console.log('🚪 Usuario deslogueado');
+    console.log('🚪 Usuario deslogueado completamente');
   }
 }
 

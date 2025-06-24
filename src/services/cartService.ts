@@ -6,24 +6,32 @@ import { CartItem, productosDisponibles } from '../types/productos';
 export class CartService {
   private static instance: CartService;
   private baseUrl: string;
-
   constructor() {
-    // Configurar URL base según el entorno
+    // Configurar URL base según el entorno usando variables de entorno
     if (typeof window !== 'undefined') {
-      const hostname = window.location.hostname;
+      // Priorizar variable de entorno VITE_API_URL
+      const apiUrl = import.meta.env.VITE_API_URL;
       
-      if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        // Desarrollo local
-        this.baseUrl = 'http://localhost:3000/api/cart';
-      } else if (hostname.includes('surge.sh')) {
-        // Producción en Surge
-        this.baseUrl = `https://${hostname}/api/cart`;
-      } else if (hostname.includes('vercel.app')) {
-        // Producción en Vercel
-        this.baseUrl = `https://${hostname}/api/cart`;
+      if (apiUrl) {
+        this.baseUrl = `${apiUrl}/api/cart`;
+        console.log('🔧 CartService usando VITE_API_URL:', apiUrl);
       } else {
-        // Fallback para otros entornos
-        this.baseUrl = `${window.location.protocol}//${window.location.host}/api/cart`;
+        // Fallback a detección automática por hostname
+        const hostname = window.location.hostname;
+        
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+          // Desarrollo local
+          this.baseUrl = 'http://localhost:3001/api/cart';
+        } else if (hostname.includes('surge.sh')) {
+          // Producción en Surge
+          this.baseUrl = `https://${hostname}/api/cart`;
+        } else if (hostname.includes('vercel.app')) {
+          // Producción en Vercel
+          this.baseUrl = `https://${hostname}/api/cart`;
+        } else {
+          // Fallback para otros entornos
+          this.baseUrl = `${window.location.protocol}//${window.location.host}/api/cart`;
+        }
       }
     } else {
       // SSR fallback

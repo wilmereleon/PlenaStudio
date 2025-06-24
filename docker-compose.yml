@@ -44,7 +44,6 @@ services:
       - plena-network
     volumes:
       - ./Backend/src:/app/src
-
   # Frontend React
   frontend:
     build:
@@ -53,7 +52,7 @@ services:
     container_name: plena-frontend
     restart: unless-stopped
     environment:
-      - VITE_API_URL=http://localhost:3001
+      - VITE_API_URL=http://backend:3001
       - VITE_APP_NAME=PlenaStudio
     ports:
       - "3000:3000"

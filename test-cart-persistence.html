@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Persistencia de Carrito en BD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        h2 {
+            color: #4CAF50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+        .test-step {
+            background: #e8f5e8;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+        }
+        .test-step strong {
+            color: #2e7d32;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .code {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛒 Test de Persistencia de Carrito en Base de Datos</h1>
+        
+        <div class="warning">
+            <strong>⚠️ Objetivo del Test:</strong> Verificar que los productos del carrito se guarden correctamente en la base de datos MySQL cuando el usuario está autenticado, especialmente después del logout.
+        </div>
+
+        <h2>🎯 Problema Identificado</h2>
+        <div class="error">
+            <strong>❌ Problema:</strong> Los artículos del carrito no se están guardando en la base de datos después del logout del usuario, perdiendo la información del carrito permanentemente.
+        </div>
+
+        <h2>🔍 Pasos para Reproducir el Problema</h2>
+        
+        <div class="test-step">
+            <strong>Paso 1:</strong> Abrir la aplicación en una nueva pestaña y registrarse/loguearse
+            <br><a href="http://localhost:3000" target="_blank" class="btn">🌐 Abrir Aplicación</a>
+        </div>
+
+        <div class="test-step">
+            <strong>Paso 2:</strong> Agregar varios productos al carrito mientras está autenticado
+            <br><em>Verificar que los productos aparecen en el icono del carrito</em>
+        </div>
+
+        <div class="test-step">
+            <strong>Paso 3:</strong> Hacer logout y verificar que el carrito se mantiene visible
+            <br><em>El icono del carrito debe seguir mostrando los productos</em>
+        </div>
+
+        <div class="test-step">
+            <strong>Paso 4:</strong> Volver a hacer login con la misma cuenta
+            <br><em>❌ PROBLEMA: Los productos del carrito deberían cargarse desde la BD pero se pierden</em>
+        </div>
+
+        <h2>🔧 Análisis del Código</h2>
+        
+        <div class="container">
+            <h3>📁 CartContext.tsx - Lógica de Sincronización</h3>
+            <div class="code">
+// En el logout, la lógica actual:
+const handleAuthChange = (e: CustomEvent) => {
+  if (!newAuthState && wasAuthenticated) {
+    // LOGOUT: Usuario se desautentica
+    console.log("🔴 Usuario hizo logout - cargando carrito local");
+    setDiscount(0);
+    loadCartFromLocalStorage(); // ⚠️ Carga solo del localStorage
+  }
+};
+
+// ❌ PROBLEMA: No se está guardando en BD antes del logout
+            </div>
+        </div>
+
+        <div class="container">
+            <h3>📁 cartService.ts - Método saveCart</h3>
+            <div class="code">
+async saveCart(items: CartItem[]): Promise&lt;void&gt; {
+  console.log('💾 CartService.saveCart - Guardando carrito:', items.length, 'productos');
+  
+  // Verifica API disponible
+  const apiAvailable = await this.isApiAvailable();
+  
+  if (!apiAvailable) {
+    // ⚠️ Fallback a localStorage
+    localStorage.setItem('plena_cart', JSON.stringify(items));
+    return;
+  }
+  
+  // 📡 Envía al backend
+  const response = await fetch(this.baseUrl, {
+    method: 'POST',
+    headers: this.getAuthHeaders(),
+    body: JSON.stringify({ items })
+  });
+}
+            </div>
+        </div>
+
+        <h2>🛠️ Solución Implementada</h2>
+        
+        <div class="success">
+            <strong>✅ Correcciones Realizadas:</strong>
+            <ol>
+                <li><strong>CartContext.tsx:</strong> Mejorada la lógica de <code>syncWithServer</code> para asegurar persistencia en BD</li>
+                <li><strong>Logout Logic:</strong> Asegurar que el carrito se guarde en BD antes del logout</li>
+                <li><strong>Login Logic:</strong> Cargar carrito desde BD después del login</li>
+                <li><strong>Fallback Robusto:</strong> Mantener localStorage como respaldo cuando la API no esté disponible</li>
+            </ol>
+        </div>
+
+        <h2>🧪 Test Manual</h2>
+        
+        <div class="container">
+            <iframe src="http://localhost:3000" title="Aplicación Plena Studio"></iframe>
+        </div>
+
+        <h2>📝 Instrucciones de Test</h2>
+        
+        <div class="test-step">
+            <strong>1. Test de Persistencia en BD:</strong>
+            <ul>
+                <li>Login con una cuenta existente</li>
+                <li>Agregar 2-3 productos al carrito</li>
+                <li>Verificar que el contador del carrito se actualiza</li>
+                <li>Hacer logout</li>
+                <li>Login nuevamente con la misma cuenta</li>
+                <li>✅ <strong>Verificar:</strong> Los productos deben seguir en el carrito (cargados desde BD)</li>
+            </ul>
+        </div>
+
+        <div class="test-step">
+            <strong>2. Test de Fallback Local:</strong>
+            <ul>
+                <li>Sin estar logueado, agregar productos al carrito</li>
+                <li>Login con una cuenta</li>
+                <li>✅ <strong>Verificar:</strong> Los productos locales se sincronizan con la BD</li>
+                <li>Logout y login nuevamente</li>
+                <li>✅ <strong>Verificar:</strong> Los productos persisten desde la BD</li>
+            </ul>
+        </div>
+
+        <h2>🔍 Monitoreo de Logs</h2>
+        
+        <div class="container">
+            <p>Para monitorear la sincronización, abrir las herramientas de desarrollador del navegador y revisar la consola:</p>
+            <div class="code">
+// Logs esperados en el navegador:
+🔄 CartContext.syncWithServer - Usuario autenticado, sincronizando: X productos
+💾 CartService.saveCart - Guardando carrito: X productos
+📡 Enviando carrito al servidor...
+✅ Carrito guardado en servidor exitosamente
+            </div>
+        </div>
+
+        <div class="container">
+            <a href="http://localhost:3000" target="_blank" class="btn">🌐 Abrir Aplicación</a>
+            <a href="#" onclick="location.reload()" class="btn btn-secondary">🔄 Actualizar Test</a>
+        </div>
+    </div>
+
+    <script>
+        // Auto-refresh cada 30 segundos para mantener actualizado
+        setTimeout(() => {
+            location.reload();
+        }, 30000);
+        
+        console.log('🧪 Test de Persistencia de Carrito iniciado');
+        console.log('📋 Sigue las instrucciones en la página para probar la funcionalidad');
+    </script>
+</body>
+</html>
