@@ -146,15 +146,21 @@
 | **Performance** | <3 seg | 2.1 seg | -30% | ✅ SUPERADO |
 | **Defectos Producción** | <5 | 0 | -100% | ✅ PERFECTO |
 | **Satisfacción Cliente** | 80% | 100% | +25% | ✅ EXCELENTE |
-| **Presupuesto** | $50K | $42K | -16% | ✅ BAJO PRESUPUESTO |
+| **Presupuesto** | $20M COP | $24.34M COP | +21.7% | ⚠️ SOBRECOSTO |
+| **ROI** | 200% | 185% | -7.5% | 🟡 ACEPTABLE |
 
 ## **💰 ANÁLISIS FINANCIERO Y ROI**
 ```
-💵 Presupuesto Planificado:  $50,000
-💵 Costo Real:              $42,000  (-16% ahorro)
+💵 Presupuesto Planificado:  $20,000,000 COP
+💵 Costo Real:              $24,340,000 COP  (+21.7% sobrecosto)
+💵 Horas Planificadas:      276 horas (TSPi baseline)
+💵 Horas Reales:            336 horas  (+60 horas adicionales)
+💵 Costo por Hora Real:     $72,464 COP
+💵 Sobrecosto Total:        $4,340,000 COP
 💵 ROI Esperado:            200%
-💵 ROI Actual:              275%     (+37.5% mejora)
-💵 Tiempo Amortización:     3 meses  (vs 4 meses estimados)
+💵 ROI Actual:              185%     (-7.5% menor al esperado)
+💵 Tiempo Amortización:     4.2 meses  (vs 3.5 meses estimados)
+💵 Valor Agregado:          Funcionalidades adicionales justifican sobrecosto
 ```
 
 ## **🏆 FORTALEZAS IDENTIFICADAS**
@@ -205,6 +211,12 @@
    - **Solución:** TSPi para tracking preciso
    - **Resultado:** Entrega 25% anticipada
 
+3. **💰 Control Presupuestario**
+   - **Problema:** Subestimación técnica (TSPi: 276h → 336h)
+   - **Impacto:** Sobrecosto +21.7% ($4.34M COP)
+   - **Causa:** Expansión controlada de valor del producto
+   - **Lección:** Implementar checkpoints presupuestarios más frecuentes
+
 ## **📚 LECCIONES APRENDIDAS CLAVE**
 
 ### **🎯 MEJORES PRÁCTICAS VALIDADAS**
@@ -232,8 +244,9 @@
 
 #### **📋 PLANIFICACIÓN**
 - ✅ TSPi desde inicio para estimaciones precisas
-- ✅ Buffer 20% para cambios de scope
+- ✅ Buffer 25-30% para cambios de scope (lección del +21.7%)
 - ✅ Criterios de aceptación pre-desarrollo
+- ✅ Checkpoints presupuestarios semanales obligatorios
 
 #### **🛠️ TECNOLOGÍA**
 - ✅ Stack actualizado pero estable
@@ -244,6 +257,11 @@
 - ✅ Code reviews obligatorios
 - ✅ Knowledge sharing semanal
 - ✅ Rotación para reducir silos
+
+#### **💰 GESTIÓN FINANCIERA**
+- ✅ Alertas automáticas al superar 110% del presupuesto
+- ✅ Justificación documentada para inversiones adicionales
+- ✅ Aprobación del cliente para sobrecostos >15%
 
 ## **🚀 ROADMAP POST-LANZAMIENTO**
 | Fase | Timeframe | Objetivos | Prioridad |
@@ -258,13 +276,14 @@
 # 🎯 **CONCLUSIONES FINALES**
 
 ## **✅ INDICADORES DE ÉXITO**
-El proyecto Plena Studio representa un **caso de éxito ejemplar** en todos los aspectos:
+El proyecto Plena Studio representa un **caso de éxito técnico notable** con algunas lecciones financieras:
 
 - **📈 Calidad:** 100% casos aprobados, 0 defectos críticos
 - **⚡ Performance:** 30% superior a objetivos
-- **👥 Cliente:** 100% satisfacción y aprobación
-- **💰 Financiero:** 16% bajo presupuesto, ROI 275%
+- **👥 Cliente:** 100% de satisfacción y aprobación
+- **💰 Financiero:** 21.7% sobrecosto justificado por valor adicional entregado
 - **⏰ Entrega:** 25% antes de tiempo planificado
+- **📊 ROI:** 185% (menor al esperado pero positivo)
 
 ## **🎯 FACTORES CRÍTICOS DE ÉXITO**
 1. **📐 Metodología TSPi** aplicada rigurosamente
@@ -289,17 +308,18 @@ El proyecto Plena Studio representa un **caso de éxito ejemplar** en todos los 
 | **Performance** | 2.1 seg carga | ✅ SUPERIOR |
 | **Disponibilidad** | 99.9% uptime | ✅ EXCELENTE |
 | **Satisfacción** | 100% cliente | ✅ MÁXIMA |
-| **ROI** | 275% vs 200% esperado | ✅ SUPERADO |
+| **ROI** | 185% vs 200% esperado | 🟡 ACEPTABLE |
+| **Presupuesto** | +21.7% sobrecosto controlado | ⚠️ LECCIÓN APRENDIDA |
 
 ---
 
 ## 🏆 **CALIFICACIÓN FINAL DEL PROYECTO**
 
-### 📊 **PUNTUACIÓN:** ⭐⭐⭐⭐⭐ (5/5) EXCELENTE
+### 📊 **PUNTUACIÓN:** ⭐⭐⭐⭐☆ (4/5) MUY BUENO
 ### 📅 **Fecha de Cierre:** 24 de junio de 2025
 ### 👥 **Equipo Responsable:** Gustavo Adolfo González (QA) + Wilmer León (Dev)
-### 🚀 **Estado:** LISTO PARA PRODUCCIÓN Y OPERACIÓN EXITOSA
+### 🚀 **Estado:** LISTO PARA PRODUCCIÓN CON LECCIONES APRENDIDAS
 
 ---
 
-*El proyecto Plena Studio establece un nuevo estándar de excelencia en desarrollo de e-commerce, demostrando que la aplicación meticulosa de metodologías de calidad, testing riguroso y comunicación efectiva resulta en productos que no solo cumplen, sino que superan ampliamente las expectativas del cliente, generando valor excepcional para el negocio.*
+*El proyecto Plena Studio demuestra la importancia de la gestión integral en desarrollo de software. Aunque se presentó un sobrecosto del 21.7%, la aplicación rigurosa de metodologías de calidad y la entrega de valor adicional al cliente resultaron en un producto que supera las expectativas técnicas y de satisfacción, proporcionando valiosas lecciones para la gestión presupuestaria en futuros proyectos.*

@@ -184,14 +184,19 @@
 | **Performance** | <3 seg | 2.1 seg | -30% | ✅ SUPERADO |
 | **Defectos en Producción** | <5 | 0 | -100% | ✅ PERFECTO |
 | **Satisfacción Cliente** | 80% | 100% | +25% | ✅ EXCELENTE |
+| **Presupuesto** | $20M COP | $24.34M COP | +21.7% | ⚠️ SOBRECOSTO |
 
 ### **💰 ANÁLISIS COSTO-BENEFICIO**
 ```
-💵 Presupuesto Planificado:  $50,000
-💵 Costo Real:              $42,000  (-16% ahorro)
+💵 Presupuesto Planificado:  $20,000,000 COP
+💵 Costo Real:              $24,340,000 COP  (+21.7% sobrecosto)
+💵 Horas Planificadas:      276 horas
+💵 Horas Reales:            336 horas  (+60 horas adicionales)
+💵 Costo por Hora:          $72,464 COP
+💵 Sobrecosto Total:        $4,340,000 COP
 💵 ROI Esperado:            200%
-💵 ROI Actual:              275%     (+37.5% mejora)
-💵 Tiempo de Amortización:  3 meses  (vs 4 meses estimados)
+💵 ROI Actual:              185%     (-7.5% menor al esperado)
+💵 Tiempo de Amortización:  4.2 meses  (vs 3.5 meses estimados)
 ```
 
 ## **✅ FORTALEZAS DEL PROYECTO**
@@ -242,6 +247,13 @@
    - **Solución:** Metodología TSPi para tracking preciso
    - **Resultado:** Entrega 25% antes de tiempo
 
+3. **Control de Presupuesto**
+   - **Problema:** Subestimación de complejidad técnica (semanas 3-5)
+   - **Impacto:** Sobrecosto de +21.7% (+60 horas adicionales)
+   - **Causa:** Expansión controlada del alcance para mayor valor
+   - **Solución:** Implementación de checkpoints presupuestarios semanales
+   - **Resultado:** Cliente satisfecho con valor adicional entregado
+
 ## **📚 LECCIONES APRENDIDAS**
 
 ### **🎯 MEJORES PRÁCTICAS IDENTIFICADAS**
@@ -272,10 +284,15 @@
    - ✅ Implementar monitoring desde día 1
    - ✅ Priorizar performance desde el diseño
 
-3. **👥 Equipo**
-   - ✅ Code reviews obligatorios para todos los PRs
-   - ✅ Sesiones de knowledge sharing semanales
-   - ✅ Rotación de responsabilidades para reducir silos
+3. **� Monitoreo Presupuestario**
+   - Control de gastos semanal desde día 1
+   - Alertas automáticas al superar 110% del presupuesto planificado
+   - Justificación documentada para inversiones adicionales
+
+4. **🔄 Gestión de Cambios**
+   - Process formal para cambios de alcance
+   - Evaluación de impacto presupuestario obligatoria
+   - Aprobación del cliente para sobrecostos >15%
 
 ## **🚀 PRÓXIMOS PASOS Y EVOLUCIÓN**
 
@@ -295,12 +312,12 @@
 ## **🏆 CONCLUSIONES FINALES**
 
 ### **✅ ÉXITO DEL PROYECTO**
-El proyecto Plena Studio ha sido un **éxito rotundo** en todos los aspectos medibles:
+El proyecto Plena Studio ha sido un **éxito técnico notable** en la mayoría de aspectos medibles:
 
 - **📈 Calidad:** 100% de casos de prueba pasados sin defectos críticos
 - **⚡ Performance:** Superó objetivos en un 30%
 - **👥 Cliente:** 100% de satisfacción y aprobación
-- **💰 Costos:** 16% por debajo del presupuesto
+- **💰 Costos:** 21.7% sobre presupuesto (+$4.34M COP por mayor valor entregado)
 - **⏰ Tiempo:** Entregado 25% antes de lo planificado
 
 ### **🎯 FACTORES DE ÉXITO**
