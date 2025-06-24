@@ -83,7 +83,10 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
               alt="Carrito"
               src="/cart.svg"
               style={{ cursor: "pointer" }}
-              onClick={() => navigate("/shopping-cart")}
+              onClick={() => {
+                console.log("🛒 Cart button clicked - navigating to /shopping-cart");
+                navigate("/shopping-cart");
+              }}
             />
             {totalArticulos > 0 && (
               <span className={styles.cartBadge}>{totalArticulos}</span>
@@ -218,6 +221,7 @@ const TypeFloatingHeaderWithNavi: FunctionComponent<
           <button 
             className={styles.mobileCartButton}
             onClick={() => {
+              console.log("🛒 Mobile cart button clicked - navigating to /shopping-cart");
               navigate("/shopping-cart");
               setIsMenuOpen(false);
             }}

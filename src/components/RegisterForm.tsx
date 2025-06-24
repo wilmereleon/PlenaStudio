@@ -66,9 +66,11 @@ const RegisterForm: React.FC = () => {
           nombre: formData.nombres,
           apellido: formData.apellidos,
           email: formData.correo,
-          password: formData.contraseña
+          password: formData.contraseña,
+          tipoIdentificacion: formData.tipoIdentificacion,
+          numeroIdentificacion: formData.numeroIdentificacion
         };
-        const response = await fetch('http://localhost:3000/api/usuarios', {
+        const response = await fetch('http://localhost/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -146,8 +148,10 @@ const RegisterForm: React.FC = () => {
                 className={errores.correo ? 'error' : ''}
                 placeholder="ejemplo@email.com"
                 name="correo"
+                type="email"
                 value={formData.correo}
                 onChange={handleChange}
+                autoComplete="email"
               />
             </div>
             <div className="registro-col">
@@ -196,6 +200,7 @@ const RegisterForm: React.FC = () => {
                 name="numeroIdentificacion"
                 value={formData.numeroIdentificacion}
                 onChange={handleChange}
+                autoComplete="username"
               />
             </div>
             {/* Contraseña */}
@@ -210,6 +215,7 @@ const RegisterForm: React.FC = () => {
                   name="contraseña"
                   value={formData.contraseña}
                   onChange={handleChange}
+                  autoComplete="new-password"
                   style={{ background: "#F4D7D7", borderRadius: 20, paddingRight: 36 }}
                 />
                 <span
@@ -235,11 +241,12 @@ const RegisterForm: React.FC = () => {
                 <input
                   id="confirmar"
                   className={`form-control ${errores.confirmar ? 'error' : ''}`}
-                  placeholder="Por favor digita tu contraseña"
+                  placeholder="Confirma tu contraseña"
                   type={showConfirm ? "text" : "password"}
                   name="confirmar"
                   value={formData.confirmar}
                   onChange={handleChange}
+                  autoComplete="new-password"
                   style={{ background: "#F4D7D7", borderRadius: 20, paddingRight: 36 }}
                 />
                 <span

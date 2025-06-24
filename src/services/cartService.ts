@@ -5,7 +5,7 @@ import { CartItem } from '../context/CartContext';
  */
 export class CartService {
   private static instance: CartService;
-  private baseUrl = 'http://localhost:3000/api/cart';
+  private baseUrl = 'http://localhost/api/cart';
 
   static getInstance(): CartService {
     if (!CartService.instance) {

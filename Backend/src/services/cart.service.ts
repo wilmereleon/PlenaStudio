@@ -257,8 +257,9 @@ export const cartService = {
         const existingItem = dbItemsMap.get(localItem.productId);
         
         if (existingItem) {
-          // Si existe en BD, sumar cantidades
-          const newQuantity = existingItem.cantidad + localItem.cantidad;
+          // Si existe en BD, tomar la cantidad máxima (no sumar)
+          // Esto evita duplicación al mantener la cantidad más reciente
+          const newQuantity = Math.max(existingItem.cantidad, localItem.cantidad);
           await this.updateCartItemQuantity(userId, localItem.productId, newQuantity);
         } else {
           // Si no existe en BD, agregarlo

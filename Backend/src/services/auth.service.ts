@@ -22,16 +22,6 @@ export const authService = {  /**
 
     // Inserta el usuario en la base de datos
     await db.query(
-<<<<<<< HEAD
-      "INSERT INTO usuario (nombre, apellido, email, password, fecha_registro) VALUES (?, ?, ?, ?, NOW())",
-      [nombre, apellido, email, passwordHash]
-    );
-
-    // Recupera el usuario insertado para devolver el id
-    const [userRows] = await db.query("SELECT id_usuario, nombre, apellido, email FROM usuario WHERE email = ?", [email]);
-    const user = (userRows as any[])[0];
-    return { id: user.id_usuario, nombre: user.nombre, apellido: user.apellido, email: user.email };
-=======
       "INSERT INTO usuario (nombre, email, password_hash, fecha_registro) VALUES (?, ?, ?, NOW())",
       [nombre, email, passwordHash]
     );
@@ -40,7 +30,6 @@ export const authService = {  /**
     const [userRows] = await db.query("SELECT id_usuario, nombre, email FROM usuario WHERE email = ?", [email]);
     const user = (userRows as any[])[0];
     return { id: user.id_usuario, nombre: user.nombre, email: user.email };
->>>>>>> master
   },
 
   /**
@@ -53,15 +42,8 @@ export const authService = {  /**
     // Busca el usuario por email
     const [rows] = await db.query("SELECT * FROM usuario WHERE email = ?", [email]);
     const user = (rows as any[])[0];
-<<<<<<< HEAD
-    if (!user) throw new Error("Usuario o contraseña incorrectos");
-
-    // Compara la contraseña hasheada
-    const valid = await bcrypt.compare(password, user.password);
-=======
     if (!user) throw new Error("Usuario o contraseña incorrectos");    // Compara la contraseña hasheada
     const valid = await bcrypt.compare(password, user.password_hash);
->>>>>>> master
     if (!valid) throw new Error("Usuario o contraseña incorrectos");
 
     // Genera el token JWT
@@ -69,15 +51,8 @@ export const authService = {  /**
       { userId: user.id_usuario, email: user.email },
       process.env.JWT_SECRET || "secreto_super_seguro",
       { expiresIn: "7d" }
-<<<<<<< HEAD
-    );
-
-    return {
-      user: { id: user.id_usuario, nombre: user.nombre, apellido: user.apellido, email: user.email },
-=======
     );    return {
       user: { id: user.id_usuario, nombre: user.nombre, email: user.email },
->>>>>>> master
       token
     };
   }

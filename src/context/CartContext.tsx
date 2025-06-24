@@ -75,9 +75,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         // LOGIN: Usuario se autentica
         if (cart) {
           // Login exitoso con carrito sincronizado desde servidor
+          console.log("🟢 Login exitoso - carrito sincronizado recibido:", cart.length, "items");
           setCartItems(cart);
         } else {
           // Login exitoso, cargar carrito del servidor
+          console.log("🟡 Login exitoso - cargando carrito del servidor");
           loadCartFromServer();
         }
       } else if (!newAuthState && wasAuthenticated) {
@@ -135,10 +137,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
    */
   const loadCartFromServer = async () => {
     try {
+      console.log("📥 Cargando carrito del servidor...");
       const serverCart = await cartService.getCart();
+      console.log("📥 Carrito cargado del servidor:", serverCart.length, "items");
       setCartItems(serverCart);
     } catch (error) {
-      console.error('Error al cargar carrito del servidor:', error);
+      console.error('❌ Error al cargar carrito del servidor:', error);
       // Fallback a carrito local en caso de error
       loadCartFromLocalStorage();
     }

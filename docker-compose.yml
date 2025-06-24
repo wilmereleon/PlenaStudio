@@ -10,11 +10,7 @@ services:
       MYSQL_USER: plena_user
       MYSQL_PASSWORD: plena_password
     ports:
-<<<<<<< HEAD
-      - "3307:3306"
-=======
       - "3308:3306"
->>>>>>> master
     volumes:
       - mysql_data:/var/lib/mysql
       - ./script:/docker-entrypoint-initdb.d
@@ -48,10 +44,6 @@ services:
       - plena-network
     volumes:
       - ./Backend/src:/app/src
-<<<<<<< HEAD
-
-=======
->>>>>>> master
   # Frontend React
   frontend:
     build:
@@ -60,11 +52,7 @@ services:
     container_name: plena-frontend
     restart: unless-stopped
     environment:
-<<<<<<< HEAD
-      - VITE_API_URL=http://localhost:3001
-=======
       - VITE_API_URL=http://backend:3001
->>>>>>> master
       - VITE_APP_NAME=PlenaStudio
     ports:
       - "3000:3000"

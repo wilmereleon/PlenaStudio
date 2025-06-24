@@ -174,7 +174,7 @@ class AuthService {
    * @throws Error si las credenciales son incorrectas.
    */
   async login(credentials: LoginCredentials): Promise<{ user: User; token: string; cart?: CartItem[] }> {
-    const response = await fetch('http://localhost:3000/api/auth/login', {
+    const response = await fetch('http://localhost/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials)
@@ -192,14 +192,17 @@ class AuthService {
     // Sincronizar carrito local con el servidor
     try {
       const localCartItems = this.getLocalCartItems();
+      console.log("🔄 Sincronizando carrito - items locales:", localCartItems.length);
+      
       const syncedCart = await cartService.syncCartOnLogin(localCartItems);
+      console.log("✅ Carrito sincronizado - items finales:", syncedCart.length);
       
       // Limpiar carrito local después de sincronización exitosa
       this.clearLocalCart();
       
       return { ...data, cart: syncedCart };
     } catch (cartError) {
-      console.warn('Error al sincronizar carrito, continuando con login:', cartError);
+      console.warn('❌ Error al sincronizar carrito, continuando con login:', cartError);
       return data;
     }
   }
