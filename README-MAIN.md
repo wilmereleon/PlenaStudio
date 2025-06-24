@@ -1,99 +1,3 @@
-<<<<<<< HEAD
-### **Inicio de Sesión**
-
-- **Vista de la interfaz:**
-
-  [![Pantalla de Home](https://via.placeholder.com/400x200?text=Login+Plena+Studio)](https://capable-kiss.surge.sh/)
-  [![Pantalla de Home](https://via.placeholder.com/400x200?text=Login+Plena+Studio)](https://capable-kiss.surge.sh/login)
-
-- **Ejemplo de petición a la API:**
-
-  ```http
-  POST /api/auth/login
-  Content-Type: application/json
-
-  {
-    "email": "usuario@correo.com",
-    "password": "123456"
-  }
-  ```
-
-- **Respuesta esperada:**
-
-  ```json
-  {
-    "user": {
-      "id": "1",
-      "nombre": "Juan",
-      "apellido": "Pérez",
-      "email": "usuario@correo.com"
-    },
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-  }
-  ```
-
----
-
-### **Registro de Usuario**
-
-- **Vista de la interfaz:**
-
-  ![Pantalla de registro]([https://via.placeholder.com/400x200?text=Registro+Plena+Studio](https://capable-kiss.surge.sh/register))
-
-- **Ejemplo de petición a la API:**
-
-  ```http
-  POST /api/auth/register
-  Content-Type: application/json
-
-  {
-    "nombre": "Ana",
-    "apellido": "López",
-    "email": "ana@correo.com",
-    "password": "abcdef"
-  }
-  ```
-
-- **Respuesta esperada:**
-
-  ```json
-  {
-    "id": "2",
-    "nombre": "Ana",
-    "apellido": "López",
-    "email": "ana@correo.com"
-  }
-  ```
-
----
-
-### **Carrito de Compras**
-
-- **Vista de la interfaz:**
-
-  ![Pantalla del carrito](https://via.placeholder.com/400x200?text=Carrito+de+Compras)
-
-- **Ejemplo de petición para obtener el carrito:**
-
-  ```http
-  GET /api/cart?userId=1
-  ```
-
-- **Respuesta esperada:**
-
-  ```json
-  {
-    "userId": "1",
-    "items": [
-      {
-        "productId": "1",
-        "nombre": "Arete Dorado",
-        "cantidad": 2,
-        "precioUnitario": 50000
-      }
-    ]
-  }
-=======
 # 💎 Plena Studio - E-Commerce de Joyería
 
 <div align="center">
@@ -114,29 +18,6 @@
 [🛠️ Desarrollo](#-desarrollo-local)
 
 </div>
-
----
-
-## 🎉 ESTADO ACTUAL - JUNIO 2025
-
-### ✅ **COMPLETAMENTE FUNCIONAL**
-- 🔐 **Autenticación:** Registro y login funcionando con BD real + fallback localStorage
-- 🛒 **Carrito:** Sincronización automática tras login/logout/registro
-- 🗄️ **Backend:** API completa con base de datos MySQL
-- 🌐 **Frontend:** React + TypeScript con Vite
-- 🐳 **Docker:** Entorno completo containerizado
-- 📱 **Responsive:** Diseño adaptable para móviles y desktop
-
-### 🧪 **COMPONENTES DE PRUEBA DISPONIBLES**
-- `/registro-test` - Pruebas de registro de usuario
-- `/cart-sync-test` - Pruebas de sincronización de carrito
-- `/auth-test` - Pruebas de autenticación
-- **Credenciales de prueba:** Ver `CREDENCIALES-ACCESO.md`
-
-### 📋 **DOCUMENTACIÓN ACTUALIZADA**
-- [`CORRECCIONES-CARRITO-COMPLETAS.md`](CORRECCIONES-CARRITO-COMPLETAS.md) - Estado final de correcciones
-- [`CREDENCIALES-ACCESO.md`](CREDENCIALES-ACCESO.md) - Usuarios de prueba y acceso
-- [`README-Docker.md`](README-Docker.md) - Guía completa de Docker
 
 ## 📋 Tabla de Contenidos
 
@@ -526,4 +407,3 @@ Este proyecto está bajo la Licencia ISC. Ver [LICENSE](LICENSE) para más detal
 **Hecho con ❤️ para la comunidad de e-commerce**
 
 </div>
->>>>>>> master

@@ -4,16 +4,44 @@ import { authService } from "../services/auth.service";
 /**
  * Controlador de autenticación: registro, login y logout.
  */
-export const authController = {
-  /**
+export const authController = {  /**
    * Registro de usuario.
    */
   async register(req: Request, res: Response) {
     try {
-      const { nombre, apellido, email, password } = req.body;
-      const user = await authService.register({ nombre, apellido, email, password });
+      console.log('📝 Registro recibido:', req.body);
+      
+      const { 
+        nombre, 
+        apellido, 
+        email, 
+        password, 
+        edad, 
+        tipoIdentificacion, 
+        numeroIdentificacion 
+      } = req.body;
+      
+      // Validar campos requeridos
+      if (!nombre || !email || !password) {
+        return res.status(400).json({ 
+          error: 'Campos requeridos: nombre, email, password' 
+        });
+      }
+      
+      const userData = {
+        nombre,
+        apellido: apellido || '',
+        email,
+        password,
+        edad: edad || null,
+        tipoIdentificacion: tipoIdentificacion || 'CC',
+        numeroIdentificacion: numeroIdentificacion || null
+      };
+      
+      const user = await authService.register(userData);
       res.status(201).json(user);
     } catch (error: any) {
+      console.error('❌ Error en registro:', error);
       res.status(400).json({ error: error.message });
     }
   },
