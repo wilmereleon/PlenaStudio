@@ -1,0 +1,1949 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plena - Joyería y Accesorios Premium</title>
+    <meta name="description" content="Plena - Descubre nuestra colección exclusiva de joyer�a y 
+accesorios premium. Anillos, aretes, pulseras y bufandas de lujo.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="favicon-32x32.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="favicon-16x16.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta name="theme-color" content="#D4AF37">
+    <style>
+        /* 🎨 PLENA - BRAND IDENTITY & DESIGN SYSTEM */
+        :root {
+            /* Nueva Paleta Cromática Mejorada */
+            --plena-light-beige: #F5F5DC;
+            --plena-lavender: #E6E6FA;
+            --plena-sky-blue: #87CEEB;
+            --plena-lime-green: #9ACD32;
+            --plena-forest-green: #228B22;
+            --plena-dark-green: #006400;
+            
+            /* Colores Premium Originales */
+            --plena-gold: #D4AF37;
+            --plena-gold-dark: #B8941F;
+            --plena-gold-light: #E8C44F;
+            --plena-emerald: #0F5132;
+            --plena-emerald-dark: #0A3D26;
+            --plena-emerald-light: #2D8B47;
+            --plena-sage: #87A96B;
+            --plena-sage-light: #A6C285;
+            --plena-pearl: #F8F9FA;
+            --plena-pearl-dark: #E9ECEF;
+            --plena-rose: #E8B4A0;
+            --plena-rose-light: #F2C7B5;
+            --plena-charcoal: #2C3E50;
+            --plena-charcoal-light: #34495E;
+            --plena-black: #1A1A1A;
+            --plena-black-purple: #2D1B5F;
+            --plena-black-purple-light: #4A2C7A;
+            --plena-white: #FFFFFF;
+            
+            /* Typography Scale */
+            --font-heading: 'Inter', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-accent: 'Inter', sans-serif;
+            
+            /* Spacing System */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --space-4xl: 6rem;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+            --shadow-premium: 0 25px 50px rgba(212, 175, 55, 0.25);
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--plena-charcoal);
+            background: linear-gradient(135deg, var(--plena-light-beige) 0%, var(--plena-lavender) 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* 🎨 ILUSTRACIONES SUTILES DE FONDO */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(135, 206, 235, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(154, 205, 50, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(230, 230, 250, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Ilustraciones decorativas específicas */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                /* Plantas y elementos orgánicos */
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 
+200"><circle cx="100" cy="100" r="40" fill="rgba(34,139,34,0.1)"/><path d="M100 60 Q70 90 100 100 Q130 90 
+100 60" fill="rgba(135,206,235,0.1)"/><path d="M100 140 Q70 110 100 100 Q130 110 100 140" 
+fill="rgba(135,206,235,0.1)"/><circle cx="100" cy="100" r="6" fill="rgba(154,205,50,0.15)"/></svg>'),
+                /* Formas geométricas */
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 
+150"><rect x="25" y="25" width="100" height="100" fill="rgba(230,230,250,0.08)" rx="15"/><rect x="40" 
+y="40" width="70" height="70" fill="rgba(135,206,235,0.06)" rx="10"/><circle cx="75" cy="75" r="20" 
+fill="rgba(154,205,50,0.1)"/><circle cx="75" cy="75" r="8" fill="rgba(0,100,0,0.12)"/></svg>'),
+                /* Elementos decorativos pequeños */
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><rect 
+x="10" y="30" width="60" height="8" fill="rgba(135,206,235,0.08)" rx="4"/><rect x="30" y="10" width="8" 
+height="60" fill="rgba(154,205,50,0.08)" rx="4"/><circle cx="40" cy="40" r="6" 
+fill="rgba(0,100,0,0.1)"/></svg>');
+            background-position: 
+                15% 25%, 
+                85% 75%, 
+                45% 55%;
+            background-size: 
+                300px 300px, 
+                250px 250px, 
+                120px 120px;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+            animation: floatElements 40s ease-in-out infinite;
+        }
+        
+        @keyframes floatElements {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.6; }
+            25% { transform: translate(10px, -15px) rotate(5deg); opacity: 0.8; }
+            50% { transform: translate(-5px, 10px) rotate(-3deg); opacity: 0.7; }
+            75% { transform: translate(15px, 5px) rotate(8deg); opacity: 0.9; }
+        }
+        
+        /* Patrones geométricos sutiles inspirados en bufandas */
+        .geometric-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(45deg, transparent 40%, rgba(34, 139, 34, 0.05) 40%, rgba(34, 139, 34, 
+0.05) 60%, transparent 60%),
+                linear-gradient(-45deg, transparent 40%, rgba(135, 206, 235, 0.05) 40%, rgba(135, 206, 
+235, 0.05) 60%, transparent 60%);
+            background-size: 60px 60px;
+            opacity: 0.3;
+            animation: subtleMove 30s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes subtleMove {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(10px) translateY(-5px); }
+            50% { transform: translateX(-5px) translateY(10px); }
+            75% { transform: translateX(15px) translateY(5px); }
+        }
+        
+        /* Elementos decorativos orgánicos */
+        .organic-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 10% 10%, rgba(230, 230, 250, 0.1) 0%, transparent 30%),
+                radial-gradient(ellipse at 90% 20%, rgba(154, 205, 50, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 20% 80%, rgba(135, 206, 235, 0.08) 0%, transparent 35%),
+                radial-gradient(ellipse at 80% 70%, rgba(34, 139, 34, 0.06) 0%, transparent 30%);
+            pointer-events: none;
+            animation: organicFloat 25s ease-in-out infinite;
+        }
+        
+        @keyframes organicFloat {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            33% { transform: scale(1.05) rotate(1deg); }
+            66% { transform: scale(0.98) rotate(-1deg); }
+        }
+        
+        /* 🎯 HEADER & NAVIGATION */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition-normal);
+        }
+        
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .header.scrolled .plena-logo,
+        .header.scrolled .nav-link,
+        .header.scrolled .social-icon,
+        .header.scrolled .mobile-toggle {
+            color: var(--plena-charcoal);
+        }
+        
+        .header.scrolled .logo-main-text {
+            color: var(--plena-charcoal);
+        }
+        
+        .header.scrolled .logo-subtitle-text {
+            color: rgba(44, 62, 80, 0.8);
+        }
+        
+        .header.scrolled .logo-silhouette svg path {
+            fill: var(--plena-charcoal);
+            stroke: var(--plena-charcoal);
+        }
+        
+        .header.scrolled .logo-silhouette svg circle {
+            fill: var(--plena-sky-blue);
+            stroke: var(--plena-charcoal);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        /* 💎 PLENA LOGO REDESIGNED - ARTISTIC SILHOUETTE */
+        .plena-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            text-decoration: none;
+            color: white;
+            font-family: var(--font-heading);
+            transition: var(--transition-normal);
+            position: relative;
+        }
+        
+        .plena-logo:hover {
+            transform: translateY(-1px);
+            opacity: 0.8;
+        }
+        
+        /* Logo con silhouette artística */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .logo-silhouette {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+        
+        .logo-silhouette svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .logo-text-container {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+        
+        .logo-main-text {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            font-size: 1.8rem;
+            line-height: 1;
+            color: white;
+            letter-spacing: 0.1em;
+            margin-bottom: 2px;
+        }
+        
+        .logo-subtitle-text {
+            font-family: var(--font-heading);
+            font-weight: 300;
+            font-size: 0.7rem;
+            line-height: 1;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            letter-spacing: 0.05em;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+        
+        .logo-main {
+            background: linear-gradient(135deg, var(--plena-black-purple) 0%, var(--plena-gold) 50%, 
+var(--plena-black-purple-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+        
+        .logo-main::after {
+            content: '✨';
+            position: absolute;
+            right: -25px;
+            top: -5px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        .logo-subtitle {
+            font-size: 0.5rem;
+            color: var(--plena-sage);
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-top: var(--space-xs);
+        }
+        
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            gap: var(--space-xl);
+            list-style: none;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: white;
+            font-weight: 400;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+            transition: var(--transition-normal);
+            position: relative;
+            padding: var(--space-sm) 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+            transition: var(--transition-normal);
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* 🌐 SOCIAL ICONS */
+        .nav-social {
+            display: flex;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+        
+        .social-icon {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition-normal);
+            padding: var(--space-sm);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .social-icon:hover {
+            color: rgba(255, 255, 255, 0.7);
+            transform: translateY(-2px);
+        }
+        
+        /* 🌟 HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: url('InsumosIMG/womenEarring13.jpeg') center/cover;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(15, 81, 50, 0.7) 0%, 
+                rgba(15, 81, 50, 0.6) 50%, 
+                rgba(15, 81, 50, 0.5) 100%);
+            z-index: 1;
+        }
+        
+        @keyframes patternMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(80px, 80px); }
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, 
+                rgba(0, 0, 0, 0.1) 0%, 
+                rgba(0, 0, 0, 0.3) 100%);
+            z-index: 2;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            z-index: 3;
+            position: relative;
+            padding: 0 var(--space-lg);
+            color: white;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--plena-gold);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-xl);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: var(--space-lg);
+            color: white;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            margin-bottom: var(--space-2xl);
+            line-height: 1.4;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            letter-spacing: 0.01em;
+        }
+        
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-md);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: var(--space-lg) var(--space-2xl);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: var(--transition-normal);
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero-cta:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 🎨 PRODUCTS SHOWCASE */
+        .products {
+            padding: var(--space-4xl) 0;
+            background: linear-gradient(135deg, 
+                var(--plena-pearl) 0%, 
+                var(--plena-light-beige) 100%);
+            position: relative;
+        }
+        
+        .products::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 
+200"><defs><pattern id="floral" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><path 
+d="M20,5 Q30,15 20,25 Q10,15 20,5 Z" fill="rgba(15,81,50,0.03)"/><path d="M5,20 Q15,30 25,20 Q15,10 5,20 
+Z" fill="rgba(15,81,50,0.03)"/></pattern></defs><rect width="200" height="200" 
+fill="url(%23floral)"/></svg>') center/120px 120px;
+            opacity: 0.3;
+            animation: floralMove 50s linear infinite;
+        }
+        
+        @keyframes floralMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(120px, 120px) rotate(360deg); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-4xl);
+        }
+        
+        .section-badge {
+            display: inline-block;
+            background: rgba(15, 81, 50, 0.1);
+            color: var(--plena-emerald);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-lg);
+            border: 1px solid rgba(15, 81, 50, 0.2);
+        }
+        
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--plena-charcoal);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--plena-sage);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* 🎨 PRODUCTS GALLERY */
+        .products-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            margin-top: var(--space-4xl);
+        }
+        
+        .gallery-row {
+            display: flex;
+            gap: var(--space-lg);
+            height: 300px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+        
+        .gallery-item.large {
+            flex: 2;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            padding: var(--space-xl);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: white;
+        }
+        
+        .gallery-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-4xl);
+        }
+        
+        .product-card {
+            background: var(--plena-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-md);
+            background: rgba(212, 175, 55, 0.9);
+            color: var(--plena-white);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        
+        .product-info {
+            padding: var(--space-xl);
+        }
+        
+        .product-category {
+            color: var(--plena-sage);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .product-title {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--plena-charcoal);
+            margin-bottom: var(--space-md);
+            line-height: 1.3;
+        }
+        
+        .product-description {
+            color: var(--plena-sage);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* 🌟 BRAND STORY */
+        .brand-story {
+            padding: var(--space-4xl) 0;
+            background: linear-gradient(135deg, 
+                var(--plena-charcoal) 0%, 
+                var(--plena-forest-green) 50%, 
+                var(--plena-dark-green) 100%);
+            position: relative;
+            color: white;
+        }
+        
+        .brand-story::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('InsumosIMG/womenEarring01.jpeg') center/cover;
+            opacity: 0.08;
+            z-index: 1;
+        }
+        
+        .brand-story::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 
+150"><defs><pattern id="textile" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><path 
+d="M0,15 Q7.5,0 15,15 Q22.5,30 30,15" stroke="rgba(230,230,250,0.1)" stroke-width="2" fill="none"/><path 
+d="M15,0 Q0,7.5 15,15 Q30,22.5 15,30" stroke="rgba(135,206,235,0.1)" stroke-width="2" 
+fill="none"/></pattern></defs><rect width="150" height="150" fill="url(%23textile)"/></svg>') 
+center/100px 100px;
+            opacity: 0.2;
+            animation: textileMove 60s linear infinite;
+            z-index: 2;
+        }
+        
+        @keyframes textileMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 100px); }
+        }
+        
+        .brand-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4xl);
+            align-items: start;
+        }
+        
+        .brand-images {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            height: 600px;
+        }
+        
+        .brand-image-main {
+            background: url('InsumosIMG/womanEarring11.jpeg') center/cover;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            height: 100%;
+        }
+        
+        .brand-right-column {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            height: 600px;
+        }
+        
+        .brand-image-secondary {
+            background: url('InsumosIMG/girlRing01.jpeg') center/cover;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            height: 250px;
+        }
+        
+        .brand-text-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: var(--space-lg);
+        }
+        
+        .brand-image-tertiary {
+            display: none;
+        }
+        
+        .brand-image-main::after,
+        .brand-image-secondary::after,
+        .brand-image-tertiary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), rgba(15, 81, 50, 0.1));
+        }
+        
+        .brand-text {
+            padding: var(--space-xl);
+        }
+        
+        .brand-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--space-xl);
+            line-height: 1.2;
+        }
+        
+        .brand-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .brand-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+        
+        .brand-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--plena-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--plena-white);
+            font-size: 1.4rem;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .feature-text {
+            font-weight: 600;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .brand-image {
+            background: url('InsumosIMG/wallpaper02.jpeg') center/cover;
+            border-radius: 20px;
+            min-height: 500px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .brand-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), rgba(15, 81, 50, 0.1));
+        }
+        
+        /* � NEWSLETTER SECTION */
+        .newsletter-section {
+            padding: var(--space-4xl) 0;
+            background: var(--plena-charcoal);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4xl);
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-image {
+            position: relative;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .newsletter-bg {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .newsletter-form {
+            color: white;
+            padding: var(--space-xl);
+        }
+        
+        .newsletter-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: white;
+            line-height: 1.2;
+        }
+        
+        .newsletter-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-2xl);
+            line-height: 1.6;
+        }
+        
+        .newsletter-input-group {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: var(--space-lg);
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .newsletter-button {
+            background: var(--plena-emerald);
+            color: white;
+            border: none;
+            padding: var(--space-lg) var(--space-2xl);
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            box-shadow: 0 4px 15px rgba(15, 81, 50, 0.3);
+        }
+        
+        .newsletter-button:hover {
+            background: var(--plena-emerald-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(15, 81, 50, 0.4);
+        }
+        
+        /* �📱 SOCIAL SECTION */
+        .social-section {
+            padding: var(--space-4xl) 0;
+            background: var(--plena-forest-green);
+            color: var(--plena-white);
+            text-align: center;
+            position: relative;
+        }
+        
+        .social-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(15, 81, 50, 0.1), rgba(34, 139, 34, 0.1));
+            z-index: 1;
+        }
+        
+        .social-content {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .social-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            background: linear-gradient(135deg, var(--plena-gold) 0%, var(--plena-rose) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .social-description {
+            font-size: 1.1rem;
+            color: var(--plena-pearl);
+            margin-bottom: var(--space-2xl);
+            line-height: 1.6;
+        }
+        
+        .instagram-button {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-md);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--plena-white);
+            padding: var(--space-lg) var(--space-2xl);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition-normal);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .instagram-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .instagram-icon {
+            width: 24px;
+            height: 24px;
+        }
+        
+        /* 🎯 FOOTER */
+        .footer {
+            background: var(--plena-charcoal);
+            color: var(--plena-pearl);
+            padding: var(--space-4xl) 0 var(--space-xl);
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 
+100"><defs><pattern id="footerPattern" x="0" y="0" width="25" height="25" 
+patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="1" 
+fill="rgba(245,245,220,0.03)"/></pattern></defs><rect width="100" height="100" 
+fill="url(%23footerPattern)"/></svg>') center/50px 50px;
+            opacity: 0.5;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: var(--space-4xl);
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .footer-brand .logo-letters {
+            display: flex;
+            align-items: center;
+            gap: 1px;
+        }
+        
+        .footer-brand .logo-letter {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1.3rem;
+            line-height: 1;
+            color: var(--plena-charcoal);
+        }
+        
+        .footer-description {
+            color: var(--plena-sage);
+            line-height: 1.6;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .footer-section h4 {
+            color: var(--plena-emerald);
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        
+        .footer-links a {
+            color: var(--plena-sage);
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+        
+        .footer-links a:hover {
+            color: var(--plena-emerald);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid var(--plena-sage);
+            padding-top: var(--space-xl);
+            text-align: center;
+            color: var(--plena-sage);
+        }
+        
+        /* 🎭 ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* 📱 RESPONSIVE DESIGN */
+        @media (max-width: 1024px) {
+            .brand-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+            
+            .brand-images {
+                height: 400px;
+            }
+            
+            .brand-right-column {
+                height: auto;
+            }
+            
+            .brand-image-secondary {
+                height: 200px;
+            }
+            
+            .newsletter-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+            
+            .newsletter-image {
+                height: 300px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .hero-content {
+                padding: 0 var(--space-md);
+            }
+            
+            .products-gallery {
+                gap: var(--space-md);
+            }
+            
+            .gallery-row {
+                flex-direction: column;
+                height: auto;
+                gap: var(--space-md);
+            }
+            
+            .gallery-item {
+                height: 250px;
+            }
+            
+            .newsletter-input-group {
+                flex-direction: column;
+            }
+            
+            .newsletter-button {
+                width: 100%;
+            }
+            
+            .brand-features {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 🎨 SCROLL ANIMATIONS */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 💫 FLOATING ELEMENTS */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 4s; }
+        .floating-element:nth-child(4) { bottom: 10%; right: 20%; animation-delay: 1s; }
+        
+        /* 🖼️ MODAL STYLES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            position: relative;
+            max-width: 80%;
+            max-height: 80%;
+            animation: zoomIn 0.3s ease;
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: auto;
+            border-radius: var(--space-md);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: var(--plena-gold);
+            color: var(--plena-white);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+        
+        .modal-close:hover {
+            background: var(--plena-gold-light);
+            transform: scale(1.1);
+        }
+        
+        .modal-info {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            right: 0;
+            background: var(--plena-white);
+            padding: var(--space-lg);
+            border-radius: var(--space-md);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-info h3 {
+            color: var(--plena-charcoal);
+            margin-bottom: var(--space-sm);
+            font-family: var(--font-heading);
+        }
+        
+        .modal-info p {
+            color: var(--plena-sage);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        /* 🎯 CLICKABLE PRODUCT IMAGES */
+        .product-image {
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+        
+        .product-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image::after {
+            content: '🔍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: var(--space-sm);
+            border-radius: 50%;
+            opacity: 0;
+            transition: var(--transition-normal);
+            font-size: 1.2rem;
+        }
+        
+        .product-image:hover::after {
+            opacity: 1;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inte
+r:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 🌟 FLOATING ELEMENTS -->
+    <div class="floating-element">💎</div>
+    <div class="floating-element">✨</div>
+    <div class="floating-element">🌟</div>
+    <div class="floating-element">💫</div>
+    
+    <!-- � ELEMENTOS DECORATIVOS DE FONDO -->
+    <div class="geometric-pattern"></div>
+    <div class="organic-shapes"></div>
+    
+    <!-- �🎯 HEADER -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="#home" class="plena-logo">
+                <div class="logo-container">
+                    <div class="logo-silhouette">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Woman's face silhouette -->
+                            <path d="M50 15 C40 15, 35 25, 35 35 C35 40, 37 45, 40 48 C38 50, 37 53, 37 
+56 C37 60, 40 63, 43 65 C45 67, 47 68, 50 68 C53 68, 55 67, 57 65 C60 63, 63 60, 63 56 C63 53, 62 50, 60 
+48 C63 45, 65 40, 65 35 C65 25, 60 15, 50 15 Z" 
+                                  fill="white" stroke="white" stroke-width="1"/>
+                            
+                            <!-- Hair with blue accent -->
+                            <path d="M35 25 C32 20, 30 15, 35 12 C40 10, 45 12, 50 15 C55 12, 60 10, 65 
+12 C70 15, 68 20, 65 25 C68 30, 70 35, 68 40 C65 42, 60 40, 55 38 C50 36, 45 36, 40 38 C35 40, 30 42, 32 
+38 C34 35, 35 30, 35 25 Z" 
+                                  fill="rgba(135, 206, 235, 0.7)" stroke="white" stroke-width="1"/>
+                            
+                            <!-- Additional hair detail -->
+                            <path d="M45 20 C48 18, 52 18, 55 20 C58 22, 60 25, 58 28 C55 30, 50 28, 45 
+28 C42 25, 43 22, 45 20 Z" 
+                                  fill="rgba(135, 206, 235, 0.5)" stroke="white" stroke-width="0.5"/>
+                            
+                            <!-- Earring -->
+                            <circle cx="38" cy="52" r="3" fill="rgba(135, 206, 235, 0.8)" stroke="white" 
+stroke-width="1"/>
+                            
+                            <!-- Neck -->
+                            <path d="M45 65 C47 68, 48 70, 50 72 C52 70, 53 68, 55 65" 
+                                  fill="none" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text-container">
+                        <div class="logo-main-text">PLENA</div>
+                        <div class="logo-subtitle-text">Joyería y accesorios</div>
+                    </div>
+                </div>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#productos" class="nav-link">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#historia" class="nav-link">Historia</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contacto" class="nav-link">Contacto</a>
+                </li>
+            </ul>
+            
+            <div class="nav-social">
+                <a href="https://instagram.com/plenaestudio.co" target="_blank" class="social-icon" 
+aria-label="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="X">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 
+21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+            </div>
+            
+            <button class="mobile-toggle" id="mobile-toggle">
+                ☰
+            </button>
+        </nav>
+    </header>
+    
+    <!-- 🌟 HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Descubre nuestra<br>
+                nueva colección<br>
+                limitada.
+            </h1>
+            <p class="hero-subtitle">DISPONIBLE AHORA</p>
+            <a href="#productos" class="hero-cta">
+                Explorar colección
+            </a>
+        </div>
+    </section>
+    
+    <!-- 🎨 PRODUCTS SECTION -->
+    <section class="products" id="productos">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <span class="section-badge">💎 Nuestros Productos</span>
+                <h2 class="section-title">Colección Premium</h2>
+                <p class="section-description">
+                    Cada pieza es una obra de arte, diseñada para resaltar tu personalidad única y 
+sofisticada.
+                </p>
+            </div>
+            
+            <!-- Galería de productos estilo grid -->
+            <div class="products-gallery">
+                <div class="gallery-row">
+                    <div class="gallery-item large" onclick="openModal('womenEarring01.jpeg', 'Aretes 
+Elegantes', 'Aretes de diseño exclusivo con acabados premium')">
+                        <div class="gallery-image" style="background-image: 
+url('InsumosIMG/womenEarring01.jpeg');"></div>
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Aretes Elegantes</h3>
+                                <p>Diseños únicos premium</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openModal('womenEarring02.jpeg', 'Bufandas de 
+Lujo', 'Seda premium con patrones exclusivos y acabados artesanales')">
+                        <div class="gallery-image" style="background-image: 
+url('InsumosIMG/womenEarring02.jpeg');"></div>
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Bufandas de Lujo</h3>
+                                <p>Seda premium</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-row">
+                    <div class="gallery-item" onclick="openModal('ring01.jpeg', 'Anillos Especiales', 
+'Anillos con diseños únicos y piedras preciosas')">
+                        <div class="gallery-image" style="background-image: 
+url('InsumosIMG/ring01.jpeg');"></div>
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Anillos</h3>
+                                <p>Especiales</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openModal('womenEarring04.jpeg', 'Gama de 
+Colores', 'Ensamble perfecto de piezas con tonalidades vibrantes y combinaciones únicas')">
+                        <div class="gallery-image" style="background-image: 
+url('InsumosIMG/womenEarring04.jpeg');"></div>
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Gama de Colores</h3>
+                                <p>Ensamble único</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item large" onclick="openModal('womenEarring05.jpeg', 'Materiales 
+Premium', 'Metales nobles, piedras preciosas y elementos naturales de la más alta calidad')">
+                        <div class="gallery-image" style="background-image: 
+url('InsumosIMG/womenEarring05.jpeg');"></div>
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Materiales Premium</h3>
+                                <p>Calidad excepcional</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 🌟 BRAND STORY -->
+    <section class="brand-story" id="historia">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="brand-title">Nuestra Historia</h2>
+            </div>
+            <div class="brand-content">
+                <div class="brand-images scroll-reveal animate-float">
+                    <div class="brand-image-main"></div>
+                </div>
+                
+                <div class="brand-right-column">
+                    <div class="brand-image-secondary"></div>
+                    <div class="brand-text-right scroll-reveal">
+                        <p class="brand-description">
+                            Todo empieza con una idea. Tal vez quieras comenzar un negocio o convertir un 
+                            pasatiempo en algo más. O bien, es posible que tengas un proyecto creativo 
+para 
+                            compartir con el mundo. Sea lo que sea, la manera en la que cuentas tu 
+historia 
+                            online puede marcar la diferencia.
+                        </p>
+                        <p class="brand-description">
+                            No te preocupes por sonar profesional. Suena como tú. Hay más de 1500 
+millones de sitios 
+                            web, pero tu historia es lo que lo diferencia del resto. Si vuelves a leer 
+las palabras y no oyes tu 
+                            propia voz en la mente, es una señal de que aún tienes mucho trabajo por 
+hacer.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- � NEWSLETTER SUBSCRIPTION -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-image">
+                    <div class="newsletter-bg" style="background-image: 
+url('InsumosIMG/womenEarring06.jpeg');"></div>
+                </div>
+                <div class="newsletter-form">
+                    <h2 class="newsletter-title">Mantente al día.</h2>
+                    <p class="newsletter-description">
+                        Recibe una notificación cuando esté disponible nuestra próxima colección.
+                    </p>
+                    <div class="newsletter-input-group">
+                        <input type="email" placeholder="Correo electrónico" class="newsletter-input">
+                        <button class="newsletter-button">Suscribirse</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- �📱 SOCIAL SECTION -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-brand">
+                        <div class="logo-letters">
+                            <span class="logo-letter">P</span>
+                            <span class="logo-letter">L</span>
+                            <span class="logo-letter">E</span>
+                            <span class="logo-letter">N</span>
+                            <span class="logo-letter">A</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        Plena es más que joyería, es una expresión de tu personalidad única. 
+                        Cada pieza está diseñada para acompañarte en tus momentos más especiales.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Productos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#aretes">Aretes</a></li>
+                        <li><a href="#anillos">Anillos</a></li>
+                        <li><a href="#pulseras">Pulseras</a></li>
+                        <li><a href="#bufandas">Bufandas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:contacto@plena.co">contacto@plena.co</a></li>
+                        <li><a href="https://instagram.com/plenaestudio.co" 
+target="_blank">Instagram</a></li>
+                        <li><a href="#whatsapp">WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Plena. Todos los derechos reservados. Diseñado con 💎 para ti.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 🖼️ MODAL PARA IMÁGENES -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription"></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 🎭 JAVASCRIPT -->
+    <script>
+        // 🖼️ MODAL FUNCTIONALITY
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        
+        // Datos de productos con detalles
+        const productDetails = {
+            'InsumosIMG/womenEarring01.jpeg': {
+                title: 'Colección Elegancia',
+                description: 'Aretes sofisticados crafted con materiales premium. Diseño contemporáneo 
+que combina tradición artesanal con elegancia moderna. Perfectos para realzar tu belleza natural en 
+cualquier ocasión especial.'
+            },
+            'InsumosIMG/ring01.jpeg': {
+                title: 'Anillos de Compromiso',
+                description: 'S�mbolos eternos de amor elaborados con los mejores materiales. Cada anillo 
+es una promesa de calidad excepcional y diseño atemporal que perdurará por generaciones.'
+            },
+            'InsumosIMG/wallpaper01.jpeg': {
+                title: 'Diseños Únicos',
+                description: 'Piezas distintivas con patrones geométricos exclusivos. Cada diseño 
+refleja creatividad y sofisticación, creando accesorios que destacan tu personalidad única y estilo 
+individual.'
+            },
+            'InsumosIMG/womenEarring02.jpeg': {
+                title: 'Bufandas de Lujo',
+                description: 'Bufandas premium elaboradas con materiales excepcionales y diseños 
+únicos. Cada pieza combina técnicas artesanales tradicionales con patrones contemporáneos, creando 
+accesorios versátiles que elevan cualquier outfit con sofisticación y estilo distintivo.'
+            }
+        };
+        
+        // Función para abrir modal
+        function openModal(imageSrc) {
+            const details = productDetails[imageSrc];
+            if (details) {
+                modalImage.src = imageSrc;
+                modalTitle.textContent = details.title;
+                modalDescription.textContent = details.description;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        // Función para cerrar modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Agregar event listeners a las imágenes de productos
+        document.addEventListener('DOMContentLoaded', function() {
+            const productImages = document.querySelectorAll('.product-image');
+            productImages.forEach(image => {
+                image.addEventListener('click', function() {
+                    const bgImage = this.style.backgroundImage;
+                    const imageSrc = bgImage.slice(5, -2); // Extraer URL del background-image
+                    openModal(imageSrc);
+                });
+            });
+        });
+        
+        // Cerrar modal al hacer clic fuera de la imagen
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Cerrar modal con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+        
+        // 🎯 SMOOTH SCROLLING
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // 🎭 HEADER SCROLL EFFECT
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // 🌟 SCROLL REVEAL ANIMATION
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // 🎨 ACTIVE NAV LINK
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // 💫 PARALLAX EFFECT
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.animate-float');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+        
+        // 🎯 MOBILE MENU TOGGLE
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // 🌟 PRELOADER
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+        
+        // 💎 CURSOR EFFECT (Optional)
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.createElement('div');
+            cursor.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: var(--plena-gold);
+                border-radius: 50%;
+                pointer-events: none;
+                opacity: 0.7;
+                transform: translate(-50%, -50%);
+                left: ${e.clientX}px;
+                top: ${e.clientY}px;
+                z-index: 9999;
+                animation: fadeOut 0.5s ease-out forwards;
+            `;
+            
+            document.body.appendChild(cursor);
+            
+            setTimeout(() => {
+                cursor.remove();
+            }, 500);
+        });
+        
+        // 🎨 FADE OUT ANIMATION
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(2);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+
+
+

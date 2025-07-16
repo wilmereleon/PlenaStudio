@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { authService } from '../services/authService';
-import './RegisterForm.css';
+import './RegisterForm.premium.css';
 
 interface FormData {
   nombres: string;

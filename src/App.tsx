@@ -10,6 +10,8 @@ import {
 import PginaWeb from "./pages/PginaWeb";
 import RegisterForm from "./components/RegisterForm";
 import Login from "./pages/Login";
+import PremiumShowcase from "./pages/PremiumShowcase";
+import NavigationDemo from "./pages/NavigationDemo";
 import { CartProvider } from "./context/CartContext";
 import Aretes from "./pages/Aretes";
 import Bufandas from "./pages/Bufandas";
@@ -23,11 +25,13 @@ import CarritoTest from "./components/CarritoTest";
 import AuthDebug from "./components/AuthDebug";
 import AuthTest from "./components/AuthTest";
 import CartSyncTest from "./components/CartSyncTest";
+import AccessibilityValidator from "./components/AccessibilityValidator";
+import PerformanceAnalyzer from "./components/PerformanceAnalyzer";
 
 /**
  * App
  * 
- * Componente principal de la aplicación Plena Studio.
+ * Componente principal de la aplicación Plena.
  * Configura las rutas principales, gestiona el scroll al navegar y actualiza el título y la meta descripción.
  * 
  * @component
@@ -84,6 +88,8 @@ function App() {
         <Route path="/" element={<PginaWeb />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/premium-showcase" element={<PremiumShowcase />} />
+        <Route path="/navigation-demo" element={<NavigationDemo />} />
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/aretes" element={<Aretes />} />
         <Route path="/bufandas" element={<Bufandas />} />
@@ -93,6 +99,8 @@ function App() {
         <Route path="/auth-debug" element={<AuthDebug />} />
         <Route path="/auth-test" element={<AuthTest />} />
         <Route path="/cart-sync-test" element={<CartSyncTest />} />
+        <Route path="/accessibility-validator" element={<AccessibilityValidator />} />
+        <Route path="/performance-analyzer" element={<PerformanceAnalyzer />} />
       </Routes>
     </CartProvider>
   );

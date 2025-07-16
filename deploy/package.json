@@ -1,0 +1,13 @@
+﻿{
+  "name": "plena-frontend",
+  "version": "1.0.0",
+  "description": "Plena - Joyeria Premium",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve -s .",
+    "surge": "surge . --domain plena-premium.surge.sh"
+  },
+  "dependencies": {
+    "serve": "^14.0.0"
+  }
+}

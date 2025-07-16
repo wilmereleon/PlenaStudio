@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="bgGradient32" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F5DC;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#E6E6FA;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9ACD32;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="letterP32" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2D1B5F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4A2C7A;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="letterL32" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8C44F;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="letterE32" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F5132;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2D8B47;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="letterN32" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#87A96B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A6C285;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="letterA32" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2D1B5F;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0F5132;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Fondo con gradiente sutil -->
+  <rect width="32" height="32" fill="url(#bgGradient32)" rx="4" ry="4"/>
+  
+  <!-- Letras PLENA estilizadas -->
+  <g font-family="serif" font-weight="700" font-size="5" text-anchor="middle">
+    <!-- P -->
+    <text x="4" y="19" fill="url(#letterP32)">P</text>
+    <!-- L -->
+    <text x="9" y="19" fill="url(#letterL32)">L</text>
+    <!-- E -->
+    <text x="14" y="19" fill="url(#letterE32)">E</text>
+    <!-- N -->
+    <text x="19" y="19" fill="url(#letterN32)">N</text>
+    <!-- A -->
+    <text x="24" y="19" fill="url(#letterA32)">A</text>
+  </g>
+  
+  <!-- Palabra "studio" pequeña -->
+  <text x="16" y="26" font-family="sans-serif" font-size="2" font-weight="400" text-anchor="middle" fill="#87A96B" opacity="0.8">studio</text>
+  
+  <!-- Línea decorativa -->
+  <line x1="3" y1="21" x2="29" y2="21" stroke="url(#letterA32)" stroke-width="0.3" opacity="0.6"/>
+</svg>

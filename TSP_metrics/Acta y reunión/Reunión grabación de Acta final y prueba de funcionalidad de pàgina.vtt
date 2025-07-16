@@ -1,0 +1,1327 @@
+WEBVTT
+
+ee106595-fa1a-45af-a075-5f52d4766778/29-0
+00:00:08.352 --> 00:00:13.301
+<v WILMER EDILSON LEON  DIAZ>Eso ya empezamos a grabar buenas tardes,
+estamos aquí, mi compañero,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/29-1
+00:00:13.301 --> 00:00:17.677
+<v WILMER EDILSON LEON  DIAZ>Gustavo personal weird,
+estábamos hablando ya de las últimas</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/29-2
+00:00:17.677 --> 00:00:20.832
+<v WILMER EDILSON LEON  DIAZ>ofertas en la número 5 de la semana
+pasada.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/66-0
+00:00:20.832 --> 00:00:25.367
+<v WILMER EDILSON LEON  DIAZ>En la reunión quedamos sí revisar el
+proceso de integración continuo.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/66-1
+00:00:25.367 --> 00:00:29.772
+<v WILMER EDILSON LEON  DIAZ>Esto ya quedó completado,
+básicamente el resultado de estos son los</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/66-2
+00:00:29.772 --> 00:00:34.371
+<v WILMER EDILSON LEON  DIAZ>diagramas que quedan en el alta número 6
+pro diagramas de de clases de</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/66-3
+00:00:34.371 --> 00:00:38.258
+<v WILMER EDILSON LEON  DIAZ>arquitectura de actividades.
+Esa parte ya quedó completada,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/66-4
+00:00:38.258 --> 00:00:41.302
+<v WILMER EDILSON LEON  DIAZ>actualiza la documentación básica,
+esto tambi.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/69-0
+00:00:41.302 --> 00:00:42.142
+<v WILMER EDILSON LEON  DIAZ>Quedó completado.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/79-0
+00:00:45.242 --> 00:00:50.292
+<v WILMER EDILSON LEON  DIAZ>Es, básicamente,
+la documentación documentación quedó.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/119-0
+00:00:53.342 --> 00:00:56.822
+<v WILMER EDILSON LEON  DIAZ>Tengo acá en el repositorio de de
+Guitarra.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/119-1
+00:00:56.822 --> 00:01:01.884
+<v WILMER EDILSON LEON  DIAZ>Esa es la documentación y de muestra las
+cosas que se hicieron,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/119-2
+00:01:01.884 --> 00:01:07.420
+<v WILMER EDILSON LEON  DIAZ>las funcionalidades principales del
+registro, el carro, la educación,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/119-3
+00:01:07.420 --> 00:01:11.690
+<v WILMER EDILSON LEON  DIAZ>la documentación actualizada,
+la tabla de contenidos,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/119-4
+00:01:11.690 --> 00:01:18.175
+<v WILMER EDILSON LEON  DIAZ>es la arquitectura de del docker. Lunes,
+backend a través y Elena Ginette es para</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/119-5
+00:01:18.175 --> 00:01:18.412
+<v WILMER EDILSON LEON  DIAZ>es.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/122-0
+00:01:18.412 --> 00:01:19.022
+<v WILMER EDILSON LEON  DIAZ>Número 5.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/160-0
+00:01:22.372 --> 00:01:25.664
+<v WILMER EDILSON LEON  DIAZ>Completado implementar mejora de revisión
+de código.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/160-1
+00:01:25.664 --> 00:01:30.507
+<v WILMER EDILSON LEON  DIAZ>Esto se hizo con con la auditoría,
+que también es parte de de las artefactos.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/160-2
+00:01:30.507 --> 00:01:34.917
+<v WILMER EDILSON LEON  DIAZ>Quedaron para el arte número 6,
+entonces ya también quedó y la escuela</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/160-3
+00:01:34.917 --> 00:01:39.822
+<v WILMER EDILSON LEON  DIAZ>automatizadas ya pasan a completar y ya
+tienen idea con las pruebas en el tes.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/187-0
+00:01:39.912 --> 00:01:43.056
+<v WILMER EDILSON LEON  DIAZ>Directamente en el Código,
+ya vamos a ver a qué les muestro gran</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/187-1
+00:01:43.056 --> 00:01:45.329
+<v WILMER EDILSON LEON  DIAZ>plan de acción en para nuevos defectos.
+Bueno,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/187-2
+00:01:45.329 --> 00:01:48.279
+<v WILMER EDILSON LEON  DIAZ>esta parte todavía se contempla para
+siguientes iteraciones,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/187-3
+00:01:48.279 --> 00:01:50.842
+<v WILMER EDILSON LEON  DIAZ>pero pues hasta el momento quedamos hasta
+ese punto.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/213-0
+00:01:52.082 --> 00:01:56.026
+<v WILMER EDILSON LEON  DIAZ>Vamos a revisar el Acta número 6,
+late número 6.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/213-1
+00:01:56.026 --> 00:02:02.383
+<v WILMER EDILSON LEON  DIAZ>¿Quedaron todas las las respuestas de la
+tienom 5 entonces empecemos cómo cómo</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/213-2
+00:02:02.383 --> 00:02:06.568
+<v WILMER EDILSON LEON  DIAZ>quedó la realización de prueba final de
+aceptación?</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/213-3
+00:02:06.568 --> 00:02:09.062
+<v WILMER EDILSON LEON  DIAZ>¿Esa parte que va en el Código?</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/247-0
+00:02:10.372 --> 00:02:14.581
+<v WILMER EDILSON LEON  DIAZ>Yo también,
+que compruebas jets mete esa mosca para</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/247-1
+00:02:14.581 --> 00:02:18.871
+<v WILMER EDILSON LEON  DIAZ>para hacerlo,
+smart down para optimizar procesos esa</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/247-2
+00:02:18.871 --> 00:02:25.022
+<v WILMER EDILSON LEON  DIAZ>parte está aquí, los tetes acá los html,
+quedan los resultados de los test.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/263-0
+00:02:27.452 --> 00:02:31.261
+<v WILMER EDILSON LEON  DIAZ>Que más tenemos acá los resultados es
+nuevamente las correcciones que se hacen</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/263-1
+00:02:31.261 --> 00:02:33.092
+<v WILMER EDILSON LEON  DIAZ>en las pruebas, entonces quedan en MD.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/288-0
+00:02:34.242 --> 00:02:40.020
+<v WILMER EDILSON LEON  DIAZ>Versión de carrito, cronología, nombre,
+credenciales de un sinfín que queda toda</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/288-1
+00:02:40.020 --> 00:02:45.012
+<v WILMER EDILSON LEON  DIAZ>la parte de de resultado de las pruebas.
+La partida quedó completada.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/309-0
+00:02:48.722 --> 00:02:54.489
+<v WILMER EDILSON LEON  DIAZ>Está sin embargo dentro del Código,
+la sección de los test queda dentro de de</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/309-1
+00:02:54.489 --> 00:02:55.672
+<v WILMER EDILSON LEON  DIAZ>los componentes.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/314-0
+00:02:56.752 --> 00:02:59.352
+<v WILMER EDILSON LEON  DIAZ>Permíteme ya,
+ya les muestro en qué parte quedó.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/322-0
+00:03:01.892 --> 00:03:05.652
+<v WILMER EDILSON LEON  DIAZ>Edición de ustedes para ver si los
+encuentro.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/327-0
+00:03:07.292 --> 00:03:09.532
+<v WILMER EDILSON LEON  DIAZ>Hey hoods contenidos.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/347-0
+00:03:11.712 --> 00:03:15.414
+<v WILMER EDILSON LEON  DIAZ>1950 no le gustaban este recuerdo.
+¿Dónde quedaron los test? Ah,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/347-1
+00:03:15.414 --> 00:03:16.552
+<v WILMER EDILSON LEON  DIAZ>mira acá están bien.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/344-0
+00:03:16.112 --> 00:03:17.272
+<v GONZALEZ RODRIGUEZ GUSTAVO ADOLFO>¿Vale los componentes?</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/350-0
+00:03:16.552 --> 00:03:17.432
+<v WILMER EDILSON LEON  DIAZ>¿Recomiendas?</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/385-0
+00:03:18.532 --> 00:03:21.618
+<v WILMER EDILSON LEON  DIAZ>Verdad que Samira indecente se quedó acá,
+entonces,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/385-1
+00:03:21.618 --> 00:03:24.525
+<v WILMER EDILSON LEON  DIAZ>en el momento en que uno lo ejecuta por
+consola,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/385-2
+00:03:24.525 --> 00:03:28.264
+<v WILMER EDILSON LEON  DIAZ>automáticamente hace una prueba
+automática. Generó el informe.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/385-3
+00:03:28.264 --> 00:03:32.002
+<v WILMER EDILSON LEON  DIAZ>Los informes son los que aparecen en el
+MD, en el repositorio,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/385-4
+00:03:32.002 --> 00:03:33.722
+<v WILMER EDILSON LEON  DIAZ>esto eso esa parte de lata 6.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/423-0
+00:03:34.742 --> 00:03:39.080
+<v WILMER EDILSON LEON  DIAZ>Salieron de auditoria y métricas, o sea,
+ya quedó completado.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/423-1
+00:03:39.080 --> 00:03:42.718
+<v WILMER EDILSON LEON  DIAZ>Está dentro de este mismo,
+de este mismo documento,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/423-2
+00:03:42.718 --> 00:03:47.826
+<v WILMER EDILSON LEON  DIAZ>autorización de documentación.
+Eso también ya quedó en la eso que ese es</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/423-3
+00:03:47.826 --> 00:03:53.073
+<v WILMER EDILSON LEON  DIAZ>el la entrega, la entrega final.
+Ahí aparece lo las como las conclusiones.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/423-4
+00:03:53.073 --> 00:03:54.892
+<v WILMER EDILSON LEON  DIAZ>Igual en el documento, no.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/468-0
+00:03:54.892 --> 00:03:58.830
+<v WILMER EDILSON LEON  DIAZ>¿Varió mucho con respecto a la entrega 2
+de la sesión de 6 Holding,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/468-1
+00:03:58.830 --> 00:04:01.435
+<v WILMER EDILSON LEON  DIAZ>usted sepulcrente?
+Fd con el con el cliente,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/468-2
+00:04:01.435 --> 00:04:05.662
+<v WILMER EDILSON LEON  DIAZ>pero pues el cliente básicamente somos
+nosotros mismos y revisar dícteme</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/468-3
+00:04:05.662 --> 00:04:07.572
+<v WILMER EDILSON LEON  DIAZ>contenedores ya quedó completado.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/483-0
+00:04:09.122 --> 00:04:13.190
+<v WILMER EDILSON LEON  DIAZ>¿Tema contenedores lo tenemos acá,
+toma un poco de trabajo porque pues nunca</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/483-1
+00:04:13.190 --> 00:04:14.722
+<v WILMER EDILSON LEON  DIAZ>hemos usado contenedores, no?</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/503-0
+00:04:15.362 --> 00:04:20.991
+<v WILMER EDILSON LEON  DIAZ>Pero ya quedó aquí embalado,
+crearon 3 servicios en mira a ver,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/503-1
+00:04:20.991 --> 00:04:25.212
+<v WILMER EDILSON LEON  DIAZ>muestro,
+están acá los 3 servicios y el Energy.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/534-0
+00:04:25.212 --> 00:04:29.494
+<v WILMER EDILSON LEON  DIAZ>Entonces primero se despega el proyecto y
+luego el backend y por último,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/534-1
+00:04:29.494 --> 00:04:32.368
+<v WILMER EDILSON LEON  DIAZ>la base de datos.
+¿Eso quién la va a ir a tomar?</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/534-2
+00:04:32.368 --> 00:04:36.766
+<v WILMER EDILSON LEON  DIAZ>Algunas pruebitas con con el rendimiento
+de la página y que pues solamente</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/534-3
+00:04:36.766 --> 00:04:38.232
+<v WILMER EDILSON LEON  DIAZ>funcione la persistencia.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/539-0
+00:04:40.682 --> 00:04:42.042
+<v WILMER EDILSON LEON  DIAZ>Revisemos las conclusiones.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/595-0
+00:04:43.152 --> 00:04:47.475
+<v WILMER EDILSON LEON  DIAZ>Solamente las metolas de control de
+cardíaco se cumplieran la cabalidad,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/595-1
+00:04:47.475 --> 00:04:51.383
+<v WILMER EDILSON LEON  DIAZ>hubo mucho contratiempo,
+pues porque muchos integrantes se fueron</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/595-2
+00:04:51.383 --> 00:04:56.298
+<v WILMER EDILSON LEON  DIAZ>entonces solamente quedamos Gustavo y yo,
+haciendo como la la finificación del del</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/595-3
+00:04:56.298 --> 00:04:59.377
+<v WILMER EDILSON LEON  DIAZ>proyecto.
+Actualizar calendario el calendario ahora</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/595-4
+00:04:59.377 --> 00:05:02.456
+<v WILMER EDILSON LEON  DIAZ>quedó así,
+obviamente las primeras 2 a inicio de la</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/595-5
+00:05:02.456 --> 00:05:02.692
+<v WILMER EDILSON LEON  DIAZ>ter.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/636-0
+00:05:02.692 --> 00:05:06.376
+<v WILMER EDILSON LEON  DIAZ>Semana el equipo completo estuvo pues
+trabajando en el proyecto,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/636-1
+00:05:06.376 --> 00:05:10.229
+<v WILMER EDILSON LEON  DIAZ>pero llegamos a un punto en que ya
+solamente quedamos Gustavo y yo,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/636-2
+00:05:10.229 --> 00:05:14.592
+<v WILMER EDILSON LEON  DIAZ>aquí quedaron pues las tareas asignadas
+que saco una estructura del trabajo,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/636-3
+00:05:14.592 --> 00:05:18.842
+<v WILMER EDILSON LEON  DIAZ>todas las asignaciones que se hicieron en
+el backlog el backlog lo estamos</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/636-4
+00:05:18.842 --> 00:05:19.692
+<v WILMER EDILSON LEON  DIAZ>trabajando, di.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/644-0
+00:05:19.962 --> 00:05:24.012
+<v WILMER EDILSON LEON  DIAZ>Con con gigap y yo les muestro el barrio.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/688-0
+00:05:27.532 --> 00:05:31.346
+<v WILMER EDILSON LEON  DIAZ>Esa parte de la documentación no se kam,
+que es el brazo,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/688-1
+00:05:31.346 --> 00:05:35.225
+<v WILMER EDILSON LEON  DIAZ>permite que no cosas en proceso,
+pero pues que apenas vas,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/688-2
+00:05:35.225 --> 00:05:39.170
+<v WILMER EDILSON LEON  DIAZ>estoy como pasando.
+Esto ya quedó corregir al lado de esto,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/688-3
+00:05:39.170 --> 00:05:44.692
+<v WILMER EDILSON LEON  DIAZ>ya que ya quedó también hecho. Me gustaba,
+lo hizo y gusta la editorial Código esa.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/729-0
+00:05:44.692 --> 00:05:49.296
+<v WILMER EDILSON LEON  DIAZ>Parte le simplemente a los 2.
+Esa parte quedó pendiente porque no ya no</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/729-1
+00:05:49.296 --> 00:05:52.621
+<v WILMER EDILSON LEON  DIAZ>alcanzamos,
+porque en cuanto al Mateo y aquí están,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/729-2
+00:05:52.621 --> 00:05:56.905
+<v WILMER EDILSON LEON  DIAZ>pues las fechas importantes,
+el ISO del ACTA uno hasta 2 cuatro lo</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/729-3
+00:05:56.905 --> 00:05:59.974
+<v WILMER EDILSON LEON  DIAZ>release,
+que son básicamente los días en que se</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/729-4
+00:05:59.974 --> 00:06:01.572
+<v WILMER EDILSON LEON  DIAZ>entrega el trabajo y las.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/764-0
+00:06:01.572 --> 00:06:05.477
+<v WILMER EDILSON LEON  DIAZ>Tareas por porque por usuario,
+o sea por para, por por desarrollador.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/764-1
+00:06:05.477 --> 00:06:09.047
+<v WILMER EDILSON LEON  DIAZ>Y tú carona fue documentadas,
+esto es la parte del presupuesto,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/764-2
+00:06:09.047 --> 00:06:13.399
+<v WILMER EDILSON LEON  DIAZ>pero más adelante nos muestra un diagrama
+mucho más organizado por esa parte,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/764-3
+00:06:13.399 --> 00:06:16.411
+<v WILMER EDILSON LEON  DIAZ>el diagnóstico de presupuesto.
+Dejé los enlaces aquí,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/764-4
+00:06:16.411 --> 00:06:17.582
+<v WILMER EDILSON LEON  DIAZ>en la en el Acta par.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/771-0
+00:06:17.632 --> 00:06:18.832
+<v WILMER EDILSON LEON  DIAZ>Que se puedan visualizar directamente.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/801-0
+00:06:20.372 --> 00:06:24.114
+<v WILMER EDILSON LEON  DIAZ>En el repositorio,
+que es a la parte del presupuesto.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/801-1
+00:06:24.114 --> 00:06:27.371
+<v WILMER EDILSON LEON  DIAZ>El planificado de la base, el real,
+el ahorro,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/801-2
+00:06:27.371 --> 00:06:32.914
+<v WILMER EDILSON LEON  DIAZ>el ahorro porcentual en algún momento por
+las tendencias y por acumulamiento de</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/801-3
+00:06:32.914 --> 00:06:36.932
+<v WILMER EDILSON LEON  DIAZ>trabajo de las tercera y cuarta semana
+empezó el desfase.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/818-0
+00:06:37.242 --> 00:06:41.463
+<v WILMER EDILSON LEON  DIAZ>En primera es aquí,
+aparece aquí hay un programa que este un</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/818-1
+00:06:41.463 --> 00:06:44.092
+<v WILMER EDILSON LEON  DIAZ>poquito mejor de todo, de del desfase.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/860-0
+00:06:45.702 --> 00:06:49.758
+<v WILMER EDILSON LEON  DIAZ>¿Permítame no busco uso,
+lo tengo acá a ver, está en esta parte,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/860-1
+00:06:49.758 --> 00:06:54.438
+<v WILMER EDILSON LEON  DIAZ>no? Se arrancó la tercera semana.
+Las tareas que comenzaron a congestionar</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/860-2
+00:06:54.438 --> 00:06:57.433
+<v WILMER EDILSON LEON  DIAZ>porque pues solamente quedamos los
+integrantes,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/860-3
+00:06:57.433 --> 00:07:00.928
+<v WILMER EDILSON LEON  DIAZ>obviamente en el en el en la simulación
+de presupuesto,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/860-4
+00:07:00.928 --> 00:07:04.172
+<v WILMER EDILSON LEON  DIAZ>obviamente el verde es el presupuesto
+real, se inc.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/904-0
+00:07:04.282 --> 00:07:08.862
+<v WILMER EDILSON LEON  DIAZ>Porque hasta que se acumularon y era
+mucho más caro levantar los los los,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/904-1
+00:07:08.862 --> 00:07:11.895
+<v WILMER EDILSON LEON  DIAZ>los componentes solicitados en el
+requerimiento,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/904-2
+00:07:11.895 --> 00:07:16.537
+<v WILMER EDILSON LEON  DIAZ>entonces aquí esa parte empezó a
+incrementarse ya para la última por la la</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/904-3
+00:07:16.537 --> 00:07:21.302
+<v WILMER EDILSON LEON  DIAZ>cuestión de tiempo se agilizó mucho más
+con cloud, con agentes. Entonces ya,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/904-4
+00:07:21.302 --> 00:07:22.292
+<v WILMER EDILSON LEON  DIAZ>obviamente el P.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/919-0
+00:07:22.512 --> 00:07:26.004
+<v WILMER EDILSON LEON  DIAZ>Real versus el presupuestado se ajustó
+mucho más. Sin embargo,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/919-1
+00:07:26.004 --> 00:07:27.112
+<v WILMER EDILSON LEON  DIAZ>entramos en déficit.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/955-0
+00:07:27.152 --> 00:07:30.043
+<v WILMER EDILSON LEON  DIAZ>Obviamente,
+no es defastamos en el presupuesto,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/955-1
+00:07:30.043 --> 00:07:34.922
+<v WILMER EDILSON LEON  DIAZ>ya para la semana 6 era crítico, o sea,
+hacía hacía falta como unos 3000000 para</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/955-2
+00:07:34.922 --> 00:07:39.259
+<v WILMER EDILSON LEON  DIAZ>ajustar el el el presupuesto,
+pues a la a las actividades hechas en ese</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/955-3
+00:07:39.259 --> 00:07:42.210
+<v WILMER EDILSON LEON  DIAZ>documento,
+pues aparece más o menos el de yo por</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/955-4
+00:07:42.210 --> 00:07:42.812
+<v WILMER EDILSON LEON  DIAZ>semana PR.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1011-0
+00:07:42.812 --> 00:07:45.796
+<v WILMER EDILSON LEON  DIAZ>Segunda semana arrancamos bien ya la
+tercera empezó en rojo,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1011-1
+00:07:45.796 --> 00:07:48.192
+<v WILMER EDILSON LEON  DIAZ>en la cuarta empezó a normalizarse en la
+quinta,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1011-2
+00:07:48.192 --> 00:07:52.055
+<v WILMER EDILSON LEON  DIAZ>pues obviamente veníamos con el déficit y
+en la última pues ya no recuperamos,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1011-3
+00:07:52.055 --> 00:07:54.402
+<v WILMER EDILSON LEON  DIAZ>pero sin embargo el el déficit quedó
+acumulado.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1042-0
+00:07:54.802 --> 00:07:59.449
+<v WILMER EDILSON LEON  DIAZ>Más adelante les muestro el documento.
+Esto continuamos con el Acta número 6,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1042-1
+00:07:59.449 --> 00:08:04.155
+<v WILMER EDILSON LEON  DIAZ>ese es el diagrama de de los end points,
+esa es la parte de los endpues de los</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1042-2
+00:08:04.155 --> 00:08:08.623
+<v WILMER EDILSON LEON  DIAZ>carritos hay cuatro porque pues solamente
+usamos por cuestiones de tiempo,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1042-3
+00:08:08.623 --> 00:08:11.542
+<v WILMER EDILSON LEON  DIAZ>solamente el registro del carrito,
+el inicio de.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1044-0
+00:08:11.532 --> 00:08:11.652
+<v WILMER EDILSON LEON  DIAZ>Sesión.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1051-0
+00:08:13.562 --> 00:08:16.042
+<v WILMER EDILSON LEON  DIAZ>Esto, ese es el el de actividades.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1053-0
+00:08:17.352 --> 00:08:18.112
+<v WILMER EDILSON LEON  DIAZ>Un poquito pequeño.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1058-0
+00:08:20.002 --> 00:08:22.442
+<v WILMER EDILSON LEON  DIAZ>Pues se puede visualizar mejor acá.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1087-0
+00:08:24.172 --> 00:08:29.239
+<v WILMER EDILSON LEON  DIAZ>Tenemos aquí 2, llegamos directamente,
+se lo puede hacer mucho más sencillo.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1087-1
+00:08:29.239 --> 00:08:32.463
+<v WILMER EDILSON LEON  DIAZ>Decir el diagrama de amor,
+permítame les mostró,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1087-2
+00:08:32.463 --> 00:08:36.411
+<v WILMER EDILSON LEON  DIAZ>están acá de los componentes del sistema,
+de los endpoints,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1087-3
+00:08:36.411 --> 00:08:39.042
+<v WILMER EDILSON LEON  DIAZ>queremos hablar desde El juego de datos.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1090-0
+00:08:45.852 --> 00:08:46.732
+<v WILMER EDILSON LEON  DIAZ>Ni acá.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1102-0
+00:08:49.622 --> 00:08:52.342
+<v WILMER EDILSON LEON  DIAZ>Listo aquí vamos,
+aquí esperamos de Renderiza el diagrama.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1114-0
+00:08:55.272 --> 00:08:58.917
+<v WILMER EDILSON LEON  DIAZ>¿Por la consejera de la grabación se
+demora un poquito en renderizar en</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1114-1
+00:08:58.917 --> 00:08:59.372
+<v WILMER EDILSON LEON  DIAZ>diagrama?</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1131-0
+00:09:02.422 --> 00:09:05.753
+<v WILMER EDILSON LEON  DIAZ>Se me antojo en ver isaí. Ah, mira ya,
+abrió casa.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1131-1
+00:09:05.753 --> 00:09:11.042
+<v WILMER EDILSON LEON  DIAZ>Entonces aquí está todo el comportamiento
+de flujo desde el desde el inicio del.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1143-0
+00:09:13.442 --> 00:09:17.485
+<v WILMER EDILSON LEON  DIAZ>¿Proceso del usuario,
+hasta cuándo llega la base de datos?</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1143-1
+00:09:17.485 --> 00:09:18.512
+<v WILMER EDILSON LEON  DIAZ>Desaparece acá.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1152-0
+00:09:21.442 --> 00:09:25.522
+<v WILMER EDILSON LEON  DIAZ>Entramos al al frontlinens cuando entra
+al joker.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1163-0
+00:09:27.132 --> 00:09:28.532
+<v WILMER EDILSON LEON  DIAZ>Al baquen entra por Energy.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1188-0
+00:09:29.332 --> 00:09:32.221
+<v WILMER EDILSON LEON  DIAZ>Después,
+sigue al backend directamente a la a la</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1188-1
+00:09:32.221 --> 00:09:35.877
+<v WILMER EDILSON LEON  DIAZ>Pieta Script llega a la base de datos y
+obviamente el bloque,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1188-2
+00:09:35.877 --> 00:09:40.063
+<v WILMER EDILSON LEON  DIAZ>como las sesiones y las tareas de
+gestionar todas las peticiones en el</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1188-3
+00:09:40.063 --> 00:09:41.772
+<v WILMER EDILSON LEON  DIAZ>sistema, esa la parte de acá.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1198-0
+00:09:44.242 --> 00:09:46.990
+<v WILMER EDILSON LEON  DIAZ>Hace falta, pues,
+por tiempo es mejor no revisar con mucho</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1198-1
+00:09:46.990 --> 00:09:47.362
+<v WILMER EDILSON LEON  DIAZ>detalle.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1210-0
+00:09:48.742 --> 00:09:52.062
+<v WILMER EDILSON LEON  DIAZ>La Casa 6. Bueno, aquí está, pues el de.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1229-0
+00:09:53.942 --> 00:09:57.108
+<v WILMER EDILSON LEON  DIAZ>¿De qué? El de componentes,
+el de la base de datos aquí es el de la</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1229-1
+00:09:57.108 --> 00:09:59.622
+<v WILMER EDILSON LEON  DIAZ>base de datos.
+El comportamiento de la base de datos.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1258-0
+00:10:01.752 --> 00:10:06.209
+<v WILMER EDILSON LEON  DIAZ>Es el diagrama programa de complementos
+desplegado que sean todas las</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1258-1
+00:10:06.209 --> 00:10:09.902
+<v WILMER EDILSON LEON  DIAZ>documentaciones,
+cualquier cosa están directamente en las</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1258-2
+00:10:09.902 --> 00:10:14.422
+<v WILMER EDILSON LEON  DIAZ>instituciones básicas, demostraciones,
+pruebas, resultados de pruebas.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1283-0
+00:10:14.512 --> 00:10:18.711
+<v WILMER EDILSON LEON  DIAZ>¿Y aparecen ya en, en un html,
+también están dentro del repositorio,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1283-1
+00:10:18.711 --> 00:10:22.849
+<v WILMER EDILSON LEON  DIAZ>pero pues están acá en imagen, no?
+Ese es el de carrito. Al inicio,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1283-2
+00:10:22.849 --> 00:10:25.952
+<v WILMER EDILSON LEON  DIAZ>obviamente empezaba,
+pues un poquito de desempeño.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1293-0
+00:10:25.952 --> 00:10:29.510
+<v WILMER EDILSON LEON  DIAZ>Se hablan muchísimos errores,
+solamente que se avanzará en componentes,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1293-1
+00:10:29.510 --> 00:10:30.942
+<v WILMER EDILSON LEON  DIAZ>ya debe mejorar la situación.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1334-0
+00:10:32.192 --> 00:10:35.364
+<v WILMER EDILSON LEON  DIAZ>Indicaciones a parte se mejoró,
+ya no salen,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1334-1
+00:10:35.364 --> 00:10:39.663
+<v WILMER EDILSON LEON  DIAZ>ese porcentaje ya sale casi el 90% de
+servicios. El storage,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1334-2
+00:10:39.663 --> 00:10:44.807
+<v WILMER EDILSON LEON  DIAZ>que la la parte de la de la OCH,
+que se comporta directamente con la con</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1334-3
+00:10:44.807 --> 00:10:48.542
+<v WILMER EDILSON LEON  DIAZ>la página en el local storage,
+o sea cuando uno tra.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1371-0
+00:10:48.542 --> 00:10:52.880
+<v WILMER EDILSON LEON  DIAZ>Directamente sin la base de datos listo,
+aquí están los los,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1371-1
+00:10:52.880 --> 00:10:58.214
+<v WILMER EDILSON LEON  DIAZ>la documentación de correcciones,
+la auditoria completa creo que es la más</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1371-2
+00:10:58.214 --> 00:11:01.770
+<v WILMER EDILSON LEON  DIAZ>importante,
+que aquí pues sale obviamente toda la</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1371-3
+00:11:01.770 --> 00:11:07.032
+<v WILMER EDILSON LEON  DIAZ>revisión del Código de la cobertura de
+los test. Fue el 82,5 la deuda té.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1408-0
+00:11:07.072 --> 00:11:09.714
+<v WILMER EDILSON LEON  DIAZ>Pues es baja,
+pues asumiendo que ya la última semana</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1408-1
+00:11:09.714 --> 00:11:13.850
+<v WILMER EDILSON LEON  DIAZ>nos emparejamos en el momento general de
+bueno la Mantenibilidad bueno también fue</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1408-2
+00:11:13.850 --> 00:11:17.388
+<v WILMER EDILSON LEON  DIAZ>alta porque pues a pesar de todo
+consistencia, con buenas actividades,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1408-3
+00:11:17.388 --> 00:11:19.032
+<v WILMER EDILSON LEON  DIAZ>con los integrantes que quedaron.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1414-0
+00:11:20.582 --> 00:11:23.062
+<v WILMER EDILSON LEON  DIAZ>Usamos un meetworld para hacer.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1428-0
+00:11:24.582 --> 00:11:27.954
+<v WILMER EDILSON LEON  DIAZ>Filtro de seguridad que es un un
+componente que montamos para usar en</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1428-1
+00:11:27.954 --> 00:11:29.302
+<v WILMER EDILSON LEON  DIAZ>todos los demás componentes.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1450-0
+00:11:31.182 --> 00:11:34.968
+<v WILMER EDILSON LEON  DIAZ>Esto esa parte no se puede mirar con más
+tiempo para que obviamente aparecen los</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1450-1
+00:11:34.968 --> 00:11:37.913
+<v WILMER EDILSON LEON  DIAZ>más críticos, no el de la.
+La autenticación es el más crítico,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1450-2
+00:11:37.913 --> 00:11:40.062
+<v WILMER EDILSON LEON  DIAZ>todavía estamos como trabajando en esa
+parte.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1485-0
+00:11:41.692 --> 00:11:46.508
+<v WILMER EDILSON LEON  DIAZ>Estudiantes con el Acta número 6 mira la
+parte que está en el documento anterior,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1485-1
+00:11:46.508 --> 00:11:50.091
+<v WILMER EDILSON LEON  DIAZ>está también aquí pegado,
+que es como el de resultado de las</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1485-2
+00:11:50.091 --> 00:11:53.144
+<v WILMER EDILSON LEON  DIAZ>métricas,
+comportamiento de tiempos y van en Excel.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1485-3
+00:11:53.144 --> 00:11:57.490
+<v WILMER EDILSON LEON  DIAZ>También aparece la información,
+pues obviamente con las restricciones que</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1485-4
+00:11:57.490 --> 00:11:58.782
+<v WILMER EDILSON LEON  DIAZ>tenía el Excel ahí en.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1493-0
+00:11:58.782 --> 00:12:02.902
+<v WILMER EDILSON LEON  DIAZ>Cuanto Asus gráficos, esto es,
+en la parte del post mortem.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1537-0
+00:12:04.632 --> 00:12:07.634
+<v WILMER EDILSON LEON  DIAZ>Lo que estamos haciendo ahorita
+obviamente yo meteré el trabajo como</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1537-1
+00:12:07.634 --> 00:12:09.983
+<v WILMER EDILSON LEON  DIAZ>adelantarlo,
+porque obviamente pues aparece todos los</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1537-2
+00:12:09.983 --> 00:12:12.506
+<v WILMER EDILSON LEON  DIAZ>Estados completados,
+entonces ya llegamos a la escuela de</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1537-3
+00:12:12.506 --> 00:12:15.942
+<v WILMER EDILSON LEON  DIAZ>habitación de lo que estamos haciendo
+ahorita aquí aparece pues obviamente las</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1537-4
+00:12:15.942 --> 00:12:19.422
+<v WILMER EDILSON LEON  DIAZ>oraciones de plasmitarias la integración
+del sistema, aceptación de usuario al.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1574-0
+00:12:19.422 --> 00:12:24.268
+<v WILMER EDILSON LEON  DIAZ>Del código y la fase del despliegue.
+Todo funcionó perfectamente bien,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1574-1
+00:12:24.268 --> 00:12:29.251
+<v WILMER EDILSON LEON  DIAZ>pues porque hicimos el uso del despliegue
+con docker. Esto soy amorcito,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1574-2
+00:12:29.251 --> 00:12:33.755
+<v WILMER EDILSON LEON  DIAZ>y no me alcanzamos listo.
+Ahora damos el vuelo a la funcionalidad</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1574-3
+00:12:33.755 --> 00:12:34.642
+<v WILMER EDILSON LEON  DIAZ>de de Docker.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1610-0
+00:12:35.902 --> 00:12:40.700
+<v WILMER EDILSON LEON  DIAZ>La ventaja con docker es que uno activa
+todos los servicios en nos puede activar</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1610-1
+00:12:40.700 --> 00:12:43.425
+<v WILMER EDILSON LEON  DIAZ>en orden,
+se demora un poquito en Renderizar.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1610-2
+00:12:43.425 --> 00:12:48.400
+<v WILMER EDILSON LEON  DIAZ>Por eso en todos los servicios activos ya
+se puede trabajar directamente con el con</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1610-3
+00:12:48.400 --> 00:12:51.302
+<v WILMER EDILSON LEON  DIAZ>el que con el con,
+el aplicativo es a la el APL.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1634-0
+00:12:51.462 --> 00:12:55.401
+<v WILMER EDILSON LEON  DIAZ>Está en el Localhost 3000,
+entonces hagamos una prueba,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1634-1
+00:12:55.401 --> 00:12:59.972
+<v WILMER EDILSON LEON  DIAZ>entonces iniciamos la sesión no mejor.
+Creemos que no la cuenta.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1640-0
+00:13:00.052 --> 00:13:03.746
+<v WILMER EDILSON LEON  DIAZ>Entonces,
+colocamos un usuario en cualquier,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1640-1
+00:13:03.746 --> 00:13:05.552
+<v WILMER EDILSON LEON  DIAZ>puede ser María Reyes.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1647-0
+00:13:07.882 --> 00:13:10.342
+<v WILMER EDILSON LEON  DIAZ>Para validar la persistencia y que el
+usuario se cree.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1654-0
+00:13:12.032 --> 00:13:15.262
+<v WILMER EDILSON LEON  DIAZ>De maria@correo.com.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1667-0
+00:13:16.692 --> 00:13:20.092
+<v WILMER EDILSON LEON  DIAZ>Importante recordarme esto,
+puse algunas me acordaré, se me olvidé,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1667-1
+00:13:20.092 --> 00:13:21.092
+<v WILMER EDILSON LEON  DIAZ>María armacorre.com.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1716-0
+00:13:22.682 --> 00:13:26.417
+<v WILMER EDILSON LEON  DIAZ>Te mole cualquier celular,
+la identificación,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1716-1
+00:13:26.417 --> 00:13:29.989
+<v WILMER EDILSON LEON  DIAZ>contraseña la estamos dejando los
+expertos,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1716-2
+00:13:29.989 --> 00:13:34.048
+<v WILMER EDILSON LEON  DIAZ>56 obviamente no se puede dar una
+contraseña así,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1716-3
+00:13:34.048 --> 00:13:40.868
+<v WILMER EDILSON LEON  DIAZ>pero la idea es que seamos más prácticas.
+Aquí podemos. El blackout funciona listo,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1716-4
+00:13:40.868 --> 00:13:44.602
+<v WILMER EDILSON LEON  DIAZ>ya quedó el registro no es como lo
+validamos,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1716-5
+00:13:44.602 --> 00:13:47.362
+<v WILMER EDILSON LEON  DIAZ>toca validarlo directamente en DO.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1735-0
+00:13:48.122 --> 00:13:53.893
+<v WILMER EDILSON LEON  DIAZ>¿Porque, dónde estamos yendo las pruebas?
+Entonces solamente copiamos esa</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1735-1
+00:13:53.893 --> 00:13:55.842
+<v WILMER EDILSON LEON  DIAZ>instrucción y la pegamos.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1769-0
+00:13:58.082 --> 00:14:01.807
+<v WILMER EDILSON LEON  DIAZ>Lento María,
+que aparece en el modelo Ristro María el</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1769-1
+00:14:01.807 --> 00:14:05.738
+<v WILMER EDILSON LEON  DIAZ>correo, obviamente,
+el password enquistado con hash y la</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1769-2
+00:14:05.738 --> 00:14:09.462
+<v WILMER EDILSON LEON  DIAZ>fecha de creación.
+Ahora vamos a hacer un registro de</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1769-3
+00:14:09.462 --> 00:14:13.462
+<v WILMER EDILSON LEON  DIAZ>carrito de compras,
+nos devolvemos al carrito de compras.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1790-0
+00:14:14.582 --> 00:14:20.655
+<v WILMER EDILSON LEON  DIAZ>Al carrito en realidad,
+iniciar la sesión entonces es María a</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1790-1
+00:14:20.655 --> 00:14:24.082
+<v WILMER EDILSON LEON  DIAZ>Robarcorreo. ¿om, cierto es cierto?</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1795-0
+00:14:25.602 --> 00:14:25.962
+<v GONZALEZ RODRIGUEZ GUSTAVO ADOLFO>Sí, sí.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1842-0
+00:14:27.292 --> 00:14:31.604
+<v WILMER EDILSON LEON  DIAZ>Listo, chinito. Ahí está,
+miramos la ahí inició la sesión listo,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1842-1
+00:14:31.604 --> 00:14:35.717
+<v WILMER EDILSON LEON  DIAZ>allá quedó la sesión. Guardámelo. Acá,
+supongamos aplicativo,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1842-2
+00:14:35.717 --> 00:14:41.024
+<v WILMER EDILSON LEON  DIAZ>tenemos unas unos productos iniciales.
+Bueno, ya directamente dentro del panel,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1842-3
+00:14:41.024 --> 00:14:46.198
+<v WILMER EDILSON LEON  DIAZ>que son como los asesores populares,
+podemos añadirlos directamente desde acá</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1842-4
+00:14:46.198 --> 00:14:49.382
+<v WILMER EDILSON LEON  DIAZ>de favoritos. Se van a estar habilitada,
+es la.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1859-0
+00:14:49.382 --> 00:14:52.205
+<v WILMER EDILSON LEON  DIAZ>Parte de la vamos a estar ahí,
+automáticamente aparece en el listado de</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1859-1
+00:14:52.205 --> 00:14:53.302
+<v WILMER EDILSON LEON  DIAZ>los artículos en el carrito.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1906-0
+00:14:55.462 --> 00:14:58.958
+<v WILMER EDILSON LEON  DIAZ>También separamos por por categorías
+relativamente,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1906-1
+00:14:58.958 --> 00:15:02.588
+<v WILMER EDILSON LEON  DIAZ>no están el catalogo acá está
+directamente funcional,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1906-2
+00:15:02.588 --> 00:15:08.032
+<v WILMER EDILSON LEON  DIAZ>fue carga más productos el de búsqueda
+también funciona entonces por descripción</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1906-3
+00:15:08.032 --> 00:15:12.066
+<v WILMER EDILSON LEON  DIAZ>o por búsquedas populares,
+entonces digamos anillos, plata,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1906-4
+00:15:12.066 --> 00:15:16.838
+<v WILMER EDILSON LEON  DIAZ>búscalos referentes anillos,
+plata y se pueden agregar cuando entramos</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1906-5
+00:15:16.838 --> 00:15:19.392
+<v WILMER EDILSON LEON  DIAZ>directamente al icono del carrito. Ap.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1919-0
+00:15:19.382 --> 00:15:23.832
+<v WILMER EDILSON LEON  DIAZ>Todos los componentes acá los componentes
+de los artículos solicitados previamente.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1957-0
+00:15:25.342 --> 00:15:28.454
+<v WILMER EDILSON LEON  DIAZ>Hay cosas como aplicadas descuento que lo
+aplica,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1957-1
+00:15:28.454 --> 00:15:33.307
+<v WILMER EDILSON LEON  DIAZ>ya se como su total y un total a pagar,
+funciona con ese esa pared donde está</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1957-2
+00:15:33.307 --> 00:15:36.729
+<v WILMER EDILSON LEON  DIAZ>funcionando porque ya es un ecommerce.
+Hizo esa parte,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1957-3
+00:15:36.729 --> 00:15:40.960
+<v WILMER EDILSON LEON  DIAZ>ya quedó aquí funcionando con Mario al
+momento de cerrar la sesión,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1957-4
+00:15:40.960 --> 00:15:42.702
+<v WILMER EDILSON LEON  DIAZ>la persistencia almacena ya.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1979-0
+00:15:42.702 --> 00:15:46.180
+<v WILMER EDILSON LEON  DIAZ>Sé que podemos almacenar los artículos en
+la base de datos,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1979-1
+00:15:46.180 --> 00:15:50.643
+<v WILMER EDILSON LEON  DIAZ>entonces al cerrar y probar en docker,
+podemos verificar que, efectivamente,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1979-2
+00:15:50.643 --> 00:15:52.382
+<v WILMER EDILSON LEON  DIAZ>los artículos quedaron dentro.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1998-0
+00:15:53.862 --> 00:15:58.122
+<v WILMER EDILSON LEON  DIAZ>Dentro del carrito de compras,
+nosotros lo tenemos en en 2 en 2 tablas</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/1998-1
+00:15:58.122 --> 00:15:59.862
+<v WILMER EDILSON LEON  DIAZ>en carrito y en carrito item.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2036-0
+00:16:03.182 --> 00:16:06.810
+<v WILMER EDILSON LEON  DIAZ>El carrito aparece,
+mira el último registro hecho de</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2036-1
+00:16:06.810 --> 00:16:10.369
+<v WILMER EDILSON LEON  DIAZ>artículos al en usuario 9 y el usuario 9.
+Es María,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2036-2
+00:16:10.369 --> 00:16:15.775
+<v WILMER EDILSON LEON  DIAZ>aquí aparece el registro y en el otro
+aparece el listado de ítems y fue lo que</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2036-3
+00:16:15.775 --> 00:16:18.102
+<v WILMER EDILSON LEON  DIAZ>almacenó el usuario con su sesión.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2040-0
+00:16:20.472 --> 00:16:21.992
+<v WILMER EDILSON LEON  DIAZ>Esto pedí uno acá.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2080-0
+00:16:24.032 --> 00:16:29.052
+<v WILMER EDILSON LEON  DIAZ>En contra, punto y coma listo.
+Aquí aparece todos los artículos para que,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2080-1
+00:16:29.052 --> 00:16:34.410
+<v WILMER EDILSON LEON  DIAZ>asociados al al tenemos el usuario 9,
+aquí están los artículos cuatro del ID 2</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2080-2
+00:16:34.410 --> 00:16:37.869
+<v WILMER EDILSON LEON  DIAZ>cantidad,
+uno aparece y el precio el peso unitario</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2080-3
+00:16:37.869 --> 00:16:42.142
+<v WILMER EDILSON LEON  DIAZ>de la más adelante. Bueno,
+pues igual creo que hasta aquí lle.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2121-0
+00:16:42.162 --> 00:16:46.971
+<v WILMER EDILSON LEON  DIAZ>Pero la idea es hacer otro carrito que
+tenga los totales que haga ya como la la</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2121-1
+00:16:46.971 --> 00:16:51.780
+<v WILMER EDILSON LEON  DIAZ>operación para poder reaccionar el paro.
+Hasta aquí mostramos la funcionalidad.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2121-2
+00:16:51.780 --> 00:16:56.228
+<v WILMER EDILSON LEON  DIAZ>Podemos decir que en el lata 6 se
+cumplieron con todo lo que se esperaba.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2121-3
+00:16:56.228 --> 00:16:58.632
+<v WILMER EDILSON LEON  DIAZ>Hicimos una prueba de de rendimiento de.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2170-0
+00:16:58.632 --> 00:17:03.045
+<v WILMER EDILSON LEON  DIAZ>La página como se hubiera encuentro,
+funciona rápido.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2170-1
+00:17:03.045 --> 00:17:08.603
+<v WILMER EDILSON LEON  DIAZ>Las métricas realmente no,
+no jugarán mucho a favor de la tercera y</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2170-2
+00:17:08.603 --> 00:17:15.631
+<v WILMER EDILSON LEON  DIAZ>la cuarta semana, pues finalmente se pudo.
+Se pudo lograr que era como lo importante.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2170-3
+00:17:15.631 --> 00:17:20.207
+<v WILMER EDILSON LEON  DIAZ>También que tenemos aquí como para
+mostrar importancia.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2170-4
+00:17:20.207 --> 00:17:22.822
+<v WILMER EDILSON LEON  DIAZ>¿Acá realmente es usted nos com?</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2204-0
+00:17:22.822 --> 00:17:25.536
+<v WILMER EDILSON LEON  DIAZ>¿Hicimos el la las pruebas de presencia
+de los test,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2204-1
+00:17:25.536 --> 00:17:29.068
+<v WILMER EDILSON LEON  DIAZ>obviamente pues el sistema automatizó un
+poco la la función de test,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2204-2
+00:17:29.068 --> 00:17:31.679
+<v WILMER EDILSON LEON  DIAZ>entonces fue mucho más sencillo poderlo
+hacer, no?</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2204-3
+00:17:31.679 --> 00:17:35.723
+<v WILMER EDILSON LEON  DIAZ>Aunque aparece la ejecución y lo que
+pasaba durante la consola cuando hacíamos</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2204-4
+00:17:35.723 --> 00:17:36.542
+<v WILMER EDILSON LEON  DIAZ>las de los test.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2222-0
+00:17:38.562 --> 00:17:41.093
+<v WILMER EDILSON LEON  DIAZ>Otra cosa que tenía también de
+beneficioso que era,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2222-1
+00:17:41.093 --> 00:17:44.742
+<v WILMER EDILSON LEON  DIAZ>toma automatizáramos las pruebas es que
+nos permitía generar un documento.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2254-0
+00:17:45.822 --> 00:17:49.830
+<v WILMER EDILSON LEON  DIAZ>Y después de que culminaba,
+nos permitía abrir directamente la las</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2254-1
+00:17:49.830 --> 00:17:53.479
+<v WILMER EDILSON LEON  DIAZ>pruebas en en la página correspondiente
+cuando puedan abrir.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2254-2
+00:17:53.479 --> 00:17:56.769
+<v WILMER EDILSON LEON  DIAZ>Quería decir que el te has funcionado
+tipo de sistema,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2254-3
+00:17:56.769 --> 00:17:59.759
+<v WILMER EDILSON LEON  DIAZ>automáticamente enganchaba el sistema de
+pruebas,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2254-4
+00:17:59.759 --> 00:18:01.972
+<v WILMER EDILSON LEON  DIAZ>se enganchaba la la el procedimiento.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2267-0
+00:18:04.232 --> 00:18:07.951
+<v WILMER EDILSON LEON  DIAZ>Esto creo que hasta aquí se me hacemos
+una realidad y pues a plenitud,</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2267-1
+00:18:07.951 --> 00:18:09.312
+<v WILMER EDILSON LEON  DIAZ>cumplimiento de la ACTA 6.</v>
+
+ee106595-fa1a-45af-a075-5f52d4766778/2273-0
+00:18:15.692 --> 00:18:17.452
+<v WILMER EDILSON LEON  DIAZ>Solamente lo deben de tener y ya cierto.</v>

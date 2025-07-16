@@ -1,0 +1,292 @@
+/* 🎨 PLENA STUDIO - TOKENS DE COLOR OPTIMIZADOS */
+/* Paleta de Colores para Joyería Premium */
+
+:root {
+  /* ===================================================================
+   * 🌟 COLORES PRINCIPALES - JOYERÍA DE LUJO
+   * ================================================================= */
+  
+  /* Primarios */
+  --color-jewel-gold: #D4AF37;          /* Oro joya - CTAs principales */
+  --color-deep-emerald: #0F5132;        /* Esmeralda profunda - Headers */
+  --color-pearl-white: #F8F9FA;         /* Blanco perla - Backgrounds */
+  --color-charcoal: #2C3E50;            /* Carbón - Textos principales */
+  
+  /* Secundarios */
+  --color-rose-gold: #E8B4A0;           /* Oro rosa - Acentos */
+  --color-mint-green: #A8E6CF;          /* Verde menta - Éxito */
+  --color-warm-gray: #6C757D;           /* Gris cálido - Textos secundarios */
+  --color-soft-cream: #FFF8E1;          /* Crema suave - Fondos alternativos */
+  
+  /* Acentos */
+  --color-luxury-purple: #6A4C93;       /* Púrpura lujo - Premium */
+  --color-copper: #B87333;              /* Cobre - Detalles */
+  --color-sage: #87A96B;                /* Salvia - Botones secundarios */
+  --color-pearl-gray: #E9ECEF;          /* Gris perla - Bordes */
+  
+  /* ===================================================================
+   * 🎯 ESTADOS Y INTERACCIONES
+   * ================================================================= */
+  
+  /* Estados del sistema */
+  --color-success: #28A745;             /* Verde éxito */
+  --color-warning: #FFC107;             /* Amarillo advertencia */
+  --color-error: #DC3545;               /* Rojo error */
+  --color-info: #17A2B8;                /* Azul información */
+  
+  /* Hovers y focus */
+  --color-jewel-gold-hover: #B8941F;    /* Oro hover */
+  --color-deep-emerald-hover: #0A3D26;  /* Esmeralda hover */
+  --color-rose-gold-hover: #D89B7A;     /* Oro rosa hover */
+  --color-sage-hover: #6B8A4F;          /* Salvia hover */
+  --color-focus-outline: #0F5132;       /* Contorno focus */
+  
+  /* ===================================================================
+   * 🎨 GRADIENTES PREMIUM
+   * ================================================================= */
+  
+  /* Gradiente hero */
+  --gradient-hero: linear-gradient(135deg, #F8F9FA 0%, #FFF8E1 100%);
+  
+  /* Gradiente premium */
+  --gradient-premium: linear-gradient(45deg, #D4AF37 0%, #E8B4A0 100%);
+  
+  /* Gradiente overlay */
+  --gradient-overlay: linear-gradient(180deg, rgba(15, 81, 50, 0.6) 0%, transparent 100%);
+  
+  /* Gradiente botón */
+  --gradient-button: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+  
+  /* ===================================================================
+   * 🎭 SOMBRAS Y EFECTOS
+   * ================================================================= */
+  
+  /* Sombras */
+  --shadow-soft: 0px 2px 8px rgba(44, 62, 80, 0.08);
+  --shadow-elevated: 0px 8px 24px rgba(15, 81, 50, 0.12);
+  --shadow-button: 0px 4px 12px rgba(212, 175, 55, 0.3);
+  --shadow-card: 0px 4px 16px rgba(44, 62, 80, 0.08);
+  --shadow-card-hover: 0px 8px 24px rgba(44, 62, 80, 0.12);
+  
+  /* Bordes */
+  --border-light: 1px solid var(--color-pearl-gray);
+  --border-accent: 2px solid var(--color-deep-emerald);
+  --border-gold: 1px solid var(--color-jewel-gold);
+  --border-radius-small: 8px;
+  --border-radius-medium: 12px;
+  --border-radius-large: 16px;
+  --border-radius-extra: 20px;
+  
+  /* ===================================================================
+   * 🔤 TIPOGRAFÍA MEJORADA
+   * ================================================================= */
+  
+  /* Familias de fuentes */
+  --font-primary: 'Garamond', serif;
+  --font-secondary: 'Lato', sans-serif;
+  --font-accent: 'Gilroy-Medium', sans-serif;
+  
+  /* Tamaños optimizados */
+  --font-size-h1: 72px;
+  --font-size-h2: 48px;
+  --font-size-h3: 32px;
+  --font-size-h4: 24px;
+  --font-size-body-large: 18px;
+  --font-size-body: 16px;
+  --font-size-body-small: 14px;
+  --font-size-caption: 12px;
+  
+  /* Pesos */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  
+  /* ===================================================================
+   * 📐 ESPACIADO SISTEMÁTICO
+   * ================================================================= */
+  
+  /* Espaciado base */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  --spacing-4xl: 80px;
+  
+  /* Espaciado específico */
+  --spacing-component: 16px;
+  --spacing-section: 64px;
+  --spacing-section-mobile: 32px;
+  --spacing-card: 24px;
+  --spacing-button: 16px 32px;
+  
+  /* ===================================================================
+   * 📱 RESPONSIVE BREAKPOINTS
+   * ================================================================= */
+  
+  /* Breakpoints */
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
+  
+  /* Contenedores */
+  --container-sm: 540px;
+  --container-md: 720px;
+  --container-lg: 960px;
+  --container-xl: 1140px;
+  --container-xxl: 1320px;
+  
+  /* ===================================================================
+   * 🎨 TRANSICIONES Y ANIMACIONES
+   * ================================================================= */
+  
+  /* Transiciones */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Curvas de animación */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  
+  /* ===================================================================
+   * 🎯 COMPATIBILIDAD CON SISTEMA ACTUAL
+   * ================================================================= */
+  
+  /* Mapeo de colores existentes optimizados */
+  --color-lightgreen: var(--color-sage);
+  --color-darkslategray-100: var(--color-charcoal);
+  --color-darkslategray-200: var(--color-deep-emerald);
+  --color-darkslategray-300: var(--color-warm-gray);
+  --color-whitesmoke: var(--color-pearl-white);
+  --color-silver: var(--color-pearl-gray);
+  --color-mintcream: var(--color-mint-green);
+  --color-white: #ffffff;
+  
+  /* Mapeo de espaciado */
+  --gap-4: var(--spacing-xs);
+  --gap-8: var(--spacing-sm);
+  --gap-16: var(--spacing-md);
+  --gap-24: var(--spacing-lg);
+  --gap-32: var(--spacing-xl);
+  --gap-48: var(--spacing-2xl);
+  --gap-64: var(--spacing-3xl);
+  
+  /* Mapeo de padding */
+  --padding-8: var(--spacing-sm);
+  --padding-16: var(--spacing-md);
+  --padding-24: var(--spacing-lg);
+  --padding-32: var(--spacing-xl);
+  
+  /* Mapeo de border radius */
+  --br-8: var(--border-radius-small);
+  --br-16: var(--border-radius-medium);
+  --br-20: var(--border-radius-large);
+  --br-32: var(--border-radius-extra);
+}
+
+/* ===================================================================
+ * 🌙 DARK MODE SUPPORT
+ * ================================================================= */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-pearl-white: #1a1a1a;
+    --color-soft-cream: #2a2a2a;
+    --color-charcoal: #e0e0e0;
+    --color-warm-gray: #b0b0b0;
+    --color-pearl-gray: #3a3a3a;
+    
+    /* Ajustar sombras para tema oscuro */
+    --shadow-soft: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-elevated: 0px 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0px 4px 16px rgba(0, 0, 0, 0.3);
+    --shadow-card-hover: 0px 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ===================================================================
+ * 🎨 UTILIDADES DE COLOR
+ * ================================================================= */
+
+/* Clases de utilidad para colores */
+.text-jewel-gold { color: var(--color-jewel-gold); }
+.text-deep-emerald { color: var(--color-deep-emerald); }
+.text-charcoal { color: var(--color-charcoal); }
+.text-warm-gray { color: var(--color-warm-gray); }
+
+.bg-pearl-white { background-color: var(--color-pearl-white); }
+.bg-soft-cream { background-color: var(--color-soft-cream); }
+.bg-mint-green { background-color: var(--color-mint-green); }
+.bg-rose-gold { background-color: var(--color-rose-gold); }
+
+.border-pearl-gray { border-color: var(--color-pearl-gray); }
+.border-deep-emerald { border-color: var(--color-deep-emerald); }
+.border-jewel-gold { border-color: var(--color-jewel-gold); }
+
+/* ===================================================================
+ * 🎯 COMPONENTES ESPECÍFICOS
+ * ================================================================= */
+
+/* Botón primario mejorado */
+.btn-primary-jewel {
+  background: var(--color-jewel-gold);
+  color: var(--color-pearl-white);
+  border: none;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius-small);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: var(--shadow-button);
+  transition: all var(--transition-normal);
+}
+
+.btn-primary-jewel:hover {
+  background: var(--color-jewel-gold-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevated);
+}
+
+/* Card de producto mejorada */
+.product-card-premium {
+  background: var(--color-pearl-white);
+  border: var(--border-light);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
+  overflow: hidden;
+}
+
+.product-card-premium:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+/* Precio destacado */
+.price-highlight {
+  color: var(--color-jewel-gold);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h4);
+}
+
+/* Badge premium */
+.badge-premium {
+  background: var(--color-luxury-purple);
+  color: var(--color-pearl-white);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-small);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}

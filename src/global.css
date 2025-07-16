@@ -2,6 +2,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Garamond:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Gilroy-Medium:wght@400&display=swap");
 
+/* 🎨 IMPORTAR TOKENS DE COLOR PREMIUM */
+@import './tokens-color-optimizados.css';
+
+/* 🎨 IMPORTAR TIPOGRAFÍA PREMIUM */
+@import './styles/typography.css';
+
 /* Reset básico y box-sizing global */
 *,
 *::before,
@@ -47,24 +53,25 @@ img {
 body {
   margin: 0;
   line-height: normal;
-  background: var(--color-white, #fff);
-  color: var(--color-darkslategray-100, #2c3e50);
-  font-family: var(--font-lato, Arial, sans-serif);
+  background: var(--color-pearl-white);
+  color: var(--color-charcoal);
+  font-family: var(--font-secondary);
 }
 
 :root {
-  /* Color */
-  --color-honeydew: #d1fae5;
-  --color-slategray: #4a6a7b;
-  --color-mistyrose: #f4d7d7;
-  --color-lavenderblush: #fce7f3;
-  --color-silver: #b9b9b9;
-  --color-whitesmoke: #f0f0f0;
-  --color-lightgreen: #8abf69;
-  --color-mintcream: #ecfdf5;
-  --color-darkslategray-300: #1b333c;
-  --color-darkslategray-200: #064e3b;
-  --color-darkslategray-100: #2c3e50;
+  /* 🎨 COLORES LEGACY - MIGRADOS A TOKENS PREMIUM */
+  /* Usar tokens premium en lugar de estos colores */
+  --color-honeydew: var(--color-mint-green);
+  --color-slategray: var(--color-warm-gray);
+  --color-mistyrose: var(--color-rose-gold);
+  --color-lavenderblush: var(--color-soft-cream);
+  --color-silver: var(--color-pearl-gray);
+  --color-whitesmoke: var(--color-pearl-white);
+  --color-lightgreen: var(--color-sage);
+  --color-mintcream: var(--color-mint-green);
+  --color-darkslategray-300: var(--color-warm-gray);
+  --color-darkslategray-200: var(--color-deep-emerald);
+  --color-darkslategray-100: var(--color-charcoal);
   --color-white: #fff;
 
   /* Gap */

@@ -1,0 +1,27 @@
+﻿{
+  "version": 2,
+  "builds": [
+    {
+      "src": "**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/figma",
+      "dest": "/figma-landing-prototype.html"
+    },
+    {
+      "src": "/navegacion",
+      "dest": "/navegacion-premium.html"
+    },
+    {
+      "src": "/galeria",
+      "dest": "/galeria-lupa-premium.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}

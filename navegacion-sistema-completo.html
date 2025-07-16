@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plena - Nuevo Sistema de Navegación Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-jewel-gold: #D4AF37;
+            --color-deep-emerald: #0F5132;
+            --color-pearl-white: #F8F9FA;
+            --color-charcoal: #2C3E50;
+            --color-rose-gold: #E8B4A0;
+            --color-mint-green: #A8E6CF;
+            --color-sage: #87A96B;
+            --color-soft-cream: #FFF8E1;
+            --gradient-premium: linear-gradient(45deg, #D4AF37 0%, #E8B4A0 100%);
+            --gradient-hero: linear-gradient(135deg, #F8F9FA 0%, #FFF8E1 100%);
+            --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-elevated: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--color-charcoal);
+            background: var(--gradient-hero);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+            background: var(--gradient-premium);
+            color: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 30px;
+            border-left: 4px solid var(--color-jewel-gold);
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-deep-emerald);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--color-jewel-gold);
+            font-size: 1.8rem;
+            margin: 25px 0 15px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: var(--color-soft-cream);
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid var(--color-jewel-gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .feature-card h4 {
+            color: var(--color-deep-emerald);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: var(--color-sage);
+            font-size: 0.95rem;
+        }
+
+        .demo-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .demo-link {
+            display: inline-block;
+            background: var(--gradient-premium);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-card);
+        }
+
+        .demo-link:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .logo-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .logo-demo {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            min-width: 250px;
+        }
+
+        .logo-demo.dark {
+            background: var(--color-deep-emerald);
+            color: white;
+        }
+
+        .logo-demo.gold {
+            background: var(--color-jewel-gold);
+            color: white;
+        }
+
+        .specs-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .specs-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .specs-list strong {
+            color: var(--color-deep-emerald);
+            font-weight: 600;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .success { background: #d4edda; color: #155724; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .premium { background: var(--gradient-premium); color: white; }
+
+        .code-block {
+            background: #2d3748;
+            color: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .typography-demo {
+            padding: 30px;
+            background: var(--color-pearl-white);
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .font-luxury {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: var(--color-deep-emerald);
+            margin-bottom: 10px;
+        }
+
+        .font-elegant {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            font-size: 1.8rem;
+            color: var(--color-jewel-gold);
+            margin-bottom: 10px;
+        }
+
+        .font-modern {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--color-sage);
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 Plena - Sistema de Navegación Premium</h1>
+            <p>Nuevo logo dinámico, menú hamburguesa responsive y tipografía premium para joyería de lujo</p>
+        </div>
+
+        <div class="section">
+            <h2>💎 Logo Dinámico Plena</h2>
+            <p>Diseño SVG inspirado en joyería con elementos decorativos de bufandas y animaciones premium.</p>
+            
+            <div class="logo-showcase">
+                <div class="logo-demo">
+                    <h4>Versión Default</h4>
+                    <p>Logo principal con paleta premium</p>
+                </div>
+                <div class="logo-demo dark">
+                    <h4>Versión White</h4>
+                    <p>Para fondos oscuros</p>
+                </div>
+                <div class="logo-demo gold">
+                    <h4>Versión Gold</h4>
+                    <p>Versión premium dorada</p>
+                </div>
+            </div>
+
+            <h3>✨ Características del Logo</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>💎 Forma de Gema</h4>
+                    <p>Diseño inspirado en piedras preciosas con geometría elegante y líneas refinadas.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎭 Animaciones Hover</h4>
+                    <p>Efectos de escala, brillo y movimiento que crean una experiencia interactiva premium.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🧣 Elementos Decorativos</h4>
+                    <p>Líneas onduladas inspiradas en patrones de bufandas de lujo, como en Vista Bufandas.png.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📱 Responsive</h4>
+                    <p>Tamaño adaptable con múltiples variantes para diferentes contextos y fondos.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🍔 Menú Hamburguesa Responsive</h2>
+            <p>Menú deslizante premium con animaciones fluidas y elementos inspirados en joyería.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📱 Diseño Móvil Primero</h4>
+                    <p>Deslizamiento desde la derecha con overlay de fondo y animaciones escalonadas.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎨 Elementos Premium</h4>
+                    <p>Badges "Premium" y "Nuevo", iconos expresivos y descripciones contextuales.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🌟 Patrones Decorativos</h4>
+                    <p>Elementos visuales inspirados en bufandas con gradientes y animaciones sutiles.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⌨️ Accesibilidad</h4>
+                    <p>Navegación por teclado, cierre con Escape y indicadores de estado claros.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🧭 Navbar Inteligente</h2>
+            <p>Barra de navegación que se adapta al scroll con efectos premium y elementos interactivos.</p>
+            
+            <ul class="specs-list">
+                <li>
+                    <strong>Reducción en Scroll:</strong>
+                    <span>Logo se reduce de 110px a 90px <span class="status-badge success">✅</span></span>
+                </li>
+                <li>
+                    <strong>Backdrop Blur:</strong>
+                    <span>Efecto de desenfoque de fondo <span class="status-badge success">✅</span></span>
+                </li>
+                <li>
+                    <strong>Indicadores Activos:</strong>
+                    <span>Puntos dorados para página actual <span class="status-badge success">✅</span></span>
+                </li>
+                <li>
+                    <strong>Búsqueda Integrada:</strong>
+                    <span>Botón circular con hover effects <span class="status-badge success">✅</span></span>
+                </li>
+                <li>
+                    <strong>Carrito Premium:</strong>
+                    <span>Contador de items con animación <span class="status-badge success">✅</span></span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🔤 Tipografía Premium</h2>
+            <p>Sistema de fuentes optimizado para joyería de lujo con jerarquía visual clara.</p>
+            
+            <div class="typography-demo">
+                <div class="font-luxury">Playfair Display - Títulos de Lujo</div>
+                <div class="font-elegant">Cormorant Garamond - Subtítulos Elegantes</div>
+                <div class="font-modern">Montserrat - Texto Moderno y Legible</div>
+            </div>
+
+            <h3>📚 Fuentes Implementadas</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🏆 Playfair Display</h4>
+                    <p>Títulos principales, logos y elementos de lujo. Transmite elegancia y sofisticación.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>✨ Cormorant Garamond</h4>
+                    <p>Subtítulos y descripciones elegantes. Serif clásico con carácter premium.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎯 Montserrat</h4>
+                    <p>Navegación, botones y texto de lectura. Sans-serif moderno y altamente legible.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📱 Responsive</h4>
+                    <p>Tamaños adaptativos con clamp() para perfecta legibilidad en todos los dispositivos.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🛠️ Implementación Técnica</h2>
+            
+            <h3>📦 Componentes Creados</h3>
+            <div class="code-block">
+PlenaLogo.tsx          - Logo dinámico SVG con animaciones
+HamburgerMenu.tsx      - Menú deslizante responsive
+Navbar.tsx             - Barra de navegación inteligente
+NavigationDemo.tsx     - Página de demostración
+typography.css         - Sistema de fuentes premium
+            </div>
+
+            <h3>🎨 Características Implementadas</h3>
+            <ul class="specs-list">
+                <li>
+                    <strong>Logo SVG Dinámico:</strong>
+                    <span>4 variantes con animaciones <span class="status-badge premium">PREMIUM</span></span>
+                </li>
+                <li>
+                    <strong>Menú Hamburguesa:</strong>
+                    <span>11 elementos con descripciones <span class="status-badge success">✅</span></span>
+                </li>
+                <li>
+                    <strong>Navbar Responsive:</strong>
+                    <span>Scroll detection y blur effect <span class="status-badge success">✅</span></span>
+                </li>
+                <li>
+                    <strong>Tipografía Premium:</strong>
+                    <span>3 fuentes con 15+ variantes <span class="status-badge success">✅</span></span>
+                </li>
+                <li>
+                    <strong>Animaciones CSS:</strong>
+                    <span>Hover effects y transitions <span class="status-badge success">✅</span></span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Cómo Probar</h2>
+            
+            <div class="demo-links">
+                <a href="http://localhost:5175/navigation-demo" class="demo-link" target="_blank">
+                    🎨 Demo de Navegación
+                </a>
+                <a href="http://localhost:5175/premium-showcase" class="demo-link" target="_blank">
+                    💎 Showcase Premium
+                </a>
+                <a href="http://localhost:5175/" class="demo-link" target="_blank">
+                    🏠 Página Principal
+                </a>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📱 Prueba Móvil</h4>
+                    <p>Reduce la ventana o usa DevTools para ver el menú hamburguesa en acción.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🖥️ Prueba Desktop</h4>
+                    <p>Navega con el menú horizontal y observa los efectos hover y scroll.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎭 Interactividad</h4>
+                    <p>Pasa el cursor sobre logos y elementos para ver todas las animaciones.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔍 Inspección</h4>
+                    <p>Usa las herramientas de desarrollador para explorar el código SVG y CSS.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: var(--gradient-premium); color: white; padding: 40px; border-radius: 15px; text-align: center; margin-top: 40px;">
+            <h2 style="color: white; margin-bottom: 20px;">🎉 Sistema Completo Implementado</h2>
+            <p style="font-size: 1.2rem; opacity: 0.9; margin-bottom: 25px;">
+                Logo dinámico, menú hamburguesa, navbar responsive y tipografía premium listos para uso en producción.
+            </p>
+            <p style="font-size: 1rem; opacity: 0.8;">
+                Diseño inspirado en joyería de lujo con elementos decorativos de bufandas y animaciones premium.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

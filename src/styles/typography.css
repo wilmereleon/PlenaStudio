@@ -1,0 +1,306 @@
+/* 🎨 PLENA - TIPOGRAFÍA PREMIUM Y ESTILOS DE NAVEGACIÓN */
+/* Fuentes y estilos optimizados para joyería de lujo */
+
+/* Importar fuentes premium adicionales */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+/* Variables de tipografía premium */
+:root {
+  /* Fuentes principales */
+  --font-luxury: 'Playfair Display', serif;
+  --font-elegant: 'Cormorant Garamond', serif;
+  --font-modern: 'Montserrat', sans-serif;
+  
+  /* Tamaños de fuente optimizados */
+  --font-size-hero: clamp(2.5rem, 5vw, 4rem);
+  --font-size-display: clamp(2rem, 4vw, 3rem);
+  --font-size-title: clamp(1.5rem, 3vw, 2.5rem);
+  --font-size-subtitle: clamp(1.2rem, 2.5vw, 1.8rem);
+  --font-size-body: clamp(1rem, 1.5vw, 1.1rem);
+  --font-size-small: clamp(0.875rem, 1.2vw, 0.95rem);
+  --font-size-tiny: clamp(0.75rem, 1vw, 0.875rem);
+  
+  /* Espaciado de letras */
+  --letter-spacing-wide: 0.05em;
+  --letter-spacing-normal: 0.025em;
+  --letter-spacing-tight: -0.025em;
+  
+  /* Alturas de línea */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-loose: 1.8;
+}
+
+/* Estilos base para el texto */
+.text-luxury {
+  font-family: var(--font-luxury);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-wide);
+  line-height: var(--line-height-tight);
+}
+
+.text-elegant {
+  font-family: var(--font-elegant);
+  font-weight: 400;
+  letter-spacing: var(--letter-spacing-normal);
+  line-height: var(--line-height-normal);
+}
+
+.text-modern {
+  font-family: var(--font-modern);
+  font-weight: 500;
+  letter-spacing: var(--letter-spacing-normal);
+  line-height: var(--line-height-normal);
+}
+
+/* Estilos para títulos */
+.title-hero {
+  font-family: var(--font-luxury);
+  font-size: var(--font-size-hero);
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-tight);
+  background: var(--gradient-premium);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title-display {
+  font-family: var(--font-elegant);
+  font-size: var(--font-size-display);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-wide);
+  line-height: var(--line-height-tight);
+  color: var(--color-deep-emerald);
+}
+
+.title-section {
+  font-family: var(--font-luxury);
+  font-size: var(--font-size-title);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-wide);
+  line-height: var(--line-height-tight);
+  color: var(--color-charcoal);
+}
+
+/* Estilos para navegación */
+.nav-link {
+  font-family: var(--font-modern);
+  font-size: var(--font-size-body);
+  font-weight: 500;
+  letter-spacing: var(--letter-spacing-normal);
+  text-decoration: none;
+  color: var(--color-charcoal);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-premium);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  color: var(--color-jewel-gold);
+}
+
+/* Estilos para el logo */
+.logo-text {
+  font-family: var(--font-luxury);
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.logo-subtitle {
+  font-family: var(--font-elegant);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.6em;
+  opacity: 0.8;
+}
+
+/* Estilos para el menú hamburguesa */
+.menu-item {
+  font-family: var(--font-modern);
+  font-weight: 500;
+  letter-spacing: var(--letter-spacing-normal);
+  transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+  transform: translateX(5px);
+  color: var(--color-jewel-gold);
+}
+
+.menu-description {
+  font-family: var(--font-elegant);
+  font-size: var(--font-size-small);
+  opacity: 0.8;
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* Estilos para badges */
+.badge-premium {
+  font-family: var(--font-modern);
+  font-size: var(--font-size-tiny);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--gradient-premium);
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.badge-new {
+  font-family: var(--font-modern);
+  font-size: var(--font-size-tiny);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--color-mint-green);
+  color: var(--color-deep-emerald);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Animaciones para texto */
+@keyframes textShine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.text-shine {
+  background: linear-gradient(
+    90deg,
+    var(--color-charcoal) 0%,
+    var(--color-jewel-gold) 50%,
+    var(--color-charcoal) 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShine 3s linear infinite;
+}
+
+.text-glow {
+  text-shadow: 
+    0 0 10px var(--color-jewel-gold),
+    0 0 20px var(--color-jewel-gold),
+    0 0 30px var(--color-jewel-gold);
+}
+
+/* Estilos para párrafos */
+.paragraph-elegant {
+  font-family: var(--font-elegant);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-loose);
+  color: var(--color-charcoal);
+  margin-bottom: 1.5rem;
+}
+
+.paragraph-modern {
+  font-family: var(--font-modern);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-normal);
+  color: var(--color-sage);
+  margin-bottom: 1rem;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: var(--font-size-small);
+  }
+  
+  .logo-text {
+    font-size: 1.2rem;
+  }
+  
+  .menu-item {
+    font-size: var(--font-size-body);
+  }
+}
+
+@media (max-width: 480px) {
+  .title-hero {
+    font-size: 2rem;
+  }
+  
+  .title-display {
+    font-size: 1.8rem;
+  }
+  
+  .logo-text {
+    font-size: 1rem;
+  }
+}
+
+/* Estilos para elementos interactivos */
+.interactive-text {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.interactive-text:hover {
+  color: var(--color-jewel-gold);
+  transform: translateY(-1px);
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para separadores */
+.text-separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.text-separator::before,
+.text-separator::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--gradient-premium);
+}
+
+.text-separator::before {
+  margin-right: 1rem;
+}
+
+.text-separator::after {
+  margin-left: 1rem;
+}
+
+.text-separator span {
+  font-family: var(--font-elegant);
+  font-size: var(--font-size-small);
+  color: var(--color-jewel-gold);
+  font-weight: 500;
+  letter-spacing: var(--letter-spacing-wide);
+  padding: 0 1rem;
+}

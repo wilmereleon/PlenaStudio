@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <mask id="circleMask">
+      <circle cx="32" cy="32" r="30" fill="white"/>
+    </mask>
+    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2D1B5F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4A2C7A;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Fondo circular -->
+  <circle cx="32" cy="32" r="30" fill="#F5F5DC" stroke="#2D1B5F" stroke-width="1"/>
+  
+  <!-- Patrones de ondas -->
+  <g mask="url(#circleMask)">
+    <!-- Ondas horizontales -->
+    <path d="M8 12 Q16 10 24 12 T40 12 T56 12" stroke="url(#waveGradient)" stroke-width="1.5" fill="none"/>
+    <path d="M8 18 Q16 16 24 18 T40 18 T56 18" stroke="url(#waveGradient)" stroke-width="1.5" fill="none"/>
+    <path d="M8 24 Q16 22 24 24 T40 24 T56 24" stroke="url(#waveGradient)" stroke-width="1.5" fill="none"/>
+    <path d="M8 30 Q16 28 24 30 T40 30 T56 30" stroke="url(#waveGradient)" stroke-width="1.5" fill="none"/>
+    <path d="M8 36 Q16 34 24 36 T40 36 T56 36" stroke="url(#waveGradient)" stroke-width="1.5" fill="none"/>
+    <path d="M8 42 Q16 40 24 42 T40 42 T56 42" stroke="url(#waveGradient)" stroke-width="1.5" fill="none"/>
+    <path d="M8 48 Q16 46 24 48 T40 48 T56 48" stroke="url(#waveGradient)" stroke-width="1.5" fill="none"/>
+    <path d="M8 54 Q16 52 24 54 T40 54 T56 54" stroke="url(#waveGradient)" stroke-width="1.5" fill="none"/>
+    
+    <!-- Ondas distorsionadas -->
+    <path d="M0 20 Q10 18 20 20 Q30 22 40 20 Q50 18 60 20 Q70 22 80 20" stroke="url(#waveGradient)" stroke-width="1" fill="none" opacity="0.7"/>
+    <path d="M0 32 Q10 30 20 32 Q30 34 40 32 Q50 30 60 32 Q70 34 80 32" stroke="url(#waveGradient)" stroke-width="1" fill="none" opacity="0.7"/>
+    <path d="M0 44 Q10 42 20 44 Q30 46 40 44 Q50 42 60 44 Q70 46 80 44" stroke="url(#waveGradient)" stroke-width="1" fill="none" opacity="0.7"/>
+  </g>
+  
+  <!-- Letra P central -->
+  <text x="32" y="42" font-family="Inter, sans-serif" font-size="20" font-weight="300" text-anchor="middle" fill="#2D1B5F">P</text>
+</svg>
